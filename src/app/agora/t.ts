@@ -28,4 +28,9 @@ export default {
   study3: { pt: "go.", en: "go." },
   lastUpdated: { pt: "última atualização: {date}", en: "last updated: {date}" },
   footerLink: { pt: "agora", en: "now" },
+  contribTitle: { pt: "contribuições", en: "contributions" },
+  contribLabel: { pt: "contribuições no github por dia, no último ano", en: "github contributions per day over the last year" },
+  contribUnitOne: { pt: "contribuição", en: "contribution" },
+  contribUnitMany: { pt: "contribuições", en: "contributions" },
+  contribTotal: { pt: "{n} contribuições no último ano", en: "{n} contributions in the last year" },
 };

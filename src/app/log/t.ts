@@ -14,4 +14,12 @@ export default {
   },
   all: { pt: "ver tudo no github", en: "see everything on github" },
   footerLink: { pt: "log", en: "log" },
+  heatLabel: { pt: "commits por dia nas últimas semanas", en: "commits per day over the last weeks" },
+  heatLess: { pt: "menos", en: "less" },
+  heatMore: { pt: "mais", en: "more" },
+  commitOne: { pt: "commit", en: "commit" },
+  commitMany: { pt: "commits", en: "commits" },
+  clear: { pt: "limpar", en: "clear" },
+  noMatch: { pt: "nenhum commit com esse filtro.", en: "no commits match this filter." },
+  filterBy: { pt: "filtrar por", en: "filter by" },
 };

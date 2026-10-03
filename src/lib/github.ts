@@ -304,23 +304,35 @@ export async function getRecentRepos(limit = 5): Promise<RecentRepo[]> {
 
 export type Commit = { sha: string; url: string; subject: string; date: string };
 
-/** Últimos commits deste site: só a primeira linha da mensagem (sem corpo nem trailers `Co-Authored-By`). */
-export async function getSiteCommits(limit = 30): Promise<Commit[]> {
+const MAX_PAGES = 10;
+
+/**
+ * Histórico completo deste site, do mais novo pro mais antigo: só a primeira linha da mensagem (sem corpo
+ * nem trailers `Co-Authored-By`). Pagina de 100 em 100 até `MAX_PAGES`; se uma página falha, devolve o que já veio.
+ */
+export async function getSiteCommits(): Promise<Commit[]> {
+  type Item = { sha: string; html_url: string; commit: { message: string; author: { date: string } | null; committer: { date: string } | null } };
+  const commits: Commit[] = [];
   try {
-    const res = await fetch(`${API}/repos/${site.github}/portfolio-cd/commits?per_page=${limit}`, {
-      headers: headers(),
-      next: { revalidate: HOUR, tags: ["github"] },
-    });
-    if (!res.ok) return [];
-    type Item = { sha: string; html_url: string; commit: { message: string; author: { date: string } | null; committer: { date: string } | null } };
-    const items: Item[] = await res.json();
-    return items.map((c) => ({
-      sha: c.sha,
-      url: c.html_url,
-      subject: c.commit.message.split("\n")[0].trim(),
-      date: (c.commit.author ?? c.commit.committer)?.date ?? "",
-    }));
+    for (let page = 1; page <= MAX_PAGES; page++) {
+      const res = await fetch(`${API}/repos/${site.github}/portfolio-cd/commits?per_page=100&page=${page}`, {
+        headers: headers(),
+        next: { revalidate: HOUR, tags: ["github"] },
+      });
+      if (!res.ok) break;
+      const items: Item[] = await res.json();
+      for (const c of items) {
+        commits.push({
+          sha: c.sha,
+          url: c.html_url,
+          subject: c.commit.message.split("\n")[0].trim(),
+          date: (c.commit.author ?? c.commit.committer)?.date ?? "",
+        });
+      }
+      if (items.length < 100) break;
+    }
   } catch {
-    return [];
+    // devolve o que já foi lido
   }
+  return commits;
 }

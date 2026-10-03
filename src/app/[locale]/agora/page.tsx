@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Heatmap } from "@/components/heatmap";
 import { Section } from "@/components/section";
 import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
-import { getRecentRepos } from "@/lib/github";
+import { getContributions, getRecentRepos } from "@/lib/github";
 import { projects } from "@/lib/projects";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -31,7 +32,7 @@ function ago(rtf: Intl.RelativeTimeFormat, iso: string) {
 export default async function Agora() {
   const { t, locale, dateLocale } = await getT();
   const copy = t.app.agora;
-  const repos = await getRecentRepos();
+  const [repos, contributions] = await Promise.all([getRecentRepos(), getContributions()]);
   const rtf = new Intl.RelativeTimeFormat(dateLocale, { numeric: "auto" });
   const fmt = new Intl.DateTimeFormat(dateLocale, { day: "numeric", month: "long", year: "numeric" });
   const study = [copy.study1, copy.study2, copy.study3];
@@ -76,6 +77,19 @@ export default async function Agora() {
           </ul>
         )}
       </Section>
+
+      {contributions && (
+        <Section id="contribuicoes" title={copy.contribTitle}>
+          <Heatmap
+            days={contributions.days}
+            label={copy.contribLabel}
+            legend={[t.app.log.heatLess, t.app.log.heatMore]}
+            locale={dateLocale}
+            unit={[copy.contribUnitOne, copy.contribUnitMany]}
+          />
+          <p className="mt-2 text-muted-foreground text-sm">{copy.contribTotal({ n: contributions.total.toLocaleString(dateLocale) })}</p>
+        </Section>
+      )}
 
       <Section id="estudando" title={copy.studyingTitle}>
         <ul className="flex list-disc flex-col gap-2 pl-5 marker:text-muted-foreground">

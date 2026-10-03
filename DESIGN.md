@@ -220,6 +220,8 @@ Prefer plain stacked lists (title, then a one-line description, 24px between ite
 
 ### Log timeline
 - One 1px rail with a Cursor Yellow dot per day. Rows: mono sha chip (links to GitHub), an optional muted chip for a `Tag:` or `type(scope):` prefix, the subject, relative time (full date in `title`). Rows get a faint hover tint, the one place a list row has a hover background, because each row is a dense record you scan by pointer.
+- Above the timeline, a 26-week heatmap of the site's own commits (heat ramp). Days with commits are buttons (roving tabindex, arrows move); clicking one, or a tag chip, filters the list and writes `?dia=` / `?tag=` to the URL with `history.replaceState` (a router navigation would replay the page transition). Filtering never animates.
+- /agora shows the same heatmap, static, with the whole-GitHub contribution year.
 
 ### Topic chips
 - **Style:** full pill, hairline border, mono 12px, Ink Muted, 8px horizontal padding. Read-only labels, not filters.
