@@ -6,7 +6,7 @@ import { ContactLinks } from "@/components/contact-links";
 import { Section } from "@/components/section";
 import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
-import { getBlogRepos, getContributions } from "@/lib/github";
+import { getBlogPosts, getContributions } from "@/lib/github";
 import { projects } from "@/lib/projects";
 import { site } from "@/lib/site";
 
@@ -23,7 +23,7 @@ export default async function Home() {
   const { t, locale, dateLocale } = await getT();
   const copy = t.app;
   const nav = t.components["site-shell"].nav;
-  const [posts, contributions] = await Promise.all([getBlogRepos().then((r) => r.slice(0, 3)), getContributions()]);
+  const [posts, contributions] = await Promise.all([getBlogPosts(locale).then((p) => p.slice(0, 3)), getContributions()]);
   const fmt = new Intl.DateTimeFormat(dateLocale, { day: "numeric", month: "short" });
   const place = `${site.location.city}, ${site.location.region}`.toLowerCase();
 
@@ -166,17 +166,17 @@ export default async function Home() {
         >
           <ul className="flex flex-col gap-6">
             {posts.map((post) => (
-              <li key={post.name}>
+              <li key={post.slug}>
                 <Link
                   className="underline decoration-muted-foreground/40 underline-offset-4 transition-[text-decoration-color] duration-150 hover:decoration-brand"
-                  href={localePath(locale, `/blog/${post.name}`)}
+                  href={localePath(locale, `/blog/${post.slug}`)}
                 >
-                  {post.name}
+                  {post.title}
                 </Link>
                 <p className="text-muted-foreground">
                   {post.description}{" "}
-                  <time className="text-sm tabular-nums" dateTime={post.created_at}>
-                    · {fmt.format(new Date(post.created_at))}
+                  <time className="text-sm tabular-nums" dateTime={post.date}>
+                    · {fmt.format(new Date(post.date))}
                   </time>
                 </p>
               </li>

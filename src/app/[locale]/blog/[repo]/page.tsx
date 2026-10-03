@@ -6,21 +6,25 @@ import { ViewTransition } from "react";
 import { Markdown } from "@/components/markdown";
 import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
-import { getBlogRepo, getReadme } from "@/lib/github";
+import { getBlogPost, getReadme } from "@/lib/github";
+import { site } from "@/lib/site";
 
+// O segmento `[repo]` também resolve slug de nota (`posts/<slug>` no repo de notas).
 export async function generateMetadata({ params }: PageProps<"/[locale]/blog/[repo]">): Promise<Metadata> {
-  const repo = await getBlogRepo((await params).repo);
   const { locale } = await getT();
-  return repo ? { title: repo.name, description: repo.description ?? undefined, alternates: alternates(locale, `/blog/${repo.name}`) } : {};
+  const post = await getBlogPost((await params).repo, locale);
+  return post ? { title: post.title, description: post.description ?? undefined, alternates: alternates(locale, `/blog/${post.slug}`) } : {};
 }
 
 export default async function Post({ params }: PageProps<"/[locale]/blog/[repo]">) {
-  const repo = await getBlogRepo((await params).repo);
-  if (!repo) notFound();
+  const { t, locale, dateLocale } = await getT();
+  const post = await getBlogPost((await params).repo, locale);
+  if (!post) notFound();
 
-  const { t, locale } = await getT();
   const copy = t.app.blog;
-  const readme = await getReadme(repo.name, locale);
+  const { repo, note } = post;
+  const readme = note ? { markdown: note.markdown, translated: note.translated } : await getReadme(post.slug, locale);
+  const fmt = new Intl.DateTimeFormat(dateLocale, { day: "numeric", month: "long", year: "numeric" });
 
   return (
     <article>
@@ -31,20 +35,37 @@ export default async function Post({ params }: PageProps<"/[locale]/blog/[repo]"
 
       <header className="mt-6 mb-8 border-b pb-6">
         {/* Mesmo nome do título na lista do blog: o título "voa" de um lugar pro outro. */}
-        <ViewTransition default="none" name={`post-title-${repo.name}`} share="morph">
-          <h1 className="font-bold font-heading text-[28px] leading-tight">{repo.name}</h1>
+        <ViewTransition default="none" name={`post-title-${post.slug}`} share="morph">
+          <h1 className="font-bold font-heading text-[28px] leading-tight">{post.title}</h1>
         </ViewTransition>
-        {repo.description && <p className="mt-2 text-muted-foreground">{repo.description}</p>}
+        {post.description && <p className="mt-2 text-muted-foreground">{post.description}</p>}
         <p className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm">
-          <a className="text-brand-foreground underline underline-offset-3" href={repo.html_url} rel="noopener" target="_blank">
-            {copy.repo}
-          </a>
-          {repo.homepage && (
+          {repo && (
+            <a className="text-brand-foreground underline underline-offset-3" href={repo.html_url} rel="noopener" target="_blank">
+              {copy.repo}
+            </a>
+          )}
+          {repo?.homepage && (
             <a className="text-brand-foreground underline underline-offset-3" href={repo.homepage} rel="noopener" target="_blank">
               {copy.live}
             </a>
           )}
-          {repo.stargazers_count > 0 && <span className="text-muted-foreground">{copy.stars({ count: String(repo.stargazers_count) })}</span>}
+          {repo && repo.stargazers_count > 0 && <span className="text-muted-foreground">{copy.stars({ count: String(repo.stargazers_count) })}</span>}
+          {note && (
+            <>
+              <time className="text-muted-foreground tabular-nums" dateTime={post.date}>
+                {fmt.format(new Date(post.date))}
+              </time>
+              <a
+                className="text-brand-foreground underline underline-offset-3"
+                href={`https://github.com/${site.github}/${site.notes}/tree/${note.branch}/posts/${post.slug}`}
+                rel="noopener"
+                target="_blank"
+              >
+                {copy.onGithub}
+              </a>
+            </>
+          )}
         </p>
       </header>
 
@@ -55,7 +76,7 @@ export default async function Post({ params }: PageProps<"/[locale]/blog/[repo]"
       )}
 
       {readme ? (
-        <Markdown branch={repo.default_branch} repo={repo.name}>
+        <Markdown branch={repo?.default_branch ?? note?.branch} dir={note && `posts/${post.slug}`} repo={repo?.name ?? site.notes}>
           {readme.markdown}
         </Markdown>
       ) : (

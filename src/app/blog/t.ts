@@ -1,15 +1,16 @@
 export default {
   title: { pt: "blog", en: "blog" },
   intro: {
-    pt: "posts gerados automaticamente a partir dos meus repositórios públicos.",
-    en: "posts generated automatically from my public repositories.",
+    pt: "Notas e posts sobre meus projetos, montados direto do GitHub.",
+    en: "Notes and posts about my projects, pulled straight from GitHub.",
   },
   empty: {
-    pt: "nenhum post ainda. assim que eu publicar um repositório com o tópico portfolio, ele aparece aqui.",
-    en: "no posts yet. as soon as i publish a repository tagged portfolio, it shows up here.",
+    pt: "Ainda não tem post por aqui. Quando eu marcar um repositório com `portfolio`, ele aparece nesta página.",
+    en: "Nothing here yet. Once I tag a repository with `portfolio`, it’ll show up on this page.",
   },
   back: { pt: "voltar pro blog", en: "back to blog" },
   repo: { pt: "ver repositório", en: "view repository" },
+  onGithub: { pt: "ver no github", en: "view on github" },
   live: { pt: "ver no ar", en: "see it live" },
   stars: { pt: "{count} estrelas", en: "{count} stars" },
   onlyPt: {

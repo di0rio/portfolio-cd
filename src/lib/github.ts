@@ -1,3 +1,5 @@
+import { readdir, readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { site } from "@/lib/site";
 
 const API = "https://api.github.com";
@@ -70,6 +72,135 @@ export async function getReadme(repo: string, locale: string) {
   }
   const markdown = await getRaw(repo, "README.md");
   return markdown ? { markdown, translated: locale === "pt" } : null;
+}
+
+/** Frontmatter simples (`chave: valor`, uma por linha): sem YAML de verdade, nada de dependência. */
+export function parseFrontmatter(src: string): { data: Record<string, string>; body: string } {
+  const m = src.replace(/^\uFEFF/, "").match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+  if (!m) return { data: {}, body: src };
+  const data: Record<string, string> = {};
+  for (const line of m[1].split(/\r?\n/)) {
+    const kv = line.match(/^([\w-]+):\s*(.*)$/);
+    if (kv) data[kv[1]] = kv[2].trim().replace(/^(["'])(.*)\1$/, "$2");
+  }
+  return { data, body: m[2] };
+}
+
+type NoteDoc = { title?: string; description?: string; date?: string; markdown: string };
+type Note = { slug: string; branch: string; pt: NoteDoc; en: NoteDoc | null };
+
+function parseNote(raw: string | null): NoteDoc | null {
+  if (!raw) return null;
+  const { data, body } = parseFrontmatter(raw);
+  return {
+    title: data.title || undefined,
+    description: data.description || undefined,
+    // Data sem hora vira meio-dia UTC: meia-noite UTC cairia no dia anterior no fuso do Brasil.
+    date: /^\d{4}-\d{2}-\d{2}$/.test(data.date ?? "") ? `${data.date}T12:00:00Z` : /^\d{4}-\d{2}-\d{2}T/.test(data.date ?? "") ? data.date : undefined,
+    // O `# título` do README já aparece no cabeçalho da página; sem ele aqui o título não repete.
+    markdown: body.trim().replace(/^# .*\n+/, ""),
+  };
+}
+
+/**
+ * Só em dev: `NOTES_LOCAL_DIR=C:\caminho\notes` lê os posts do disco em vez do GitHub, pra escrever sem
+ * dar push. (Imagens relativas ainda apontam pro raw do GitHub, então só aparecem depois do push.)
+ */
+const notesLocalDir = () => (process.env.NODE_ENV === "production" ? undefined : process.env.NOTES_LOCAL_DIR);
+
+/**
+ * Posts do repositório de notas: `posts/<slug>/README.md` (pt, obrigatório) e `README.en.md` (en),
+ * ambos com frontmatter (`title`, `description`, `date`). Sem o repo, sem pasta ou com erro: sem notas.
+ * Pasta sem README ou sem `date` válida não entra (rascunho).
+ */
+async function getNotes(): Promise<Note[]> {
+  try {
+    const local = notesLocalDir();
+    let branch = "main";
+    let slugs: string[];
+    if (local) {
+      slugs = (await readdir(join(local, "posts"), { withFileTypes: true })).filter((d) => d.isDirectory()).map((d) => d.name);
+    } else {
+      const opts = { headers: headers(), next: { revalidate: HOUR, tags: ["github"] } };
+      const [repoRes, listRes] = await Promise.all([
+        fetch(`${API}/repos/${site.github}/${site.notes}`, opts),
+        fetch(`${API}/repos/${site.github}/${site.notes}/contents/posts`, opts),
+      ]);
+      if (!repoRes.ok || !listRes.ok) return [];
+      branch = ((await repoRes.json()) as { default_branch: string }).default_branch;
+      const items: { name: string; type: string }[] = await listRes.json();
+      slugs = items.filter((i) => i.type === "dir").map((i) => i.name);
+    }
+
+    const read = async (slug: string, file: string): Promise<string | null> => {
+      try {
+        if (local) return await readFile(join(local, "posts", slug, file), "utf8");
+        const res = await fetch(`https://raw.githubusercontent.com/${site.github}/${site.notes}/${branch}/posts/${slug}/${file}`, {
+          next: { revalidate: HOUR, tags: ["github"] },
+        });
+        return res.ok ? await res.text() : null;
+      } catch {
+        return null;
+      }
+    };
+
+    const notes = await Promise.all(
+      slugs
+        .filter((slug) => /^[a-z0-9-]+$/.test(slug))
+        .map(async (slug): Promise<Note | null> => {
+          const [pt, en] = await Promise.all([read(slug, "README.md"), read(slug, "README.en.md")]);
+          const doc = parseNote(pt);
+          return doc?.date ? { slug, branch, pt: doc, en: parseNote(en) } : null;
+        }),
+    );
+    return notes.filter((n) => n !== null);
+  } catch {
+    return [];
+  }
+}
+
+export type BlogPost = {
+  slug: string;
+  title: string;
+  description: string | null;
+  /** ISO: `created_at` do repositório ou `date` do frontmatter da nota. */
+  date: string;
+  source: "repo" | "note";
+  topics: string[];
+  /** Só em `source: "repo"`. */
+  repo?: Repo;
+  /** Só em `source: "note"`; `translated: false` = caiu no texto em português. */
+  note?: { markdown: string; translated: boolean; branch: string };
+};
+
+/** Repositórios do blog + notas no idioma pedido, do mais novo pro mais antigo. Repo com o mesmo nome vence a nota. */
+export async function getBlogPosts(locale: string): Promise<BlogPost[]> {
+  const [repos, notes] = await Promise.all([getBlogRepos(), getNotes()]);
+  const names = new Set(repos.map((r) => r.name));
+  const posts: BlogPost[] = [
+    ...repos.map((repo): BlogPost => ({ slug: repo.name, title: repo.name, description: repo.description, date: repo.created_at, source: "repo", topics: repo.topics, repo })),
+    ...notes
+      .filter((n) => !names.has(n.slug))
+      .map((n): BlogPost => {
+        const doc = locale === "en" ? n.en : null;
+        const shown = doc ?? n.pt;
+        return {
+          slug: n.slug,
+          title: shown.title ?? n.pt.title ?? n.slug,
+          description: shown.description ?? n.pt.description ?? null,
+          date: n.pt.date as string,
+          source: "note",
+          topics: [],
+          note: { markdown: shown.markdown, translated: locale === "pt" || !!doc, branch: n.branch },
+        };
+      }),
+  ];
+  return posts.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+}
+
+/** Busca na lista (cacheada), nunca no GitHub direto: um slug qualquer na URL não gera requisição. */
+export async function getBlogPost(slug: string, locale: string): Promise<BlogPost | undefined> {
+  return (await getBlogPosts(locale)).find((p) => p.slug === slug);
 }
 
 /** Contribuições do último ano (API pública que lê o gráfico do perfil do GitHub). */

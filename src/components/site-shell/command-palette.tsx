@@ -50,8 +50,8 @@ type Props = {
   copy: Copy;
   /** Estudos de caso (slug + nome), de `src/lib/projects.ts`. */
   projects: { slug: string; name: string }[];
-  /** Nomes dos repositórios que viram post no blog. */
-  posts: string[];
+  /** Posts do blog (repositórios e notas). */
+  posts: { slug: string; title: string }[];
   github: string;
 };
 
@@ -110,7 +110,7 @@ export function CommandPalette({ locale, copy, projects, posts, github }: Props)
         page("log", copy.log, "/log"),
       ],
     },
-    ...(posts.length ? [{ value: copy.posts, items: posts.map((name) => page(`post-${name}`, name, `/blog/${name}`)) }] : []),
+    ...(posts.length ? [{ value: copy.posts, items: posts.map((p) => page(`post-${p.slug}`, p.title, `/blog/${p.slug}`)) }] : []),
     {
       value: copy.actions,
       items: [

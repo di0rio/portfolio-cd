@@ -43,11 +43,12 @@ const article: Components = {
  * Renderiza markdown. Com `repo` e `branch` é o README de um repositório: caminhos relativos
  * (`./docs/x.png`) são resolvidos pro GitHub, imagens via raw e links via blob. Sem eles é conteúdo
  * do próprio site (estudos de caso em `content/projetos`), com prints locais via next/image.
+ * `dir` é a pasta do documento no repositório (nota em `posts/<slug>`): `./x.png` parte dela e `/x.png`, da raiz.
  *
  * Segurança: o README é conteúdo de terceiros. HTML cru não é renderizado (sem rehype-raw; não adicione sem
  * sanitizar) e esquemas como `javascript:` e `data:` são barrados pelo `defaultUrlTransform`.
  */
-export function Markdown({ children, repo, branch }: { children: string; repo?: string; branch?: string }) {
+export function Markdown({ children, repo, branch, dir }: { children: string; repo?: string; branch?: string; dir?: string }) {
   const base = repo && branch ? `${site.github}/${repo}/${branch}` : null;
 
   return (
@@ -57,7 +58,7 @@ export function Markdown({ children, repo, branch }: { children: string; repo?: 
         remarkPlugins={[remarkGfm]}
         urlTransform={(url, key) => {
           if (!base || /^([a-z]+:|#|\/\/)/i.test(url)) return defaultUrlTransform(url);
-          const path = url.replace(/^\.?\//, "");
+          const path = url.startsWith("/") ? url.slice(1) : `${dir ? `${dir}/` : ""}${url.replace(/^\.\//, "")}`;
           return key === "src"
             ? `https://raw.githubusercontent.com/${base}/${path}`
             : `https://github.com/${site.github}/${repo}/blob/${branch}/${path}`;

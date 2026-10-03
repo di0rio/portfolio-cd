@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { localePath } from "@/i18n/path";
-import { getBlogRepos } from "@/lib/github";
+import { getBlogPosts } from "@/lib/github";
 import { projects } from "@/lib/projects";
 import { site } from "@/lib/site";
 
@@ -16,7 +16,7 @@ function entry(path: string, extra: Omit<MetadataRoute.Sitemap[number], "url"> =
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await getBlogRepos();
+  const posts = await getBlogPosts("pt");
   return [
     ...entry("/", { changeFrequency: "monthly", priority: 1 }),
     ...entry("/blog", { changeFrequency: "weekly", priority: 0.8 }),
@@ -26,6 +26,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...entry("/agora", { changeFrequency: "daily", priority: 0.5 }),
     ...entry("/log", { changeFrequency: "daily", priority: 0.4 }),
     ...projects.flatMap((p) => entry(`/projetos/${p.slug}`, { changeFrequency: "monthly", priority: 0.6 })),
-    ...posts.flatMap((p) => entry(`/blog/${p.name}`, { lastModified: p.pushed_at, priority: 0.6 })),
+    ...posts.flatMap((p) => entry(`/blog/${p.slug}`, { lastModified: p.repo?.pushed_at ?? p.date, priority: 0.6 })),
   ];
 }

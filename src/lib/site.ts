@@ -15,4 +15,6 @@ export const site = {
     : "http://localhost:3000",
   // Repositório público com algum desses tópicos vira post no blog.
   blogTopics: ["portfolio", "blog"],
+  // Repositório público de notas: cada pasta de `posts/` vira um post no blog.
+  notes: "notes",
 };

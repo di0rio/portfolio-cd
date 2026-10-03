@@ -14,7 +14,7 @@ import { ThemeProvider } from "@/components/site-shell/theme-provider";
 import { ThemeSwitch } from "@/components/site-shell/theme-switch";
 import { localePath } from "@/i18n/path";
 import { getT, locales } from "@/i18n/server";
-import { getBlogRepos } from "@/lib/github";
+import { getBlogPosts } from "@/lib/github";
 import { projects } from "@/lib/projects";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -41,7 +41,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function RootLayout({ children }: LayoutProps<"/[locale]">) {
   const { locale, t } = await getT();
   const shell = t.components["site-shell"];
-  const posts = (await getBlogRepos()).map((r) => r.name); // cacheado por hora; alimenta a paleta (⌘K)
+  const posts = (await getBlogPosts(locale)).map(({ slug, title }) => ({ slug, title })); // cacheado por hora; alimenta a paleta (⌘K)
 
   return (
     <html
