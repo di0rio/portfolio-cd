@@ -190,29 +190,29 @@ Prefer a list with hairline dividers (`border-y` plus `divide-y`) over a stack o
 ### Navigation (sidebar)
 - **Style:** text links in body size, Ink Muted, each with a small 14px Lucide icon at 70% opacity.
 - **Hover / Focus:** Ink text on a 4% tint background, 150ms ease-out. Focus shows a 2px Cursor Yellow ring.
-- **Press:** scales to 0.97 (only when the user allows motion).
+- **Press:** none. Links don't move; only color changes.
 - **Mobile:** each link becomes a bordered, wrapping pill with the icon first.
 - **Order:** site sections first, then a short hairline, then external profiles (GitHub, LinkedIn, email, CV). External links render only when configured.
 
 ### Segmented toggle (locale)
 - **Style:** coss `ToggleGroup`, small size, 1px hairline border with 2px inner padding, 10px radius. Labels are mono (`pt` / `en`).
-- **State:** the pressed item gets a raised tint. Press scales to 0.96.
-- **Theme button:** a single outline icon button (coss `Button`, `icon-sm`) that flips light ↔ dark. It shows a moon in light theme and a sun in dark theme, with an `aria-label` naming the theme it switches to. Same 0.96 press. It starts from the system theme; there is no separate "system" option.
-- **Locale change:** while the server re-renders, `main` fades to 50% opacity with a 2px blur (200ms), then returns.
+- **State:** the pressed item gets a raised tint. Press scales to 0.98 over 100ms, barely perceptible.
+- **Theme button:** a single outline icon button (coss `Button`, `icon-sm`) that flips light ↔ dark. It shows a moon in light theme and a sun in dark theme, with an `aria-label` naming the theme it switches to. Same 0.98 press. It starts from the system theme; there is no separate "system" option.
+- **Locale change:** while the server re-renders, `main` fades to 60% opacity (150ms), then returns. No blur.
 
 ### Cards / Containers (blog list)
 - **Corner Style:** 14px.
 - **Background:** page background; hover adds a 4% tint.
 - **Border:** hairline; hover switches it to Cursor Yellow.
 - **Internal Padding:** 16px vertical, 18px horizontal.
-- **Press:** scales to 0.99.
+- **Press:** none.
 
 ### Topic chips
 - **Style:** full pill, hairline border, mono 12px, Ink Muted, 8px horizontal padding. Read-only labels, not filters.
 
 ### Contribution graph (signature)
 - A 7-row grid of rounded squares, one per day, colored by the heat scale. Each cell's title gives the count and date in the active language.
-- On load it is revealed left to right with `clip-path` over 1000ms (strong ease-out, 120ms delay), ending on the current week. With reduced motion it only fades in.
+- On load it is revealed left to right with `clip-path` over 700ms (strong ease-out), ending on the current week. With reduced motion it only fades in.
 - Legend ("less ■■■■■ more") sits right-aligned below in small muted text.
 
 ### Terminal fragments (signature)
@@ -225,6 +225,7 @@ Prefer a list with hairline dividers (`border-y` plus `divide-y`) over a stack o
 ## Do's and Don'ts
 
 ### Do:
+- **Do** keep motion light: only real buttons get press feedback (scale 0.98, 100ms); links and cards change color only.
 - **Do** keep Cursor Yellow the only accent, and keep it small: underlines, rings, bullets, cursor, heat scale.
 - **Do** use cream / graphite surfaces and 1px alpha hairlines (black 8% / white 6%).
 - **Do** write UI copy and headings in lowercase, in both pt and en.

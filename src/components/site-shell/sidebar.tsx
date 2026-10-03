@@ -25,7 +25,7 @@ function Item({ href, icon, children }: { href: string; icon: ReactNode; childre
   const external = href.startsWith("http");
   return (
     <Link
-      className="flex items-center justify-between gap-3 rounded-md px-2 py-1 text-muted-foreground text-[15px] outline-none transition-[color,background-color,transform] duration-150 ease-out hover:bg-accent motion-safe:active:scale-[0.97] hover:text-foreground focus-visible:ring-2 focus-visible:ring-brand max-lg:flex-row-reverse max-lg:border max-lg:justify-start [&_svg]:size-3.5 [&_svg]:shrink-0 [&_svg]:opacity-70"
+      className="flex items-center justify-between gap-3 rounded-md px-2 py-1 text-muted-foreground text-[15px] outline-none transition-colors duration-150 hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-brand max-lg:flex-row-reverse max-lg:border max-lg:justify-start [&_svg]:size-3.5 [&_svg]:shrink-0 [&_svg]:opacity-70"
       href={href}
       {...(external ? { rel: "noopener", target: "_blank" } : {})}
     >

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-02T23:10:36.042Z",
+  "generatedAt": "2026-10-03T00:55:13.636Z",
   "title": "Design System: cauã · portfolio-cd",
   "extensions": {
     "colorMeta": {
@@ -291,17 +291,17 @@
       },
       {
         "name": "press",
-        "value": "transform 150ms ease-out, scale 0.96 to 0.99",
-        "purpose": "Press feedback on toggles, nav links and cards; motion-safe only."
+        "value": "transform 100ms ease-out, scale 0.98",
+        "purpose": "Press feedback on real buttons only (theme, locale); motion-safe only. Links and cards don't scale."
       },
       {
         "name": "reveal-x",
-        "value": "clip-path 1000ms ease-out, 120ms delay",
+        "value": "clip-path 700ms ease-out",
         "purpose": "Contribution graph reveal; fade only under reduced motion."
       },
       {
         "name": "locale-pending",
-        "value": "opacity 0.5 + blur(2px), 200ms ease",
+        "value": "opacity 0.6, 150ms ease",
         "purpose": "Main content while the locale re-renders."
       },
       {
@@ -328,7 +328,7 @@
       "refersTo": "nav-link",
       "description": "Quiet text link with a small trailing icon; sidebar on desktop, pill on mobile.",
       "html": "<a class=\"ds-nav-link\" href=\"#\">blog<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 11a9 9 0 0 1 9 9\"/><path d=\"M4 4a16 16 0 0 1 16 16\"/><circle cx=\"5\" cy=\"19\" r=\"1\"/></svg></a>",
-      "css": ".ds-nav-link{display:flex;align-items:center;justify-content:space-between;gap:12px;width:192px;padding:4px 8px;border-radius:8px;color:var(--muted-foreground);font:400 15px/1.5 Ubuntu,sans-serif;text-decoration:none;outline:none;transition:color 150ms cubic-bezier(0.23,1,0.32,1),background-color 150ms cubic-bezier(0.23,1,0.32,1),transform 150ms cubic-bezier(0.23,1,0.32,1)}.ds-nav-link svg{width:14px;height:14px;opacity:.7}.ds-nav-link:hover{background:var(--accent);color:var(--foreground)}.ds-nav-link:focus-visible{box-shadow:0 0 0 2px var(--brand)}.ds-nav-link:active{transform:scale(.97)}"
+      "css": ".ds-nav-link{display:flex;align-items:center;justify-content:space-between;gap:12px;width:192px;padding:4px 8px;border-radius:8px;color:var(--muted-foreground);font:400 15px/1.5 Ubuntu,sans-serif;text-decoration:none;outline:none;transition:color 150ms cubic-bezier(0.23,1,0.32,1),background-color 150ms cubic-bezier(0.23,1,0.32,1),transform 150ms cubic-bezier(0.23,1,0.32,1)}.ds-nav-link svg{width:14px;height:14px;opacity:.7}.ds-nav-link:hover{background:var(--accent);color:var(--foreground)}.ds-nav-link:focus-visible{box-shadow:0 0 0 2px var(--brand)}"
     },
     {
       "name": "Locale Toggle",
@@ -336,7 +336,7 @@
       "refersTo": "segmented-toggle",
       "description": "Segmented pt/en switch in mono.",
       "html": "<div class=\"ds-seg\" role=\"group\"><button class=\"ds-seg-item\" aria-pressed=\"true\">pt</button><button class=\"ds-seg-item\" aria-pressed=\"false\">en</button></div>",
-      "css": ".ds-seg{display:inline-flex;gap:2px;padding:2px;border:1px solid var(--border);border-radius:10px}.ds-seg-item{height:26px;padding:0 7px;border:1px solid transparent;border-radius:8px;background:transparent;color:var(--foreground);font:500 14px \"Ubuntu Mono\",monospace;cursor:pointer;transition:transform 150ms cubic-bezier(0.23,1,0.32,1)}.ds-seg-item:hover{background:var(--accent)}.ds-seg-item[aria-pressed=true]{background:var(--input)}.ds-seg-item:focus-visible{outline:2px solid var(--ring);outline-offset:1px}.ds-seg-item:active{transform:scale(.96)}"
+      "css": ".ds-seg{display:inline-flex;gap:2px;padding:2px;border:1px solid var(--border);border-radius:10px}.ds-seg-item{height:26px;padding:0 7px;border:1px solid transparent;border-radius:8px;background:transparent;color:var(--foreground);font:500 14px \"Ubuntu Mono\",monospace;cursor:pointer;transition:transform 150ms cubic-bezier(0.23,1,0.32,1)}.ds-seg-item:hover{background:var(--accent)}.ds-seg-item[aria-pressed=true]{background:var(--input)}.ds-seg-item:focus-visible{outline:2px solid var(--ring);outline-offset:1px}.ds-seg-item:active{transform:scale(.98)}"
     },
     {
       "name": "Post Card",
@@ -344,7 +344,7 @@
       "refersTo": "post-card",
       "description": "Blog list entry; hairline card whose border turns yellow on hover.",
       "html": "<a class=\"ds-post\" href=\"#\"><span class=\"ds-post-head\"><span class=\"ds-post-title\">domus</span><time>12 mar 2026</time></span><span class=\"ds-post-desc\">CMS que virou plataforma de conteúdo.</span><span class=\"ds-chip\">portfolio</span></a>",
-      "css": ".ds-post{display:block;max-width:600px;padding:16px 18px;border:1px solid var(--border);border-radius:14px;color:var(--foreground);text-decoration:none;outline:none;transition:border-color 150ms cubic-bezier(0.23,1,0.32,1),background-color 150ms cubic-bezier(0.23,1,0.32,1),transform 150ms cubic-bezier(0.23,1,0.32,1)}.ds-post:hover{border-color:var(--brand);background:var(--accent)}.ds-post:focus-visible{box-shadow:0 0 0 2px var(--brand)}.ds-post:active{transform:scale(.99)}.ds-post-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px}.ds-post-title{font:500 17px Ubuntu,sans-serif}.ds-post time{font:400 14px Ubuntu,sans-serif;color:var(--muted-foreground);font-variant-numeric:tabular-nums}.ds-post-desc{display:block;margin-top:4px;font:400 14.5px/1.5 Ubuntu,sans-serif;color:var(--muted-foreground)}.ds-chip{display:inline-block;margin-top:10px;padding:0 8px;border:1px solid var(--border);border-radius:9999px;font:400 12px \"Ubuntu Mono\",monospace;color:var(--muted-foreground)}"
+      "css": ".ds-post{display:block;max-width:600px;padding:16px 18px;border:1px solid var(--border);border-radius:14px;color:var(--foreground);text-decoration:none;outline:none;transition:border-color 150ms cubic-bezier(0.23,1,0.32,1),background-color 150ms cubic-bezier(0.23,1,0.32,1),transform 150ms cubic-bezier(0.23,1,0.32,1)}.ds-post:hover{border-color:var(--brand);background:var(--accent)}.ds-post:focus-visible{box-shadow:0 0 0 2px var(--brand)}.ds-post-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px}.ds-post-title{font:500 17px Ubuntu,sans-serif}.ds-post time{font:400 14px Ubuntu,sans-serif;color:var(--muted-foreground);font-variant-numeric:tabular-nums}.ds-post-desc{display:block;margin-top:4px;font:400 14.5px/1.5 Ubuntu,sans-serif;color:var(--muted-foreground)}.ds-chip{display:inline-block;margin-top:10px;padding:0 8px;border:1px solid var(--border);border-radius:9999px;font:400 12px \"Ubuntu Mono\",monospace;color:var(--muted-foreground)}"
     },
     {
       "name": "Project Row",
@@ -432,6 +432,7 @@
       }
     ],
     "dos": [
+      "Do keep motion light: only real buttons get press feedback (scale 0.98, 100ms); links and cards change color only.",
       "Do keep Cursor Yellow the only accent, and keep it small: underlines, rings, bullets, cursor, heat scale.",
       "Do use cream / graphite surfaces and 1px alpha hairlines (black 8% / white 6%).",
       "Do write UI copy and headings in lowercase, in both pt and en.",

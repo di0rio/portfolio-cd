@@ -1,7 +1,7 @@
 export default {
   tagline: {
-    pt: "desenvolvedor front-end · interface e os detalhes.",
-    en: "front-end developer · interface and the details.",
+    pt: "jaú, sp · brasil",
+    en: "jaú, sp · brazil",
   },
   nav: {
     label: { pt: "Seções e redes", en: "Sections and links" },

@@ -7,8 +7,8 @@ import { type Locale, updateLocale } from "@/i18n/generated";
 
 const locales: Locale[] = ["pt", "en"];
 
-// Resposta ao clique: afunda 4% e volta rápido.
-export const press = "transition-[box-shadow,transform] duration-150 ease-out motion-safe:active:scale-[0.96]";
+// Resposta ao clique: afunda 2%, quase imperceptível.
+export const press = "transition-[box-shadow,transform] duration-100 ease-out motion-safe:active:scale-[0.98]";
 
 export function LocaleSwitch({ label, locale }: { label: string; locale: Locale }) {
   const router = useRouter();

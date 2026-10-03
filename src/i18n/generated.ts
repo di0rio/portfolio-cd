@@ -23,7 +23,7 @@ export const translations = {
 				description: "Desenvolvedor front-end. Interface, interação e os detalhes que fazem um produto ser bom de usar.",
 			},
 			role: "desenvolvedor front-end",
-			bio: "trabalho na parte que as pessoas veem e usam: interface, interação e os detalhes. hoje cuido de sistema pra clínica veterinária, de um CMS que virou plataforma de conteúdo e de ferramentas internas de migração de dados.",
+			bio: "cuido da parte que as pessoas veem e usam: interface, interação e os detalhes que fazem um produto ser bom de usar. hoje trabalho no loopvet, sistema pra clínica veterinária, e no domus, um CMS que virou plataforma de conteúdo.",
 			contributions: {
 				count: (v: { count: string }) => `${v.count} contribuições no último ano em`,
 				fallback: "contribuições no último ano em",
@@ -54,16 +54,14 @@ export const translations = {
 				home: "voltar pro começo",
 			},
 			experience: {
-				title: "profissional",
-				loopvetWhen: "20XX – hoje",
-				loopvetPath: (v: { from: string; to: string }) => `de ${v.from} a ${v.to}`,
-				loopvetFrom: "cargo inicial",
-				loopvetTo: "desenvolvedor front-end",
+				title: "experiência",
+				current: "atual",
+				role: "desenvolvedor front-end",
 			},
 		},
 		components: {
 			"site-shell": {
-				tagline: "desenvolvedor front-end · interface e os detalhes.",
+				tagline: "jaú, sp · brasil",
 				nav: {
 					label: "Seções e redes",
 					blog: "blog",
@@ -104,7 +102,7 @@ export const translations = {
 				description: "Front-end developer. Interface, interaction and the details that make a product good to use.",
 			},
 			role: "front-end developer",
-			bio: "i take care of the part people see and use: interface, interaction and the details. today i work on software for veterinary clinics, a CMS that grew into a content platform, and internal data-migration tools.",
+			bio: "i take care of the part people see and use: interface, interaction and the details that make a product good to use. today i work on loopvet, software for veterinary clinics, and domus, a CMS that grew into a content platform.",
 			contributions: {
 				count: (v: { count: string }) => `${v.count} contributions in the last year on`,
 				fallback: "contributions in the last year on",
@@ -135,16 +133,14 @@ export const translations = {
 				home: "back to the start",
 			},
 			experience: {
-				title: "professional",
-				loopvetWhen: "20XX – present",
-				loopvetPath: (v: { from: string; to: string }) => `from ${v.from} to ${v.to}`,
-				loopvetFrom: "first role",
-				loopvetTo: "front-end developer",
+				title: "experience",
+				current: "current",
+				role: "front-end developer",
 			},
 		},
 		components: {
 			"site-shell": {
-				tagline: "front-end developer · interface and the details.",
+				tagline: "jaú, sp · brazil",
 				nav: {
 					label: "Sections and links",
 					blog: "blog",

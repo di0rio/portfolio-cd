@@ -342,20 +342,16 @@
   from { opacity: 0; }
 }
 @utility animate-reveal-x {
-  animation: reveal-x 1000ms var(--ease-out) 120ms both;
+  animation: reveal-x 700ms var(--ease-out) both;
   @media (prefers-reduced-motion: reduce) {
     animation: fade-in 300ms ease both;
   }
 }
 
-/* Troca de idioma: enquanto o servidor re-renderiza, o conteúdo esmaece em vez de trocar seco. */
+/* Troca de idioma: enquanto o servidor re-renderiza, o conteúdo esmaece de leve em vez de trocar seco. */
 main {
-  transition: opacity 200ms ease, filter 200ms ease;
+  transition: opacity 150ms ease;
 }
 html[data-pending] main {
-  opacity: 0.5;
-  filter: blur(2px);
-  @media (prefers-reduced-motion: reduce) {
-    filter: none;
-  }
+  opacity: 0.6;
 }

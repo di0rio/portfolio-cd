@@ -23,7 +23,7 @@ export default async function Home() {
         <div className="flex items-center gap-4">
           <Image
             alt=""
-            className="size-16 rounded-2xl border-2 border-black shadow-[3px_3px_0_var(--brand)] transition-transform duration-200 ease-out motion-safe:hover:-rotate-4 motion-safe:hover:scale-105"
+            className="size-16 rounded-2xl border-2 border-black shadow-[3px_3px_0_var(--brand)] transition-transform duration-200 ease-out motion-safe:hover:-rotate-3"
             height={64}
             priority
             src={`https://github.com/${site.github}.png?size=128`}
@@ -124,13 +124,11 @@ export default async function Home() {
           {copy.experience.title}
         </h2>
         <p>
-          <span className="text-muted-foreground">{copy.experience.loopvetWhen}</span>
+          Loopscape
           <span aria-hidden="true" className="mx-2 text-muted-foreground">•</span>
-          Loopvet
+          <span className="text-muted-foreground">{copy.experience.current}</span>
         </p>
-        <p className="text-muted-foreground text-sm">
-          {copy.experience.loopvetPath({ from: copy.experience.loopvetFrom, to: copy.experience.loopvetTo })}
-        </p>
+        <p className="text-muted-foreground text-sm">{copy.experience.role}</p>
       </section>
     </>
   );

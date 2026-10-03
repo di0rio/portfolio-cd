@@ -8,8 +8,8 @@ export default {
   },
   role: { pt: "desenvolvedor front-end", en: "front-end developer" },
   bio: {
-    pt: "trabalho na parte que as pessoas veem e usam: interface, interação e os detalhes. hoje cuido de sistema pra clínica veterinária, de um CMS que virou plataforma de conteúdo e de ferramentas internas de migração de dados.",
-    en: "i take care of the part people see and use: interface, interaction and the details. today i work on software for veterinary clinics, a CMS that grew into a content platform, and internal data-migration tools.",
+    pt: "cuido da parte que as pessoas veem e usam: interface, interação e os detalhes que fazem um produto ser bom de usar. hoje trabalho no loopvet, sistema pra clínica veterinária, e no domus, um CMS que virou plataforma de conteúdo.",
+    en: "i take care of the part people see and use: interface, interaction and the details that make a product good to use. today i work on loopvet, software for veterinary clinics, and domus, a CMS that grew into a content platform.",
   },
   contributions: {
     count: { pt: "{count} contribuições no último ano em", en: "{count} contributions in the last year on" },
@@ -53,10 +53,8 @@ export default {
     home: { pt: "voltar pro começo", en: "back to the start" },
   },
   experience: {
-    title: { pt: "profissional", en: "professional" },
-    loopvetWhen: { pt: "20XX – hoje", en: "20XX – present" },
-    loopvetPath: { pt: "de {from} a {to}", en: "from {from} to {to}" },
-    loopvetFrom: { pt: "cargo inicial", en: "first role" },
-    loopvetTo: { pt: "desenvolvedor front-end", en: "front-end developer" },
+    title: { pt: "experiência", en: "experience" },
+    current: { pt: "atual", en: "current" },
+    role: { pt: "desenvolvedor front-end", en: "front-end developer" },
   },
 };
