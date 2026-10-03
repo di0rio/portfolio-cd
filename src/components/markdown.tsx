@@ -1,8 +1,10 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import Image from "next/image";
+import { isValidElement, type ReactNode } from "react";
 import ReactMarkdown, { type Components, defaultUrlTransform } from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { CodeCopy } from "@/components/code-copy";
 import { site } from "@/lib/site";
 
 // Link externo abre em outra aba sem dar acesso à janela de origem.
@@ -17,6 +19,66 @@ const link: Components["a"] = ({ href, title, children }) => {
 
 // Só prints do próprio site (`/projects/x.webp`, 3840x2160); sem o arquivo no build, some em silêncio.
 const localImage = /^\/projects\/[\w.-]+$/;
+
+const textOf = (node: ReactNode): string =>
+  typeof node === "string" || typeof node === "number"
+    ? String(node)
+    : Array.isArray(node)
+      ? node.map(textOf).join("")
+      : isValidElement<{ children?: ReactNode }>(node)
+        ? textOf(node.props.children)
+        : "";
+
+// Mesma regra do GitHub (minúsculas, sem pontuação, espaço vira hífen), pra links `#secao` de README continuarem valendo.
+const slugify = (text: string) =>
+  text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\p{L}\p{N}\s-]/gu, "")
+    .replace(/\s+/g, "-");
+
+type CopyLabels = { label: string; done: string };
+
+/** h2/h3 com id (e o "#" de link direto) e bloco de código com linguagem e botão de copiar. */
+function enhance(copy?: CopyLabels): Components {
+  const seen = new Map<string, number>();
+  const heading = (Tag: "h2" | "h3"): Components["h2"] => {
+    const Heading: Components["h2"] = ({ children }) => {
+      const label = textOf(children);
+      const base = slugify(label) || "secao";
+      const n = seen.get(base) ?? 0;
+      seen.set(base, n + 1);
+      const id = n ? `${base}-${n}` : base;
+      return (
+        <Tag id={id}>
+          {children}
+          <a aria-label={label} className="anchor" href={`#${id}`}>
+            #
+          </a>
+        </Tag>
+      );
+    };
+    return Heading;
+  };
+
+  return {
+    h2: heading("h2"),
+    h3: heading("h3"),
+    pre: ({ children }) => {
+      const lang = isValidElement<{ className?: string }>(children) ? /language-([\w+#-]+)/.exec(children.props.className ?? "")?.[1] : undefined;
+      if (!lang && !copy) return <pre>{children}</pre>;
+      return (
+        <div className="code">
+          <div className="code-bar">
+            <span>{lang}</span>
+            {copy && <CodeCopy done={copy.done} label={copy.label} text={textOf(children).replace(/\n$/, "")} />}
+          </div>
+          <pre>{children}</pre>
+        </div>
+      );
+    },
+  };
+}
 
 const article: Components = {
   a: link,
@@ -48,13 +110,13 @@ const article: Components = {
  * Segurança: o README é conteúdo de terceiros. HTML cru não é renderizado (sem rehype-raw; não adicione sem
  * sanitizar) e esquemas como `javascript:` e `data:` são barrados pelo `defaultUrlTransform`.
  */
-export function Markdown({ children, repo, branch, dir }: { children: string; repo?: string; branch?: string; dir?: string }) {
+export function Markdown({ children, repo, branch, dir, copy }: { children: string; repo?: string; branch?: string; dir?: string; copy?: CopyLabels }) {
   const base = repo && branch ? `${site.github}/${repo}/${branch}` : null;
 
   return (
     <div className="markdown">
       <ReactMarkdown
-        components={base ? { a: link } : article}
+        components={{ ...(base ? { a: link } : article), ...enhance(copy) }}
         remarkPlugins={[remarkGfm]}
         urlTransform={(url, key) => {
           if (!base || /^([a-z]+:|#|\/\/)/i.test(url)) return defaultUrlTransform(url);

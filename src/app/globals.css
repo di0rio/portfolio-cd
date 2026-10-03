@@ -217,7 +217,23 @@
   .markdown h1,
   .markdown h2,
   .markdown h3 {
-    @apply mt-9 font-heading font-bold leading-tight;
+    @apply relative mt-10 scroll-mt-8 text-balance font-heading font-bold leading-tight;
+  }
+  .markdown p,
+  .markdown li {
+    @apply text-pretty;
+  }
+  /* "#" ao lado do título (h2/h3): link direto pra seção. */
+  .markdown .anchor {
+    @apply absolute right-full pr-2 font-normal text-muted-foreground no-underline opacity-0 transition-opacity duration-150;
+  }
+  .markdown .anchor:focus-visible {
+    @apply rounded-sm opacity-100 outline-none ring-2 ring-brand;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .markdown :is(h2, h3):hover .anchor {
+      @apply opacity-100;
+    }
   }
   .markdown h1 { @apply text-2xl; }
   .markdown h2 { @apply text-xl; }
@@ -238,6 +254,16 @@
   }
   .markdown pre {
     @apply overflow-x-auto rounded-xl border bg-card p-4 text-sm leading-6;
+  }
+  /* Bloco de código: barra com a linguagem e o botão de copiar; a rolagem horizontal fica no <pre>. */
+  .markdown .code {
+    @apply overflow-hidden rounded-xl border bg-card;
+  }
+  .markdown .code pre {
+    @apply rounded-none border-0 bg-transparent;
+  }
+  .markdown .code-bar {
+    @apply flex items-center justify-between gap-2 border-b py-1 pr-1 pl-4 font-mono text-muted-foreground text-xs;
   }
   .markdown table { @apply block w-full overflow-x-auto text-sm; }
   .markdown th, .markdown td { @apply border px-3 py-1.5 text-left; }
@@ -368,5 +394,55 @@ html[data-pending] main {
   animation: bubble-in 360ms var(--ease-out) 450ms both;
   @media (prefers-reduced-motion: reduce) {
     animation: fade-in 200ms ease 450ms both;
+  }
+}
+
+/* Entrada escalonada das listas (blog, log): o atraso vem de --i, em passos de 40ms. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+@keyframes fade-only {
+  from {
+    opacity: 0;
+  }
+}
+@utility rise {
+  animation: rise-in 220ms var(--ease-out) calc(var(--i, 0) * 40ms) both;
+  @media (prefers-reduced-motion: reduce) {
+    animation: fade-only 150ms ease both;
+  }
+}
+
+/* Barra de progresso de leitura: animação ligada à rolagem da página, sem JS. Some onde não há suporte. */
+.read-progress {
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .read-progress {
+      display: block;
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 50;
+      height: 2px;
+      background: var(--brand);
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: read-progress linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+@keyframes read-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+@media print {
+  .read-progress {
+    display: none !important;
   }
 }

@@ -1,9 +1,11 @@
+import { ArrowRightIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ViewTransition } from "react";
+import { type CSSProperties, ViewTransition } from "react";
 import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
 import { getBlogPosts } from "@/lib/github";
+import { readingTime } from "@/lib/reading-time";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { t, locale } = await getT();
@@ -28,31 +30,40 @@ export default async function Blog() {
       {posts.length === 0 ? (
         <p className="text-muted-foreground">{copy.empty}</p>
       ) : (
-        <ul className="flex flex-col gap-2.5">
-          {posts.map((post) => (
-            <li key={post.slug}>
+        <ul className="flex flex-col gap-1">
+          {posts.map((post, i) => (
+            <li className="rise" key={post.slug} style={{ "--i": Math.min(i, 8) } as CSSProperties}>
               <Link
-                className="block rounded-xl border px-4.5 py-4 outline-none transition-colors duration-150 hover:border-brand hover:bg-accent focus-visible:ring-2 focus-visible:ring-brand"
+                className="group -mx-2 grid gap-x-6 gap-y-0.5 rounded-lg px-2 py-3 outline-none focus-visible:ring-2 focus-visible:ring-brand sm:grid-cols-[7.5rem_1fr]"
                 href={localePath(locale, `/blog/${post.slug}`)}
               >
-                <span className="flex items-baseline justify-between gap-4">
-                  <ViewTransition default="none" name={`post-title-${post.slug}`} share="morph">
-                    <span className="font-medium text-[17px]">{post.title}</span>
-                  </ViewTransition>
-                  <time className="whitespace-nowrap text-muted-foreground text-sm tabular-nums" dateTime={post.date}>
-                    {fmt.format(new Date(post.date))}
-                  </time>
+                <span className="flex flex-wrap gap-x-2 whitespace-nowrap pt-0.5 text-muted-foreground text-sm tabular-nums sm:block">
+                  <time dateTime={post.date}>{fmt.format(new Date(post.date))}</time>
+                  {post.note && <span className="sm:block">{readingTime(post.note.markdown, dateLocale)}</span>}
                 </span>
-                {post.description && <span className="mt-1 block text-muted-foreground text-[14.5px]">{post.description}</span>}
-                {post.topics.length > 0 && (
-                  <span className="mt-2.5 flex flex-wrap gap-1.5">
-                    {post.topics.map((topic) => (
-                      <span className="rounded-full border px-2 font-mono text-muted-foreground text-xs" key={topic}>
-                        {topic}
+                <span className="min-w-0">
+                  <span className="block">
+                    <ViewTransition default="none" name={`post-title-${post.slug}`} share="morph">
+                      <span className="font-medium text-[17px] underline decoration-transparent underline-offset-4 transition-[text-decoration-color] duration-150 ease-[ease] group-hover:decoration-brand group-focus-visible:decoration-brand">
+                        {post.title}
                       </span>
-                    ))}
+                    </ViewTransition>
+                    <ArrowRightIcon
+                      aria-hidden="true"
+                      className="ml-1.5 inline size-3.5 align-[-2px] text-muted-foreground transition-transform duration-150 ease-out group-hover:translate-x-0.5"
+                    />
                   </span>
-                )}
+                  {post.description && <span className="mt-0.5 block text-muted-foreground text-[14.5px]">{post.description}</span>}
+                  {post.topics.length > 0 && (
+                    <span className="mt-2 flex flex-wrap gap-1.5">
+                      {post.topics.map((topic) => (
+                        <span className="rounded-full border px-2 font-mono text-muted-foreground text-xs" key={topic}>
+                          {topic}
+                        </span>
+                      ))}
+                    </span>
+                  )}
+                </span>
               </Link>
             </li>
           ))}

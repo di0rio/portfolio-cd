@@ -164,7 +164,7 @@ A warm two-theme neutral palette carrying one bright yellow accent that behaves 
 - **Footer:** a hairline on top; the credit on the left, the `cd ..` hint (as a `Kbd`) on the right. Social links live only in the hero buttons, not repeated here.
 
 ### Named Rules
-**The One Column Rule.** Content never spans wider than 640px. New sections stack in the same column; they do not introduce side-by-side layouts at page level.
+**The One Column Rule.** Content never spans wider than 640px. New sections stack in the same column; they do not introduce side-by-side layouts at page level. Two exceptions on reading pages: media marked `wide` (case study screenshots) may grow to 1024px, and long posts get a table of contents in the right gutter from 1200px up (hidden below).
 
 ## Elevation & Depth
 
@@ -208,12 +208,18 @@ Prefer plain stacked lists (title, then a one-line description, 24px between ite
 - **Theme button:** a single outline icon button (cd/ui `Button`, `icon-sm`) that flips light ↔ dark. It shows a moon in light theme and a sun in dark theme, with an `aria-label` naming the theme it switches to. Same 0.98 press. It starts from the system theme; there is no separate "system" option.
 - **Locale change:** while the server re-renders, `main` fades to 60% opacity (150ms), then returns. No blur.
 
-### Cards / Containers (blog list)
-- **Corner Style:** 14px.
-- **Background:** page background; hover adds a 4% tint.
-- **Border:** hairline; hover switches it to Cursor Yellow.
-- **Internal Padding:** 16px vertical, 18px horizontal.
-- **Press:** none.
+### Blog list
+- **Shape:** plain stacked list, no cards. Date (and reading time for notes) in a 7.5rem column on desktop, above the title on mobile; tabular numerals, not mono.
+- **Row:** the whole row is the link (the post is the only action). Hover/focus turns the title underline Cursor Yellow and nudges the arrow 2px right (150ms); focus also gets the ring, never motion.
+- **Entry:** rows rise in once on first paint (6px, 220ms ease-out, 40ms steps capped at 8); opacity only under reduced motion. The title morphs into the post header through a view transition.
+
+### Post page
+- 2px Cursor Yellow reading-progress bar driven by the scroll timeline (CSS only, linear, `scaleX`); hidden under reduced motion or without scroll timelines.
+- h2/h3 carry ids and a hover `#` anchor. Code blocks get a bar with the language and a copy button (press 0.97, icon swap with a 2px blur crossfade).
+- Table of contents (h2s) in the gutter from 1200px; the current section changes color and its 1px rule, nothing moves.
+
+### Log timeline
+- One 1px rail with a Cursor Yellow dot per day. Rows: mono sha chip (links to GitHub), an optional muted chip for a `Tag:` or `type(scope):` prefix, the subject, relative time (full date in `title`). Rows get a faint hover tint, the one place a list row has a hover background, because each row is a dense record you scan by pointer.
 
 ### Topic chips
 - **Style:** full pill, hairline border, mono 12px, Ink Muted, 8px horizontal padding. Read-only labels, not filters.
