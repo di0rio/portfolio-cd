@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Markdown } from "@/components/markdown";
+import { PageHeader } from "@/components/page-header";
 import { ProjectMedia } from "@/components/project-media";
 import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
@@ -44,13 +45,16 @@ export default async function CaseStudy({ params }: PageProps<"/[locale]/projeto
 
   return (
     <>
-      <header>
-        <Link className="inline-flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground" href={localePath(locale, "/#projetos")}>
-          <ArrowLeftIcon aria-hidden="true" className="size-3.5" />
-          {copy.back}
-        </Link>
-        <h1 className="mt-6 mb-1.5 font-bold font-heading text-[22px] leading-tight">{project.name}</h1>
-        <p className="max-w-[520px] text-pretty text-muted-foreground">{c.intro}</p>
+      <PageHeader
+        back={
+          <Link className="inline-flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground" href={localePath(locale, "/#projetos")}>
+            <ArrowLeftIcon aria-hidden="true" className="size-3.5" />
+            {copy.back}
+          </Link>
+        }
+        intro={c.intro}
+        title={project.name}
+      >
         {(project.live || project.repo) && (
           <p className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm">
             {project.live && (
@@ -68,7 +72,7 @@ export default async function CaseStudy({ params }: PageProps<"/[locale]/projeto
         {/* Vídeos desligados por enquanto (ainda têm bugs). Pra religar: devolver `video={image.video}`
             e os .mp4 de `.videos/` pra `public/projects/`. */}
         {image && <ProjectMedia alt={copy.imageAlt({ name: project.name })} play={copy.play} src={image.src} /* video={image.video} */ />}
-      </header>
+      </PageHeader>
 
       {article && <Markdown>{article}</Markdown>}
 

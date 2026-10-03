@@ -61,7 +61,7 @@ spacing:
   tight: "6px"
   item: "16px"
   block: "32px"
-  section: "56px"
+  section: "64px"
 components:
   nav-link:
     textColor: "{colors.ink-muted}"
@@ -160,7 +160,13 @@ A warm two-theme neutral palette carrying one bright yellow accent that behaves 
 
 - **All sizes:** one centered column, max 640px, 16px side padding. Header, `main` and footer share the same edges. There is no sidebar.
 - **Header:** the prompt (`cd/ ~/section $▍`) on the left, section links in the middle, locale and theme on the right. Below 640px the links drop to their own row and scroll horizontally if needed.
-- **Vertical rhythm:** 64px between sections in `main` (80px above the hero on desktop), 20px from a section title to its content, 16px of padding inside list rows. 96px bottom padding before the footer.
+- **Vertical rhythm** (one scale, same on every page and viewport; the header is a fixed 56px row, 96px under 640px, so nothing moves between pages):
+  - `main`: 64px top padding, 96px bottom padding, **64px** between its top-level blocks (hero, sections, footnotes). `gap-16` on `main` is the only source of section spacing: pages never add their own top/bottom margins.
+  - Page header (`PageHeader`: h1 22px bold, 6px, intro, max 520px): 48px to the first block (the component pulls 16px back from the 64px gap). With a back link: 24px between link and h1. Exceptions: the home hero (avatar + 15px name) and blog post titles (28px headline, own header with a hairline).
+  - Section (`Section`): 20px from the label to its content.
+  - Lists: **24px** between two-line entries (projects, writing, repos), **12px** between single-line items (bullets, steps); blog rows are 4px apart with 12px of padding inside. A note or caption under a list or paragraph group: 24px (12px under the heatmap).
+  - Inside an entry: title and description touch (0), a meta line under them is 2px away.
+  - Motion on page change: only `<main>` moves (fade out 120ms, fade in with a 6px rise); list stagger (`rise`) is opacity only, so two offsets never add up.
 - **Footer:** a hairline on top; the credit on the left, the `cd ..` hint (as a `Kbd`) on the right. Social links live only in the hero buttons, not repeated here.
 
 ### Named Rules

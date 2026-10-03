@@ -138,7 +138,7 @@ export default async function Home() {
           ))}
         </ul>
         {contributions && (
-          <p className="mt-8 text-muted-foreground text-sm tabular-nums">
+          <p className="mt-6 text-muted-foreground text-sm tabular-nums">
             {copy.projects.contributions({ count: contributions.total.toLocaleString(dateLocale) })} ·{" "}
             <a className="underline decoration-muted-foreground/40 underline-offset-4 transition-[text-decoration-color] duration-150 hover:decoration-brand" href={`https://github.com/${site.github}`} rel="noopener" target="_blank">
               github.com/{site.github}

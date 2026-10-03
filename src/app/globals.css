@@ -356,7 +356,7 @@ html[data-pending] main {
 ::view-transition-new(root) {
   animation: none;
 }
-/* Conteúdo: sai rápido, entra subindo 6px com um desfoque curto que funde as duas telas. */
+/* Conteúdo: sai rápido, entra subindo 6px. Sem blur: filtrar um snapshot de 6000px de altura pesa no GPU. */
 ::view-transition-group(.page) {
   animation: none;
 }
@@ -378,7 +378,6 @@ html[data-pending] main {
   from {
     opacity: 0;
     transform: translateY(6px);
-    filter: blur(2px);
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -407,11 +406,11 @@ html[data-pending] main {
   }
 }
 
-/* Entrada escalonada das listas (blog, log): o atraso vem de --i, em passos de 40ms. */
+/* Entrada escalonada das listas (blog, log): o atraso vem de --i, em passos de 40ms.
+   Só opacidade: a página já sobe 6px na troca (view transition), e dois deslocamentos somados pulam. */
 @keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(6px);
   }
 }
 @keyframes fade-only {

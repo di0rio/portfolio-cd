@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { LogFallback, LogView } from "@/components/log-view";
+import { PageHeader } from "@/components/page-header";
 import { alternates, getT } from "@/i18n/server";
 import { getSiteCommits } from "@/lib/github";
 import { site } from "@/lib/site";
@@ -33,10 +34,7 @@ export default async function Log() {
 
   return (
     <>
-      <header>
-        <h1 className="mb-1.5 font-bold font-heading text-[22px] leading-tight">{copy.title}</h1>
-        <p className="max-w-[520px] text-pretty text-muted-foreground">{copy.intro}</p>
-      </header>
+      <PageHeader intro={copy.intro} title={copy.title} />
 
       {commits.length === 0 ? (
         <p className="text-muted-foreground">{copy.empty}</p>

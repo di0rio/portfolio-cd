@@ -2,6 +2,7 @@ import { ArrowRightIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { type CSSProperties, ViewTransition } from "react";
+import { PageHeader } from "@/components/page-header";
 import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
 import { getBlogPosts } from "@/lib/github";
@@ -23,9 +24,8 @@ export default async function Blog() {
   });
 
   return (
-    <section>
-      <h1 className="mb-1.5 font-bold font-heading text-[22px]">{copy.title}</h1>
-      <p className="mb-8 text-muted-foreground">{copy.intro}</p>
+    <>
+      <PageHeader intro={copy.intro} title={copy.title} />
 
       {posts.length === 0 ? (
         <p className="text-muted-foreground">{copy.empty}</p>
@@ -70,6 +70,6 @@ export default async function Blog() {
           ))}
         </ul>
       )}
-    </section>
+    </>
   );
 }

@@ -70,7 +70,7 @@ export default async function RootLayout({ children }: LayoutProps<"/[locale]">)
 
           {/* Trocar de página anima só o conteúdo; header e rodapé ficam parados. */}
           <ViewTransition default="page">
-            <main className="mx-auto flex w-full min-w-0 max-w-[640px] flex-1 flex-col gap-20 px-4 pt-16 pb-28 sm:pt-24 print:max-w-none print:p-0">
+            <main className="mx-auto flex w-full min-w-0 max-w-[640px] flex-1 flex-col gap-16 px-4 pt-16 pb-24 print:max-w-none print:p-0">
               {children}
             </main>
           </ViewTransition>

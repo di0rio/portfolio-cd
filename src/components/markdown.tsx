@@ -101,6 +101,14 @@ const article: Components = {
   },
 };
 
+// Imagem de README (qualquer domínio): preguiçosa. Sem isso o React emite um preload dela no HTML do post, e o
+// prefetch dos links do /blog baixaria a imagem de um post que ninguém abriu.
+const remote: Components = {
+  a: link,
+  // eslint-disable-next-line @next/next/no-img-element
+  img: ({ src, alt }) => <img alt={alt ?? ""} decoding="async" loading="lazy" src={typeof src === "string" ? src : undefined} />,
+};
+
 /**
  * Renderiza markdown. Com `repo` e `branch` é o README de um repositório: caminhos relativos
  * (`./docs/x.png`) são resolvidos pro GitHub, imagens via raw e links via blob. Sem eles é conteúdo
@@ -116,7 +124,7 @@ export function Markdown({ children, repo, branch, dir, copy }: { children: stri
   return (
     <div className="markdown">
       <ReactMarkdown
-        components={{ ...(base ? { a: link } : article), ...enhance(copy) }}
+        components={{ ...(base ? remote : article), ...enhance(copy) }}
         remarkPlugins={[remarkGfm]}
         urlTransform={(url, key) => {
           if (!base || /^([a-z]+:|#|\/\/)/i.test(url)) return defaultUrlTransform(url);

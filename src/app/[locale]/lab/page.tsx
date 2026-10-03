@@ -5,6 +5,7 @@ import { ClipTabs } from "@/components/lab/clip-tabs";
 import { CopyButton } from "@/components/lab/copy-button";
 import { DragSheet } from "@/components/lab/drag-sheet";
 import { HoldToConfirm } from "@/components/lab/hold-to-confirm";
+import { PageHeader } from "@/components/page-header";
 import { PaletteDemo } from "@/components/lab/palette-demo";
 import { ReorderList } from "@/components/lab/reorder-list";
 import { Terminal } from "@/components/lab/terminal";
@@ -23,10 +24,7 @@ export default async function Lab() {
 
   return (
     <>
-      <section>
-        <h1 className="mb-1.5 font-bold font-heading text-[22px]">{copy.title}</h1>
-        <p className="max-w-[520px] text-pretty text-muted-foreground">{copy.intro}</p>
-      </section>
+      <PageHeader intro={copy.intro} title={copy.title} />
 
       {/* Os mais novos primeiro. */}
       <Experiment desc={copy.toasts.desc} id="toasts" title={copy.toasts.title}>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactLinks } from "@/components/contact-links";
+import { PageHeader } from "@/components/page-header";
 import { Section } from "@/components/section";
 import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
@@ -25,10 +26,7 @@ export default async function Freela() {
 
   return (
     <>
-      <header>
-        <h1 className="mb-1.5 font-bold font-heading text-[22px] leading-tight">{copy.title}</h1>
-        <p className="max-w-[520px] text-pretty text-muted-foreground">{copy.pitch}</p>
-      </header>
+      <PageHeader intro={copy.pitch} title={copy.title} />
 
       <Section id="o-que-eu-faco" title={copy.whatTitle}>
         <ul className="flex flex-col gap-3">

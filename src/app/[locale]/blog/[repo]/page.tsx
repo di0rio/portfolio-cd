@@ -11,6 +11,11 @@ import { getBlogPost, getBlogPosts, getReadme } from "@/lib/github";
 import { readingTime } from "@/lib/reading-time";
 import { site } from "@/lib/site";
 
+// Posts pré-renderizados (ISR, 1h): sem isso a rota era dinâmica. Slug fora da lista (ex.: build sem acesso ao GitHub) renderiza sob demanda.
+export async function generateStaticParams() {
+  return (await getBlogPosts("pt")).map(({ slug }) => ({ repo: slug }));
+}
+
 // O segmento `[repo]` também resolve slug de nota (`posts/<slug>` no repo de notas).
 export async function generateMetadata({ params }: PageProps<"/[locale]/blog/[repo]">): Promise<Metadata> {
   const { locale } = await getT();

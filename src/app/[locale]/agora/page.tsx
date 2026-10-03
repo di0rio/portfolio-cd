@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Heatmap } from "@/components/heatmap";
+import { PageHeader } from "@/components/page-header";
 import { Section } from "@/components/section";
 import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
@@ -39,10 +40,7 @@ export default async function Agora() {
 
   return (
     <>
-      <header>
-        <h1 className="mb-1.5 font-bold font-heading text-[22px] leading-tight">{copy.title}</h1>
-        <p className="max-w-[520px] text-pretty text-muted-foreground">{copy.intro}</p>
-      </header>
+      <PageHeader intro={copy.intro} title={copy.title} />
 
       <Section id="mexendo" title={copy.workingTitle}>
         {repos.length === 0 ? (
@@ -87,12 +85,12 @@ export default async function Agora() {
             locale={dateLocale}
             unit={[copy.contribUnitOne, copy.contribUnitMany]}
           />
-          <p className="mt-2 text-muted-foreground text-sm">{copy.contribTotal({ n: contributions.total.toLocaleString(dateLocale) })}</p>
+          <p className="mt-3 text-muted-foreground text-sm">{copy.contribTotal({ n: contributions.total.toLocaleString(dateLocale) })}</p>
         </Section>
       )}
 
       <Section id="estudando" title={copy.studyingTitle}>
-        <ul className="flex list-disc flex-col gap-2 pl-5 marker:text-muted-foreground">
+        <ul className="flex list-disc flex-col gap-3 pl-5 marker:text-muted-foreground">
           {study.map((item) => (
             <li className="text-pretty" key={item}>
               {item}

@@ -33,8 +33,8 @@ export default async function Cv() {
     <article className="flex flex-col gap-9 print:gap-6 print:text-[13px]">
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="font-bold font-heading text-[28px] leading-tight">{site.name}</h1>
-          <p className="mt-1 text-muted-foreground">
+          <h1 className="font-bold font-heading text-[22px] leading-tight">{site.name}</h1>
+          <p className="mt-1.5 text-muted-foreground">
             {copy.role} · {site.location.city}, {site.location.region}
           </p>
           <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm">
