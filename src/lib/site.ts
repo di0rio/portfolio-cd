@@ -9,7 +9,10 @@ export const site = {
   company: { name: "Loopscape", url: "https://github.com/loopscape" },
   // Tecnologias principais, em ordem de importância. Vazio = a seção não aparece (home e /cv).
   stack: [] as string[], // TODO: ex.: ["TypeScript", "React", "Next.js", "Tailwind CSS"]
-  url: "https://portfolio-cd.vercel.app", // TODO: domínio final
+  // Na Vercel usa o domínio de produção do projeto; local, o dev server. TODO: domínio final
+  url: process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000",
   // Repositório público com algum desses tópicos vira post no blog.
   blogTopics: ["portfolio", "blog"],
 };

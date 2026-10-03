@@ -27,7 +27,7 @@ A front-end developer who cares about the details people see and use. The site i
 - Built with Next.js 16 (App Router), Tailwind CSS v4, coss ui (Base UI), `better-intl` for translations, `next-themes` for light/dark.
 - Content sources: colocated `t.ts` translation files for copy, `src/lib/site.ts` for personal data, GitHub API for blog posts and README content, a public contributions API for the activity graph. `GITHUB_TOKEN` is optional (rate limit 60 req/h without it).
 - Blog convention: `README.md` in Portuguese, `README.en.md` in English; missing English falls back to Portuguese with a notice.
-- Deploy target: Vercel (`portfolio-cd.vercel.app`, final domain undecided).
+- Deploy target: Vercel (final domain undecided; `site.url` reads `VERCEL_PROJECT_PRODUCTION_URL`).
 
 ## Capabilities and Constraints
 
