@@ -42,7 +42,8 @@ Tudo é revalidado a cada hora (contribuições a cada 6 h).
 
 | O quê | Arquivo |
 | --- | --- |
-| Nome, GitHub, LinkedIn, e-mail, CV, domínio | `src/lib/site.ts` |
+| Nome, GitHub, LinkedIn, e-mail, empresa, cidade, stack, domínio | `src/lib/site.ts` |
+| Currículo (`/cv`, salva em PDF pela impressão) | `src/app/[locale]/cv/page.tsx` + `src/app/cv/t.ts` |
 | Páginas (home, blog, 404) | `src/app/[locale]/` |
 | Textos da home (bio, projetos, experiência) | `src/app/t.ts` |
 | Textos do blog | `src/app/blog/t.ts` |

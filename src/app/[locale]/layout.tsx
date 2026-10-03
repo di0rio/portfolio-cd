@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { Ubuntu, Ubuntu_Mono } from "next/font/google";
 import "../globals.css";
+import { ClickTracker } from "@/components/site-shell/click-tracker";
 import { EasterEgg } from "@/components/site-shell/easter-egg";
 import { LocaleSwitch } from "@/components/site-shell/locale-switch";
 import { Sidebar } from "@/components/site-shell/sidebar";
@@ -42,7 +43,7 @@ export default async function RootLayout({ children }: LayoutProps<"/[locale]">)
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <ThemeProvider>
-          <header className="flex items-center justify-between gap-4 px-4 py-3 text-muted-foreground text-sm lg:px-6">
+          <header className="flex items-center justify-between gap-4 px-4 py-3 text-muted-foreground text-sm lg:px-6 print:hidden">
             <span>{shell.tagline}</span>
             <div className="flex items-center gap-2">
               <LocaleSwitch label={shell.language.label} locale={locale} />
@@ -50,12 +51,12 @@ export default async function RootLayout({ children }: LayoutProps<"/[locale]">)
             </div>
           </header>
 
-          <div className="grid flex-1 gap-8 px-4 pt-4 pb-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,600px)_minmax(0,1fr)] lg:gap-14 lg:px-6 lg:pt-10">
+          <div className="grid flex-1 gap-8 px-4 pt-4 pb-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,600px)_minmax(0,1fr)] lg:gap-14 lg:px-6 lg:pt-10 print:block print:p-0">
             <Sidebar locale={locale} nav={shell.nav} />
             <main className="flex min-w-0 flex-col gap-14">{children}</main>
           </div>
 
-          <footer className="flex flex-wrap justify-between gap-4 px-4 pb-7 text-muted-foreground text-sm lg:px-6">
+          <footer className="flex flex-wrap justify-between gap-4 px-4 pb-7 text-muted-foreground text-sm lg:px-6 print:hidden">
             <span>{shell.footer.made}</span>
             <span>
               {shell.footer.hint} <code className="rounded-md bg-accent px-1.5 font-mono text-foreground">cd ..</code>
@@ -63,6 +64,7 @@ export default async function RootLayout({ children }: LayoutProps<"/[locale]">)
           </footer>
           <EasterEgg locale={locale} />
           <Analytics />
+          <ClickTracker />
         </ThemeProvider>
       </body>
     </html>

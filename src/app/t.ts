@@ -29,6 +29,15 @@ export default {
       en: "a CMS that grew into a content marketing platform: articles, API and campaign links with analytics.",
     },
   },
+  stack: { title: { pt: "stack", en: "stack" } },
+  error: {
+    title: { pt: "algo deu errado.", en: "something went wrong." },
+    body: {
+      pt: "provavelmente a API do GitHub não respondeu. tenta de novo daqui a pouco.",
+      en: "the GitHub API probably didn't respond. try again in a moment.",
+    },
+    retry: { pt: "tentar de novo", en: "try again" },
+  },
   repos: {
     title: { pt: "em destaque no github", en: "featured on github" },
     all: { pt: "ver todos →", en: "see all →" },

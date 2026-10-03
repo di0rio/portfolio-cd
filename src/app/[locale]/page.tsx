@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ContactLinks } from "@/components/contact-links";
 import { Contributions } from "@/components/contributions";
 import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
@@ -20,6 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
   const { t, locale, dateLocale } = await getT();
   const copy = t.app;
+  const nav = t.components["site-shell"].nav;
   const [posts, featured] = await Promise.all([getBlogRepos().then((r) => r.slice(0, 3)), getFeaturedRepos()]);
   const fmt = new Intl.DateTimeFormat(dateLocale, { day: "numeric", month: "short" });
 
@@ -41,9 +43,14 @@ export default async function Home() {
           </div>
         </div>
         <p className="mt-4.5 max-w-[520px] text-pretty text-muted-foreground">{copy.bio}</p>
+        <div className="mt-5">
+          <ContactLinks labels={nav} locale={locale} />
+        </div>
+        <script
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd(locale, copy.role, copy.bio)) }}
+          type="application/ld+json"
+        />
       </section>
-
-      <Contributions />
 
       <section aria-labelledby="projetos" className="scroll-mt-8">
         <h2 className="mb-3.5 font-medium text-[17px]" id="projetos">
@@ -58,6 +65,29 @@ export default async function Home() {
           ))}
         </ul>
       </section>
+
+      <section aria-labelledby="experiencia" className="scroll-mt-8">
+        <h2 className="mb-3.5 font-medium text-[17px]" id="experiencia">
+          {copy.experience.title}
+        </h2>
+        <p>
+          {site.company.name}
+          <span aria-hidden="true" className="mx-2 text-muted-foreground">•</span>
+          <span className="text-muted-foreground">{copy.experience.current}</span>
+        </p>
+        <p className="text-muted-foreground text-sm">{copy.experience.role}</p>
+      </section>
+
+      {site.stack.length > 0 && (
+        <section aria-labelledby="stack">
+          <h2 className="mb-3.5 font-medium text-[17px]" id="stack">
+            {copy.stack.title}
+          </h2>
+          <p className="text-muted-foreground">{site.stack.join(" · ")}</p>
+        </section>
+      )}
+
+      <Contributions />
 
       {featured.length > 0 && (
         <section aria-labelledby="github">
@@ -125,17 +155,22 @@ export default async function Home() {
         </section>
       )}
 
-      <section aria-labelledby="experiencia" className="scroll-mt-8">
-        <h2 className="mb-3.5 font-medium text-[17px]" id="experiencia">
-          {copy.experience.title}
-        </h2>
-        <p>
-          Loopscape
-          <span aria-hidden="true" className="mx-2 text-muted-foreground">•</span>
-          <span className="text-muted-foreground">{copy.experience.current}</span>
-        </p>
-        <p className="text-muted-foreground text-sm">{copy.experience.role}</p>
-      </section>
     </>
   );
+}
+
+// Dados estruturados (schema.org) pro Google entender quem é a pessoa do site.
+function personJsonLd(locale: string, role: string, bio: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: site.name,
+    jobTitle: role,
+    description: bio,
+    url: site.url + localePath(locale === "en" ? "en" : "pt", "/"),
+    image: `https://github.com/${site.github}.png`,
+    worksFor: { "@type": "Organization", name: site.company.name, url: site.company.url },
+    address: { "@type": "PostalAddress", addressLocality: site.location.city, addressRegion: site.location.region, addressCountry: site.location.country },
+    sameAs: [`https://github.com/${site.github}`, site.linkedin && `https://www.linkedin.com/in/${site.linkedin}`].filter(Boolean),
+  };
 }

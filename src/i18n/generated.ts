@@ -18,6 +18,13 @@ export const translations = {
 				onlyPt: "este post só está disponível em português.",
 				noReadme: "esse repositório ainda não tem README.",
 			},
+			cv: {
+				title: "currículo",
+				description: "Currículo do Cauã Diorio, desenvolvedor front-end.",
+				print: "salvar em PDF",
+				summary: "resumo",
+				openSource: "open source",
+			},
 			meta: {
 				title: "Cauã Diorio · desenvolvedor front-end",
 				description: "Desenvolvedor front-end. Interface, interação e os detalhes que fazem um produto ser bom de usar.",
@@ -35,6 +42,14 @@ export const translations = {
 				title: "projetos em que eu trabalhei",
 				loopvet: "sistema de gestão pra clínica veterinária: agenda, prontuário e financeiro.",
 				domus: "CMS que virou plataforma de marketing de conteúdo: artigos, API e links de campanha com métricas.",
+			},
+			stack: {
+				title: "stack",
+			},
+			error: {
+				title: "algo deu errado.",
+				body: "provavelmente a API do GitHub não respondeu. tenta de novo daqui a pouco.",
+				retry: "tentar de novo",
 			},
 			repos: {
 				title: "em destaque no github",
@@ -96,6 +111,13 @@ export const translations = {
 				onlyPt: "this post is only available in portuguese.",
 				noReadme: "this repository has no README yet.",
 			},
+			cv: {
+				title: "résumé",
+				description: "Résumé of Cauã Diorio, front-end developer.",
+				print: "save as PDF",
+				summary: "summary",
+				openSource: "open source",
+			},
 			meta: {
 				title: "Cauã Diorio · front-end developer",
 				description: "Front-end developer. Interface, interaction and the details that make a product good to use.",
@@ -113,6 +135,14 @@ export const translations = {
 				title: "projects i've worked on",
 				loopvet: "management software for veterinary clinics: scheduling, medical records and billing.",
 				domus: "a CMS that grew into a content marketing platform: articles, API and campaign links with analytics.",
+			},
+			stack: {
+				title: "stack",
+			},
+			error: {
+				title: "something went wrong.",
+				body: "the GitHub API probably didn't respond. try again in a moment.",
+				retry: "try again",
 			},
 			repos: {
 				title: "featured on github",
