@@ -52,7 +52,8 @@ export function Terminal({ locale }: { locale: Locale }) {
       case "sudo":
         return [copy.sudo];
       case "cd": {
-        const target = places[(arg || "~").toLowerCase()];
+        const dir = (arg || "~").toLowerCase();
+        const target = Object.hasOwn(places, dir) ? places[dir] : undefined; // `cd constructor` não pode achar chave do protótipo
         if (!target) return [copy.noDir({ dir: arg })];
         router.push(localePath(locale, target));
         return [];

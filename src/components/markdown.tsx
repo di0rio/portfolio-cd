@@ -5,6 +5,9 @@ import { site } from "@/lib/site";
 /**
  * Renderiza o README de um repositório. Caminhos relativos (`./docs/x.png`) são
  * resolvidos pro GitHub: imagens via raw, links via blob.
+ *
+ * Segurança: o README é conteúdo de terceiros. HTML cru não é renderizado (sem rehype-raw; não adicione sem
+ * sanitizar) e esquemas como `javascript:` e `data:` são barrados pelo `defaultUrlTransform`.
  */
 export function Markdown({ children, repo, branch }: { children: string; repo: string; branch: string }) {
   const base = `${site.github}/${repo}/${branch}`;
@@ -19,6 +22,17 @@ export function Markdown({ children, repo, branch }: { children: string; repo: s
           return key === "src"
             ? `https://raw.githubusercontent.com/${base}/${path}`
             : `https://github.com/${site.github}/${repo}/blob/${branch}/${path}`;
+        }}
+        components={{
+          // Link externo abre em outra aba sem dar acesso à janela de origem.
+          a: ({ href, title, children }) => {
+            const external = href && /^(https?:)?\/\//i.test(href);
+            return (
+              <a href={href} title={title} {...(external && { rel: "noopener noreferrer", target: "_blank" })}>
+                {children}
+              </a>
+            );
+          },
         }}
       >
         {children}

@@ -31,6 +31,9 @@ function headers(accept = "application/vnd.github+json"): HeadersInit {
   };
 }
 
+// `homepage` é texto livre no GitHub: só http(s) vira link (nada de `javascript:`).
+const httpUrl = (url: string | null | undefined) => (url && /^https?:\/\//i.test(url) ? url : null);
+
 /** Repositórios públicos marcados com um dos `site.blogTopics`, do mais novo pro mais antigo. */
 export async function getBlogRepos(): Promise<Repo[]> {
   const res = await fetch(`${API}/users/${site.github}/repos?type=owner&per_page=100&sort=created`, {
@@ -39,9 +42,9 @@ export async function getBlogRepos(): Promise<Repo[]> {
   });
   if (!res.ok) return [];
   const repos: Repo[] = await res.json();
-  return repos.filter(
-    (r) => !r.fork && !r.archived && r.topics.some((topic) => (site.blogTopics as readonly string[]).includes(topic)),
-  );
+  return repos
+    .filter((r) => !r.fork && !r.archived && r.topics.some((topic) => (site.blogTopics as readonly string[]).includes(topic)))
+    .map((r) => ({ ...r, homepage: httpUrl(r.homepage) }));
 }
 
 export async function getBlogRepo(name: string): Promise<Repo | undefined> {
@@ -113,7 +116,7 @@ export async function getFeaturedRepos(limit = 4): Promise<FeaturedRepo[]> {
           name: n.name,
           description: n.description,
           url: n.url,
-          homepage: n.homepageUrl || null,
+          homepage: httpUrl(n.homepageUrl),
           language: n.primaryLanguage?.name ?? null,
           stars: n.stargazerCount,
         }));
@@ -135,7 +138,7 @@ export async function getFeaturedRepos(limit = 4): Promise<FeaturedRepo[]> {
       name: r.name,
       description: r.description,
       url: r.html_url,
-      homepage: r.homepage || null,
+      homepage: httpUrl(r.homepage),
       language: r.language,
       stars: r.stargazers_count,
     }));
