@@ -5,8 +5,10 @@ import { ClipTabs } from "@/components/lab/clip-tabs";
 import { CopyButton } from "@/components/lab/copy-button";
 import { DragSheet } from "@/components/lab/drag-sheet";
 import { HoldToConfirm } from "@/components/lab/hold-to-confirm";
+import { PaletteDemo } from "@/components/lab/palette-demo";
 import { ReorderList } from "@/components/lab/reorder-list";
 import { Terminal } from "@/components/lab/terminal";
+import { ToastStack } from "@/components/lab/toast-stack";
 import { alternates, getT } from "@/i18n/server";
 import { site } from "@/lib/site";
 
@@ -27,6 +29,27 @@ export default async function Lab() {
       </section>
 
       {/* Os mais novos primeiro. */}
+      <Experiment desc={copy.toasts.desc} id="toasts" title={copy.toasts.title}>
+        <ToastStack
+          copy={{
+            add: copy.toasts.add,
+            clear: copy.toasts.clear,
+            region: copy.toasts.region,
+            dismiss: copy.toasts.dismiss,
+            messages: [
+              { title: copy.toasts.m1, desc: copy.toasts.d1 },
+              { title: copy.toasts.m2, desc: copy.toasts.d2 },
+              { title: copy.toasts.m3, desc: copy.toasts.d3 },
+              { title: copy.toasts.m4, desc: copy.toasts.d4 },
+            ],
+          }}
+        />
+      </Experiment>
+
+      <Experiment desc={copy.palette.desc} id="paleta" title={copy.palette.title}>
+        <PaletteDemo label={copy.palette.open} />
+      </Experiment>
+
       <Experiment desc={copy.sheet.desc} id="gaveta" title={copy.sheet.title}>
         <DragSheet
           copy={{ open: copy.sheet.open, title: copy.sheet.sheetTitle, body: copy.sheet.body, close: copy.sheet.close, hint: copy.sheet.hint }}

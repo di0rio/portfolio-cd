@@ -4,6 +4,33 @@ export default {
     pt: "experimentos de interface: detalhes de interação pequenos, feitos pra sentir na mão. tudo aqui é código de verdade rodando no seu navegador.",
     en: "interface experiments: small interaction details, made to be felt. everything here is real code running in your browser.",
   },
+  toasts: {
+    title: { pt: "pilha de toasts", en: "toast stack" },
+    desc: {
+      pt: "os avisos se empilham com profundidade (escala e deslocamento). passe o mouse ou foque com o teclado pra abrir a pilha e pausar os timers; arraste de lado pra dispensar (distância > 96 px ou velocidade > 0,11 px/ms).",
+      en: "notices stack with depth (scale and offset). hover or focus with the keyboard to open the stack and pause the timers; drag sideways to dismiss (distance > 96 px or velocity > 0.11 px/ms).",
+    },
+    add: { pt: "mostrar toast", en: "show toast" },
+    clear: { pt: "limpar", en: "clear" },
+    region: { pt: "Notificações", en: "Notifications" },
+    dismiss: { pt: "Dispensar", en: "Dismiss" },
+    m1: { pt: "rascunho salvo", en: "draft saved" },
+    d1: { pt: "agora há pouco, neste dispositivo", en: "just now, on this device" },
+    m2: { pt: "link copiado", en: "link copied" },
+    d2: { pt: "cole onde quiser", en: "paste it anywhere" },
+    m3: { pt: "convite enviado", en: "invite sent" },
+    d3: { pt: "chega em instantes", en: "arrives in a moment" },
+    m4: { pt: "deploy concluído", en: "deploy finished" },
+    d4: { pt: "tudo no ar, sem erros", en: "all live, no errors" },
+  },
+  palette: {
+    title: { pt: "paleta de comandos", en: "command palette" },
+    desc: {
+      pt: "essa já está no site inteiro: aperte ⌘K (ctrl+k no windows e linux) em qualquer página pra buscar páginas, posts e ações. setas navegam, enter abre, esc fecha e o foco volta pra onde estava.",
+      en: "this one is already live site-wide: press ⌘K (ctrl+k on windows and linux) on any page to search pages, posts and actions. arrows navigate, enter opens, esc closes and focus returns to where it was.",
+    },
+    open: { pt: "abrir agora", en: "open now" },
+  },
   hold: {
     title: { pt: "segurar pra confirmar", en: "hold to confirm" },
     desc: {

@@ -74,6 +74,9 @@ export default async function Home() {
         </div>
         <div className="mt-6">
           <ContactLinks labels={nav} locale={locale} />
+          <Link className="mt-4 inline-block text-muted-foreground text-sm underline decoration-muted-foreground/40 underline-offset-4 transition-[text-decoration-color] duration-150 hover:text-foreground hover:decoration-brand" href={localePath(locale, "/freela")}>
+            {copy.freela.homeLink}
+          </Link>
         </div>
       </Section>
 
