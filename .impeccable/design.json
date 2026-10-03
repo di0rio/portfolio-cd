@@ -1,0 +1,451 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-02T23:10:36.042Z",
+  "title": "Design System: cauã · portfolio-cd",
+  "extensions": {
+    "colorMeta": {
+      "cursor-yellow": {
+        "role": "primary",
+        "displayName": "Cursor Yellow",
+        "canonical": "#ffd23f",
+        "tonalRamp": [
+          "oklch(15.0% 0.097 90.9)",
+          "oklch(25.0% 0.162 90.9)",
+          "oklch(35.0% 0.162 90.9)",
+          "oklch(48.0% 0.162 90.9)",
+          "oklch(60.0% 0.162 90.9)",
+          "oklch(72.0% 0.162 90.9)",
+          "oklch(84.0% 0.162 90.9)",
+          "oklch(95.0% 0.097 90.9)"
+        ]
+      },
+      "cursor-yellow-ink": {
+        "role": "primary",
+        "displayName": "Cursor Yellow Ink",
+        "canonical": "#7a5c00",
+        "tonalRamp": [
+          "oklch(15.0% 0.060 86.4)",
+          "oklch(25.0% 0.101 86.4)",
+          "oklch(35.0% 0.101 86.4)",
+          "oklch(48.0% 0.101 86.4)",
+          "oklch(60.0% 0.101 86.4)",
+          "oklch(72.0% 0.101 86.4)",
+          "oklch(84.0% 0.101 86.4)",
+          "oklch(95.0% 0.060 86.4)"
+        ]
+      },
+      "paper-cream": {
+        "role": "neutral",
+        "displayName": "Paper Cream",
+        "canonical": "#f6f4ee",
+        "tonalRamp": [
+          "oklch(15.0% 0.005 91.5)",
+          "oklch(25.0% 0.008 91.5)",
+          "oklch(35.0% 0.008 91.5)",
+          "oklch(48.0% 0.008 91.5)",
+          "oklch(60.0% 0.008 91.5)",
+          "oklch(72.0% 0.008 91.5)",
+          "oklch(84.0% 0.008 91.5)",
+          "oklch(95.0% 0.005 91.5)"
+        ]
+      },
+      "paper-cream-raised": {
+        "role": "neutral",
+        "displayName": "Paper Cream Raised",
+        "canonical": "#fbfaf6",
+        "tonalRamp": [
+          "oklch(15.0% 0.003 95.1)",
+          "oklch(25.0% 0.005 95.1)",
+          "oklch(35.0% 0.005 95.1)",
+          "oklch(48.0% 0.005 95.1)",
+          "oklch(60.0% 0.005 95.1)",
+          "oklch(72.0% 0.005 95.1)",
+          "oklch(84.0% 0.005 95.1)",
+          "oklch(95.0% 0.003 95.1)"
+        ]
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "canonical": "#1c1c1c",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 89.9)",
+          "oklch(25.0% 0.000 89.9)",
+          "oklch(35.0% 0.000 89.9)",
+          "oklch(48.0% 0.000 89.9)",
+          "oklch(60.0% 0.000 89.9)",
+          "oklch(72.0% 0.000 89.9)",
+          "oklch(84.0% 0.000 89.9)",
+          "oklch(95.0% 0.000 89.9)"
+        ]
+      },
+      "graphite-raised": {
+        "role": "neutral",
+        "displayName": "Graphite Raised",
+        "canonical": "#222220",
+        "tonalRamp": [
+          "oklch(15.0% 0.002 106.7)",
+          "oklch(25.0% 0.004 106.7)",
+          "oklch(35.0% 0.004 106.7)",
+          "oklch(48.0% 0.004 106.7)",
+          "oklch(60.0% 0.004 106.7)",
+          "oklch(72.0% 0.004 106.7)",
+          "oklch(84.0% 0.004 106.7)",
+          "oklch(95.0% 0.002 106.7)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#262626",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 89.9)",
+          "oklch(25.0% 0.000 89.9)",
+          "oklch(35.0% 0.000 89.9)",
+          "oklch(48.0% 0.000 89.9)",
+          "oklch(60.0% 0.000 89.9)",
+          "oklch(72.0% 0.000 89.9)",
+          "oklch(84.0% 0.000 89.9)",
+          "oklch(95.0% 0.000 89.9)"
+        ]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Ink Muted",
+        "canonical": "#686868",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 89.9)",
+          "oklch(25.0% 0.000 89.9)",
+          "oklch(35.0% 0.000 89.9)",
+          "oklch(48.0% 0.000 89.9)",
+          "oklch(60.0% 0.000 89.9)",
+          "oklch(72.0% 0.000 89.9)",
+          "oklch(84.0% 0.000 89.9)",
+          "oklch(95.0% 0.000 89.9)"
+        ]
+      },
+      "chalk": {
+        "role": "neutral",
+        "displayName": "Chalk",
+        "canonical": "#f5f5f5",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 89.9)",
+          "oklch(25.0% 0.000 89.9)",
+          "oklch(35.0% 0.000 89.9)",
+          "oklch(48.0% 0.000 89.9)",
+          "oklch(60.0% 0.000 89.9)",
+          "oklch(72.0% 0.000 89.9)",
+          "oklch(84.0% 0.000 89.9)",
+          "oklch(95.0% 0.000 89.9)"
+        ]
+      },
+      "chalk-muted": {
+        "role": "neutral",
+        "displayName": "Chalk Muted",
+        "canonical": "#818181",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 89.9)",
+          "oklch(25.0% 0.000 89.9)",
+          "oklch(35.0% 0.000 89.9)",
+          "oklch(48.0% 0.000 89.9)",
+          "oklch(60.0% 0.000 89.9)",
+          "oklch(72.0% 0.000 89.9)",
+          "oklch(84.0% 0.000 89.9)",
+          "oklch(95.0% 0.000 89.9)"
+        ]
+      },
+      "heat-empty-light": {
+        "role": "neutral",
+        "displayName": "Heat Empty (light)",
+        "canonical": "#e6e3d9",
+        "tonalRamp": [
+          "oklch(15.0% 0.008 93.0)",
+          "oklch(25.0% 0.014 93.0)",
+          "oklch(35.0% 0.014 93.0)",
+          "oklch(48.0% 0.014 93.0)",
+          "oklch(60.0% 0.014 93.0)",
+          "oklch(72.0% 0.014 93.0)",
+          "oklch(84.0% 0.014 93.0)",
+          "oklch(95.0% 0.008 93.0)"
+        ]
+      },
+      "heat-empty-dark": {
+        "role": "neutral",
+        "displayName": "Heat Empty (dark)",
+        "canonical": "#2a2a27",
+        "tonalRamp": [
+          "oklch(15.0% 0.003 106.7)",
+          "oklch(25.0% 0.005 106.7)",
+          "oklch(35.0% 0.005 106.7)",
+          "oklch(48.0% 0.005 106.7)",
+          "oklch(60.0% 0.005 106.7)",
+          "oklch(72.0% 0.005 106.7)",
+          "oklch(84.0% 0.005 106.7)",
+          "oklch(95.0% 0.003 106.7)"
+        ]
+      },
+      "heat-1": {
+        "role": "primary",
+        "displayName": "Heat 1",
+        "canonical": "#f6e3a0",
+        "tonalRamp": [
+          "oklch(15.0% 0.052 94.2)",
+          "oklch(25.0% 0.087 94.2)",
+          "oklch(35.0% 0.087 94.2)",
+          "oklch(48.0% 0.087 94.2)",
+          "oklch(60.0% 0.087 94.2)",
+          "oklch(72.0% 0.087 94.2)",
+          "oklch(84.0% 0.087 94.2)",
+          "oklch(95.0% 0.052 94.2)"
+        ]
+      },
+      "heat-2": {
+        "role": "primary",
+        "displayName": "Heat 2",
+        "canonical": "#f2cf5e",
+        "tonalRamp": [
+          "oklch(15.0% 0.082 92.1)",
+          "oklch(25.0% 0.137 92.1)",
+          "oklch(35.0% 0.137 92.1)",
+          "oklch(48.0% 0.137 92.1)",
+          "oklch(60.0% 0.137 92.1)",
+          "oklch(72.0% 0.137 92.1)",
+          "oklch(84.0% 0.137 92.1)",
+          "oklch(95.0% 0.082 92.1)"
+        ]
+      },
+      "heat-3": {
+        "role": "primary",
+        "displayName": "Heat 3",
+        "canonical": "#e0b320",
+        "tonalRamp": [
+          "oklch(15.0% 0.092 89.5)",
+          "oklch(25.0% 0.154 89.5)",
+          "oklch(35.0% 0.154 89.5)",
+          "oklch(48.0% 0.154 89.5)",
+          "oklch(60.0% 0.154 89.5)",
+          "oklch(72.0% 0.154 89.5)",
+          "oklch(84.0% 0.154 89.5)",
+          "oklch(95.0% 0.092 89.5)"
+        ]
+      },
+      "heat-4": {
+        "role": "primary",
+        "displayName": "Heat 4",
+        "canonical": "#a98300",
+        "tonalRamp": [
+          "oklch(15.0% 0.077 88.1)",
+          "oklch(25.0% 0.129 88.1)",
+          "oklch(35.0% 0.129 88.1)",
+          "oklch(48.0% 0.129 88.1)",
+          "oklch(60.0% 0.129 88.1)",
+          "oklch(72.0% 0.129 88.1)",
+          "oklch(84.0% 0.129 88.1)",
+          "oklch(95.0% 0.077 88.1)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Blog post titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Page titles and the name beside the avatar."
+      },
+      "section": {
+        "displayName": "Section",
+        "purpose": "Lowercase section headings; hierarchy from weight and space."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Bio, descriptions, READMEs."
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Dates, metadata, header, footer, legends."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Code, commands, identifiers, locale toggle, 404 prompt."
+      }
+    },
+    "shadows": [
+      {
+        "name": "avatar-offset",
+        "value": "3px 3px 0 var(--brand)",
+        "purpose": "Signature hard yellow shadow on the avatar only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "Default for UI feedback, entrances and the graph reveal."
+      },
+      {
+        "name": "ease-in-out",
+        "value": "cubic-bezier(0.77, 0, 0.175, 1)",
+        "purpose": "On-screen movement and morphing."
+      },
+      {
+        "name": "press",
+        "value": "transform 150ms ease-out, scale 0.96 to 0.99",
+        "purpose": "Press feedback on toggles, nav links and cards; motion-safe only."
+      },
+      {
+        "name": "reveal-x",
+        "value": "clip-path 1000ms ease-out, 120ms delay",
+        "purpose": "Contribution graph reveal; fade only under reduced motion."
+      },
+      {
+        "name": "locale-pending",
+        "value": "opacity 0.5 + blur(2px), 200ms ease",
+        "purpose": "Main content while the locale re-renders."
+      },
+      {
+        "name": "caret-blink",
+        "value": "1s ease-out infinite",
+        "purpose": "404 terminal cursor; static under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Sidebar Nav Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Quiet text link with a small trailing icon; sidebar on desktop, pill on mobile.",
+      "html": "<a class=\"ds-nav-link\" href=\"#\">blog<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 11a9 9 0 0 1 9 9\"/><path d=\"M4 4a16 16 0 0 1 16 16\"/><circle cx=\"5\" cy=\"19\" r=\"1\"/></svg></a>",
+      "css": ".ds-nav-link{display:flex;align-items:center;justify-content:space-between;gap:12px;width:192px;padding:4px 8px;border-radius:8px;color:var(--muted-foreground);font:400 15px/1.5 Ubuntu,sans-serif;text-decoration:none;outline:none;transition:color 150ms cubic-bezier(0.23,1,0.32,1),background-color 150ms cubic-bezier(0.23,1,0.32,1),transform 150ms cubic-bezier(0.23,1,0.32,1)}.ds-nav-link svg{width:14px;height:14px;opacity:.7}.ds-nav-link:hover{background:var(--accent);color:var(--foreground)}.ds-nav-link:focus-visible{box-shadow:0 0 0 2px var(--brand)}.ds-nav-link:active{transform:scale(.97)}"
+    },
+    {
+      "name": "Locale Toggle",
+      "kind": "custom",
+      "refersTo": "segmented-toggle",
+      "description": "Segmented pt/en switch in mono.",
+      "html": "<div class=\"ds-seg\" role=\"group\"><button class=\"ds-seg-item\" aria-pressed=\"true\">pt</button><button class=\"ds-seg-item\" aria-pressed=\"false\">en</button></div>",
+      "css": ".ds-seg{display:inline-flex;gap:2px;padding:2px;border:1px solid var(--border);border-radius:10px}.ds-seg-item{height:26px;padding:0 7px;border:1px solid transparent;border-radius:8px;background:transparent;color:var(--foreground);font:500 14px \"Ubuntu Mono\",monospace;cursor:pointer;transition:transform 150ms cubic-bezier(0.23,1,0.32,1)}.ds-seg-item:hover{background:var(--accent)}.ds-seg-item[aria-pressed=true]{background:var(--input)}.ds-seg-item:focus-visible{outline:2px solid var(--ring);outline-offset:1px}.ds-seg-item:active{transform:scale(.96)}"
+    },
+    {
+      "name": "Post Card",
+      "kind": "card",
+      "refersTo": "post-card",
+      "description": "Blog list entry; hairline card whose border turns yellow on hover.",
+      "html": "<a class=\"ds-post\" href=\"#\"><span class=\"ds-post-head\"><span class=\"ds-post-title\">domus</span><time>12 mar 2026</time></span><span class=\"ds-post-desc\">CMS que virou plataforma de conteúdo.</span><span class=\"ds-chip\">portfolio</span></a>",
+      "css": ".ds-post{display:block;max-width:600px;padding:16px 18px;border:1px solid var(--border);border-radius:14px;color:var(--foreground);text-decoration:none;outline:none;transition:border-color 150ms cubic-bezier(0.23,1,0.32,1),background-color 150ms cubic-bezier(0.23,1,0.32,1),transform 150ms cubic-bezier(0.23,1,0.32,1)}.ds-post:hover{border-color:var(--brand);background:var(--accent)}.ds-post:focus-visible{box-shadow:0 0 0 2px var(--brand)}.ds-post:active{transform:scale(.99)}.ds-post-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px}.ds-post-title{font:500 17px Ubuntu,sans-serif}.ds-post time{font:400 14px Ubuntu,sans-serif;color:var(--muted-foreground);font-variant-numeric:tabular-nums}.ds-post-desc{display:block;margin-top:4px;font:400 14.5px/1.5 Ubuntu,sans-serif;color:var(--muted-foreground)}.ds-chip{display:inline-block;margin-top:10px;padding:0 8px;border:1px solid var(--border);border-radius:9999px;font:400 12px \"Ubuntu Mono\",monospace;color:var(--muted-foreground)}"
+    },
+    {
+      "name": "Project Row",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Hairline-divided project list: name column plus description.",
+      "html": "<ul class=\"ds-projects\"><li><p>loopvet</p><p>sistema de gestão pra clínica veterinária: agenda, prontuário e financeiro.</p></li><li><p>domus</p><p>CMS que virou plataforma de marketing de conteúdo.</p></li></ul>",
+      "css": ".ds-projects{max-width:600px;margin:0;padding:0;list-style:none;border-block:1px solid var(--border)}.ds-projects li{display:grid;grid-template-columns:136px minmax(0,1fr);gap:24px;padding:16px 0}.ds-projects li+li{border-top:1px solid var(--border)}.ds-projects p{margin:0}.ds-projects p:first-child{font:500 16px Ubuntu,sans-serif;color:var(--foreground)}.ds-projects p:last-child{font:400 15px/1.5 Ubuntu,sans-serif;color:var(--muted-foreground)}"
+    },
+    {
+      "name": "Inline Code",
+      "kind": "chip",
+      "refersTo": "inline-code",
+      "description": "Commands and identifiers inside prose, like the footer cd .. hint.",
+      "html": "<span class=\"ds-hint\">psst: digita <code class=\"ds-code\">cd ..</code></span>",
+      "css": ".ds-hint{font:400 14px Ubuntu,sans-serif;color:var(--muted-foreground)}.ds-code{padding:0 6px;border-radius:8px;background:var(--accent);color:var(--foreground);font-family:\"Ubuntu Mono\",monospace}"
+    },
+    {
+      "name": "Terminal Prompt",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Shell fragment with a blinking yellow block cursor (404 page).",
+      "html": "<div class=\"ds-term\"><p><span class=\"ds-tilde\">~</span> $ cd pagina-que-nao-existe</p><p class=\"ds-out\">cd: arquivo ou diretório inexistente</p><p><span class=\"ds-tilde\">~</span> $ <span class=\"ds-caret\"></span></p></div>",
+      "css": ".ds-term p{margin:4px 0;font:400 14px \"Ubuntu Mono\",monospace;color:var(--muted-foreground)}.ds-term .ds-out{color:var(--foreground)}.ds-tilde{color:var(--brand-foreground)}.ds-caret{display:inline-block;width:.55em;height:1.1em;vertical-align:-.2em;background:var(--brand);animation:ds-blink 1s ease-out infinite}@keyframes ds-blink{0%,70%,to{opacity:1}20%,50%{opacity:0}}@media (prefers-reduced-motion:reduce){.ds-caret{animation:none}}"
+    },
+    {
+      "name": "Contribution Cells",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Heat scale squares from the GitHub contribution graph.",
+      "html": "<div class=\"ds-heat\"><span style=\"background:var(--heat-0)\"></span><span style=\"background:var(--heat-1)\"></span><span style=\"background:var(--heat-2)\"></span><span style=\"background:var(--heat-3)\"></span><span style=\"background:var(--heat-4)\"></span></div>",
+      "css": ".ds-heat{display:flex;gap:3px}.ds-heat span{width:10px;height:10px;border-radius:2px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "O Terminal de Casa (The Home Terminal)",
+    "overview": "The site is a terminal that feels like home. The `cd` monogram is both the owner's initials and the shell command, and that pun runs through the whole system: a prompt on the 404 page, a blinking yellow cursor, an easter egg that navigates when you type `cd ..`. It never becomes a costume, though. There is no green-on-black, no scanlines, no mono everywhere. The terminal shows up in the details while the page reads like a calm personal notebook.\n\nDensity is low on purpose. One narrow reading column (600px) sits between a quiet sidebar and empty space, sections are separated by generous air, and almost everything is text, hairlines and a single warm accent. Personality lives in a few deliberate places: the illustrated avatar, the contribution graph, the terminal jokes. Everything else stays out of the way.\n\nBoth themes are warm rather than pure: cream paper instead of white, graphite instead of black, and yellow as the light source in either theme.",
+    "keyCharacteristics": [
+      "Calm and spare: one column, lots of space, flat surfaces.",
+      "Playful in the details: avatar, `cd` jokes, blinking cursor, easter egg.",
+      "Warm neutrals (cream / graphite) with one yellow accent.",
+      "Lowercase voice in headings and UI copy.",
+      "Real data as decoration: the GitHub contribution graph is the visual centerpiece of the home page."
+    ],
+    "rules": [
+      {
+        "name": "The Single Light Rule",
+        "body": "Yellow is the only chromatic color in the interface. If a second hue seems necessary, use weight, size or a hairline instead.",
+        "section": "colors"
+      },
+      {
+        "name": "The Warm Neutral Rule",
+        "body": "Never pure `#ffffff` or `#000000` as a page surface. Backgrounds are cream or graphite.",
+        "section": "colors"
+      },
+      {
+        "name": "The Lowercase Voice Rule",
+        "body": "Headings, nav and UI labels are written in lowercase (\"blog\", \"experiência\", \"voltar pro começo\"). Proper nouns and acronyms (CMS, API, CV) keep their case.",
+        "section": "typography"
+      },
+      {
+        "name": "The Real Mono Rule",
+        "body": "Mono is for commands, code and identifiers. Never use it to make ordinary text look technical.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Dates Rule",
+        "body": "Dates and counts use tabular numerals so lists of dates align.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Column Rule",
+        "body": "Content never spans wider than 600px. New sections stack in the same column; they do not introduce side-by-side layouts at page level.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "No shadows on cards, lists or sections. Hover states change border or background color, never elevation.",
+        "section": "elevation"
+      },
+      {
+        "name": "The One Sticker Rule",
+        "body": "The hard yellow offset shadow belongs to the avatar alone. Do not copy it onto buttons or cards.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep Cursor Yellow the only accent, and keep it small: underlines, rings, bullets, cursor, heat scale.",
+      "Do use cream / graphite surfaces and 1px alpha hairlines (black 8% / white 6%).",
+      "Do write UI copy and headings in lowercase, in both pt and en.",
+      "Do use strong ease-out curves (`cubic-bezier(0.23, 1, 0.32, 1)`) with 150–200ms for interface feedback, and gate any movement behind reduced-motion preferences.",
+      "Do separate list items with hairline dividers instead of boxing each one.",
+      "Do use tabular numerals for dates and counts."
+    ],
+    "donts": [
+      "Don't add shadows for elevation; hover changes color or border, not depth.",
+      "Don't reuse the avatar's hard yellow offset shadow anywhere else.",
+      "Don't use mono as decoration on ordinary text.",
+      "Don't introduce a second accent hue or pure white/black page backgrounds.",
+      "Don't widen content past the 600px column or add page-level multi-column layouts.",
+      "Don't animate keyboard-triggered actions (the `cd` easter egg navigates instantly)."
+    ]
+  }
+}

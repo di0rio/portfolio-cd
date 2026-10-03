@@ -1,7 +1,7 @@
 export default {
   tagline: {
-    pt: "desenvolvedor full stack · produto de ponta a ponta.",
-    en: "full stack developer · product end to end.",
+    pt: "desenvolvedor front-end · interface e os detalhes.",
+    en: "front-end developer · interface and the details.",
   },
   nav: {
     label: { pt: "Seções e redes", en: "Sections and links" },
@@ -12,16 +12,14 @@ export default {
     cv: { pt: "CV", en: "CV" },
   },
   theme: {
-    label: { pt: "Tema", en: "Theme" },
-    light: { pt: "Claro", en: "Light" },
-    dark: { pt: "Escuro", en: "Dark" },
-    system: { pt: "Sistema", en: "System" },
+    toLight: { pt: "Mudar pro tema claro", en: "Switch to light theme" },
+    toDark: { pt: "Mudar pro tema escuro", en: "Switch to dark theme" },
   },
   language: {
     label: { pt: "Idioma", en: "Language" },
   },
   footer: {
-    made: { pt: "feito com ☕ por cauã.", en: "made with ☕ by cauã." },
+    made: { pt: "feito por cauã.", en: "made by cauã." },
     hint: { pt: "psst: digita", en: "psst: type" },
   },
 };

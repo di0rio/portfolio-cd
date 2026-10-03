@@ -1,40 +1,32 @@
 "use client";
 
-import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
+import { MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { press } from "@/components/site-shell/locale-switch";
+import { Button } from "@/components/ui/button";
 
-const options = [
-  { value: "light", Icon: SunIcon },
-  { value: "dark", Icon: MoonIcon },
-  { value: "system", Icon: MonitorIcon },
-] as const;
-
-type Labels = { label: string; light: string; dark: string; system: string };
+type Labels = { toLight: string; toDark: string };
 
 export function ThemeSwitch({ labels }: { labels: Labels }) {
-  const { theme, setTheme } = useTheme();
-  // O tema só é conhecido no cliente; antes disso nenhum item fica marcado.
+  const { resolvedTheme, setTheme } = useTheme();
+  // O tema só é conhecido no cliente; antes disso o botão fica sem ícone pra não piscar o errado.
   const mounted = useSyncExternalStore(
     () => () => {},
     () => true,
     () => false,
   );
+  const dark = mounted && resolvedTheme === "dark";
 
   return (
-    <ToggleGroup
-      aria-label={labels.label}
-      className="rounded-lg border p-0.5"
-      onValueChange={(value) => value[0] && setTheme(value[0])}
-      size="sm"
-      value={mounted && theme ? [theme] : []}
+    <Button
+      aria-label={dark ? labels.toLight : labels.toDark}
+      className={press}
+      onClick={() => setTheme(dark ? "light" : "dark")}
+      size="icon-sm"
+      variant="outline"
     >
-      {options.map(({ value, Icon }) => (
-        <ToggleGroupItem aria-label={labels[value]} key={value} value={value}>
-          <Icon aria-hidden="true" />
-        </ToggleGroupItem>
-      ))}
-    </ToggleGroup>
+      {mounted && (dark ? <SunIcon aria-hidden="true" /> : <MoonIcon aria-hidden="true" />)}
+    </Button>
   );
 }

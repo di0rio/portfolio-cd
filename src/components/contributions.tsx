@@ -22,6 +22,7 @@ export async function Contributions() {
   const fmt = new Intl.DateTimeFormat(dateLocale, { day: "numeric", month: "short" });
   // A grade começa no domingo: completa a primeira semana com células invisíveis.
   const offset = new Date(`${days[0].date}T00:00`).getDay();
+  const weeks = Math.ceil((offset + days.length) / 7);
 
   return (
     <section aria-labelledby="contrib-title">
@@ -36,14 +37,18 @@ export async function Contributions() {
           github.com/{site.github}
         </a>
       </p>
-      <div className="overflow-x-auto pb-1.5 [direction:rtl]">
-        <div className="grid w-max auto-cols-[10px] grid-flow-col grid-rows-[repeat(7,10px)] gap-[3px] [direction:ltr]">
+      {/* No desktop a grade ocupa a coluna inteira; no celular rola, começando pela semana atual. */}
+      <div className="scrollbar-thin overflow-x-auto pb-1.5 [direction:rtl]">
+        <div
+          className="grid min-w-[480px] animate-reveal-x grid-flow-col grid-rows-7 gap-[3px] [direction:ltr]"
+          style={{ gridTemplateColumns: `repeat(${weeks}, minmax(0, 1fr))` }}
+        >
           {Array.from({ length: offset }, (_, i) => (
             <span aria-hidden="true" key={`pad-${i}`} />
           ))}
           {days.map((d) => (
             <span
-              className={`rounded-[2.5px] ${levelClass[d.level]}`}
+              className={`aspect-square rounded-[2px] ${levelClass[d.level]}`}
               key={d.date}
               title={copy.day({ count: String(d.count), date: fmt.format(new Date(`${d.date}T00:00`)) })}
             />

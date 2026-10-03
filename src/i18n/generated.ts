@@ -19,11 +19,11 @@ export const translations = {
 				noReadme: "esse repositório ainda não tem README.",
 			},
 			meta: {
-				title: "Cauã Diorio · desenvolvedor full stack",
-				description: "Desenvolvedor full stack. Produto de ponta a ponta, do banco ao botão.",
+				title: "Cauã Diorio · desenvolvedor front-end",
+				description: "Desenvolvedor front-end. Interface, interação e os detalhes que fazem um produto ser bom de usar.",
 			},
-			role: "desenvolvedor full stack",
-			bio: "faço produto de ponta a ponta, do banco ao botão. hoje cuido de sistema pra clínica veterinária, de um CMS que virou plataforma de conteúdo e de ferramentas internas de migração de dados.",
+			role: "desenvolvedor front-end",
+			bio: "trabalho na parte que as pessoas veem e usam: interface, interação e os detalhes. hoje cuido de sistema pra clínica veterinária, de um CMS que virou plataforma de conteúdo e de ferramentas internas de migração de dados.",
 			contributions: {
 				count: (v: { count: string }) => `${v.count} contribuições no último ano em`,
 				fallback: "contribuições no último ano em",
@@ -37,22 +37,33 @@ export const translations = {
 				domus: "CMS que virou plataforma de marketing de conteúdo: artigos, API e links de campanha com métricas.",
 				converter: "conversores que pegam dado bagunçado de outro sistema e entregam arrumado no banco.",
 			},
+			repos: {
+				title: "em destaque no github",
+				all: "ver todos →",
+				stars: (v: { count: string }) => `${v.count} estrelas`,
+			},
 			writing: {
 				title: "escrita",
-				empty: "os posts aparecem aqui sozinhos quando eu publico um repositório com o tópico portfolio.",
 				all: "ver todos →",
+			},
+			notFound: {
+				path: "pagina-que-nao-existe",
+				error: "cd: arquivo ou diretório inexistente",
+				title: "essa página não existe.",
+				body: "o link pode estar quebrado ou a página mudou de lugar. digita cd .. ou volta pelo link abaixo.",
+				home: "voltar pro começo",
 			},
 			experience: {
 				title: "profissional",
 				loopvetWhen: "20XX – hoje",
 				loopvetPath: (v: { from: string; to: string }) => `de ${v.from} a ${v.to}`,
 				loopvetFrom: "cargo inicial",
-				loopvetTo: "desenvolvedor full stack",
+				loopvetTo: "desenvolvedor front-end",
 			},
 		},
 		components: {
 			"site-shell": {
-				tagline: "desenvolvedor full stack · produto de ponta a ponta.",
+				tagline: "desenvolvedor front-end · interface e os detalhes.",
 				nav: {
 					label: "Seções e redes",
 					blog: "blog",
@@ -62,16 +73,14 @@ export const translations = {
 					cv: "CV",
 				},
 				theme: {
-					label: "Tema",
-					light: "Claro",
-					dark: "Escuro",
-					system: "Sistema",
+					toLight: "Mudar pro tema claro",
+					toDark: "Mudar pro tema escuro",
 				},
 				language: {
 					label: "Idioma",
 				},
 				footer: {
-					made: "feito com ☕ por cauã.",
+					made: "feito por cauã.",
 					hint: "psst: digita",
 				},
 			},
@@ -91,11 +100,11 @@ export const translations = {
 				noReadme: "this repository has no README yet.",
 			},
 			meta: {
-				title: "Cauã Diorio · full stack developer",
-				description: "Full stack developer. Product end to end, from the database to the button.",
+				title: "Cauã Diorio · front-end developer",
+				description: "Front-end developer. Interface, interaction and the details that make a product good to use.",
 			},
-			role: "full stack developer",
-			bio: "i build products end to end, from the database to the button. today i work on software for veterinary clinics, a CMS that grew into a content platform, and internal data-migration tools.",
+			role: "front-end developer",
+			bio: "i take care of the part people see and use: interface, interaction and the details. today i work on software for veterinary clinics, a CMS that grew into a content platform, and internal data-migration tools.",
 			contributions: {
 				count: (v: { count: string }) => `${v.count} contributions in the last year on`,
 				fallback: "contributions in the last year on",
@@ -109,22 +118,33 @@ export const translations = {
 				domus: "a CMS that grew into a content marketing platform: articles, API and campaign links with analytics.",
 				converter: "converters that take messy data from other systems and deliver it clean to the database.",
 			},
+			repos: {
+				title: "featured on github",
+				all: "see all →",
+				stars: (v: { count: string }) => `${v.count} stars`,
+			},
 			writing: {
 				title: "writing",
-				empty: "posts show up here on their own when i publish a repository tagged portfolio.",
 				all: "see all →",
+			},
+			notFound: {
+				path: "page-that-doesnt-exist",
+				error: "cd: no such file or directory",
+				title: "this page doesn't exist.",
+				body: "the link may be broken or the page moved. type cd .. or head back with the link below.",
+				home: "back to the start",
 			},
 			experience: {
 				title: "professional",
 				loopvetWhen: "20XX – present",
 				loopvetPath: (v: { from: string; to: string }) => `from ${v.from} to ${v.to}`,
 				loopvetFrom: "first role",
-				loopvetTo: "full stack developer",
+				loopvetTo: "front-end developer",
 			},
 		},
 		components: {
 			"site-shell": {
-				tagline: "full stack developer · product end to end.",
+				tagline: "front-end developer · interface and the details.",
 				nav: {
 					label: "Sections and links",
 					blog: "blog",
@@ -134,16 +154,14 @@ export const translations = {
 					cv: "CV",
 				},
 				theme: {
-					label: "Theme",
-					light: "Light",
-					dark: "Dark",
-					system: "System",
+					toLight: "Switch to light theme",
+					toDark: "Switch to dark theme",
 				},
 				language: {
 					label: "Language",
 				},
 				footer: {
-					made: "made with ☕ by cauã.",
+					made: "made by cauã.",
 					hint: "psst: type",
 				},
 			},

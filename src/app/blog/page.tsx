@@ -30,12 +30,12 @@ export default async function Blog() {
           {repos.map((repo) => (
             <li key={repo.name}>
               <Link
-                className="block rounded-xl border px-4.5 py-4 outline-none transition-colors hover:border-brand hover:bg-accent focus-visible:ring-2 focus-visible:ring-brand"
+                className="block rounded-xl border px-4.5 py-4 outline-none transition-[border-color,background-color,transform] duration-150 ease-out hover:border-brand motion-safe:active:scale-[0.99] hover:bg-accent focus-visible:ring-2 focus-visible:ring-brand"
                 href={`/blog/${repo.name}`}
               >
                 <span className="flex items-baseline justify-between gap-4">
                   <span className="font-medium text-[17px]">{repo.name}</span>
-                  <time className="whitespace-nowrap text-muted-foreground text-sm" dateTime={repo.created_at}>
+                  <time className="whitespace-nowrap text-muted-foreground text-sm tabular-nums" dateTime={repo.created_at}>
                     {fmt.format(new Date(repo.created_at))}
                   </time>
                 </span>

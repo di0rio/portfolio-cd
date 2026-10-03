@@ -17,8 +17,8 @@ export function EasterEgg() {
       const match = buffer.match(/cd (\.\.|~|blog)$/);
       if (!match) return;
       buffer = "";
+      // Ação de teclado: navega seco, sem rolagem animada (o push já volta pro topo).
       router.push(routes[match[1]]);
-      window.scrollTo({ top: 0, behavior: "smooth" });
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);

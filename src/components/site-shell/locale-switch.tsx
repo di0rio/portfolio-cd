@@ -1,15 +1,23 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useTransition } from "react";
+import { useEffect, useTransition } from "react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { type Locale, updateLocale } from "@/i18n/generated";
 
 const locales: Locale[] = ["pt", "en"];
 
+// Resposta ao clique: afunda 4% e volta rápido.
+export const press = "transition-[box-shadow,transform] duration-150 ease-out motion-safe:active:scale-[0.96]";
+
 export function LocaleSwitch({ label, locale }: { label: string; locale: Locale }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
+
+  // Sinaliza a troca pro CSS esmaecer o <main> até o conteúdo novo chegar.
+  useEffect(() => {
+    document.documentElement.toggleAttribute("data-pending", pending);
+  }, [pending]);
 
   return (
     <ToggleGroup
@@ -27,7 +35,7 @@ export function LocaleSwitch({ label, locale }: { label: string; locale: Locale 
       value={[locale]}
     >
       {locales.map((l) => (
-        <ToggleGroupItem key={l} lang={l} value={l}>
+        <ToggleGroupItem className={press} key={l} lang={l} value={l}>
           {l}
         </ToggleGroupItem>
       ))}

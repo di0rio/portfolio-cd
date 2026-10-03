@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "raw.githubusercontent.com" },
       { protocol: "https", hostname: "github.com" },
+      // github.com/<user>.png redireciona pra cá (avatar do perfil).
+      { protocol: "https", hostname: "avatars.githubusercontent.com" },
     ],
   },
 };

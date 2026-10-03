@@ -310,3 +310,52 @@
   .markdown th, .markdown td { @apply border px-3 py-1.5 text-left; }
   .markdown hr { @apply my-8 border-border; }
 }
+
+/* superfícies do navegador: seleção, caret e barra de rolagem na cor da marca */
+@layer base {
+  ::selection {
+    background: --alpha(var(--brand) / 45%);
+    color: var(--foreground);
+  }
+  html {
+    caret-color: var(--brand-foreground);
+    scrollbar-color: --alpha(var(--muted-foreground) / 35%) transparent;
+  }
+}
+
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--heat-0) transparent;
+}
+
+/* --- movimento: curvas fortes (Emil Kowalski) sobrescrevem as do Tailwind --- */
+@theme {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* Grade de contribuições: preenche da semana mais antiga até hoje, uma vez por visita. */
+@keyframes reveal-x {
+  from { clip-path: inset(0 100% 0 0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+}
+@utility animate-reveal-x {
+  animation: reveal-x 1000ms var(--ease-out) 120ms both;
+  @media (prefers-reduced-motion: reduce) {
+    animation: fade-in 300ms ease both;
+  }
+}
+
+/* Troca de idioma: enquanto o servidor re-renderiza, o conteúdo esmaece em vez de trocar seco. */
+main {
+  transition: opacity 200ms ease, filter 200ms ease;
+}
+html[data-pending] main {
+  opacity: 0.5;
+  filter: blur(2px);
+  @media (prefers-reduced-motion: reduce) {
+    filter: none;
+  }
+}

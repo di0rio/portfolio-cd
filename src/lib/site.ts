@@ -3,7 +3,7 @@ export const site = {
   name: "Cauã Diorio",
   shortName: "cauã",
   github: "di0rio",
-  linkedin: "", // TODO: usuário do LinkedIn
+  linkedin: "cauã-diório",
   email: "", // TODO: e-mail de contato
   cv: "", // TODO: caminho do PDF em /public, ex.: "/cv.pdf"
   url: "https://portfolio-cd.vercel.app", // TODO: domínio final

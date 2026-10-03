@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Ubuntu, Ubuntu_Mono } from "next/font/google";
 import "./globals.css";
 import { EasterEgg } from "@/components/site-shell/easter-egg";
@@ -55,6 +56,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             </span>
           </footer>
           <EasterEgg />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>

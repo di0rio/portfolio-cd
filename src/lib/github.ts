@@ -78,3 +78,65 @@ export async function getContributions(): Promise<Contributions | null> {
   const data: { total: { lastYear: number }; contributions: ContributionDay[] } = await res.json();
   return { total: data.total.lastYear, days: data.contributions };
 }
+
+export type FeaturedRepo = {
+  name: string;
+  description: string | null;
+  url: string;
+  homepage: string | null;
+  language: string | null;
+  stars: number;
+};
+
+/**
+ * Repositórios fixados no perfil do GitHub. Fixados só existem na API GraphQL, que exige token;
+ * sem `GITHUB_TOKEN`, cai nos públicos com mais estrelas (e mais recentes no empate).
+ */
+export async function getFeaturedRepos(limit = 4): Promise<FeaturedRepo[]> {
+  if (process.env.GITHUB_TOKEN) {
+    const res = await fetch(`${API}/graphql`, {
+      method: "POST",
+      headers: headers(),
+      body: JSON.stringify({
+        query: `query($login: String!) { user(login: $login) { pinnedItems(first: ${limit}, types: REPOSITORY) { nodes {
+          ... on Repository { name description url homepageUrl stargazerCount primaryLanguage { name } } } } } }`,
+        variables: { login: site.github },
+      }),
+      next: { revalidate: HOUR, tags: ["github"] },
+    });
+    if (res.ok) {
+      type Node = { name: string; description: string | null; url: string; homepageUrl: string | null; stargazerCount: number; primaryLanguage: { name: string } | null };
+      const json: { data?: { user?: { pinnedItems: { nodes: Node[] } } } } = await res.json();
+      const nodes = json.data?.user?.pinnedItems.nodes;
+      if (nodes?.length) {
+        return nodes.map((n) => ({
+          name: n.name,
+          description: n.description,
+          url: n.url,
+          homepage: n.homepageUrl || null,
+          language: n.primaryLanguage?.name ?? null,
+          stars: n.stargazerCount,
+        }));
+      }
+    }
+  }
+
+  const res = await fetch(`${API}/users/${site.github}/repos?type=owner&per_page=100&sort=pushed`, {
+    headers: headers(),
+    next: { revalidate: HOUR, tags: ["github"] },
+  });
+  if (!res.ok) return [];
+  const repos: Repo[] = await res.json();
+  return repos
+    .filter((r) => !r.fork && !r.archived && r.name !== site.github)
+    .sort((a, b) => b.stargazers_count - a.stargazers_count || b.pushed_at.localeCompare(a.pushed_at))
+    .slice(0, limit)
+    .map((r) => ({
+      name: r.name,
+      description: r.description,
+      url: r.html_url,
+      homepage: r.homepage || null,
+      language: r.language,
+      stars: r.stargazers_count,
+    }));
+}
