@@ -6,7 +6,8 @@ import "../globals.css";
 import { ClickTracker } from "@/components/site-shell/click-tracker";
 import { EasterEgg } from "@/components/site-shell/easter-egg";
 import { LocaleSwitch } from "@/components/site-shell/locale-switch";
-import { Sidebar } from "@/components/site-shell/sidebar";
+import { SiteNav } from "@/components/site-shell/site-nav";
+import { Kbd } from "@/components/ui/kbd";
 import { ThemeProvider } from "@/components/site-shell/theme-provider";
 import { ThemeSwitch } from "@/components/site-shell/theme-switch";
 import { getT, locales } from "@/i18n/server";
@@ -42,28 +43,28 @@ export default async function RootLayout({ children }: LayoutProps<"/[locale]">)
       lang={locale}
       suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col bg-background text-foreground">
+      <body className="flex min-h-full flex-col bg-background text-[15px] text-foreground leading-[1.65]">
         <ThemeProvider>
-          <header className="flex items-center justify-between gap-4 px-4 py-3 text-muted-foreground text-sm lg:px-6 print:hidden">
-            <span>{shell.tagline}</span>
+          {/* Uma coluna só (640px): header, conteúdo e rodapé alinhados no mesmo eixo. */}
+          <header className="mx-auto flex w-full max-w-[640px] flex-wrap items-center justify-between gap-x-4 gap-y-3 px-4 pt-6 print:hidden">
+            <SiteNav copy={shell.nav} locale={locale} />
             <div className="flex items-center gap-2">
               <LocaleSwitch label={shell.language.label} locale={locale} />
               <ThemeSwitch labels={shell.theme} />
             </div>
           </header>
 
-          <div className="grid flex-1 gap-8 px-4 pt-4 pb-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,600px)_minmax(0,1fr)] lg:gap-14 lg:px-6 lg:pt-10 print:block print:p-0">
-            <Sidebar locale={locale} nav={shell.nav} />
-            {/* Trocar de página anima só o conteúdo; header, sidebar e rodapé ficam parados. */}
-            <ViewTransition default="page">
-              <main className="flex min-w-0 flex-col gap-14">{children}</main>
-            </ViewTransition>
-          </div>
+          {/* Trocar de página anima só o conteúdo; header e rodapé ficam parados. */}
+          <ViewTransition default="page">
+            <main className="mx-auto flex w-full min-w-0 max-w-[640px] flex-1 flex-col gap-20 px-4 pt-16 pb-28 sm:pt-24 print:max-w-none print:p-0">
+              {children}
+            </main>
+          </ViewTransition>
 
-          <footer className="flex flex-wrap justify-between gap-4 px-4 pb-7 text-muted-foreground text-sm lg:px-6 print:hidden">
+          <footer className="mx-auto flex w-full max-w-[640px] flex-wrap items-center justify-between gap-4 border-t px-4 py-6 text-muted-foreground text-sm print:hidden">
             <span>{shell.footer.made}</span>
             <span>
-              {shell.footer.hint} <code className="rounded-md bg-accent px-1.5 font-mono text-foreground">cd ..</code>
+              {shell.footer.hint} <Kbd>cd ..</Kbd>
             </span>
           </footer>
           <EasterEgg locale={locale} />

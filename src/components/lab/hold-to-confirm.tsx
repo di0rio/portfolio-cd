@@ -51,7 +51,8 @@ export function HoldToConfirm({ label, done }: { label: string; done: string }) 
       <span>{label}</span>
       <span
         aria-hidden={state !== "done"}
-        className="absolute inset-0 flex items-center justify-center bg-brand text-[#1c1c1c] transition-[clip-path] duration-200 ease-out [clip-path:inset(0_100%_0_0)] group-data-[state=done]:[clip-path:inset(0)] group-data-[state=holding]:duration-[1600ms] group-data-[state=holding]:ease-linear group-data-[state=holding]:[clip-path:inset(0)]"      >
+        className="absolute inset-0 flex items-center justify-center bg-brand text-brand-contrast transition-[clip-path] duration-200 ease-out [clip-path:inset(0_100%_0_0)] group-data-[state=done]:[clip-path:inset(0)] group-data-[state=holding]:duration-[1600ms] group-data-[state=holding]:ease-linear group-data-[state=holding]:[clip-path:inset(0)]"
+      >
         {state === "done" ? done : label}
       </span>
     </button>

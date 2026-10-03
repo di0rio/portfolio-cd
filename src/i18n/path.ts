@@ -7,7 +7,7 @@ export function localePath(locale: Locale, path: string) {
   return `/${locale}${rest}`;
 }
 
-/** Tira o prefixo de idioma de um pathname do navegador: "/en/blog" → "/blog". */
+/** Tira o prefixo de idioma (inclusive o /pt interno do servidor): "/en/blog" → "/blog". */
 export function stripLocale(pathname: string) {
-  return pathname.replace(/^\/en(?=\/|$)/, "") || "/";
+  return pathname.replace(/^\/(en|pt)(?=\/|$)/, "") || "/";
 }

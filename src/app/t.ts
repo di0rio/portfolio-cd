@@ -6,28 +6,28 @@ export default {
       en: "Front-end developer. Interface, interaction and the details that make a product good to use.",
     },
   },
-  role: { pt: "desenvolvedor front-end", en: "front-end developer" },
+  role: { pt: "desenvolvedor front-end júnior", en: "junior front-end developer" },
+  bubble: { pt: "e aí!", en: "hey!" },
+  today: { pt: "hoje", en: "today" },
   bio: {
-    pt: "cuido da parte que as pessoas veem e usam: interface, interação e os detalhes que fazem um produto ser bom de usar. hoje trabalho no loopvet, sistema pra clínica veterinária, e no domus, um CMS que virou plataforma de conteúdo.",
-    en: "i take care of the part people see and use: interface, interaction and the details that make a product good to use. today i work on loopvet, software for veterinary clinics, and domus, a CMS that grew into a content platform.",
+    pt: "front-end júnior na loopscape, no loopvet e na domus. gosto da parte que as pessoas tocam: interface, interação e detalhe.",
+    en: "junior front-end at loopscape, on loopvet and domus. i like the part people touch: interface, interaction and detail.",
   },
-  contributions: {
-    count: { pt: "{count} contribuições no último ano em", en: "{count} contributions in the last year on" },
-    fallback: { pt: "contribuições no último ano em", en: "contributions in the last year on" },
-    less: { pt: "menos", en: "less" },
-    more: { pt: "mais", en: "more" },
-    day: { pt: "{count} contribuições em {date}", en: "{count} contributions on {date}" },
+  ai: {
+    pt: "uso IA em quase todo projeto pra aprender mais rápido, sem pular o porquê.",
+    en: "i use AI on almost every project to learn faster, without skipping the why.",
   },
   projects: {
-    title: { pt: "projetos em que eu trabalhei", en: "projects i've worked on" },
-    loopvet: {
-      pt: "sistema de gestão pra clínica veterinária: agenda, prontuário e financeiro.",
-      en: "management software for veterinary clinics: scheduling, medical records and billing.",
-    },
-    domus: {
-      pt: "CMS que virou plataforma de marketing de conteúdo: artigos, API e links de campanha com métricas.",
-      en: "a CMS that grew into a content marketing platform: articles, API and campaign links with analytics.",
-    },
+    title: { pt: "projetos", en: "projects" },
+    loopvet: { pt: "gestão pra clínica veterinária.", en: "management software for vet clinics." },
+    domus: { pt: "CMS que virou plataforma de conteúdo.", en: "a CMS that grew into a content platform." },
+    cdui: { pt: "minha biblioteca de componentes, medida em bytes.", en: "my component library, measured in bytes." },
+    converter: { pt: "conversores de arquivo que rodam no navegador. nada sai do seu computador.", en: "file converters that run in the browser. nothing leaves your computer." },
+    cdai: { pt: "agente de código com IA que roda local, com Ollama, Tauri e Rust.", en: "a local AI coding agent built with Ollama, Tauri and Rust." },
+    atWork: { pt: "na loopscape", en: "at loopscape" },
+    soon: { pt: "em breve", en: "soon" },
+    all: { pt: "todos os repositórios", en: "all repositories" },
+    contributions: { pt: "{count} contribuições no último ano", en: "{count} contributions in the last year" },
   },
   stack: { title: { pt: "stack", en: "stack" } },
   error: {
@@ -42,6 +42,8 @@ export default {
     title: { pt: "em destaque no github", en: "featured on github" },
     all: { pt: "ver todos →", en: "see all →" },
     stars: { pt: "{count} estrelas", en: "{count} stars" },
+    open: { pt: "ver", en: "view" },
+    openLabel: { pt: "ver {name}", en: "view {name}" },
   },
   writing: {
     title: { pt: "escrita", en: "writing" },
@@ -60,6 +62,6 @@ export default {
   experience: {
     title: { pt: "experiência", en: "experience" },
     current: { pt: "atual", en: "current" },
-    role: { pt: "desenvolvedor front-end", en: "front-end developer" },
+    role: { pt: "desenvolvedor front-end júnior", en: "junior front-end developer" },
   },
 };

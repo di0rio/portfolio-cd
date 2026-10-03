@@ -25,7 +25,7 @@ export function ContactLinks({ locale, labels, cv = true }: { locale: Locale; la
       {links.map(({ track, href, label, icon, internal, ...rest }) => (
         <li key={track}>
           <Button
-            className="transition-[box-shadow,transform] duration-100 ease-out motion-safe:active:scale-[0.98]"
+            nativeButton={false}
             render={internal ? <Link href={href} /> : <a href={href} {...rest} />}
             size="sm"
             variant="outline"

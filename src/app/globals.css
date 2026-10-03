@@ -7,12 +7,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
-  --animate-skeleton: skeleton 2s -1s infinite linear;
   --animate-caret-blink: 1s ease-out infinite caret-blink;
-  --animate-toast-success-odd: toast-success-odd 0.32s cubic-bezier(0.5, 1, 0.89, 1);
-  --animate-toast-success-even: toast-success-even 0.32s cubic-bezier(0.5, 1, 0.89, 1);
-  --animate-toast-error-odd: toast-error-odd 0.28s cubic-bezier(0.5, 1, 0.89, 1);
-  --animate-toast-error-even: toast-error-even 0.28s cubic-bezier(0.5, 1, 0.89, 1);
   --font-heading: var(--font-heading);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
@@ -60,79 +55,12 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-  @keyframes skeleton {
-  to {
-    background-position: -200% 0;
-    }
-  }
   @keyframes caret-blink {
   0%, 70%, to {
     opacity: 1;
     }
   20%, 50% {
     opacity: 0;
-    }
-  }
-  @keyframes toast-success-odd {
-  0% {
-    scale: 1;
-    }
-  30% {
-    scale: 1.025;
-    }
-  60% {
-    scale: 0.99;
-    }
-  100% {
-    scale: 1;
-    }
-  }
-  @keyframes toast-error-odd {
-  0% {
-    translate: 0 0;
-    }
-  25% {
-    translate: -3px 0;
-    }
-  50% {
-    translate: 3px 0;
-    }
-  75% {
-    translate: -3px 0;
-    }
-  100% {
-    translate: 0 0;
-    }
-  }
-  @keyframes toast-success-even {
-  0% {
-    scale: 1;
-    }
-  30% {
-    scale: 1.025;
-    }
-  60% {
-    scale: 0.99;
-    }
-  100% {
-    scale: 1;
-    }
-  }
-  @keyframes toast-error-even {
-  0% {
-    translate: 0 0;
-    }
-  25% {
-    translate: -3px 0;
-    }
-  50% {
-    translate: 3px 0;
-    }
-  75% {
-    translate: -3px 0;
-    }
-  100% {
-    translate: 0 0;
     }
   }
 }
@@ -244,6 +172,7 @@
 @theme inline {
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
+  --color-brand-contrast: var(--brand-contrast);
   --color-heat-0: var(--heat-0);
   --color-heat-1: var(--heat-1);
   --color-heat-2: var(--heat-2);
@@ -257,6 +186,7 @@
   --popover: #fbfaf6;
   --brand: #ffd23f;
   --brand-foreground: #7a5c00;
+  --brand-contrast: #1c1c1c;
   --heat-0: #e6e3d9;
   --heat-1: #f6e3a0;
   --heat-2: #f2cf5e;
@@ -299,7 +229,7 @@
   .markdown ol { @apply list-decimal pl-5; }
   .markdown li + li { @apply mt-1; }
   .markdown img { @apply max-w-full rounded-lg border; }
-  .markdown blockquote { @apply border-l-2 border-brand pl-4 text-muted-foreground; }
+  .markdown blockquote { @apply border-l pl-4 text-muted-foreground italic; }
   .markdown :not(pre) > code {
     @apply rounded-md bg-accent px-1.5 py-0.5 text-[0.9em];
   }
@@ -334,19 +264,6 @@
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-/* Grade de contribuições: preenche da semana mais antiga até hoje, uma vez por visita. */
-@keyframes reveal-x {
-  from { clip-path: inset(0 100% 0 0); }
-}
-@keyframes fade-in {
-  from { opacity: 0; }
-}
-@utility animate-reveal-x {
-  animation: reveal-x 700ms var(--ease-out) both;
-  @media (prefers-reduced-motion: reduce) {
-    animation: fade-in 300ms ease both;
-  }
-}
 
 /* Troca de idioma: enquanto o servidor re-renderiza, o conteúdo esmaece de leve em vez de trocar seco. */
 main {
@@ -417,4 +334,18 @@ html[data-pending] main {
 }
 @keyframes vt-fade {
   from { opacity: 0; }
+}
+
+/* Balão de fala do cartoon na home: aparece depois do avatar, crescendo a partir da "cauda". */
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85) rotate(-6deg);
+  }
+}
+@utility animate-bubble {
+  animation: bubble-in 360ms var(--ease-out) 450ms both;
+  @media (prefers-reduced-motion: reduce) {
+    animation: fade-in 200ms ease 450ms both;
+  }
 }

@@ -1,10 +1,7 @@
 export default {
-  tagline: {
-    pt: "jaú, sp · brasil",
-    en: "jaú, sp · brazil",
-  },
   nav: {
-    label: { pt: "Seções e redes", en: "Sections and links" },
+    label: { pt: "Navegação", en: "Navigation" },
+    home: { pt: "início", en: "home" },
     blog: { pt: "blog", en: "blog" },
     lab: { pt: "lab", en: "lab" },
     experience: { pt: "experiência", en: "experience" },
@@ -22,5 +19,6 @@ export default {
   footer: {
     made: { pt: "feito por cauã.", en: "made by cauã." },
     hint: { pt: "psst: digita", en: "psst: type" },
+    social: { pt: "Redes", en: "Social" },
   },
 };

@@ -97,7 +97,7 @@ export function Terminal({ locale }: { locale: Locale }) {
             aria-label={copy.label}
             autoCapitalize="off"
             autoComplete="off"
-            className="min-w-0 flex-1 bg-transparent caret-[#ffd23f] outline-none placeholder:text-[#737373]"
+            className="min-w-0 flex-1 bg-transparent caret-brand outline-none placeholder:text-[#737373]"
             onChange={(e) => setValue(e.target.value)}
             placeholder={copy.placeholder}
             ref={input}

@@ -44,7 +44,9 @@ export default async function Cv() {
       </header>
 
       <Section title={copy.cv.summary}>
-        <p className="text-pretty">{copy.bio}</p>
+        <p className="text-pretty">
+          {copy.bio} {copy.ai}
+        </p>
       </Section>
 
       <Section title={copy.experience.title}>

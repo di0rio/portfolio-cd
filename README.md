@@ -47,7 +47,7 @@ Tudo é revalidado a cada hora (contribuições a cada 6 h).
 | Páginas (home, blog, 404) | `src/app/[locale]/` |
 | Textos da home (bio, projetos, experiência) | `src/app/t.ts` |
 | Textos do blog | `src/app/blog/t.ts` |
-| Header, sidebar, rodapé, tema, idioma | `src/components/site-shell/` |
+| Header (prompt e navegação), rodapé, tema, idioma | `src/components/site-shell/` |
 | Cores, fontes, animações | `src/app/globals.css` |
 | Imagem de prévia do link (OG) | `src/app/opengraph-image.tsx` |
 

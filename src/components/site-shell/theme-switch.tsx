@@ -3,7 +3,6 @@
 import { MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
-import { press } from "@/components/site-shell/locale-switch";
 import { Button } from "@/components/ui/button";
 
 type Labels = { toLight: string; toDark: string };
@@ -21,7 +20,6 @@ export function ThemeSwitch({ labels }: { labels: Labels }) {
   return (
     <Button
       aria-label={dark ? labels.toLight : labels.toDark}
-      className={press}
       onClick={() => setTheme(dark ? "light" : "dark")}
       size="icon-sm"
       variant="outline"
