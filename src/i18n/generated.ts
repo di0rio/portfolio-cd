@@ -196,6 +196,7 @@ export const translations = {
 			bubble: "e aí!",
 			today: "hoje",
 			bio: "front-end júnior na loopscape, no loopvet e na domus. gosto da parte que as pessoas tocam: interface, interação e detalhe.",
+			security: "também estudo cyber security: detecção, logs e como as coisas quebram. o projeto disso é o sentinel-forge, em Go.",
 			ai: "uso IA em quase todo projeto pra aprender mais rápido, sem pular o porquê.",
 			projects: {
 				title: "projetos",
@@ -487,6 +488,7 @@ export const translations = {
 			bubble: "hey!",
 			today: "today",
 			bio: "junior front-end at loopscape, on loopvet and domus. i like the part people touch: interface, interaction and detail.",
+			security: "i also study cyber security: detection, logs and how things break. the project for that is sentinel-forge, in Go.",
 			ai: "i use AI on almost every project to learn faster, without skipping the why.",
 			projects: {
 				title: "projects",

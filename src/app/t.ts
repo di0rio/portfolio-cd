@@ -13,6 +13,10 @@ export default {
     pt: "front-end júnior na loopscape, no loopvet e na domus. gosto da parte que as pessoas tocam: interface, interação e detalhe.",
     en: "junior front-end at loopscape, on loopvet and domus. i like the part people touch: interface, interaction and detail.",
   },
+  security: {
+    pt: "também estudo cyber security: detecção, logs e como as coisas quebram. o projeto disso é o sentinel-forge, em Go.",
+    en: "i also study cyber security: detection, logs and how things break. the project for that is sentinel-forge, in Go.",
+  },
   ai: {
     pt: "uso IA em quase todo projeto pra aprender mais rápido, sem pular o porquê.",
     en: "i use AI on almost every project to learn faster, without skipping the why.",

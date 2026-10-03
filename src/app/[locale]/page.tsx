@@ -70,6 +70,7 @@ export default async function Home() {
       <Section id="hoje" title={copy.today}>
         <div className="flex flex-col gap-3">
           <p className="text-pretty">{copy.bio}</p>
+          <p className="text-pretty">{copy.security}</p>
           <p className="text-pretty">{copy.ai}</p>
         </div>
         <div className="mt-6">
