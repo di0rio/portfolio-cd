@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ViewTransition } from "react";
 import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
 import { getBlogRepos } from "@/lib/github";
@@ -35,7 +36,9 @@ export default async function Blog() {
                 href={localePath(locale, `/blog/${repo.name}`)}
               >
                 <span className="flex items-baseline justify-between gap-4">
-                  <span className="font-medium text-[17px]">{repo.name}</span>
+                  <ViewTransition default="none" name={`post-title-${repo.name}`} share="morph">
+                    <span className="font-medium text-[17px]">{repo.name}</span>
+                  </ViewTransition>
                   <time className="whitespace-nowrap text-muted-foreground text-sm tabular-nums" dateTime={repo.created_at}>
                     {fmt.format(new Date(repo.created_at))}
                   </time>

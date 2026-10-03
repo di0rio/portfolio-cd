@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { Ubuntu, Ubuntu_Mono } from "next/font/google";
+import { ViewTransition } from "react";
 import "../globals.css";
 import { ClickTracker } from "@/components/site-shell/click-tracker";
 import { EasterEgg } from "@/components/site-shell/easter-egg";
@@ -53,7 +54,10 @@ export default async function RootLayout({ children }: LayoutProps<"/[locale]">)
 
           <div className="grid flex-1 gap-8 px-4 pt-4 pb-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,600px)_minmax(0,1fr)] lg:gap-14 lg:px-6 lg:pt-10 print:block print:p-0">
             <Sidebar locale={locale} nav={shell.nav} />
-            <main className="flex min-w-0 flex-col gap-14">{children}</main>
+            {/* Trocar de página anima só o conteúdo; header, sidebar e rodapé ficam parados. */}
+            <ViewTransition default="page">
+              <main className="flex min-w-0 flex-col gap-14">{children}</main>
+            </ViewTransition>
           </div>
 
           <footer className="flex flex-wrap justify-between gap-4 px-4 pb-7 text-muted-foreground text-sm lg:px-6 print:hidden">

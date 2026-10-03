@@ -19,6 +19,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...entry("/", { changeFrequency: "monthly", priority: 1 }),
     ...entry("/blog", { changeFrequency: "weekly", priority: 0.8 }),
+    ...entry("/lab", { changeFrequency: "monthly", priority: 0.7 }),
+    ...entry("/cv", { changeFrequency: "monthly", priority: 0.7 }),
     ...posts.flatMap((p) => entry(`/blog/${p.name}`, { lastModified: p.pushed_at, priority: 0.6 })),
   ];
 }

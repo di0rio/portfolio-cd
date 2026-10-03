@@ -14,7 +14,7 @@ export function EasterEgg({ locale }: { locale: Locale }) {
   useEffect(() => {
     let buffer = "";
     function onKey(e: KeyboardEvent) {
-      if (e.key.length !== 1 || (e.target as HTMLElement).closest("input, textarea, [contenteditable]")) return;
+      if (e.key.length !== 1 || (e.target instanceof Element && e.target.closest("input, textarea, [contenteditable]"))) return;
       buffer = (buffer + e.key.toLowerCase()).slice(-12);
       const match = buffer.match(/cd (\.\.|~|blog)$/);
       if (!match) return;

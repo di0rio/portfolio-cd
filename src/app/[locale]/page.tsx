@@ -47,7 +47,7 @@ export default async function Home() {
           <ContactLinks labels={nav} locale={locale} />
         </div>
         <script
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd(locale, copy.role, copy.bio)) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd(locale, copy.role, copy.bio)).replace(/</g, "\\u003c") }}
           type="application/ld+json"
         />
       </section>

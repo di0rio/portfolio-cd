@@ -6,6 +6,7 @@ export default {
   nav: {
     label: { pt: "Seções e redes", en: "Sections and links" },
     blog: { pt: "blog", en: "blog" },
+    lab: { pt: "lab", en: "lab" },
     experience: { pt: "experiência", en: "experience" },
     projects: { pt: "projetos", en: "projects" },
     email: { pt: "e-mail", en: "email" },

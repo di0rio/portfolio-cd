@@ -1,4 +1,4 @@
-import { BriefcaseIcon, FileTextIcon, FolderIcon, MailIcon, RssIcon } from "lucide-react";
+import { BriefcaseIcon, FileTextIcon, FlaskConicalIcon, FolderIcon, MailIcon, RssIcon } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { GithubIcon, LinkedinIcon } from "@/components/brand-icons";
@@ -30,6 +30,7 @@ export function Sidebar({ locale, nav }: { locale: Locale; nav: NavCopy }) {
         <Item href={localePath(locale, "/#projetos")} icon={<FolderIcon aria-hidden="true" />}>{nav.projects}</Item>
         <Item href={localePath(locale, "/#experiencia")} icon={<BriefcaseIcon aria-hidden="true" />}>{nav.experience}</Item>
         <Item href={localePath(locale, "/blog")} icon={<RssIcon aria-hidden="true" />}>{nav.blog}</Item>
+        <Item href={localePath(locale, "/lab")} icon={<FlaskConicalIcon aria-hidden="true" />}>{nav.lab}</Item>
         <Item href={localePath(locale, "/cv")} icon={<FileTextIcon aria-hidden="true" />} track="cv">{nav.cv}</Item>
         <hr className="my-2.5 mr-2 w-10 self-end border-border max-lg:hidden" />
         <Item href={`https://github.com/${site.github}`} track="github" icon={<GithubIcon aria-hidden="true" />}>/{site.github}</Item>

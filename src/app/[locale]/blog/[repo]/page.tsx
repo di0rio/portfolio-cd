@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ViewTransition } from "react";
 import { Markdown } from "@/components/markdown";
 import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
@@ -27,7 +28,10 @@ export default async function Post({ params }: PageProps<"/[locale]/blog/[repo]"
       </Link>
 
       <header className="mt-6 mb-8 border-b pb-6">
-        <h1 className="font-bold font-heading text-[28px] leading-tight">{repo.name}</h1>
+        {/* Mesmo nome do título na lista do blog: o título "voa" de um lugar pro outro. */}
+        <ViewTransition default="none" name={`post-title-${repo.name}`} share="morph">
+          <h1 className="font-bold font-heading text-[28px] leading-tight">{repo.name}</h1>
+        </ViewTransition>
         {repo.description && <p className="mt-2 text-muted-foreground">{repo.description}</p>}
         <p className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm">
           <a className="text-brand-foreground underline underline-offset-3" href={repo.html_url} rel="noopener" target="_blank">

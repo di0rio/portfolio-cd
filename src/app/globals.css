@@ -375,3 +375,46 @@ html[data-pending] main {
     color-scheme: light;
   }
 }
+
+/* --- view transitions (navegação entre páginas) --- */
+/* A página em si não faz crossfade: só o <main> anima, o resto do layout é idêntico nas duas telas. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+/* Conteúdo: sai rápido, entra subindo 6px com um desfoque curto que funde as duas telas. */
+::view-transition-group(.page) {
+  animation: none;
+}
+::view-transition-old(.page) {
+  animation: vt-out 120ms ease-out both;
+}
+::view-transition-new(.page) {
+  animation: vt-in 240ms var(--ease-out) 60ms both;
+}
+/* Título do post: voa da lista pro cabeçalho do post. */
+::view-transition-group(.morph) {
+  animation-duration: 320ms;
+  animation-timing-function: var(--ease-in-out);
+}
+@keyframes vt-out {
+  to { opacity: 0; }
+}
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+    filter: blur(2px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(.page) {
+    animation: vt-fade 160ms ease both;
+  }
+  ::view-transition-group(.morph) {
+    animation: none;
+  }
+}
+@keyframes vt-fade {
+  from { opacity: 0; }
+}

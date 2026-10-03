@@ -219,6 +219,16 @@ Prefer a list with hairline dividers (`border-y` plus `divide-y`) over a stack o
 - Mono lines styled as a shell: a Cursor Yellow Ink `~`, a muted `$`, the command, then output in Ink. The 404 page ends with a blinking yellow block cursor (`caret-blink`, 1s), static under reduced motion.
 - The footer hint renders `cd ..` as inline code on a 4% tint with an 8px radius.
 
+### Lab (`/lab`)
+- A page of live interaction experiments. Each one is a section: lowercase title, one sentence explaining the technique, then a **stage** (raised surface, hairline, 14px radius, min 160px tall, content centered).
+- Current experiments: hold-to-confirm (yellow `clip-path` fill, 1.6s linear while holding, 200ms back on release), copy button with blurred icon swap (200ms), clip-path tabs (inverted copy of the list clipped to the active tab, 250ms ease-in-out), and a mock terminal that navigates the site (no animation, keyboard-first).
+- New experiments follow the same rules as the rest of the site: yellow is the only accent, motion has a named purpose, reduced motion is handled.
+
+### Page transitions
+- Route changes use the View Transitions API through React `<ViewTransition>` around `<main>`: the old content fades out in 120ms, the new one rises 6px out of a 2px blur in 240ms (strong ease-out, 60ms delay). Header, sidebar and footer don't animate.
+- Blog titles morph from the list into the post header (`share="morph"`, 320ms ease-in-out).
+- Reduced motion: plain 160ms fade, no movement, no morph.
+
 ### Markdown (blog posts)
 - 16px body at 1.75 line-height; h1/h2/h3 in bold Ubuntu at 24/20/18px with 36px space above; links in Cursor Yellow Ink with underline; blockquotes with a 2px yellow left rule; code blocks on raised surface with a hairline and 14px radius.
 
