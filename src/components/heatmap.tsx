@@ -1,6 +1,6 @@
 "use client";
 
-import { type KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
+import { type KeyboardEvent, useMemo, useRef, useState } from "react";
 
 export type HeatDay = { date: string; count: number; level: 0 | 1 | 2 | 3 | 4 };
 
@@ -20,22 +20,17 @@ type Props = {
 };
 
 const BG = ["bg-heat-0", "bg-heat-1", "bg-heat-2", "bg-heat-3", "bg-heat-4"] as const;
-const cell = "size-[11px] rounded-[3px]";
+// Células fluidas: as colunas dividem a largura e cada célula é quadrada, então o mapa inteiro cabe sem rolar.
+const cell = "aspect-square w-full rounded-[2px] sm:rounded-[3px]";
+const swatch = "size-[11px] rounded-[3px]";
 
 // A data é só um dia do calendário: lê em UTC pra não escorregar de dia pelo fuso do navegador.
 const at = (date: string) => new Date(`${date}T12:00:00Z`);
 
 /** Gráfico de calor estilo GitHub: semanas em colunas, dias da semana em linhas (domingo em cima). */
 export function Heatmap({ days, locale, label, unit, legend, interactive = false, selected = null, onSelect }: Props) {
-  const scroller = useRef<HTMLDivElement>(null);
   const grid = useRef<HTMLDivElement>(null);
   const [focusKey, setFocusKey] = useState<string | null>(null);
-
-  // Começa mostrando a semana mais recente.
-  useEffect(() => {
-    const el = scroller.current;
-    if (el) el.scrollLeft = el.scrollWidth;
-  }, []);
 
   const { offset, weeks, months, cells, active } = useMemo(() => {
     const dayFmt = new Intl.DateTimeFormat(locale, { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
@@ -53,7 +48,7 @@ export function Heatmap({ days, locale, label, unit, legend, interactive = false
     for (const c of cells) {
       if (c.date.slice(8) !== "01" && c.col !== 0) continue;
       if (months.at(-1)?.col === c.col) continue;
-      if (months.length && c.col - months[months.length - 1].col < 3) continue;
+      if (months.length && c.col - months[months.length - 1].col < 4) continue;
       months.push({ col: c.col, name: monthFmt.format(at(c.date)) });
     }
     return { offset, weeks, months, cells, active: cells.filter((c) => c.count > 0) };
@@ -80,30 +75,24 @@ export function Heatmap({ days, locale, label, unit, legend, interactive = false
     if (next) grid.current?.querySelector<HTMLElement>(`[data-date="${next.date}"]`)?.focus();
   }
 
-  const step = 14; // 11px da célula + 3px de vão
   return (
     <div>
-      <div
-        aria-label={interactive ? undefined : label}
-        className="overflow-x-auto rounded-sm pb-2 outline-none focus-visible:ring-2 focus-visible:ring-brand"
-        ref={scroller}
-        role={interactive ? undefined : "img"}
-        tabIndex={interactive ? undefined : 0}
-      >
-        <div className="w-max">
-          <div aria-hidden="true" className="mb-1.5 grid h-4 text-muted-foreground text-xs leading-4" style={{ gridTemplateColumns: `repeat(${weeks}, 11px)`, columnGap: 3 }}>
+      <div aria-label={interactive ? undefined : label} className="pb-2" role={interactive ? undefined : "img"}>
+        <div>
+          <div aria-hidden="true" className="mb-1.5 grid h-4 gap-x-0.5 text-muted-foreground text-xs leading-4 sm:gap-x-[3px]" style={{ gridTemplateColumns: `repeat(${weeks}, minmax(0, 1fr))` }}>
             {months.map((m) => (
-              <span className="whitespace-nowrap" key={m.col} style={{ gridColumn: m.col + 1 }}>
+              // Mês nas últimas colunas encosta na direita pra não vazar da borda.
+              <span className={`whitespace-nowrap ${m.col >= weeks - 3 ? "text-right" : ""}`} key={m.col} style={{ gridColumn: m.col >= weeks - 3 ? `${m.col + 1} / -1` : m.col + 1 }}>
                 {m.name}
               </span>
             ))}
           </div>
           <div
             aria-label={interactive ? label : undefined}
-            className="grid grid-flow-col"
+            className="grid grid-flow-col gap-0.5 sm:gap-[3px]"
             ref={grid}
             role={interactive ? "group" : undefined}
-            style={{ gridTemplateRows: "repeat(7, 11px)", gridAutoColumns: 11, gap: 3, width: weeks * step - 3 }}
+            style={{ gridTemplateRows: "repeat(7, auto)", gridTemplateColumns: `repeat(${weeks}, minmax(0, 1fr))` }}
           >
             {cells.map((c, i) => {
               const style = i === 0 ? { gridRowStart: offset + 1 } : undefined;
@@ -134,7 +123,7 @@ export function Heatmap({ days, locale, label, unit, legend, interactive = false
       <div aria-hidden="true" className="flex items-center justify-end gap-1.5 text-muted-foreground text-xs">
         {legend[0]}
         {BG.map((bg) => (
-          <span className={`${cell} ${bg}`} key={bg} />
+          <span className={`${swatch} ${bg}`} key={bg} />
         ))}
         {legend[1]}
       </div>

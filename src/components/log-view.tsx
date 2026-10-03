@@ -7,7 +7,7 @@ import { Section } from "@/components/section";
 import type { Commit } from "@/lib/github";
 
 const TZ = "America/Sao_Paulo";
-const WEEKS = 26;
+const WEEKS = 53; // um ano, igual ao gráfico do GitHub
 const DAY = 86400000;
 
 // "Security: ..." ou "feat(scope): ...": o prefixo vira um chip e o resto, o texto.
@@ -63,7 +63,7 @@ function LogContent({ commits, locale, labels, dia, tag, interactive, onDia, onT
     const counts = new Map<string, number>();
     for (const r of rows) counts.set(r.day, (counts.get(r.day) ?? 0) + 1);
     const today = dayKey.format(new Date());
-    // Sempre 26 semanas (colunas de domingo a sábado), mesmo com histórico curto: lê como calendário.
+    // Sempre o ano todo (colunas de domingo a sábado), mesmo com histórico curto: lê como calendário.
     const start = shift(today, -(at(today).getUTCDay() + (WEEKS - 1) * 7));
     const list: { date: string; count: number }[] = [];
     for (let d = start; d <= today; d = shift(d, 1)) list.push({ date: d, count: counts.get(d) ?? 0 });
