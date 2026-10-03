@@ -28,10 +28,6 @@ export default {
       pt: "CMS que virou plataforma de marketing de conteúdo: artigos, API e links de campanha com métricas.",
       en: "a CMS that grew into a content marketing platform: articles, API and campaign links with analytics.",
     },
-    converter: {
-      pt: "conversores que pegam dado bagunçado de outro sistema e entregam arrumado no banco.",
-      en: "converters that take messy data from other systems and deliver it clean to the database.",
-    },
   },
   repos: {
     title: { pt: "em destaque no github", en: "featured on github" },

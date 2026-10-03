@@ -8,7 +8,6 @@ import { site } from "@/lib/site";
 const projects = [
   { name: "loopvet", key: "loopvet" },
   { name: "domus", key: "domus" },
-  { name: "converter hub", key: "converter" },
 ] as const;
 
 export default async function Home() {

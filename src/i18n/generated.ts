@@ -35,7 +35,6 @@ export const translations = {
 				title: "projetos em que eu trabalhei",
 				loopvet: "sistema de gestão pra clínica veterinária: agenda, prontuário e financeiro.",
 				domus: "CMS que virou plataforma de marketing de conteúdo: artigos, API e links de campanha com métricas.",
-				converter: "conversores que pegam dado bagunçado de outro sistema e entregam arrumado no banco.",
 			},
 			repos: {
 				title: "em destaque no github",
@@ -114,7 +113,6 @@ export const translations = {
 				title: "projects i've worked on",
 				loopvet: "management software for veterinary clinics: scheduling, medical records and billing.",
 				domus: "a CMS that grew into a content marketing platform: articles, API and campaign links with analytics.",
-				converter: "converters that take messy data from other systems and deliver it clean to the database.",
 			},
 			repos: {
 				title: "featured on github",

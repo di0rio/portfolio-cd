@@ -44,7 +44,7 @@ A front-end developer who cares about the details people see and use. The site i
 
 ## Evidence on Hand
 
-- Real projects: Loopvet (veterinary clinic management), Domus (CMS turned content marketing platform), Converter Hub (data migration converters).
+- Real projects: Loopvet (veterinary clinic management), Domus (CMS turned content marketing platform), Converter-Hub (in-browser file converters, public repo; shown under "featured on github", not duplicated in the projects list).
 - Real activity: GitHub profile `di0rio` and its contribution history.
 - Absent and not to be fabricated: testimonials, client logos, metrics, employment dates, star counts beyond what the GitHub API returns.
 
