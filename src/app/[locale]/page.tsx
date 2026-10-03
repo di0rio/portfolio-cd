@@ -2,20 +2,20 @@ import { ArrowUpRightIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
 import { ContactLinks } from "@/components/contact-links";
+import { Section } from "@/components/section";
 import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
 import { getBlogRepos, getContributions } from "@/lib/github";
+import { projects } from "@/lib/projects";
 import { site } from "@/lib/site";
 
 // Lista curada: o trabalho que eu quero mostrar, com descrição escrita por mim (não a do GitHub).
-const projects = [
+// Quem tem estudo de caso (lib/projects) ganha link interno; o "ver ↗" aponta pro site ou repositório.
+const projectItems = [
   { name: "loopvet", key: "loopvet" },
   { name: "domus", key: "domus" },
-  { name: "cd/ui", key: "cdui", href: "https://cd-ui.vercel.app" },
-  { name: "converter-hub", key: "converter", href: "https://convert-hub-web.vercel.app" },
-  { name: "cd-ai", key: "cdai", href: "https://github.com/di0rio/cd-ai" },
+  ...projects.map((p) => ({ name: p.name, key: p.key, slug: p.slug, href: p.live ?? p.repo })),
 ] as const;
 
 const atWork = new Set(["loopvet", "domus"]);
@@ -93,12 +93,21 @@ export default async function Home() {
         title={copy.projects.title}
       >
         <ul className="flex flex-col gap-6">
-          {projects.map((p) => (
-            // Só o "ver ↗" é clicável; passar o mouse no item acende o link e a seta sobe.
+          {projectItems.map((p) => (
+            // Nome leva pro estudo de caso (quando tem); "ver ↗" abre o site/repo. Hover no item acende o link e a seta sobe.
             <li className="group/item" key={p.key}>
               <p className="flex items-baseline justify-between gap-4">
-                <span>{p.name}</span>
-                {"href" in p ? (
+                {"slug" in p ? (
+                  <Link
+                    className="underline decoration-muted-foreground/40 underline-offset-4 transition-[text-decoration-color] duration-150 hover:decoration-brand"
+                    href={localePath(locale, `/projetos/${p.slug}`)}
+                  >
+                    {p.name}
+                  </Link>
+                ) : (
+                  <span>{p.name}</span>
+                )}
+                {"href" in p && p.href ? (
                   <a
                     aria-label={copy.repos.openLabel({ name: p.name })}
                     className="inline-flex shrink-0 items-center gap-0.5 rounded-md text-muted-foreground text-sm outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-brand group-hover/item:text-foreground"
@@ -113,9 +122,11 @@ export default async function Home() {
                     />
                   </a>
                 ) : (
-                  <span className="shrink-0 text-muted-foreground text-sm">
-                    {atWork.has(p.key) ? copy.projects.atWork : copy.projects.soon}
-                  </span>
+                  !("slug" in p) && (
+                    <span className="shrink-0 text-muted-foreground text-sm">
+                      {atWork.has(p.key) ? copy.projects.atWork : copy.projects.soon}
+                    </span>
+                  )
                 )}
               </p>
               <p className="text-muted-foreground">{copy.projects[p.key]}</p>
@@ -169,21 +180,6 @@ export default async function Home() {
         </Section>
       )}
     </>
-  );
-}
-
-/** Seção: rótulo discreto em cima, conteúdo com respiro. */
-function Section({ id, title, action, children }: { id: string; title: string; action?: ReactNode; children: ReactNode }) {
-  return (
-    <section aria-labelledby={id} className="scroll-mt-8">
-      <div className="mb-5 flex items-baseline justify-between gap-4">
-        <h2 className="text-muted-foreground" id={id}>
-          {title}
-        </h2>
-        {action}
-      </div>
-      {children}
-    </section>
   );
 }
 
