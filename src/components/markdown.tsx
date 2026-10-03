@@ -15,7 +15,7 @@ const link: Components["a"] = ({ href, title, children }) => {
   );
 };
 
-// Só prints do próprio site (`/projects/x.webp`, 2560x1720); sem o arquivo no build, some em silêncio.
+// Só prints do próprio site (`/projects/x.webp`, 3840x2160); sem o arquivo no build, some em silêncio.
 const localImage = /^\/projects\/[\w.-]+$/;
 
 const article: Components = {
@@ -28,8 +28,11 @@ const article: Components = {
   img: ({ src, alt }) => {
     if (typeof src !== "string" || !localImage.test(src) || !existsSync(join(process.cwd(), "public", src))) return null;
     return (
-      <figure>
-        <Image alt={alt ?? ""} className="block h-auto w-full" height={1720} quality={90} sizes="(min-width: 640px) 608px, 100vw" src={src} width={2560} />
+      <figure className="wide">
+        {/* O print é de uma tela inteira: clicar abre em tamanho real pra ler os detalhes. */}
+        <a href={src} rel="noopener" target="_blank">
+          <Image alt={alt ?? ""} className="block h-auto w-full" height={2160} quality={90} sizes="(min-width: 1056px) 1024px, 100vw" src={src} width={3840} />
+        </a>
         {alt && <figcaption>{alt}</figcaption>}
       </figure>
     );

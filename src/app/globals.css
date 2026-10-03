@@ -266,6 +266,14 @@
   }
 }
 
+/* Mídia que vaza da coluna de texto (608px) até 1024px, centrada, sem passar da tela. */
+@utility wide {
+  position: relative;
+  left: 50%;
+  width: min(calc(100vw - 2rem), 64rem);
+  translate: -50% 0;
+}
+
 @utility scrollbar-thin {
   scrollbar-width: thin;
   scrollbar-color: var(--heat-0) transparent;

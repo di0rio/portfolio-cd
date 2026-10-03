@@ -19,12 +19,15 @@ export default async function Cv() {
   const shown = new Set(projects.map((p) => p.repo?.toLowerCase()));
   const repos = (await getFeaturedRepos()).filter((r) => !shown.has(r.url.toLowerCase()));
   const strip = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
+  const local = site.url.includes("localhost");
   const contacts = [
     site.email && { href: `mailto:${site.email}`, text: site.email },
     site.linkedin && { href: `https://www.linkedin.com/in/${site.linkedin}`, text: `linkedin.com/in/${site.linkedin}` },
     { href: `https://github.com/${site.github}`, text: `github.com/${site.github}` },
-    { href: site.url, text: strip(site.url) },
+    !local && { href: site.url, text: strip(site.url) },
   ].filter((c) => !!c);
+  // Fora da Vercel o site.url é localhost: link relativo e sem o domínio no texto.
+  const projectUrl = (slug: string) => (local ? "" : site.url) + localePath(locale, `/projetos/${slug}`);
 
   return (
     <article className="flex flex-col gap-9 print:gap-6 print:text-[13px]">
@@ -70,8 +73,8 @@ export default async function Cv() {
             <li className="break-inside-avoid" key={p.slug}>
               <p className="font-medium">{p.name}</p>
               <p className="text-pretty text-muted-foreground">{copy.projects[p.key]}</p>
-              <a className="text-sm underline decoration-muted-foreground/40 underline-offset-4 hover:decoration-brand" href={site.url + localePath(locale, `/projetos/${p.slug}`)}>
-                {strip(site.url + localePath(locale, `/projetos/${p.slug}`))}
+              <a className="text-sm underline decoration-muted-foreground/40 underline-offset-4 hover:decoration-brand" href={projectUrl(p.slug)}>
+                {strip(projectUrl(p.slug))}
               </a>
             </li>
           ))}

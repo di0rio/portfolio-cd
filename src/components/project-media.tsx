@@ -18,12 +18,12 @@ export function ProjectMedia({ src, video, alt, play }: { src: string; video?: s
   }, [started]);
 
   return (
-    <div className="relative mt-8 aspect-[2560/1720] overflow-hidden rounded-xl border bg-card">
+    <div className="wide relative mt-8 aspect-video overflow-hidden rounded-xl border bg-card">
       {started ? (
         <video aria-label={alt} autoPlay className="block size-full object-cover" controls playsInline poster={src} preload="none" ref={player} src={video} />
       ) : (
         <>
-          <Image alt={alt} className="block size-full object-cover" height={1720} priority quality={90} sizes="(min-width: 640px) 608px, 100vw" src={src} width={2560} />
+          <Image alt={alt} className="block size-full object-cover" height={1080} priority quality={90} sizes="(min-width: 1056px) 1024px, 100vw" src={src} width={1920} />
           {video && (
             <button
               aria-label={play}
