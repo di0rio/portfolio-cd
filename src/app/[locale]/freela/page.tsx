@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const link = "underline decoration-muted-foreground/40 underline-offset-4 transition-[text-decoration-color] duration-150 hover:decoration-brand";
 // Os estudos de caso que mais falam com quem contrata freela.
-const examples = ["agenda-vet", "cd-ui", "converter-hub"];
+const examples = ["cd-ui", "converter-hub", "sentinel-forge"];
 
 export default async function Freela() {
   const { t, locale } = await getT();

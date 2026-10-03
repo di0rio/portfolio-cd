@@ -7,11 +7,11 @@ export default {
     },
   },
   role: { pt: "desenvolvedor front-end júnior", en: "junior front-end developer" },
-  bubble: { pt: "e aí!", en: "hey!" },
+  bubble: { pt: "salve!", en: "hey!" },
   today: { pt: "hoje", en: "today" },
   bio: {
-    pt: "front-end júnior na loopscape, no loopvet e na domus. gosto da parte que as pessoas tocam: interface, interação e detalhe.",
-    en: "junior front-end at loopscape, on loopvet and domus. i like the part people touch: interface, interaction and detail.",
+    pt: "front-end júnior na loopscape. gosto da parte que as pessoas tocam: interface, interação e detalhe.",
+    en: "junior front-end at loopscape. i like the part people touch: interface, interaction and detail.",
   },
   security: {
     pt: "também estudo cyber security: detecção, logs e como as coisas quebram. o projeto disso é o sentinel-forge, em Go.",
@@ -25,10 +25,6 @@ export default {
     title: { pt: "projetos", en: "projects" },
     loopvet: { pt: "gestão pra clínica veterinária.", en: "management software for vet clinics." },
     domus: { pt: "CMS que virou plataforma de conteúdo.", en: "a CMS that grew into a content platform." },
-    agendavet: {
-      pt: "agenda de clínica veterinária: arrastar pra remarcar, teclado completo, zod.",
-      en: "vet clinic agenda: drag to reschedule, full keyboard support, zod.",
-    },
     cdui: { pt: "minha biblioteca de componentes, medida em bytes.", en: "my component library, measured in bytes." },
     converter: { pt: "conversores de arquivo que rodam no navegador. nada sai do seu computador.", en: "file converters that run in the browser. nothing leaves your computer." },
     cdai: { pt: "agente de código com IA que roda local, com Ollama, Tauri e Rust.", en: "a local AI coding agent built with Ollama, Tauri and Rust." },

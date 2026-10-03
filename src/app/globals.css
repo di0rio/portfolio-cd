@@ -206,10 +206,10 @@
   --heat-4: #ffd23f;
 }
 
-/* README renderizado no blog */
+/* Markdown: README renderizado no blog e estudos de caso em /projetos */
 @layer components {
   .markdown {
-    @apply text-[16px] leading-7 text-foreground;
+    @apply text-[16px] leading-7 text-foreground [overflow-wrap:break-word];
   }
   .markdown > * + * {
     @apply mt-4;
@@ -229,6 +229,9 @@
   .markdown ol { @apply list-decimal pl-5; }
   .markdown li + li { @apply mt-1; }
   .markdown img { @apply max-w-full rounded-lg border; }
+  .markdown figure { @apply my-8; }
+  .markdown figure img { @apply rounded-xl; }
+  .markdown figcaption { @apply mt-2 text-center text-muted-foreground text-sm; }
   .markdown blockquote { @apply border-l pl-4 text-muted-foreground italic; }
   .markdown :not(pre) > code {
     @apply rounded-md bg-accent px-1.5 py-0.5 text-[0.9em];

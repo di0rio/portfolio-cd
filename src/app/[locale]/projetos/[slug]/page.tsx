@@ -1,12 +1,12 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Section } from "@/components/section";
+import { Markdown } from "@/components/markdown";
+import { ProjectMedia } from "@/components/project-media";
 import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
-import { projectImage, projects } from "@/lib/projects";
+import { projectArticle, projectImage, projects } from "@/lib/projects";
 
 export const dynamicParams = false;
 
@@ -38,7 +38,7 @@ export default async function CaseStudy({ params }: PageProps<"/[locale]/projeto
   const { t, locale } = await getT();
   const copy = t.app.projetos;
   const c = copy[project.key];
-  const decisions = [c.d1, c.d2, c.d3, c.d4, ...("d5" in c ? [c.d5] : [])];
+  const article = await projectArticle(project.slug, locale);
   const image = projectImage(project.slug);
   const siblings = [projects[index - 1], projects[index + 1]];
 
@@ -65,48 +65,10 @@ export default async function CaseStudy({ params }: PageProps<"/[locale]/projeto
             )}
           </p>
         )}
-        {image && (
-          <div className="mt-8 overflow-hidden rounded-xl border">
-            {/* Vídeo curto do projeto em uso; com movimento reduzido fica só o print. */}
-            {image.video && (
-              <video aria-label={copy.imageAlt({ name: project.name })} autoPlay className="block h-auto w-full motion-reduce:hidden" loop muted playsInline poster={image.src} preload="metadata" src={image.video} />
-            )}
-            <Image
-              alt={copy.imageAlt({ name: project.name })}
-              className={`block h-auto w-full ${image.video ? "hidden motion-reduce:block" : ""}`}
-              height={1600}
-              quality={90}
-              sizes="(min-width: 640px) 608px, 100vw"
-              src={image.src}
-              width={2560}
-            />
-          </div>
-        )}
+        {image && <ProjectMedia alt={copy.imageAlt({ name: project.name })} play={copy.play} src={image.src} video={image.video} />}
       </header>
 
-      <Section id="problema" title={copy.problem}>
-        <p className="text-pretty">{c.problem}</p>
-      </Section>
-
-      <Section id="decisoes" title={copy.decisions}>
-        <ul className="flex flex-col gap-4">
-          {decisions.map((d) => (
-            <li className="text-pretty" key={d}>
-              {d}
-            </li>
-          ))}
-        </ul>
-      </Section>
-
-      <Section id="stack" title={copy.stack}>
-        <p className="text-muted-foreground">{c.stack}</p>
-      </Section>
-
-      {"next" in c && (
-        <Section id="proximos" title={copy.later}>
-          <p className="text-pretty">{c.next}</p>
-        </Section>
-      )}
+      {article && <Markdown>{article}</Markdown>}
 
       <nav aria-label={copy.nav} className="flex justify-between gap-4 border-t pt-6">
         {siblings.map((p, i) =>

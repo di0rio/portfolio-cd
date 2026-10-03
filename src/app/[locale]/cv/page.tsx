@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { PrintButton } from "@/components/print-button";
 import { alternates, getT } from "@/i18n/server";
+import { localePath } from "@/i18n/path";
 import { getFeaturedRepos } from "@/lib/github";
+import { projects } from "@/lib/projects";
 import { site } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -11,9 +13,11 @@ export async function generateMetadata(): Promise<Metadata> {
 
 // Currículo em texto puro e uma coluna (lê bem em ATS). "Salvar em PDF" usa a impressão do navegador.
 export default async function Cv() {
-  const { t } = await getT();
+  const { t, locale } = await getT();
   const copy = t.app;
-  const repos = await getFeaturedRepos();
+  // Repositório que já aparece em "projetos" não se repete em "open source".
+  const shown = new Set(projects.map((p) => p.repo?.toLowerCase()));
+  const repos = (await getFeaturedRepos()).filter((r) => !shown.has(r.url.toLowerCase()));
   const strip = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
   const contacts = [
     site.email && { href: `mailto:${site.email}`, text: site.email },
@@ -49,20 +53,28 @@ export default async function Cv() {
         </p>
       </Section>
 
+      {/* Só cargo, empresa e período: o que eu faço lá dentro não é público. */}
       <Section title={copy.experience.title}>
         <div className="flex flex-wrap items-baseline justify-between gap-x-4">
           <p className="font-medium">
-            {site.company.name} · {copy.experience.role}
+            Loopvet / {site.company.name} · {copy.experience.role}
           </p>
           <p className="text-muted-foreground text-sm">{copy.experience.current}</p>
         </div>
-        <ul className="mt-2 flex list-disc flex-col gap-1 pl-5 text-pretty">
-          <li>
-            <span className="font-medium">Loopvet</span>: {copy.projects.loopvet}
-          </li>
-          <li>
-            <span className="font-medium">Domus</span>: {copy.projects.domus}
-          </li>
+        <p className="mt-1 text-pretty text-muted-foreground">{copy.experience.path}</p>
+      </Section>
+
+      <Section title={copy.projects.title}>
+        <ul className="flex flex-col gap-3">
+          {projects.map((p) => (
+            <li className="break-inside-avoid" key={p.slug}>
+              <p className="font-medium">{p.name}</p>
+              <p className="text-pretty text-muted-foreground">{copy.projects[p.key]}</p>
+              <a className="text-sm underline decoration-muted-foreground/40 underline-offset-4 hover:decoration-brand" href={site.url + localePath(locale, `/projetos/${p.slug}`)}>
+                {strip(site.url + localePath(locale, `/projetos/${p.slug}`))}
+              </a>
+            </li>
+          ))}
         </ul>
       </Section>
 

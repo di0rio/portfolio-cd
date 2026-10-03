@@ -35,8 +35,8 @@ export default {
   how4: { pt: "entrega final com código e deploy.", en: "final delivery with the code and the deploy." },
   examplesTitle: { pt: "exemplos", en: "examples" },
   examplesHint: {
-    pt: "o agenda-vet é o mais próximo de um app de clínica.",
-    en: "agenda-vet is the closest thing to a clinic app.",
+    pt: "cada um tem um estudo de caso explicando o que faz e como funciona por trás.",
+    en: "each one has a case study explaining what it does and how it works under the hood.",
   },
   ctaTitle: { pt: "vamos conversar", en: "let's talk" },
   cta: {

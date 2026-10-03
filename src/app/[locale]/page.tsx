@@ -29,12 +29,13 @@ export default async function Home() {
 
   return (
     <>
-      {/* Quem é: o cartoon como adesivo + nome e cargo, pequeno e direto. */}
+      {/* Quem é: o cartoon como adesivo + nome e cargo, pequeno e direto.
+          O fundo escuro no <img> tapa a fresta clara que o antialias da rotação deixa entre borda e imagem. */}
       <section className="flex items-center gap-4">
         <div className="relative shrink-0">
           <Image
             alt=""
-            className="size-16 -rotate-3 rounded-2xl border-2 border-black shadow-[4px_4px_0_var(--brand)] transition-transform duration-200 ease-out motion-safe:hover:rotate-0"
+            className="size-16 -rotate-3 rounded-2xl border-2 border-black bg-[#1c1c1c] shadow-[4px_4px_0_var(--brand)] transition-transform duration-200 ease-out motion-safe:hover:rotate-0"
             height={64}
             priority
             src="/avatar.svg"
