@@ -247,6 +247,16 @@
     background: --alpha(var(--brand) / 45%);
     color: var(--foreground);
   }
+  /* Tailwind v4 tirou o pointer dos botões; tudo que é clicável volta a ter. */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [role="option"],
+  [role="tab"],
+  summary,
+  label[for],
+  select {
+    cursor: pointer;
+  }
   html {
     caret-color: var(--brand-foreground);
     scrollbar-color: --alpha(var(--muted-foreground) / 35%) transparent;

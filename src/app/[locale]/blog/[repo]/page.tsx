@@ -1,3 +1,4 @@
+import { ArrowLeftIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -23,7 +24,8 @@ export default async function Post({ params }: PageProps<"/[locale]/blog/[repo]"
 
   return (
     <article>
-      <Link className="text-muted-foreground text-sm hover:text-foreground" href={localePath(locale, "/blog")}>
+      <Link className="inline-flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground" href={localePath(locale, "/blog")}>
+        <ArrowLeftIcon aria-hidden="true" className="size-3.5" />
         {copy.back}
       </Link>
 

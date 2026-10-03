@@ -19,7 +19,10 @@ export const projects: readonly Project[] = [
   { slug: "sentinel-forge", name: "sentinel-forge", key: "sentinel", repo: "https://github.com/di0rio/sentinel-forge" },
 ];
 
-/** Captura de tela opcional: só existe se `public/projects/<slug>.png` estiver no disco (checado no build). */
+const has = (file: string) => existsSync(join(process.cwd(), "public", "projects", file));
+
+/** Mídia opcional (checada no build): print `<slug>.webp` em 2x e, se houver, vídeo `<slug>.mp4`. */
 export function projectImage(slug: string) {
-  return existsSync(join(process.cwd(), "public", "projects", `${slug}.png`)) ? `/projects/${slug}.png` : undefined;
+  if (!has(`${slug}.webp`)) return undefined;
+  return { src: `/projects/${slug}.webp`, video: has(`${slug}.mp4`) ? `/projects/${slug}.mp4` : undefined };
 }

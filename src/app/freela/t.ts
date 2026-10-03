@@ -43,6 +43,6 @@ export default {
     pt: "me conta o que você quer construir e eu respondo com o que dá pra fazer.",
     en: "tell me what you want to build and i'll reply with what's doable.",
   },
-  homeLink: { pt: "faz freela? trabalhe comigo →", en: "freelance work? work with me →" },
+  homeLink: { pt: "faz freela? trabalhe comigo", en: "freelance work? work with me" },
   footerLink: { pt: "trabalhe comigo", en: "work with me" },
 };

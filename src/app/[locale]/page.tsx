@@ -1,4 +1,4 @@
-import { ArrowUpRightIcon } from "lucide-react";
+import { ArrowRightIcon, ArrowUpRightIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,13 +12,7 @@ import { site } from "@/lib/site";
 
 // Lista curada: o trabalho que eu quero mostrar, com descrição escrita por mim (não a do GitHub).
 // Quem tem estudo de caso (lib/projects) ganha link interno; o "ver ↗" aponta pro site ou repositório.
-const projectItems = [
-  { name: "loopvet", key: "loopvet" },
-  { name: "domus", key: "domus" },
-  ...projects.map((p) => ({ name: p.name, key: p.key, slug: p.slug, href: p.live ?? p.repo })),
-] as const;
-
-const atWork = new Set(["loopvet", "domus"]);
+const projectItems = projects.map((p) => ({ name: p.name, key: p.key, slug: p.slug, href: p.live ?? p.repo }));
 
 export async function generateMetadata(): Promise<Metadata> {
   const { locale } = await getT();
@@ -43,7 +37,8 @@ export default async function Home() {
             className="size-16 -rotate-3 rounded-2xl border-2 border-black shadow-[4px_4px_0_var(--brand)] transition-transform duration-200 ease-out motion-safe:hover:rotate-0"
             height={64}
             priority
-            src={`https://github.com/${site.github}.png?size=128`}
+            src="/avatar.svg"
+            unoptimized
             width={64}
           />
           <span
@@ -75,10 +70,24 @@ export default async function Home() {
         </div>
         <div className="mt-6">
           <ContactLinks labels={nav} locale={locale} />
-          <Link className="mt-4 inline-block text-muted-foreground text-sm underline decoration-muted-foreground/40 underline-offset-4 transition-[text-decoration-color] duration-150 hover:text-foreground hover:decoration-brand" href={localePath(locale, "/freela")}>
+          <Link className="group/freela mt-4 inline-flex items-center gap-1 text-muted-foreground text-sm transition-colors duration-150 hover:text-foreground" href={localePath(locale, "/freela")}>
             {copy.freela.homeLink}
+            <ArrowRightIcon aria-hidden="true" className="size-3.5 transition-transform duration-200 ease-out group-hover/freela:text-brand-foreground motion-safe:group-hover/freela:translate-x-0.5" />
           </Link>
         </div>
+      </Section>
+
+      <Section id="experiencia" title={copy.experience.professional}>
+        <p className="flex flex-wrap items-baseline gap-x-2">
+          <span className="text-muted-foreground text-sm tabular-nums">{copy.experience.current}</span>
+          <span aria-hidden="true" className="text-muted-foreground">
+            ·
+          </span>
+          <a className="underline decoration-muted-foreground/40 underline-offset-4 transition-[text-decoration-color] duration-150 hover:decoration-brand" href={site.company.url} rel="noopener noreferrer" target="_blank">
+            Loopvet / {site.company.name}
+          </a>
+        </p>
+        <p className="text-muted-foreground">{copy.experience.path}</p>
       </Section>
 
       <Section
@@ -98,20 +107,16 @@ export default async function Home() {
       >
         <ul className="flex flex-col gap-6">
           {projectItems.map((p) => (
-            // Nome leva pro estudo de caso (quando tem); "ver ↗" abre o site/repo. Hover no item acende o link e a seta sobe.
+            // Nome leva pro estudo de caso; "ver ↗" abre o site/repo. Hover no item acende o link e a seta sobe.
             <li className="group/item" key={p.key}>
               <p className="flex items-baseline justify-between gap-4">
-                {"slug" in p ? (
-                  <Link
-                    className="underline decoration-muted-foreground/40 underline-offset-4 transition-[text-decoration-color] duration-150 hover:decoration-brand"
-                    href={localePath(locale, `/projetos/${p.slug}`)}
-                  >
-                    {p.name}
-                  </Link>
-                ) : (
-                  <span>{p.name}</span>
-                )}
-                {"href" in p && p.href ? (
+                <Link
+                  className="underline decoration-muted-foreground/40 underline-offset-4 transition-[text-decoration-color] duration-150 hover:decoration-brand"
+                  href={localePath(locale, `/projetos/${p.slug}`)}
+                >
+                  {p.name}
+                </Link>
+                {p.href && (
                   <a
                     aria-label={copy.repos.openLabel({ name: p.name })}
                     className="inline-flex shrink-0 items-center gap-0.5 rounded-md text-muted-foreground text-sm outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-brand group-hover/item:text-foreground"
@@ -125,12 +130,6 @@ export default async function Home() {
                       className="size-3.5 transition-[translate,color] duration-200 ease-out group-hover/item:text-brand-foreground motion-safe:group-hover/item:translate-x-0.5 motion-safe:group-hover/item:-translate-y-0.5"
                     />
                   </a>
-                ) : (
-                  !("slug" in p) && (
-                    <span className="shrink-0 text-muted-foreground text-sm">
-                      {atWork.has(p.key) ? copy.projects.atWork : copy.projects.soon}
-                    </span>
-                  )
                 )}
               </p>
               <p className="text-muted-foreground">{copy.projects[p.key]}</p>
@@ -156,8 +155,9 @@ export default async function Home() {
       {posts.length > 0 && (
         <Section
           action={
-            <Link className="text-muted-foreground text-sm transition-colors duration-150 hover:text-foreground" href={localePath(locale, "/blog")}>
+            <Link className="inline-flex items-center gap-1 text-muted-foreground text-sm transition-colors duration-150 hover:text-foreground" href={localePath(locale, "/blog")}>
               {copy.writing.all}
+              <ArrowRightIcon aria-hidden="true" className="size-3.5" />
             </Link>
           }
           id="escrita"

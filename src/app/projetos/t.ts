@@ -1,6 +1,6 @@
 export default {
   caseStudy: { pt: "estudo de caso", en: "case study" },
-  back: { pt: "← projetos", en: "← projects" },
+  back: { pt: "projetos", en: "projects" },
   problem: { pt: "o problema", en: "the problem" },
   decisions: { pt: "o que eu fiz", en: "what i did" },
   stack: { pt: "stack", en: "stack" },

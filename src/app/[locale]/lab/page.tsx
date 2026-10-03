@@ -77,6 +77,7 @@ export default async function Lab() {
             title: copy.compare.cardTitle,
             meta: copy.compare.cardMeta,
             action: copy.compare.cardAction,
+            secondary: copy.compare.cardSecondary,
           }}
         />
       </Experiment>

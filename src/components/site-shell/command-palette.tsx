@@ -57,6 +57,15 @@ type Props = {
 
 const noop = () => () => {};
 
+/** Só no cliente dá pra saber a plataforma; no servidor e na hidratação vale Ctrl. */
+export function useIsMac() {
+  return useSyncExternalStore(
+    noop,
+    () => /Mac|iPhone|iPad/.test(navigator.platform),
+    () => false,
+  );
+}
+
 /**
  * Paleta de comandos global (⌘K / Ctrl+K): páginas, posts e ações num campo só. O gatilho fica no
  * header; o atalho vale na página inteira. O campo é um `input`, então o easter egg do `cd ..` ignora o que se digita aqui.
@@ -68,12 +77,7 @@ export function CommandPalette({ locale, copy, projects, posts, github }: Props)
   const [copied, setCopied] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const { contains } = Autocomplete.useFilter({ sensitivity: "base" });
-  // Só no cliente dá pra saber a plataforma; no servidor e na hidratação vale Ctrl.
-  const mac = useSyncExternalStore(
-    noop,
-    () => /Mac|iPhone|iPad/.test(navigator.platform),
-    () => false,
-  );
+  const mac = useIsMac();
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {

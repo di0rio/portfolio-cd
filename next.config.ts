@@ -37,6 +37,7 @@ const nextConfig: NextConfig = {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },
   images: {
+    qualities: [75, 90], // 90 só nos prints dos estudos de caso
     remotePatterns: [
       { protocol: "https", hostname: "raw.githubusercontent.com" },
       { protocol: "https", hostname: "github.com" },

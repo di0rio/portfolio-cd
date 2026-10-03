@@ -1,3 +1,4 @@
+import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -44,7 +45,8 @@ export default async function CaseStudy({ params }: PageProps<"/[locale]/projeto
   return (
     <>
       <header>
-        <Link className="text-muted-foreground text-sm hover:text-foreground" href={localePath(locale, "/#projetos")}>
+        <Link className="inline-flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground" href={localePath(locale, "/#projetos")}>
+          <ArrowLeftIcon aria-hidden="true" className="size-3.5" />
           {copy.back}
         </Link>
         <h1 className="mt-6 mb-1.5 font-bold font-heading text-[22px] leading-tight">{project.name}</h1>
@@ -64,14 +66,21 @@ export default async function CaseStudy({ params }: PageProps<"/[locale]/projeto
           </p>
         )}
         {image && (
-          <Image
-            alt={copy.imageAlt({ name: project.name })}
-            className="mt-8 h-auto w-full rounded-xl border"
-            height={0}
-            sizes="(min-width: 640px) 608px, 100vw"
-            src={image}
-            width={0}
-          />
+          <div className="mt-8 overflow-hidden rounded-xl border">
+            {/* Vídeo curto do projeto em uso; com movimento reduzido fica só o print. */}
+            {image.video && (
+              <video aria-label={copy.imageAlt({ name: project.name })} autoPlay className="block h-auto w-full motion-reduce:hidden" loop muted playsInline poster={image.src} preload="metadata" src={image.video} />
+            )}
+            <Image
+              alt={copy.imageAlt({ name: project.name })}
+              className={`block h-auto w-full ${image.video ? "hidden motion-reduce:block" : ""}`}
+              height={1600}
+              quality={90}
+              sizes="(min-width: 640px) 608px, 100vw"
+              src={image.src}
+              width={2560}
+            />
+          </div>
         )}
       </header>
 
@@ -107,7 +116,11 @@ export default async function CaseStudy({ params }: PageProps<"/[locale]/projeto
               href={localePath(locale, `/projetos/${p.slug}`)}
               key={p.slug}
             >
-              <span className="text-muted-foreground text-sm">{i === 0 ? `← ${copy.prev}` : `${copy.next} →`}</span>
+              <span className={`inline-flex items-center gap-1 text-muted-foreground text-sm ${i === 1 ? "justify-end" : ""}`}>
+                {i === 0 && <ArrowLeftIcon aria-hidden="true" className="size-3.5" />}
+                {i === 0 ? copy.prev : copy.next}
+                {i === 1 && <ArrowRightIcon aria-hidden="true" className="size-3.5" />}
+              </span>
               <span className="underline decoration-muted-foreground/40 underline-offset-4 transition-[text-decoration-color] duration-150 group-hover/nav:decoration-brand">
                 {p.name}
               </span>

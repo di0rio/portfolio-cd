@@ -1,9 +1,11 @@
 "use client";
 
+import { useIsMac } from "@/components/site-shell/command-palette";
 import { Kbd } from "@/components/ui/kbd";
 
 /** A paleta é global; aqui só aparece o atalho e um botão que o dispara (o mesmo Ctrl+K, sem acoplar os componentes). */
 export function PaletteDemo({ label }: { label: string }) {
+  const mac = useIsMac();
   return (
     <div className="flex items-center gap-3">
       <button
@@ -13,9 +15,7 @@ export function PaletteDemo({ label }: { label: string }) {
       >
         {label}
       </button>
-      <span className="flex items-center gap-1.5 text-muted-foreground text-sm">
-        <Kbd>⌘ K</Kbd>/<Kbd>Ctrl K</Kbd>
-      </span>
+      <Kbd>{mac ? "⌘K" : "Ctrl K"}</Kbd>
     </div>
   );
 }

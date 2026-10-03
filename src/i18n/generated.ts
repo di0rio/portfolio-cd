@@ -26,7 +26,7 @@ export const translations = {
 				title: "blog",
 				intro: "posts gerados automaticamente a partir dos meus repositórios públicos.",
 				empty: "nenhum post ainda. assim que eu publicar um repositório com o tópico portfolio, ele aparece aqui.",
-				back: "← voltar pro blog",
+				back: "voltar pro blog",
 				repo: "ver repositório",
 				live: "ver no ar",
 				stars: (v: { count: string }) => `${v.count} estrelas`,
@@ -58,7 +58,7 @@ export const translations = {
 				examplesHint: "o agenda-vet é o mais próximo de um app de clínica.",
 				ctaTitle: "vamos conversar",
 				cta: "me conta o que você quer construir e eu respondo com o que dá pra fazer.",
-				homeLink: "faz freela? trabalhe comigo →",
+				homeLink: "faz freela? trabalhe comigo",
 				footerLink: "trabalhe comigo",
 			},
 			lab: {
@@ -140,13 +140,14 @@ export const translations = {
 				},
 				compare: {
 					title: "antes e depois",
-					desc: "o mesmo card duas vezes, o de cima recortado por clip-path. arraste a alça ou use as setas (shift anda mais).",
+					desc: "o mesmo card cru (estilos padrão) e polido (tokens, espaçamento, sombra), o de cima recortado por clip-path. arraste a alça ou use as setas (shift anda mais).",
 					label: "Comparar antes e depois",
 					before: "antes",
 					after: "depois",
 					cardTitle: "relatório mensal",
 					cardMeta: "atualizado há 2 horas",
 					cardAction: "abrir",
+					cardSecondary: "arquivar",
 				},
 			},
 			log: {
@@ -159,7 +160,7 @@ export const translations = {
 			},
 			projetos: {
 				caseStudy: "estudo de caso",
-				back: "← projetos",
+				back: "projetos",
 				problem: "o problema",
 				decisions: "o que eu fiz",
 				stack: "stack",
@@ -240,8 +241,6 @@ export const translations = {
 				converter: "conversores de arquivo que rodam no navegador. nada sai do seu computador.",
 				cdai: "agente de código com IA que roda local, com Ollama, Tauri e Rust.",
 				sentinel: "detecção como código, em Go: regras em YAML testadas contra logs reais.",
-				atWork: "na loopscape",
-				soon: "em breve",
 				all: "todos os repositórios",
 				contributions: (v: { count: string }) => `${v.count} contribuições no último ano`,
 			},
@@ -255,14 +254,14 @@ export const translations = {
 			},
 			repos: {
 				title: "em destaque no github",
-				all: "ver todos →",
+				all: "ver todos",
 				stars: (v: { count: string }) => `${v.count} estrelas`,
 				open: "ver",
 				openLabel: (v: { name: string }) => `ver ${v.name}`,
 			},
 			writing: {
 				title: "escrita",
-				all: "ver todos →",
+				all: "ver todos",
 			},
 			notFound: {
 				path: "pagina-que-nao-existe",
@@ -273,8 +272,10 @@ export const translations = {
 			},
 			experience: {
 				title: "experiência",
-				current: "atual",
+				current: "mar 2026 – atual",
 				role: "desenvolvedor front-end júnior",
+				professional: "profissional",
+				path: "de estagiário front-end a desenvolvedor front-end júnior",
 			},
 		},
 		components: {
@@ -359,7 +360,7 @@ export const translations = {
 				title: "blog",
 				intro: "posts generated automatically from my public repositories.",
 				empty: "no posts yet. as soon as i publish a repository tagged portfolio, it shows up here.",
-				back: "← back to blog",
+				back: "back to blog",
 				repo: "view repository",
 				live: "see it live",
 				stars: (v: { count: string }) => `${v.count} stars`,
@@ -391,7 +392,7 @@ export const translations = {
 				examplesHint: "agenda-vet is the closest thing to a clinic app.",
 				ctaTitle: "let's talk",
 				cta: "tell me what you want to build and i'll reply with what's doable.",
-				homeLink: "freelance work? work with me →",
+				homeLink: "freelance work? work with me",
 				footerLink: "work with me",
 			},
 			lab: {
@@ -473,13 +474,14 @@ export const translations = {
 				},
 				compare: {
 					title: "before and after",
-					desc: "the same card twice, the top one cut by clip-path. drag the handle or use the arrow keys (shift moves further).",
+					desc: "the same card raw (default styles) and polished (tokens, spacing, shadow), the top one cut by clip-path. drag the handle or use the arrow keys (shift moves further).",
 					label: "Compare before and after",
 					before: "before",
 					after: "after",
 					cardTitle: "monthly report",
 					cardMeta: "updated 2 hours ago",
 					cardAction: "open",
+					cardSecondary: "archive",
 				},
 			},
 			log: {
@@ -492,7 +494,7 @@ export const translations = {
 			},
 			projetos: {
 				caseStudy: "case study",
-				back: "← projects",
+				back: "projects",
 				problem: "the problem",
 				decisions: "what i did",
 				stack: "stack",
@@ -573,8 +575,6 @@ export const translations = {
 				converter: "file converters that run in the browser. nothing leaves your computer.",
 				cdai: "a local AI coding agent built with Ollama, Tauri and Rust.",
 				sentinel: "detection-as-code in Go: YAML rules tested against real logs.",
-				atWork: "at loopscape",
-				soon: "soon",
 				all: "all repositories",
 				contributions: (v: { count: string }) => `${v.count} contributions in the last year`,
 			},
@@ -588,14 +588,14 @@ export const translations = {
 			},
 			repos: {
 				title: "featured on github",
-				all: "see all →",
+				all: "see all",
 				stars: (v: { count: string }) => `${v.count} stars`,
 				open: "view",
 				openLabel: (v: { name: string }) => `view ${v.name}`,
 			},
 			writing: {
 				title: "writing",
-				all: "see all →",
+				all: "see all",
 			},
 			notFound: {
 				path: "page-that-doesnt-exist",
@@ -606,8 +606,10 @@ export const translations = {
 			},
 			experience: {
 				title: "experience",
-				current: "current",
+				current: "mar 2026 – present",
 				role: "junior front-end developer",
+				professional: "professional",
+				path: "from front-end intern to junior front-end developer",
 			},
 		},
 		components: {

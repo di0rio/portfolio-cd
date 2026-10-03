@@ -108,8 +108,8 @@ export default {
   compare: {
     title: { pt: "antes e depois", en: "before and after" },
     desc: {
-      pt: "o mesmo card duas vezes, o de cima recortado por clip-path. arraste a alça ou use as setas (shift anda mais).",
-      en: "the same card twice, the top one cut by clip-path. drag the handle or use the arrow keys (shift moves further).",
+      pt: "o mesmo card cru (estilos padrão) e polido (tokens, espaçamento, sombra), o de cima recortado por clip-path. arraste a alça ou use as setas (shift anda mais).",
+      en: "the same card raw (default styles) and polished (tokens, spacing, shadow), the top one cut by clip-path. drag the handle or use the arrow keys (shift moves further).",
     },
     label: { pt: "Comparar antes e depois", en: "Compare before and after" },
     before: { pt: "antes", en: "before" },
@@ -117,5 +117,6 @@ export default {
     cardTitle: { pt: "relatório mensal", en: "monthly report" },
     cardMeta: { pt: "atualizado há 2 horas", en: "updated 2 hours ago" },
     cardAction: { pt: "abrir", en: "open" },
+    cardSecondary: { pt: "arquivar", en: "archive" },
   },
 };

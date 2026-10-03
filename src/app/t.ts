@@ -36,8 +36,6 @@ export default {
       pt: "detecção como código, em Go: regras em YAML testadas contra logs reais.",
       en: "detection-as-code in Go: YAML rules tested against real logs.",
     },
-    atWork: { pt: "na loopscape", en: "at loopscape" },
-    soon: { pt: "em breve", en: "soon" },
     all: { pt: "todos os repositórios", en: "all repositories" },
     contributions: { pt: "{count} contribuições no último ano", en: "{count} contributions in the last year" },
   },
@@ -52,14 +50,14 @@ export default {
   },
   repos: {
     title: { pt: "em destaque no github", en: "featured on github" },
-    all: { pt: "ver todos →", en: "see all →" },
+    all: { pt: "ver todos", en: "see all" },
     stars: { pt: "{count} estrelas", en: "{count} stars" },
     open: { pt: "ver", en: "view" },
     openLabel: { pt: "ver {name}", en: "view {name}" },
   },
   writing: {
     title: { pt: "escrita", en: "writing" },
-    all: { pt: "ver todos →", en: "see all →" },
+    all: { pt: "ver todos", en: "see all" },
   },
   notFound: {
     path: { pt: "pagina-que-nao-existe", en: "page-that-doesnt-exist" },
@@ -73,7 +71,9 @@ export default {
   },
   experience: {
     title: { pt: "experiência", en: "experience" },
-    current: { pt: "atual", en: "current" },
+    current: { pt: "mar 2026 – atual", en: "mar 2026 – present" },
     role: { pt: "desenvolvedor front-end júnior", en: "junior front-end developer" },
+    professional: { pt: "profissional", en: "professional" },
+    path: { pt: "de estagiário front-end a desenvolvedor front-end júnior", en: "from front-end intern to junior front-end developer" },
   },
 };
