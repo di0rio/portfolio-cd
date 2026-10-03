@@ -34,7 +34,7 @@ export default async function Blog() {
           {posts.map((post, i) => (
             <li className="rise" key={post.slug} style={{ "--i": Math.min(i, 8) } as CSSProperties}>
               <Link
-                className="group -mx-2 grid gap-x-6 gap-y-0.5 rounded-lg px-2 py-3 outline-none focus-visible:ring-2 focus-visible:ring-brand sm:grid-cols-[7.5rem_1fr]"
+                className="group -mx-2 grid gap-x-6 gap-y-0.5 rounded-lg px-2 py-3 outline-none focus-visible:ring-2 focus-visible:ring-brand sm:grid-cols-[7.5rem_1fr_auto]"
                 href={localePath(locale, `/blog/${post.slug}`)}
               >
                 <span className="flex flex-wrap gap-x-2 whitespace-nowrap pt-0.5 text-muted-foreground text-sm tabular-nums sm:block">
@@ -44,14 +44,10 @@ export default async function Blog() {
                 <span className="min-w-0">
                   <span className="block">
                     <ViewTransition default="none" name={`post-title-${post.slug}`} share="morph">
-                      <span className="font-medium text-[17px] underline decoration-transparent underline-offset-4 transition-[text-decoration-color] duration-150 ease-[ease] group-hover:decoration-brand group-focus-visible:decoration-brand">
+                      <span className="font-medium text-base underline decoration-transparent underline-offset-4 transition-[text-decoration-color] duration-150 ease-[ease] group-hover:decoration-brand group-focus-visible:decoration-brand">
                         {post.title}
                       </span>
                     </ViewTransition>
-                    <ArrowRightIcon
-                      aria-hidden="true"
-                      className="ml-1.5 inline size-3.5 align-[-2px] text-muted-foreground transition-transform duration-150 ease-out group-hover:translate-x-0.5"
-                    />
                   </span>
                   {post.description && <span className="mt-0.5 block text-muted-foreground text-[14.5px]">{post.description}</span>}
                   {post.topics.length > 0 && (
@@ -64,6 +60,11 @@ export default async function Blog() {
                     </span>
                   )}
                 </span>
+                {/* Seta em coluna própria: no texto ela caía sozinha pra linha de baixo quando o título enchia a linha. */}
+                <ArrowRightIcon
+                  aria-hidden="true"
+                  className="mt-1.5 size-3.5 text-muted-foreground transition-transform duration-150 ease-out group-hover:translate-x-0.5 max-sm:hidden"
+                />
               </Link>
             </li>
           ))}

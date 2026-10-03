@@ -52,9 +52,10 @@ export default async function RootLayout({ children }: LayoutProps<"/[locale]">)
       <body className="flex min-h-full flex-col bg-background text-[15px] text-foreground leading-[1.65]">
         <ThemeProvider>
           {/* Uma coluna só (640px): header, conteúdo e rodapé alinhados no mesmo eixo. */}
-          <header className="mx-auto flex w-full max-w-[640px] flex-wrap items-center justify-between gap-x-4 gap-y-3 px-4 pt-6 print:hidden">
+          {/* Grade de 3 colunas: o menu fica sempre no centro, não importa o tamanho do prompt (`~ $` vs `~/blog $`). */}
+          <header className="mx-auto grid w-full max-w-[640px] grid-cols-[1fr_auto] items-center gap-x-4 gap-y-3 px-4 pt-6 sm:grid-cols-[1fr_auto_1fr] print:hidden">
             <SiteNav copy={shell.nav} locale={locale} />
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 justify-self-end">
               <LocaleSwitch label={shell.language.label} locale={locale} />
               <ThemeSwitch labels={shell.theme} />
               <CommandPalette

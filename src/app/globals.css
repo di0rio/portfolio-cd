@@ -289,7 +289,17 @@
   html {
     caret-color: var(--brand-foreground);
     scrollbar-color: --alpha(var(--muted-foreground) / 35%) transparent;
+    /* Espaço da barra de rolagem sempre reservado: página curta e longa têm a mesma largura (nada pula). */
+    scrollbar-gutter: stable;
+    /* O fundo no <html> evita o quadro branco entre um documento e outro (ex.: troca pt/en). */
+    background: var(--background);
   }
+}
+
+/* Troca de idioma muda o segmento raiz e o Next recarrega a página: a transição entre documentos
+   segura a página antiga na tela até a nova pintar, em vez de piscar em branco. */
+@view-transition {
+  navigation: auto;
 }
 
 /* Mídia que vaza da coluna de texto (608px) até 1024px, centrada, sem passar da tela. */
