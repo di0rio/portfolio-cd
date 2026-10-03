@@ -151,4 +151,39 @@ export default {
       en: "tauri · rust · next.js (static export) · tailwind · base ui · bun · ollama",
     },
   },
+
+  sentinel: {
+    intro: {
+      pt: "motor de detecção como código: transforma eventos de segurança em detecções explicáveis, testáveis e reproduzíveis.",
+      en: "a detection-as-code engine: turns security events into explainable, testable and reproducible detections.",
+    },
+    problem: {
+      pt: "lógica de detecção costuma morar em dashboard e query solta: difícil de revisar, de testar e impossível de reproduzir meses depois. é o projeto onde eu estudo cyber security na prática.",
+      en: "detection logic usually lives in dashboards and ad-hoc queries: hard to review, hard to test and impossible to reproduce months later. it's the project where i study cyber security hands-on.",
+    },
+    d1: {
+      pt: "regras são YAML versionado, revisadas em pull request e validadas antes de rodar. a linguagem é declarativa e restrita: sem expressão, template ou execução de código, e campo desconhecido falha.",
+      en: "rules are versioned YAML, reviewed in pull requests and validated before they run. the format is a restricted declarative DSL: no expressions, templates or code execution, and unknown fields fail.",
+    },
+    d2: {
+      pt: "determinístico: as janelas usam o horário do evento, então rodar os mesmos eventos de novo sempre dá o mesmo resultado. cada regra tem fixture e teste.",
+      en: "deterministic: windows use event time, so replaying the same events always gives the same result. every rule has a fixture and a test.",
+    },
+    d3: {
+      pt: "lê logs reais: parsers de auth.log do sshd e de access log do nginx viram eventos normalizados. log é entrada não confiável: linha com limite de tamanho, padrão ancorado, IP validado e fuzz test.",
+      en: "reads real logs: parsers for sshd auth.log and nginx access logs produce normalized events. logs are untrusted input: length-bounded lines, anchored patterns, validated IPs and fuzz tests.",
+    },
+    d4: {
+      pt: "toda detecção se explica: regra e versão, quantos eventos, janela, limiar e a técnica do MITRE ATT&CK. um ataque de mil tentativas vira uma detecção, não cem.",
+      en: "every detection explains itself: rule and version, how many events, window, threshold and the MITRE ATT&CK technique. a 1,000-attempt attack is one detection, not a hundred.",
+    },
+    next: {
+      pt: "próximo no roadmap: regras de sequência e correlação, depois alertas com deduplicação e supressão.",
+      en: "next on the roadmap: sequence and correlation rules, then alerts with deduplication and suppression.",
+    },
+    stack: {
+      pt: "go · cobra · yaml · github actions (testes, lint, govulncheck, gitleaks)",
+      en: "go · cobra · yaml · github actions (tests, lint, govulncheck, gitleaks)",
+    },
+  },
 };

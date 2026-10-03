@@ -32,6 +32,10 @@ export default {
     cdui: { pt: "minha biblioteca de componentes, medida em bytes.", en: "my component library, measured in bytes." },
     converter: { pt: "conversores de arquivo que rodam no navegador. nada sai do seu computador.", en: "file converters that run in the browser. nothing leaves your computer." },
     cdai: { pt: "agente de código com IA que roda local, com Ollama, Tauri e Rust.", en: "a local AI coding agent built with Ollama, Tauri and Rust." },
+    sentinel: {
+      pt: "detecção como código, em Go: regras em YAML testadas contra logs reais.",
+      en: "detection-as-code in Go: YAML rules tested against real logs.",
+    },
     atWork: { pt: "na loopscape", en: "at loopscape" },
     soon: { pt: "em breve", en: "soon" },
     all: { pt: "todos os repositórios", en: "all repositories" },
