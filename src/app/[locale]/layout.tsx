@@ -9,6 +9,7 @@ import { CommandPalette } from "@/components/site-shell/command-palette";
 import { EasterEgg } from "@/components/site-shell/easter-egg";
 import { LocaleSwitch } from "@/components/site-shell/locale-switch";
 import { SiteNav } from "@/components/site-shell/site-nav";
+import { TerminalHost } from "@/components/site-shell/terminal-host";
 import { Kbd } from "@/components/ui/kbd";
 import { ThemeProvider } from "@/components/site-shell/theme-provider";
 import { ThemeSwitch } from "@/components/site-shell/theme-switch";
@@ -95,6 +96,7 @@ export default async function RootLayout({ children }: LayoutProps<"/[locale]">)
             </span>
           </footer>
           <EasterEgg copy={shell.egg} locale={locale} slugs={projects.map((p) => p.slug)} />
+          <TerminalHost locale={locale} posts={posts} projects={projects.map(({ slug, name, live, repo }) => ({ slug, name, live, repo }))} />
           <Analytics />
           <ClickTracker />
         </ThemeProvider>

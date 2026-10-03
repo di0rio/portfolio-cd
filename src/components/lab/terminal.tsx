@@ -4,18 +4,16 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { type Locale, translations } from "@/i18n/generated";
 import { localePath } from "@/i18n/path";
+import { sections } from "@/components/site-shell/shell-routes";
 
 const places: Record<string, string> = {
   "..": "/",
   "~": "/",
   "/": "/",
-  projetos: "/#projetos",
+  ...sections,
   projects: "/#projetos",
   experiencia: "/#experiencia",
   experience: "/#experiencia",
-  blog: "/blog",
-  lab: "/lab",
-  cv: "/cv",
 };
 
 type Line = { cmd: string; out: string[] };

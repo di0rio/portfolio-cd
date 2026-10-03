@@ -5,29 +5,23 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { Locale } from "@/i18n/generated";
 import { localePath } from "@/i18n/path";
+import { Kbd } from "@/components/ui/kbd";
+import { useIsMac } from "./command-palette";
+import { sections } from "./shell-routes";
 
-type Copy = { title: string; intro: string; dismiss: string };
+type Copy = { title: string; intro: string; dismiss: string; terminal: string };
 
 const HINT_MS = 7000;
 
 // Digitar `cd ..` (ou `cd ~`) em qualquer lugar volta pro começo; `cd blog`, `cd lab`... abrem a página;
 // `cd <projeto>` abre o estudo de caso; `help` (ou `ls`) lista os comandos.
-const pages: Record<string, string> = {
-  "..": "/",
-  "~": "/",
-  blog: "/blog",
-  lab: "/lab",
-  cv: "/cv",
-  freela: "/freela",
-  agora: "/agora",
-  log: "/log",
-  projetos: "/#projetos",
-};
+const pages: Record<string, string> = { "..": "/", "~": "/", ...sections };
 // Os slugs chegam por prop: `lib/projects` usa `node:fs`, que não entra no bundle do cliente.
 const hintNames = Object.keys(pages).filter((n) => n !== "~");
 
 export function EasterEgg({ locale, copy, slugs }: { locale: Locale; copy: Copy; slugs: string[] }) {
   const router = useRouter();
+  const mac = useIsMac();
   const [hint, setHint] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
@@ -49,9 +43,10 @@ export function EasterEgg({ locale, copy, slugs }: { locale: Locale; copy: Copy;
         return;
       }
       if (e.key.length !== 1 || e.ctrlKey || e.metaKey || e.altKey) return;
-      // Campos de texto e a paleta de comandos (um diálogo) ficam fora do jogo.
+      // Campos de texto (inclusive o prompt do terminal) e diálogos modais ficam fora do jogo.
+      // O terminal global é um diálogo não modal (`data-terminal`): a página segue usável com ele aberto.
       if (e.target instanceof Element && e.target.closest("input, textarea, [contenteditable]")) return;
-      if (document.querySelector('[role="dialog"]')) return;
+      if (document.querySelector('[role="dialog"]:not([data-terminal])')) return;
       buffer = (buffer + e.key.toLowerCase()).slice(-size);
       const match = buffer.match(pattern);
       if (!match) return;
@@ -84,6 +79,9 @@ export function EasterEgg({ locale, copy, slugs }: { locale: Locale; copy: Copy;
               </li>
             ))}
           </ul>
+          <p className="mt-2.5 text-muted-foreground text-xs">
+            {copy.terminal} <Kbd>{mac ? "⌘J" : "Ctrl J"}</Kbd>
+          </p>
           <button
             aria-label={copy.dismiss}
             className="absolute top-2 right-2 grid size-6 place-items-center rounded-md text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-brand"
