@@ -24,6 +24,12 @@
       "runtimeExecutable": "bun",
       "runtimeArgs": ["run", "--cwd=../cd-stats", "dev"],
       "port": 3003
+    },
+    {
+      "name": "converter-hub",
+      "runtimeExecutable": "bun",
+      "runtimeArgs": ["run", "--cwd=../Converter-Hub/apps/web", "dev", "-p", "3004"],
+      "port": 3004
     }
   ]
 }
