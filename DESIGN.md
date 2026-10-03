@@ -127,7 +127,7 @@ A warm two-theme neutral palette carrying one bright yellow accent that behaves 
 - **Hairline**: borders are black at 8% opacity on cream and white at 6% on graphite, never a solid gray.
 
 ### Heat scale
-- **Heat Empty** (`heat-empty-light` / `heat-empty-dark`) through **Heat 1–4** (`heat-1` … `heat-4`): the contribution graph ramp, from almost-background to full yellow. In dark theme, levels 1–3 are Cursor Yellow at 28%, 50% and 75% opacity and level 4 is solid Cursor Yellow.
+- **Heat Empty** (`heat-empty-light` / `heat-empty-dark`) through **Heat 1-4** (`heat-1` … `heat-4`): the contribution graph ramp, from almost-background to full yellow. In dark theme, levels 1-3 are Cursor Yellow at 28%, 50% and 75% opacity and level 4 is solid Cursor Yellow.
 
 ### Named Rules
 **The Single Light Rule.** Yellow is the only chromatic color in the interface. If a second hue seems necessary, use weight, size or a hairline instead.
@@ -180,7 +180,7 @@ Flat. Surfaces sit on the page with 1px hairlines and tonal shifts (cream → ra
 
 ## Shapes
 
-Soft but not bubbly. Interactive controls use 8–10px corners, content cards 14px, the avatar 18px. Contribution cells are nearly square (2px). Topic chips are the only full pills. Borders are always 1px hairlines; the avatar is the one element with a 2px solid black border.
+Soft but not bubbly. Interactive controls use 8-10px corners, content cards 14px, the avatar 18px. Contribution cells are nearly square (2px). Topic chips are the only full pills. Borders are always 1px hairlines; the avatar is the one element with a 2px solid black border.
 
 Prefer plain stacked lists (title, then a one-line description, 24px between items) over cards or dividers. Cards are for the /lab stages and cd/ui docs only.
 
@@ -242,7 +242,7 @@ Prefer plain stacked lists (title, then a one-line description, 24px between ite
 - **Do** keep Cursor Yellow the only accent, and keep it small: underlines, rings, bullets, cursor, heat scale.
 - **Do** use cream / graphite surfaces and 1px alpha hairlines (black 8% / white 6%).
 - **Do** write UI copy and headings in lowercase, in both pt and en.
-- **Do** use strong ease-out curves (`cubic-bezier(0.23, 1, 0.32, 1)`) with 150–200ms for interface feedback, and gate any movement behind reduced-motion preferences.
+- **Do** use strong ease-out curves (`cubic-bezier(0.23, 1, 0.32, 1)`) with 150-200ms for interface feedback, and gate any movement behind reduced-motion preferences.
 - **Do** separate list items with hairline dividers instead of boxing each one.
 - **Do** use tabular numerals for dates and counts.
 

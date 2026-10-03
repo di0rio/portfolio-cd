@@ -230,7 +230,7 @@ export const translations = {
 			},
 			experience: {
 				title: "experiência",
-				current: "mar 2026 – atual",
+				current: "mar 2026 - atual",
 				role: "desenvolvedor front-end júnior",
 				professional: "profissional",
 				path: "de estagiário front-end a desenvolvedor front-end júnior",
@@ -522,7 +522,7 @@ export const translations = {
 			},
 			experience: {
 				title: "experience",
-				current: "mar 2026 – present",
+				current: "mar 2026 - present",
 				role: "junior front-end developer",
 				professional: "professional",
 				path: "from front-end intern to junior front-end developer",

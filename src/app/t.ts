@@ -67,7 +67,7 @@ export default {
   },
   experience: {
     title: { pt: "experiência", en: "experience" },
-    current: { pt: "mar 2026 – atual", en: "mar 2026 – present" },
+    current: { pt: "mar 2026 - atual", en: "mar 2026 - present" },
     role: { pt: "desenvolvedor front-end júnior", en: "junior front-end developer" },
     professional: { pt: "profissional", en: "professional" },
     path: { pt: "de estagiário front-end a desenvolvedor front-end júnior", en: "from front-end intern to junior front-end developer" },

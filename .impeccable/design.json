@@ -436,7 +436,7 @@
       "Do keep Cursor Yellow the only accent, and keep it small: underlines, rings, bullets, cursor, heat scale.",
       "Do use cream / graphite surfaces and 1px alpha hairlines (black 8% / white 6%).",
       "Do write UI copy and headings in lowercase, in both pt and en.",
-      "Do use strong ease-out curves (`cubic-bezier(0.23, 1, 0.32, 1)`) with 150–200ms for interface feedback, and gate any movement behind reduced-motion preferences.",
+      "Do use strong ease-out curves (`cubic-bezier(0.23, 1, 0.32, 1)`) with 150-200ms for interface feedback, and gate any movement behind reduced-motion preferences.",
       "Do separate list items with hairline dividers instead of boxing each one.",
       "Do use tabular numerals for dates and counts."
     ],
