@@ -1,19 +1,25 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { Ubuntu, Ubuntu_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { EasterEgg } from "@/components/site-shell/easter-egg";
 import { LocaleSwitch } from "@/components/site-shell/locale-switch";
 import { Sidebar } from "@/components/site-shell/sidebar";
 import { ThemeProvider } from "@/components/site-shell/theme-provider";
 import { ThemeSwitch } from "@/components/site-shell/theme-switch";
-import { getT } from "@/i18n/server";
+import { getT, locales } from "@/i18n/server";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 const ubuntu = Ubuntu({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-sans" });
 const ubuntuHeading = Ubuntu({ subsets: ["latin"], weight: ["500", "700"], variable: "--font-heading" });
 const ubuntuMono = Ubuntu_Mono({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-mono" });
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
 
 export async function generateMetadata(): Promise<Metadata> {
   const { t } = await getT();
@@ -24,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/[locale]">) {
   const { locale, t } = await getT();
   const shell = t.components["site-shell"];
 
@@ -45,7 +51,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           </header>
 
           <div className="grid flex-1 gap-8 px-4 pt-4 pb-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,600px)_minmax(0,1fr)] lg:gap-14 lg:px-6 lg:pt-10">
-            <Sidebar nav={shell.nav} />
+            <Sidebar locale={locale} nav={shell.nav} />
             <main className="flex min-w-0 flex-col gap-14">{children}</main>
           </div>
 
@@ -55,7 +61,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
               {shell.footer.hint} <code className="rounded-md bg-accent px-1.5 font-mono text-foreground">cd ..</code>
             </span>
           </footer>
-          <EasterEgg />
+          <EasterEgg locale={locale} />
           <Analytics />
         </ThemeProvider>
       </body>

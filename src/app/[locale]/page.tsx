@@ -1,7 +1,9 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Contributions } from "@/components/contributions";
-import { getT } from "@/i18n/server";
+import { localePath } from "@/i18n/path";
+import { alternates, getT } from "@/i18n/server";
 import { getBlogRepos, getFeaturedRepos } from "@/lib/github";
 import { site } from "@/lib/site";
 
@@ -10,8 +12,13 @@ const projects = [
   { name: "domus", key: "domus" },
 ] as const;
 
+export async function generateMetadata(): Promise<Metadata> {
+  const { locale } = await getT();
+  return { alternates: alternates(locale, "/") };
+}
+
 export default async function Home() {
-  const { t, dateLocale } = await getT();
+  const { t, locale, dateLocale } = await getT();
   const copy = t.app;
   const [posts, featured] = await Promise.all([getBlogRepos().then((r) => r.slice(0, 3)), getFeaturedRepos()]);
   const fmt = new Intl.DateTimeFormat(dateLocale, { day: "numeric", month: "short" });
@@ -98,7 +105,7 @@ export default async function Home() {
             <h2 className="font-medium text-[17px]" id="escrita">
               {copy.writing.title}
             </h2>
-            <Link className="text-muted-foreground text-sm hover:text-foreground" href="/blog">
+            <Link className="text-muted-foreground text-sm hover:text-foreground" href={localePath(locale, "/blog")}>
               {copy.writing.all}
             </Link>
           </div>
@@ -106,7 +113,7 @@ export default async function Home() {
             {posts.map((post) => (
               <li className="flex items-baseline gap-3" key={post.name}>
                 <span aria-hidden="true" className="size-1.5 shrink-0 -translate-y-0.5 bg-brand" />
-                <Link className="underline decoration-muted-foreground/40 underline-offset-4 transition-[text-decoration-color] duration-150 hover:decoration-brand" href={`/blog/${post.name}`}>
+                <Link className="underline decoration-muted-foreground/40 underline-offset-4 transition-[text-decoration-color] duration-150 hover:decoration-brand" href={localePath(locale, `/blog/${post.name}`)}>
                   {post.description ?? post.name}
                 </Link>
                 <time className="ml-auto whitespace-nowrap text-muted-foreground text-sm tabular-nums" dateTime={post.created_at}>

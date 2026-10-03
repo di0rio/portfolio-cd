@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getT } from "@/i18n/server";
+import { localePath } from "@/i18n/path";
+import { alternates, getT } from "@/i18n/server";
 import { getBlogRepos } from "@/lib/github";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { t } = await getT();
-  return { title: t.app.blog.title, description: t.app.blog.intro };
+  const { t, locale } = await getT();
+  return { title: t.app.blog.title, description: t.app.blog.intro, alternates: alternates(locale, "/blog") };
 }
 
 export default async function Blog() {
-  const { t, dateLocale } = await getT();
+  const { t, locale, dateLocale } = await getT();
   const copy = t.app.blog;
   const repos = await getBlogRepos();
   const fmt = new Intl.DateTimeFormat(dateLocale, {
@@ -31,7 +32,7 @@ export default async function Blog() {
             <li key={repo.name}>
               <Link
                 className="block rounded-xl border px-4.5 py-4 outline-none transition-colors duration-150 hover:border-brand hover:bg-accent focus-visible:ring-2 focus-visible:ring-brand"
-                href={`/blog/${repo.name}`}
+                href={localePath(locale, `/blog/${repo.name}`)}
               >
                 <span className="flex items-baseline justify-between gap-4">
                   <span className="font-medium text-[17px]">{repo.name}</span>

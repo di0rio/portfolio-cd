@@ -43,11 +43,16 @@ Tudo é revalidado a cada hora (contribuições a cada 6 h).
 | O quê | Arquivo |
 | --- | --- |
 | Nome, GitHub, LinkedIn, e-mail, CV, domínio | `src/lib/site.ts` |
+| Páginas (home, blog, 404) | `src/app/[locale]/` |
 | Textos da home (bio, projetos, experiência) | `src/app/t.ts` |
 | Textos do blog | `src/app/blog/t.ts` |
 | Header, sidebar, rodapé, tema, idioma | `src/components/site-shell/` |
 | Cores, fontes, animações | `src/app/globals.css` |
 | Imagem de prévia do link (OG) | `src/app/opengraph-image.tsx` |
+
+### Idiomas e URLs
+
+Português fica na raiz (`/`, `/blog`) e inglês em `/en` (`/en`, `/en/blog`). Por dentro, todas as rotas vivem em `src/app/[locale]/`; o `src/proxy.ts` reescreve `/x` para `/pt/x` sem mudar a URL e redireciona quem digitar `/pt/...`. Cada página declara `canonical` + `hreflang` e o sitemap lista as duas versões, pro Google indexar as duas línguas. Links internos passam por `localePath(locale, path)` (`src/i18n/path.ts`).
 
 Cada `t.ts` tem as duas línguas lado a lado (`{ pt, en }`). O `src/i18n/generated.ts` é gerado sozinho no `dev`/`build`; não edite à mão. Faltar uma língua quebra o build de propósito.
 

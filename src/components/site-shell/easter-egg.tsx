@@ -2,11 +2,13 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import type { Locale } from "@/i18n/generated";
+import { localePath } from "@/i18n/path";
 
 // Digitar `cd ..` (ou `cd ~`) em qualquer lugar volta pro começo; `cd blog` abre o blog.
 const routes: Record<string, string> = { "..": "/", "~": "/", blog: "/blog" };
 
-export function EasterEgg() {
+export function EasterEgg({ locale }: { locale: Locale }) {
   const router = useRouter();
 
   useEffect(() => {
@@ -18,11 +20,11 @@ export function EasterEgg() {
       if (!match) return;
       buffer = "";
       // Ação de teclado: navega seco, sem rolagem animada (o push já volta pro topo).
-      router.push(routes[match[1]]);
+      router.push(localePath(locale, routes[match[1]]));
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [router]);
+  }, [locale, router]);
 
   return null;
 }

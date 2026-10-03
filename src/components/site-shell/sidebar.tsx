@@ -1,7 +1,8 @@
 import { BriefcaseIcon, FileTextIcon, FolderIcon, MailIcon, RssIcon } from "lucide-react";
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
-import type { translations } from "@/i18n/generated";
+import type { Locale, translations } from "@/i18n/generated";
+import { localePath } from "@/i18n/path";
 import { site } from "@/lib/site";
 
 // lucide não traz mais ícones de marca, então GitHub e LinkedIn ficam inline.
@@ -37,13 +38,13 @@ function Item({ href, icon, children }: { href: string; icon: ReactNode; childre
 
 type NavCopy = Record<keyof (typeof translations)["pt"]["components"]["site-shell"]["nav"], string>;
 
-export function Sidebar({ nav }: { nav: NavCopy }) {
+export function Sidebar({ locale, nav }: { locale: Locale; nav: NavCopy }) {
   return (
     <aside className="lg:sticky lg:top-8 lg:w-48 lg:self-start lg:justify-self-end">
       <nav aria-label={nav.label} className="flex flex-col gap-0.5 max-lg:flex-row max-lg:flex-wrap max-lg:gap-1">
-        <Item href="/blog" icon={<RssIcon aria-hidden="true" />}>{nav.blog}</Item>
-        <Item href="/#experiencia" icon={<BriefcaseIcon aria-hidden="true" />}>{nav.experience}</Item>
-        <Item href="/#projetos" icon={<FolderIcon aria-hidden="true" />}>{nav.projects}</Item>
+        <Item href={localePath(locale, "/blog")} icon={<RssIcon aria-hidden="true" />}>{nav.blog}</Item>
+        <Item href={localePath(locale, "/#experiencia")} icon={<BriefcaseIcon aria-hidden="true" />}>{nav.experience}</Item>
+        <Item href={localePath(locale, "/#projetos")} icon={<FolderIcon aria-hidden="true" />}>{nav.projects}</Item>
         <hr className="my-2.5 mr-2 w-10 self-end border-border max-lg:hidden" />
         <Item href={`https://github.com/${site.github}`} icon={<GithubIcon aria-hidden="true" />}>/{site.github}</Item>
         {site.linkedin && (

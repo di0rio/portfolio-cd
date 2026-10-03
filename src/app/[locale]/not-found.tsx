@@ -1,8 +1,9 @@
 import Link from "next/link";
+import { localePath } from "@/i18n/path";
 import { getT } from "@/i18n/server";
 
 export default async function NotFound() {
-  const { t } = await getT();
+  const { t, locale } = await getT();
   const copy = t.app.notFound;
 
   return (
@@ -19,7 +20,7 @@ export default async function NotFound() {
       <p className="mt-2 max-w-[460px] text-muted-foreground">{copy.body}</p>
       <Link
         className="mt-6 inline-block underline decoration-brand underline-offset-4 outline-none hover:decoration-2 focus-visible:ring-2 focus-visible:ring-brand"
-        href="/"
+        href={localePath(locale, "/")}
       >
         {copy.home}
       </Link>

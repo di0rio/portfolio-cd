@@ -2,15 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Markdown } from "@/components/markdown";
-import { getT } from "@/i18n/server";
+import { localePath } from "@/i18n/path";
+import { alternates, getT } from "@/i18n/server";
 import { getBlogRepo, getReadme } from "@/lib/github";
 
-export async function generateMetadata({ params }: PageProps<"/blog/[repo]">): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<"/[locale]/blog/[repo]">): Promise<Metadata> {
   const repo = await getBlogRepo((await params).repo);
-  return repo ? { title: repo.name, description: repo.description ?? undefined } : {};
+  const { locale } = await getT();
+  return repo ? { title: repo.name, description: repo.description ?? undefined, alternates: alternates(locale, `/blog/${repo.name}`) } : {};
 }
 
-export default async function Post({ params }: PageProps<"/blog/[repo]">) {
+export default async function Post({ params }: PageProps<"/[locale]/blog/[repo]">) {
   const repo = await getBlogRepo((await params).repo);
   if (!repo) notFound();
 
@@ -20,7 +22,7 @@ export default async function Post({ params }: PageProps<"/blog/[repo]">) {
 
   return (
     <article>
-      <Link className="text-muted-foreground text-sm hover:text-foreground" href="/blog">
+      <Link className="text-muted-foreground text-sm hover:text-foreground" href={localePath(locale, "/blog")}>
         {copy.back}
       </Link>
 
