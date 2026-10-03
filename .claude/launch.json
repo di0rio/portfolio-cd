@@ -18,6 +18,12 @@
       "runtimeExecutable": "bun",
       "runtimeArgs": ["run", "--cwd=../agenda-vet", "dev"],
       "port": 3002
+    },
+    {
+      "name": "cd-stats",
+      "runtimeExecutable": "bun",
+      "runtimeArgs": ["run", "--cwd=../cd-stats", "dev"],
+      "port": 3003
     }
   ]
 }
