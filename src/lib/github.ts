@@ -140,3 +140,53 @@ export async function getFeaturedRepos(limit = 4): Promise<FeaturedRepo[]> {
       stars: r.stargazers_count,
     }));
 }
+
+export type RecentRepo = {
+  name: string;
+  description: string | null;
+  url: string;
+  language: string | null;
+  pushedAt: string;
+};
+
+/** Repositórios públicos mexidos mais recentemente (sem forks, arquivados e o repo do perfil). */
+export async function getRecentRepos(limit = 5): Promise<RecentRepo[]> {
+  try {
+    const res = await fetch(`${API}/users/${site.github}/repos?type=owner&per_page=100&sort=pushed`, {
+      headers: headers(),
+      next: { revalidate: HOUR, tags: ["github"] },
+    });
+    if (!res.ok) return [];
+    const repos: Repo[] = await res.json();
+    return repos
+      .filter((r) => !r.fork && !r.archived && r.name !== site.github)
+      .sort((a, b) => b.pushed_at.localeCompare(a.pushed_at))
+      .slice(0, limit)
+      .map((r) => ({ name: r.name, description: r.description, url: r.html_url, language: r.language, pushedAt: r.pushed_at }));
+  } catch {
+    return [];
+  }
+}
+
+export type Commit = { sha: string; url: string; subject: string; date: string };
+
+/** Últimos commits deste site: só a primeira linha da mensagem (sem corpo nem trailers `Co-Authored-By`). */
+export async function getSiteCommits(limit = 30): Promise<Commit[]> {
+  try {
+    const res = await fetch(`${API}/repos/${site.github}/portfolio-cd/commits?per_page=${limit}`, {
+      headers: headers(),
+      next: { revalidate: HOUR, tags: ["github"] },
+    });
+    if (!res.ok) return [];
+    type Item = { sha: string; html_url: string; commit: { message: string; author: { date: string } | null; committer: { date: string } | null } };
+    const items: Item[] = await res.json();
+    return items.map((c) => ({
+      sha: c.sha,
+      url: c.html_url,
+      subject: c.commit.message.split("\n")[0].trim(),
+      date: (c.commit.author ?? c.commit.committer)?.date ?? "",
+    }));
+  } catch {
+    return [];
+  }
+}

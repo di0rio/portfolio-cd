@@ -76,14 +76,24 @@ export default async function RootLayout({ children }: LayoutProps<"/[locale]">)
 
           <footer className="mx-auto flex w-full max-w-[640px] flex-wrap items-center justify-between gap-4 border-t px-4 py-6 text-muted-foreground text-sm print:hidden">
             <span>{shell.footer.made}</span>
-            <Link className="underline decoration-muted-foreground/40 underline-offset-4 hover:text-foreground hover:decoration-brand" href={localePath(locale, "/freela")}>
-              {t.app.freela.footerLink}
-            </Link>
+            <span className="flex items-center gap-4">
+              {(
+                [
+                  ["/freela", t.app.freela.footerLink],
+                  ["/agora", t.app.agora.footerLink],
+                  ["/log", t.app.log.footerLink],
+                ] as const
+              ).map(([path, label]) => (
+                <Link className="underline decoration-muted-foreground/40 underline-offset-4 hover:text-foreground hover:decoration-brand" href={localePath(locale, path)} key={path}>
+                  {label}
+                </Link>
+              ))}
+            </span>
             <span>
-              {shell.footer.hint} <Kbd>cd ..</Kbd>
+              {shell.footer.hint} <Kbd>cd ..</Kbd> / <Kbd>help</Kbd>
             </span>
           </footer>
-          <EasterEgg locale={locale} />
+          <EasterEgg copy={shell.egg} locale={locale} slugs={projects.map((p) => p.slug)} />
           <Analytics />
           <ClickTracker />
         </ThemeProvider>

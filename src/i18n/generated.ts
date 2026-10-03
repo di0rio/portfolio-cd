@@ -7,6 +7,21 @@ import { createI18n } from "better-intl/runtime";
 export const translations = {
 	pt: {
 		app: {
+			agora: {
+				title: "agora",
+				description: "No que eu tô mexendo e o que eu tô estudando agora. A lista de repositórios se atualiza sozinha a partir do GitHub.",
+				intro: "uma página de agora: o que tá rolando por aqui neste momento.",
+				workingTitle: "no que eu tô mexendo",
+				workingEmpty: "não consegui falar com o github agora. tenta de novo daqui a pouco.",
+				updatedAgo: (v: { when: string }) => `atualizado ${v.when}`,
+				caseStudy: "estudo de caso",
+				studyingTitle: "estudando",
+				study1: "front-end de verdade: interação e acessibilidade.",
+				study2: "cyber security: detecção e logs.",
+				study3: "go.",
+				lastUpdated: (v: { date: string }) => `última atualização: ${v.date}`,
+				footerLink: "agora",
+			},
 			blog: {
 				title: "blog",
 				intro: "posts gerados automaticamente a partir dos meus repositórios públicos.",
@@ -133,6 +148,14 @@ export const translations = {
 					cardMeta: "atualizado há 2 horas",
 					cardAction: "abrir",
 				},
+			},
+			log: {
+				title: "log",
+				description: "O changelog deste site, gerado sozinho a partir dos commits do repositório.",
+				intro: "tudo que mudou aqui, direto do histórico do git.",
+				empty: "não consegui carregar os commits agora. o histórico completo tá no github.",
+				all: "ver tudo no github",
+				footerLink: "log",
 			},
 			projetos: {
 				caseStudy: "estudo de caso",
@@ -281,6 +304,8 @@ export const translations = {
 					blog: "blog",
 					cv: "CV",
 					freela: "trabalhe comigo",
+					agora: "agora",
+					log: "log do site",
 					theme: "trocar tema",
 					themeWords: "claro escuro dark light theme",
 					language: "trocar idioma pra english",
@@ -294,11 +319,31 @@ export const translations = {
 					hint: "psst: digita",
 					social: "Redes",
 				},
+				egg: {
+					title: "comandos",
+					intro: "digita em qualquer lugar da página:",
+					dismiss: "Fechar dica",
+				},
 			},
 		},
 	},
 	en: {
 		app: {
+			agora: {
+				title: "now",
+				description: "What i'm working on and what i'm studying right now. The repository list updates itself from GitHub.",
+				intro: "a now page: what's going on here at the moment.",
+				workingTitle: "what i'm working on",
+				workingEmpty: "couldn't reach github right now. try again in a bit.",
+				updatedAgo: (v: { when: string }) => `updated ${v.when}`,
+				caseStudy: "case study",
+				studyingTitle: "studying",
+				study1: "front-end craft: interaction and accessibility.",
+				study2: "cyber security: detection and logs.",
+				study3: "go.",
+				lastUpdated: (v: { date: string }) => `last updated: ${v.date}`,
+				footerLink: "now",
+			},
 			blog: {
 				title: "blog",
 				intro: "posts generated automatically from my public repositories.",
@@ -425,6 +470,14 @@ export const translations = {
 					cardMeta: "updated 2 hours ago",
 					cardAction: "open",
 				},
+			},
+			log: {
+				title: "log",
+				description: "This site's changelog, generated from the repository's commits.",
+				intro: "everything that changed here, straight from the git history.",
+				empty: "couldn't load the commits right now. the full history is on github.",
+				all: "see everything on github",
+				footerLink: "log",
 			},
 			projetos: {
 				caseStudy: "case study",
@@ -573,6 +626,8 @@ export const translations = {
 					blog: "blog",
 					cv: "CV",
 					freela: "work with me",
+					agora: "now",
+					log: "site log",
 					theme: "switch theme",
 					themeWords: "light dark tema claro escuro",
 					language: "switch language to português",
@@ -585,6 +640,11 @@ export const translations = {
 					made: "made by cauã.",
 					hint: "psst: type",
 					social: "Social",
+				},
+				egg: {
+					title: "commands",
+					intro: "type anywhere on the page:",
+					dismiss: "Dismiss hint",
 				},
 			},
 		},

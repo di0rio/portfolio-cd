@@ -1,6 +1,5 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { ogAssets } from "@/lib/og";
 import { site } from "@/lib/site";
 
 // Prévia do link (LinkedIn, WhatsApp, X). Robôs não mandam cookie, então sai no idioma padrão.
@@ -8,27 +7,8 @@ export const alt = `${site.name} · desenvolvedor front-end`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// Ubuntu em TTF direto do Google Fonts; se falhar, cai na fonte padrão do ImageResponse.
-async function ubuntu(weight: 400 | 700) {
-  try {
-    const css = await (await fetch(`https://fonts.googleapis.com/css2?family=Ubuntu:wght@${weight}`)).text();
-    const url = css.match(/src: url\((.+?)\) format\('(?:truetype|opentype)'\)/)?.[1];
-    return url ? await (await fetch(url)).arrayBuffer() : null;
-  } catch {
-    return null;
-  }
-}
-
 export default async function Image() {
-  const [avatar, regular, bold] = await Promise.all([
-    readFile(join(process.cwd(), "public/avatar.svg"), "base64"),
-    ubuntu(400),
-    ubuntu(700),
-  ]);
-  const fonts = [
-    ...(regular ? [{ name: "Ubuntu", data: regular, weight: 400 as const }] : []),
-    ...(bold ? [{ name: "Ubuntu", data: bold, weight: 700 as const }] : []),
-  ];
+  const { avatar, fonts } = await ogAssets();
 
   return new ImageResponse(
     <div
@@ -66,6 +46,6 @@ export default async function Image() {
         <div style={{ display: "flex" }}>github.com/{site.github}</div>
       </div>
     </div>,
-    { ...size, fonts: fonts.length ? fonts : undefined },
+    { ...size, fonts },
   );
 }

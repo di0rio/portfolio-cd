@@ -31,6 +31,8 @@ type Copy = {
   blog: string;
   cv: string;
   freela: string;
+  agora: string;
+  log: string;
   theme: string;
   themeWords: string;
   language: string;
@@ -100,6 +102,8 @@ export function CommandPalette({ locale, copy, projects, posts, github }: Props)
         page("blog", copy.blog, "/blog"),
         page("cv", copy.cv, "/cv"),
         page("freela", copy.freela, "/freela"),
+        page("agora", copy.agora, "/agora"),
+        page("log", copy.log, "/log"),
       ],
     },
     ...(posts.length ? [{ value: copy.posts, items: posts.map((name) => page(`post-${name}`, name, `/blog/${name}`)) }] : []),

@@ -35,6 +35,8 @@ export default {
     blog: { pt: "blog", en: "blog" },
     cv: { pt: "CV", en: "CV" },
     freela: { pt: "trabalhe comigo", en: "work with me" },
+    agora: { pt: "agora", en: "now" },
+    log: { pt: "log do site", en: "site log" },
     theme: { pt: "trocar tema", en: "switch theme" },
     themeWords: { pt: "claro escuro dark light theme", en: "light dark tema claro escuro" },
     language: { pt: "trocar idioma pra english", en: "switch language to português" },
@@ -47,5 +49,10 @@ export default {
     made: { pt: "feito por cauã.", en: "made by cauã." },
     hint: { pt: "psst: digita", en: "psst: type" },
     social: { pt: "Redes", en: "Social" },
+  },
+  egg: {
+    title: { pt: "comandos", en: "commands" },
+    intro: { pt: "digita em qualquer lugar da página:", en: "type anywhere on the page:" },
+    dismiss: { pt: "Fechar dica", en: "Dismiss hint" },
   },
 };
