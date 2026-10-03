@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { BeforeAfter } from "@/components/lab/before-after";
 import { ClipTabs } from "@/components/lab/clip-tabs";
 import { CopyButton } from "@/components/lab/copy-button";
+import { DragSheet } from "@/components/lab/drag-sheet";
 import { HoldToConfirm } from "@/components/lab/hold-to-confirm";
+import { ReorderList } from "@/components/lab/reorder-list";
 import { Terminal } from "@/components/lab/terminal";
 import { alternates, getT } from "@/i18n/server";
 import { site } from "@/lib/site";
@@ -22,6 +25,38 @@ export default async function Lab() {
         <h1 className="mb-1.5 font-bold font-heading text-[22px]">{copy.title}</h1>
         <p className="max-w-[520px] text-pretty text-muted-foreground">{copy.intro}</p>
       </section>
+
+      {/* Os mais novos primeiro. */}
+      <Experiment desc={copy.sheet.desc} id="gaveta" title={copy.sheet.title}>
+        <DragSheet
+          copy={{ open: copy.sheet.open, title: copy.sheet.sheetTitle, body: copy.sheet.body, close: copy.sheet.close, hint: copy.sheet.hint }}
+        />
+      </Experiment>
+
+      <Experiment desc={copy.reorder.desc} id="flip" title={copy.reorder.title}>
+        <ReorderList
+          copy={{
+            items: [copy.reorder.item1, copy.reorder.item2, copy.reorder.item3, copy.reorder.item4],
+            up: copy.reorder.up,
+            down: copy.reorder.down,
+            shuffle: copy.reorder.shuffle,
+            label: copy.reorder.label,
+          }}
+        />
+      </Experiment>
+
+      <Experiment desc={copy.compare.desc} id="antes-depois" title={copy.compare.title}>
+        <BeforeAfter
+          copy={{
+            label: copy.compare.label,
+            before: copy.compare.before,
+            after: copy.compare.after,
+            title: copy.compare.cardTitle,
+            meta: copy.compare.cardMeta,
+            action: copy.compare.cardAction,
+          }}
+        />
+      </Experiment>
 
       <Experiment desc={copy.hold.desc} id="segurar" title={copy.hold.title}>
         <HoldToConfirm done={copy.hold.done} label={copy.hold.label} />
