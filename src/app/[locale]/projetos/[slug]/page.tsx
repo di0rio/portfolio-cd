@@ -65,7 +65,9 @@ export default async function CaseStudy({ params }: PageProps<"/[locale]/projeto
             )}
           </p>
         )}
-        {image && <ProjectMedia alt={copy.imageAlt({ name: project.name })} play={copy.play} src={image.src} video={image.video} />}
+        {/* Vídeos desligados por enquanto (ainda têm bugs). Pra religar: devolver `video={image.video}`
+            e os .mp4 de `.videos/` pra `public/projects/`. */}
+        {image && <ProjectMedia alt={copy.imageAlt({ name: project.name })} play={copy.play} src={image.src} /* video={image.video} */ />}
       </header>
 
       {article && <Markdown>{article}</Markdown>}

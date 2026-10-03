@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# videos dos estudos de caso: fora do deploy ate corrigir os bugs
+/.videos/
