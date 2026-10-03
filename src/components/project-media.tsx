@@ -23,7 +23,7 @@ export function ProjectMedia({ src, video, alt, play }: { src: string; video?: s
         <video aria-label={alt} autoPlay className="block size-full object-cover" controls playsInline poster={src} preload="none" ref={player} src={video} />
       ) : (
         <>
-          <Image alt={alt} className="block size-full object-cover" height={1080} priority quality={90} sizes="(min-width: 1056px) 1024px, 100vw" src={src} width={1920} />
+          <Image alt={alt} className="block size-full object-cover" height={2160} priority quality={90} sizes="(min-width: 1056px) 1024px, 100vw" src={src} width={3840} />
           {video && (
             <button
               aria-label={play}
