@@ -104,10 +104,11 @@ export function CommandPaletteDialog({
 
 	return (
 		<Dialog onOpenChange={onOpenChange} open={open}>
-			{/* Popup do cd/ui: tira padding/gap/botão de fechar e ancora no topo (a grade do viewport centraliza). */}
+			{/* Popup do cd/ui: tira padding/gap e ancora no topo via position="top". */}
 			<DialogPopup
 				aria-label={copy.title}
-				className="mt-[12vh] max-h-[min(30rem,calc(100dvh-5rem))] max-w-[520px] gap-0 self-start overflow-hidden rounded-xl p-0 shadow-none"
+				position="top"
+				className="max-h-[min(30rem,calc(100dvh-5rem))] max-w-[520px] gap-0 overflow-hidden rounded-xl p-0 shadow-none"
 				// O Autocomplete engole o 1º Esc (fecha a lista inline); aqui Esc sempre fecha a paleta.
 				onKeyDownCapture={(e) => {
 					if (e.key !== "Escape") return;

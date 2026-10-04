@@ -22,15 +22,9 @@ export function ThemeSwitch({ labels }: { labels: Labels }) {
 	return (
 		<Tooltip>
 			<TooltipTrigger
-				render={
-					<Button
-						aria-label={label}
-						onClick={() => setTheme(dark ? "light" : "dark")}
-						size="icon-sm"
-						type="button"
-						variant="outline"
-					/>
-				}
+				aria-label={label}
+				onClick={() => setTheme(dark ? "light" : "dark")}
+				render={<Button size="icon-sm" type="button" variant="outline" />}
 			>
 				{mounted &&
 					(dark ? (

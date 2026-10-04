@@ -6,7 +6,6 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { Button } from "@/components/ui/button";
 import { Kbd } from "@/components/ui/kbd";
 import { Tooltip, TooltipPopup, TooltipTrigger } from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
 import type { Props } from "./command-palette-dialog";
 
 // O diálogo (base-ui Dialog + Autocomplete, ~50 KB gzip) só baixa na primeira abertura.
@@ -65,18 +64,18 @@ export function CommandPalette(props: Props) {
 	return (
 		<>
 			<Tooltip>
+				{/* Handlers no Trigger, não no Button do `render`: no build de produção o onClick do elemento
+				    de `render` não disparava (Base UI 1.8). */}
 				<TooltipTrigger
+					aria-haspopup="dialog"
+					aria-keyshortcuts="Control+K Meta+K"
+					aria-label={props.copy.open}
+					onClick={() => setOpen(true)}
+					onFocus={loadDialog}
+					onPointerEnter={loadDialog}
 					render={
 						<Button
-							aria-haspopup="dialog"
-							aria-keyshortcuts="Control+K Meta+K"
-							aria-label={props.copy.open}
-							className={cn(
-								"max-sm:size-8 max-sm:p-0 sm:gap-2 sm:pr-2 sm:pl-2.5",
-							)}
-							onClick={() => setOpen(true)}
-							onFocus={loadDialog}
-							onPointerEnter={loadDialog}
+							className="max-sm:size-8 max-sm:p-0 sm:gap-2 sm:pr-2 sm:pl-2.5"
 							size="sm"
 							type="button"
 							variant="outline"

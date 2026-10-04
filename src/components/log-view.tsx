@@ -210,7 +210,7 @@ function LogContent({
 														{c.sha.slice(0, 7)}
 													</a>
 												</TableCell>
-												<TableCell className="whitespace-normal text-pretty py-2 align-baseline [overflow-wrap:anywhere]">
+												<TableCell className="text-pretty py-2 align-baseline [overflow-wrap:anywhere]">
 													{c.tag &&
 														(interactive ? (
 															<button

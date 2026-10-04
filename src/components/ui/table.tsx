@@ -4,11 +4,17 @@ import { cn } from "@/lib/utils";
 /** Tabela estilizada sobre elementos nativos (semântica de `<table>` intacta). Sem estado: roda no servidor. */
 export function Table({
 	className,
+	containerClassName,
 	...props
-}: React.ComponentProps<"table">): React.ReactElement {
+}: React.ComponentProps<"table"> & {
+	containerClassName?: string;
+}): React.ReactElement {
 	return (
 		<div
-			className="relative w-full overflow-x-auto rounded-xl border"
+			className={cn(
+				"relative w-full overflow-x-auto rounded-xl border",
+				containerClassName,
+			)}
 			data-slot="table-container"
 		>
 			<table
@@ -103,7 +109,7 @@ export function TableCell({
 }: React.ComponentProps<"td">): React.ReactElement {
 	return (
 		<td
-			className={cn("whitespace-nowrap p-3 align-middle", className)}
+			className={cn("p-3 align-middle", className)}
 			data-slot="table-cell"
 			{...props}
 		/>
