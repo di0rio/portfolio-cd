@@ -1,12 +1,12 @@
 export default {
   title: { pt: "blog", en: "blog" },
   intro: {
-    pt: "Notas e posts sobre meus projetos, montados direto do GitHub.",
-    en: "Notes and posts about my projects, pulled straight from GitHub.",
+    pt: "Textos sobre o que construí, o que aprendi e as decisões pelo caminho.",
+    en: "Notes on what I’ve built, what I’ve learned, and the decisions along the way.",
   },
   empty: {
-    pt: "Ainda não tem post por aqui. Quando eu marcar um repositório com `portfolio`, ele aparece nesta página.",
-    en: "Nothing here yet. Once I tag a repository with `portfolio`, it’ll show up on this page.",
+    pt: "Ainda não tem texto por aqui. Quando eu publicar um projeto com a tag `portfolio`, ele aparece nesta página.",
+    en: "No posts here yet. When I publish a project with the `portfolio` topic, it’ll show up on this page.",
   },
   back: { pt: "voltar pro blog", en: "back to blog" },
   repo: { pt: "ver repositório", en: "view repository" },

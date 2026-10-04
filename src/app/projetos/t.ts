@@ -12,29 +12,29 @@ export default {
 
   cdui: {
     intro: {
-      pt: "Uma biblioteca de componentes enxuta, com o tamanho de cada peça medido de verdade.",
-      en: "A lean component library that measures the real size of every piece.",
+      pt: "Componentes React que você instala no seu projeto. Cada byte é medido no build.",
+      en: "React components you install into your project. Every byte is measured at build time.",
     },
   },
 
   converter: {
     intro: {
-      pt: "Converta arquivos direto no navegador. Nada é enviado pra fora do seu computador.",
-      en: "Convert files right in your browser. Nothing gets sent off your computer.",
+      pt: "Converta planilhas, dados e imagens sem upload. Tudo roda na sua máquina.",
+      en: "Convert spreadsheets, data, and images without an upload. It all runs on your device.",
     },
   },
 
   cdai: {
     intro: {
-      pt: "Um agente de código local, feito com Ollama, Tauri e Rust - sem depender de API externa.",
-      en: "A local coding agent built with Ollama, Tauri, and Rust, with no external API needed.",
+      pt: "Um agente de código que roda localmente. O modelo sugere; o código controla cada ação.",
+      en: "A coding agent that runs locally. The model suggests; code controls every action.",
     },
   },
 
   sentinel: {
     intro: {
-      pt: "Um motor em Go que transforma eventos de segurança em detecções claras, testáveis e reproduzíveis.",
-      en: "A Go engine that turns security events into clear, testable, and reproducible detections.",
+      pt: "Regras YAML e um motor em Go pra testar detecções de segurança contra logs reais.",
+      en: "YAML rules and a Go engine for testing security detections against real logs.",
     },
   },
 };

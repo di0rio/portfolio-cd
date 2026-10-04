@@ -5,8 +5,8 @@ export default {
 			en: "Cauã Diório · front-end developer",
 		},
 		description: {
-			pt: "Desenvolvedor front-end na Loopscape. Faço interfaces cuidadosas, acessíveis e boas de usar.",
-			en: "Front-end developer at Loopscape. I build thoughtful, accessible interfaces that feel good to use.",
+			pt: "Desenvolvedor front-end na Loopscape. Crio interfaces acessíveis, interações claras e detalhes que fazem diferença no uso.",
+			en: "Front-end developer at Loopscape. I build accessible interfaces, clear interactions, and details that make a difference.",
 		},
 	},
 	role: {
@@ -16,42 +16,42 @@ export default {
 	bubble: { pt: "salve!", en: "hey!" },
 	today: { pt: "hoje", en: "today" },
 	bio: {
-		pt: "sou dev front-end na Loopscape. Curto cuidar da parte que as pessoas usam de verdade: interface, interação e cada detalhe no caminho.",
-		en: "I’m a front-end developer at Loopscape. I like working on the part people actually use: the interface, its interactions, and all the little details.",
+		pt: "Na Loopscape, trabalho no front-end de produto. Curto cuidar do que faz diferença no uso: estados, interações e detalhes que deixam tudo mais claro.",
+		en: "At Loopscape, I work on product front ends. I like sweating the details that make things clearer: states, interactions, and the little touches along the way.",
 	},
 	security: {
-		pt: "também estudo segurança: como detectar problemas, ler logs e entender onde as coisas quebram. Levo isso pro Sentinel Forge, meu projeto em Go.",
-		en: "I also study security: spotting problems, reading logs, and figuring out where things break. I put that into Sentinel Forge, my project in Go.",
+		pt: "Fora do front-end, estudo segurança. Investigo logs, detecções e o jeito que sistemas falham no Sentinel Forge, meu projeto em Go.",
+		en: "Outside front-end, I study security. I dig into logs, detections, and how systems fail through Sentinel Forge, my Go project.",
 	},
 	ai: {
-		pt: "uso IA em muitos projetos pra explorar ideias e aprender mais rápido - sempre tentando entender o que tá acontecendo por baixo.",
-		en: "I use AI in plenty of projects to explore ideas and learn faster, while still trying to understand what’s happening under the hood.",
+		pt: "Uso IA pra explorar ideias e aprender mais rápido, mas gosto de entender exatamente o que vai pro código.",
+		en: "I use AI to explore ideas and learn faster, while making sure I understand what ends up in the code.",
 	},
 	projects: {
 		title: { pt: "projetos", en: "projects" },
 		loopvet: {
-			pt: "gestão de rotina pra clínicas veterinárias.",
-			en: "day-to-day management for veterinary clinics.",
+			pt: "Sistema de gestão para clínicas veterinárias.",
+			en: "Practice management for veterinary clinics.",
 		},
 		domus: {
-			pt: "um CMS que cresceu até virar plataforma de conteúdo.",
-			en: "a CMS that grew into a full content platform.",
+			pt: "Um CMS editorial que cresceu pra virar plataforma de conteúdo.",
+			en: "An editorial CMS that grew into a content platform.",
 		},
 		cdui: {
-			pt: "componentes leves, com cada byte na conta.",
-			en: "lightweight components, with every byte accounted for.",
+			pt: "Componentes React enxutos, medidos em bytes e instalados no seu projeto.",
+			en: "Lean React components, measured in bytes and installed into your project.",
 		},
 		converter: {
-			pt: "converta arquivos no navegador. eles nunca saem do seu computador.",
-			en: "convert files in your browser. they never leave your computer.",
+			pt: "Converta arquivos sem upload. Tudo roda no navegador.",
+			en: "Convert files without an upload. Everything runs in your browser.",
 		},
 		cdai: {
-			pt: "um agente de código com IA que roda na sua máquina.",
-			en: "an AI coding agent that runs on your machine.",
+			pt: "Um agente de código local. O modelo propõe, o código mantém o controle.",
+			en: "A local coding agent. The model proposes, the code stays in control.",
 		},
 		sentinel: {
-			pt: "detecções de segurança em Go: regras YAML testadas com logs reais.",
-			en: "security detections in Go: YAML rules tested against real logs.",
+			pt: "Detecções de segurança em Go, com regras YAML testadas contra logs reais.",
+			en: "Security detections in Go, with YAML rules tested against real logs.",
 		},
 		all: { pt: "todos os repositórios", en: "all repositories" },
 		contributions: {
@@ -63,8 +63,8 @@ export default {
 	error: {
 		title: { pt: "algo deu errado.", en: "something went wrong." },
 		body: {
-			pt: "o GitHub não respondeu agora. tenta de novo daqui a pouco.",
-			en: "GitHub didn’t respond just now. Give it another try in a bit.",
+			pt: "Não consegui carregar os dados do GitHub agora. Tenta de novo daqui a pouco.",
+			en: "I couldn’t load GitHub data just now. Give it another try in a bit.",
 		},
 		retry: { pt: "tentar de novo", en: "try again" },
 	},
@@ -87,8 +87,8 @@ export default {
 		},
 		title: { pt: "essa página não existe.", en: "this page doesn't exist." },
 		body: {
-			pt: "esse link pode estar quebrado ou a página mudou de lugar. Digita cd .. ou volta pelo link aqui embaixo.",
-			en: "That link may be broken, or the page may have moved. Type cd .. or use the link below to head back.",
+			pt: "Esse caminho não existe por aqui. Digita cd .. ou usa o link abaixo pra voltar.",
+			en: "That path doesn’t exist here. Type cd .. or use the link below to head back.",
 		},
 		home: { pt: "voltar pro começo", en: "back to the start" },
 	},

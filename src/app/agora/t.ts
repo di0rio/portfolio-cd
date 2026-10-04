@@ -1,12 +1,12 @@
 export default {
   title: { pt: "agora", en: "now" },
   description: {
-    pt: "O que tô construindo e aprendendo agora. Os projetos em andamento vêm direto do GitHub.",
-    en: "What I’m building and learning right now. Ongoing projects come straight from GitHub.",
+    pt: "O que tô construindo, estudando e descobrindo por agora. Projetos em andamento atualizados pelo GitHub.",
+    en: "What I’m building, studying, and figuring out right now. Ongoing projects update from GitHub.",
   },
   intro: {
-    pt: "Uma espiada no que tá rolando por aqui agora.",
-    en: "A quick look at what’s going on around here right now.",
+    pt: "Uma página aberta sobre o que tá ocupando meu tempo neste momento.",
+    en: "A running snapshot of what’s taking up my time right now.",
   },
   workingTitle: { pt: "no que eu tô mexendo", en: "what i'm working on" },
   workingEmpty: {
