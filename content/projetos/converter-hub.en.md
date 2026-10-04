@@ -1,6 +1,6 @@
 ## tl;dr
 
-converter-hub is a set of tools that turn one file into another **entirely in the browser**: spreadsheets, SQL dumps, SQLite databases, CSV/JSON/YAML, markdown, images. no upload and no server behind it. and privacy isn't just a promise: a CSP makes the browser **block** the file from leaving the tab.
+converter-hub brings together tools for converting spreadsheets, databases, data, text, and images **right in your browser**. Your files never go to a server: the app’s security policy blocks attempts to send them outside the tab.
 
 [see it live](https://convert-hub-web.vercel.app) · [code](https://github.com/di0rio/Converter-Hub)
 

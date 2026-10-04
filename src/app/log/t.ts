@@ -1,12 +1,12 @@
 export default {
   title: { pt: "log", en: "log" },
   description: {
-    pt: "O changelog deste site, gerado sozinho a partir dos commits do repositório.",
-    en: "This site's changelog, generated from the repository's commits.",
+    pt: "O histórico do site, montado automaticamente a partir dos commits.",
+    en: "This site’s changelog, built automatically from its commits.",
   },
   intro: {
-    pt: "tudo que mudou aqui, direto do histórico do git.",
-    en: "everything that changed here, straight from the git history.",
+    pt: "O que mudou no site, direto do histórico do Git.",
+    en: "What changed on the site, straight from the Git history.",
   },
   empty: {
     pt: "não consegui carregar os commits agora. o histórico completo tá no github.",

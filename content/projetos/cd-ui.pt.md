@@ -1,6 +1,6 @@
 ## tl;dr
 
-o cd/ui é uma biblioteca de 17 componentes React (Base UI + Tailwind v4) distribuída como **registry do shadcn**: o código vem pro seu projeto e vira seu. o peso de cada componente é **medido a cada build**, em bytes gzip, e a média dá uns 540 B.
+O cd/ui reúne 17 componentes React (Base UI + Tailwind v4) num **registry do shadcn**. Você instala o código direto no projeto e pode adaptar como quiser. O build mede o tamanho de cada componente em gzip; a média atual fica em cerca de 540 B.
 
 [docs](https://cd-ui.vercel.app/docs) · [performance](https://cd-ui.vercel.app/docs/performance) · [código](https://github.com/di0rio/cd-ui)
 

@@ -12,29 +12,29 @@ export default {
 
   cdui: {
     intro: {
-      pt: "biblioteca de componentes que pesa o mínimo e mostra quanto pesa.",
-      en: "a component library that weighs as little as possible and shows how much.",
+      pt: "Uma biblioteca de componentes enxuta, com o tamanho de cada peça medido de verdade.",
+      en: "A lean component library that measures the real size of every piece.",
     },
   },
 
   converter: {
     intro: {
-      pt: "conversores de arquivo que rodam inteiros no navegador. nada sai do seu computador.",
-      en: "file converters that run entirely in the browser. nothing leaves your computer.",
+      pt: "Converta arquivos direto no navegador. Nada é enviado pra fora do seu computador.",
+      en: "Convert files right in your browser. Nothing gets sent off your computer.",
     },
   },
 
   cdai: {
     intro: {
-      pt: "agente de código que roda local, com Ollama, Tauri e Rust, sem API externa.",
-      en: "a coding agent that runs locally, with Ollama, Tauri and Rust, no external API.",
+      pt: "Um agente de código local, feito com Ollama, Tauri e Rust - sem depender de API externa.",
+      en: "A local coding agent built with Ollama, Tauri, and Rust, with no external API needed.",
     },
   },
 
   sentinel: {
     intro: {
-      pt: "motor de detecção como código: transforma eventos de segurança em detecções explicáveis, testáveis e reproduzíveis.",
-      en: "a detection-as-code engine: turns security events into explainable, testable and reproducible detections.",
+      pt: "Um motor em Go que transforma eventos de segurança em detecções claras, testáveis e reproduzíveis.",
+      en: "A Go engine that turns security events into clear, testable, and reproducible detections.",
     },
   },
 };

@@ -16,7 +16,7 @@ Three audiences with equal weight:
 
 ## Product Purpose
 
-Personal portfolio of Cauã Diorio, front-end developer. It is a living record, not a one-off launch: it grows as he builds interesting projects and levels up as a programmer. Success means the site stays current with little effort and honestly reflects his current level and work.
+Personal portfolio of Cauã Diório, front-end developer. It is a living record, not a one-off launch: it grows as he builds interesting projects and levels up as a programmer. Success means the site stays current with little effort and honestly reflects his current level and work.
 
 ## Positioning
 
@@ -38,7 +38,7 @@ A front-end developer who cares about the details people see and use. The site i
 
 ## Brand Commitments
 
-- Name: Cauã Diorio; short name "cauã"; monogram "cd" (also a terminal pun used across the site).
+- Name: Cauã Diório; short name "cauã"; monogram "cd" (also a terminal pun used across the site).
 - Voice: lowercase, casual Brazilian Portuguese ("pra", "digita"), direct and concrete; English mirrors that tone.
 - Assets: illustrated avatar (`public/avatar.svg`), "cd" icon (`src/app/icon.svg`, `src/app/apple-icon.png`, `src/app/favicon.ico`).
 

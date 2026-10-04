@@ -1,6 +1,6 @@
 ## tl;dr
 
-cd-ai is a coding agent that runs **on your own computer**, with local models through Ollama. it does the whole loop (understand, plan, implement, run, validate and fix) with no external API. the core is Rust, the desktop app is Tauri and the interface is Next.js. the idea that organizes everything: the model **proposes**, the code **decides**.
+cd-ai is a coding agent that runs **on your machine** with local models through Ollama. It handles the full loop, from planning to validation, without calling an external API. Its core is built in Rust, its desktop app uses Tauri, and its interface runs on Next.js. The rule is simple: the model **proposes**; the code **decides**.
 
 [code](https://github.com/di0rio/cd-ai)
 

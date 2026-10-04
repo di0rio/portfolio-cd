@@ -1,6 +1,6 @@
 ## tl;dr
 
-o converter-hub é um conjunto de ferramentas que transformam um arquivo em outro **inteiramente no navegador**: planilha, dump de SQL, banco SQLite, CSV/JSON/YAML, markdown, imagem. não tem upload nem servidor por trás. e a privacidade não é só promessa: uma CSP faz o navegador **impedir** que o arquivo saia da aba.
+O converter-hub reúne ferramentas pra transformar planilhas, bancos, dados, texto e imagens **direto no navegador**. Seus arquivos não vão pra um servidor: uma política de segurança do próprio app bloqueia qualquer tentativa de enviá-los pra fora da aba.
 
 [ver no ar](https://convert-hub-web.vercel.app) · [código](https://github.com/di0rio/Converter-Hub)
 

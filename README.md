@@ -1,6 +1,6 @@
 # portfolio-cd
 
-Portfólio pessoal do Cauã Diorio ([@di0rio](https://github.com/di0rio)), desenvolvedor front-end. Bilíngue (pt/en), tema claro/escuro e conteúdo que se atualiza sozinho a partir do GitHub.
+Portfólio pessoal do Cauã Diório ([@di0rio](https://github.com/di0rio)), desenvolvedor front-end. Bilíngue (pt/en), tema claro/escuro e conteúdo que se atualiza sozinho a partir do GitHub.
 
 ## Stack
 

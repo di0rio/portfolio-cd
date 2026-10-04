@@ -1,6 +1,6 @@
 ## tl;dr
 
-cd/ui is a library of 17 React components (Base UI + Tailwind v4) shipped as a **shadcn registry**: the code comes into your project and becomes yours. the weight of every component is **measured on every build**, in gzip bytes, and the average is around 540 B.
+cd/ui ships 17 React components (Base UI + Tailwind v4) as a **shadcn registry**. Install the code into your project and adapt it as you like. Every build measures each component’s gzip size; the current average is about 540 B.
 
 [docs](https://cd-ui.vercel.app/docs) · [performance](https://cd-ui.vercel.app/docs/performance) · [code](https://github.com/di0rio/cd-ui)
 

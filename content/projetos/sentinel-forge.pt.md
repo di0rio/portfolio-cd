@@ -1,6 +1,6 @@
 ## tl;dr
 
-o sentinel-forge é um motor de **detecção como código** em Go. regras de detecção são YAML versionado, revisado em pull request e validado antes de rodar. o motor lê eventos (ou um log cru de sshd e nginx), aplica as regras e entrega detecções que **se explicam**: qual regra e versão, quantos eventos, em que janela, qual limiar e qual técnica do MITRE ATT&CK. é o projeto onde eu estudo cyber security na prática.
+O sentinel-forge é um motor de **detecção como código** em Go. As regras ficam em YAML versionado, passam por revisão e são validadas antes de rodar. O motor lê eventos ou logs de sshd e nginx e gera detecções que mostram de onde vieram: regra, versão, janela, limiar e técnica do MITRE ATT&CK. É onde estudo segurança na prática.
 
 [código](https://github.com/di0rio/sentinel-forge)
 

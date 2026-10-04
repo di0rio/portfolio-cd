@@ -1,8 +1,8 @@
 export default {
   title: { pt: "lab", en: "lab" },
   intro: {
-    pt: "experimentos de interface: detalhes de interação pequenos, feitos pra sentir na mão. tudo aqui é código de verdade rodando no seu navegador.",
-    en: "interface experiments: small interaction details, made to be felt. everything here is real code running in your browser.",
+    pt: "Experimentos de interface pra testar interações de perto. Tudo aqui é código de verdade, rodando no seu navegador.",
+    en: "Interface experiments to get a feel for the details. Everything here is real code running in your browser.",
   },
   toasts: {
     title: { pt: "pilha de toasts", en: "toast stack" },
