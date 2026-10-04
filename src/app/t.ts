@@ -16,16 +16,16 @@ export default {
 	bubble: { pt: "salve!", en: "hey!" },
 	today: { pt: "hoje", en: "today" },
 	bio: {
-			pt: "Na Loopscape, trabalho no front-end de produto. Gosto de deixar cada tela clara de usar, dos estados e interações aos detalhes menores.",
-			en: "At Loopscape, I work on product front ends. I care about making each screen clear to use, from its states and interactions down to the small details.",
+		pt: "Na Loopscape, trabalho no front-end de produto. Gosto de deixar cada tela clara de usar, dos estados e interações aos detalhes menores.",
+		en: "At Loopscape, I work on product front ends. I care about making each screen clear to use, from its states and interactions down to the small details.",
 	},
 	security: {
-			pt: "Também estudo segurança. No Sentinel Forge, meu projeto em Go, investigo logs e testo formas de detectar ataques com sinais reais.",
-			en: "I also study security. With Sentinel Forge, my Go project, I dig into logs and test ways to spot attacks from real signals.",
+		pt: "Também estudo segurança. No Sentinel Forge, meu projeto em Go, investigo logs e testo formas de detectar ataques com sinais reais.",
+		en: "I also study security. With Sentinel Forge, my Go project, I dig into logs and test ways to spot attacks from real signals.",
 	},
 	ai: {
-			pt: "Uso IA pra explorar ideias e aprender mais rápido. Antes de levar algo pro projeto, faço questão de entender o que o código está fazendo.",
-			en: "I use AI to explore ideas and learn faster. Before anything goes into a project, I make sure I understand what the code is doing.",
+		pt: "Uso IA pra explorar ideias e aprender mais rápido. Antes de levar algo pro projeto, faço questão de entender o que o código está fazendo.",
+		en: "I use AI to explore ideas and learn faster. Before anything goes into a project, I make sure I understand what the code is doing.",
 	},
 	projects: {
 		title: { pt: "projetos", en: "projects" },
