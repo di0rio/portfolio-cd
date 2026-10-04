@@ -40,7 +40,7 @@ const securityHeaders = [
 		key: "Permissions-Policy",
 		value: "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
 	},
-	{ key: "Strict-Transport-Security", value: "max-age=63072000" },
+	{ key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" },
 ];
 
 const nextConfig: NextConfig = {
@@ -52,13 +52,31 @@ const nextConfig: NextConfig = {
 	},
 	images: {
 		qualities: [75, 90], // 90 só nos prints dos estudos de caso
+		// Só o que o site usa: sem pathname, o /_next/image serviria qualquer imagem do GitHub.
 		remotePatterns: [
-			{ protocol: "https", hostname: "raw.githubusercontent.com" },
-			{ protocol: "https", hostname: "github.com" },
+			{
+				protocol: "https",
+				hostname: "raw.githubusercontent.com",
+				pathname: "/di0rio/**",
+				search: "",
+			},
+			{
+				protocol: "https",
+				hostname: "github.com",
+				pathname: "/di0rio.png",
+				search: "",
+			},
 			// github.com/<user>.png redireciona pra cá (avatar do perfil).
-			{ protocol: "https", hostname: "avatars.githubusercontent.com" },
+			{
+				protocol: "https",
+				hostname: "avatars.githubusercontent.com",
+				pathname: "/u/**",
+				search: "",
+			},
 		],
 	},
+	// Produção sem nenhum console.* do app; o aviso do console sai por alias (ver console-warning.tsx).
+	compiler: { removeConsole: !isDev },
 };
 
 export default withInternationalization(nextConfig);

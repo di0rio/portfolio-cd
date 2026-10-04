@@ -13,7 +13,10 @@ export type TerminalProject = { slug: string; name: string; live?: string; repo?
 type Props = {
   locale: Locale;
   open: boolean;
-  onClose: () => void;
+  /** Teclado (atalho, Esc) abre/fecha sem animação; ponteiro usa a gaveta. */
+  instant: boolean;
+  /** `instant` = fechar na hora (Esc); sem argumento, fecha animado. */
+  onClose: (instant?: boolean) => void;
   projects: TerminalProject[];
   /** Posts do blog (só o slug entra no `cd blog/<slug>`). */
   posts: { slug: string }[];
@@ -28,6 +31,47 @@ const COMMANDS = ["help", "ls", "cd", "pwd", "open", "theme", "lang", "whoami", 
  * Este objeto vive no módulo, que sobrevive à navegação no cliente: histórico e saída seguem no lugar.
  */
 const memory: { entries: Entry[] | null; history: string[] } = { entries: null, history: [] };
+
+const STORAGE_KEY = "cd:terminal-h";
+const MIN_HEIGHT = 160;
+const SITE_HEADER = 56; // altura do header do site: o painel nunca cobre isso
+const RUBBER_DIM = 200;
+const SNAP = "height 200ms var(--ease-out)";
+
+const clamp = (n: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, n));
+
+/** Resistência elástica além dos limites: cresce rápido no começo e satura em `RUBBER_DIM`. */
+const rubber = (over: number) => (over * RUBBER_DIM * 0.55) / (RUBBER_DIM + 0.55 * Math.abs(over));
+
+/** Equivalente em px de `clamp(200px, 40dvh, 420px)`; em tela estreita ocupa mais (55%). */
+function defaultHeight(vh: number, width: number) {
+  return width < 640 ? Math.round(vh * 0.55) : Math.min(420, Math.max(200, vh * 0.4));
+}
+
+function readStored() {
+  try {
+    const n = Number(localStorage.getItem(STORAGE_KEY));
+    return Number.isFinite(n) && n > 0 ? n : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeStored(n: number | null) {
+  try {
+    if (n === null) localStorage.removeItem(STORAGE_KEY);
+    else localStorage.setItem(STORAGE_KEY, String(n));
+  } catch {}
+}
+
+/** Altura visível e quanto o teclado virtual ocupa embaixo (`visualViewport` encolhe com ele). */
+function readViewport() {
+  const v = window.visualViewport;
+  const h = v?.height ?? window.innerHeight;
+  return { h, w: window.innerWidth, kb: v ? Math.max(0, window.innerHeight - v.height - v.offsetTop) : 0 };
+}
+
+type Drag = { id: number; y: number; h: number; raw: number; moves: { y: number; t: number }[] };
 
 /** Prefixo comum de várias strings. */
 function commonPrefix(list: string[]) {
@@ -44,9 +88,13 @@ function commonPrefix(list: string[]) {
  * usável atrás dele (sem backdrop, sem trava de foco), mas o foco entra no prompt ao abrir, Esc fecha e o
  * foco volta pro elemento anterior ao fechar. Fechado, o painel fica no DOM (guarda histórico e saída)
  * com `inert`, então não entra na ordem de tabulação nem na árvore de acessibilidade.
- * Movimento: gaveta (`translate` em Y, 240ms entra / 180ms sai, `--ease-out`); instantâneo com reduced motion.
+ * Movimento: abrir/fechar por teclado (atalho, Esc) é instantâneo, porque se repete o dia todo. Por ponteiro
+ * (paleta, botão de fechar) é uma gaveta (`translate` em Y, 260ms entra / 200ms sai, `--ease-drawer`).
+ * Na primeira abertura a entrada usa `starting:` (sem rAF). Com reduced motion vira um fade de 150ms.
+ * Redimensiona arrastando a borda de cima (ou com setas/Home/End): estica com resistência elástica além dos
+ * limites, volta com 200ms e fecha se soltar com velocidade pra baixo. A altura fica em `localStorage`.
  */
-export function TerminalPanel({ locale, open, onClose, projects, posts }: Props) {
+export function TerminalPanel({ locale, open, instant, onClose, projects, posts }: Props) {
   const copy = translations[locale].components["site-shell"].terminal;
   const router = useRouter();
   const pathname = stripLocale(usePathname() ?? "/");
@@ -70,19 +118,126 @@ export function TerminalPanel({ locale, open, onClose, projects, posts }: Props)
     memory.entries = entries;
   }, [entries]);
 
-  // Na primeira montagem o painel nasce fechado e abre no quadro seguinte, senão não haveria transição.
-  // Remontado por troca de idioma (`memory` já preenchida), volta direto ao estado anterior.
-  const [ready, setReady] = useState(memory.entries !== null);
+  // Entrada via `starting:` só na primeira montagem; remontado por troca de idioma (`memory` já preenchida)
+  // volta direto ao estado anterior, sem entrar de novo.
+  const [fresh] = useState(() => memory.entries === null);
+  const shown = open;
+
+  // Altura: preferência do usuário (null = padrão) limitada pela área visível. Re-clampa quando a viewport muda.
+  const [pref, setPref] = useState<number | null>(readStored);
+  const [vp, setVp] = useState(readViewport);
+  const max = Math.max(MIN_HEIGHT, vp.h - SITE_HEADER);
+  const height = Math.round(clamp(pref ?? defaultHeight(vp.h, vp.w), MIN_HEIGHT, max));
+  const drag = useRef<Drag | null>(null);
+
+  // Teclado virtual: `visualViewport` encolhe e o painel sobe junto, sem esconder o prompt.
   useEffect(() => {
-    // rAF pausa em aba/painel em segundo plano; o timeout garante que o painel abre mesmo assim.
-    const id = requestAnimationFrame(() => setReady(true));
-    const fallback = setTimeout(() => setReady(true), 50);
+    if (!shown) return;
+    const v = window.visualViewport;
+    const update = () =>
+      setVp((prev) => {
+        const next = readViewport();
+        return prev.h === next.h && prev.w === next.w && prev.kb === next.kb ? prev : next;
+      });
+    update();
+    v?.addEventListener("resize", update);
+    v?.addEventListener("scroll", update);
+    window.addEventListener("resize", update);
     return () => {
-      cancelAnimationFrame(id);
-      clearTimeout(fallback);
+      v?.removeEventListener("resize", update);
+      v?.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
     };
-  }, []);
-  const shown = open && ready;
+  }, [shown]);
+
+  // Aberto, o painel empurra a página pra cima dele (nada fica escondido). Durante o arrasto `height` não
+  // muda, então só atualiza ao soltar. O `style.height` direto também desfaz um arrasto que terminou fechando.
+  useEffect(() => {
+    if (!shown) return;
+    if (panel.current) panel.current.style.height = `${height}px`;
+    document.body.style.paddingBottom = `${height}px`;
+    return () => {
+      document.body.style.paddingBottom = "";
+    };
+  }, [shown, height]);
+
+  // Se desmontar no meio do arrasto (troca de idioma), devolve cursor e seleção.
+  useEffect(
+    () => () => {
+      document.documentElement.style.cursor = "";
+      document.documentElement.style.userSelect = "";
+    },
+    [],
+  );
+
+  function commit(next: number | null) {
+    setPref(next);
+    writeStored(next);
+  }
+
+  function setDragging(on: boolean) {
+    document.documentElement.style.cursor = on ? "row-resize" : "";
+    document.documentElement.style.userSelect = on ? "none" : "";
+  }
+
+  function resizeStart(e: React.PointerEvent<HTMLDivElement>) {
+    // Já arrastando (segundo dedo) ou botão que não é o principal: ignora.
+    if (drag.current || !panel.current || (e.pointerType === "mouse" && e.button !== 0)) return;
+    e.currentTarget.setPointerCapture(e.pointerId);
+    const h = panel.current.getBoundingClientRect().height;
+    drag.current = { id: e.pointerId, y: e.clientY, h, raw: h, moves: [{ y: e.clientY, t: e.timeStamp }] };
+    panel.current.style.transition = "none";
+    setDragging(true);
+  }
+
+  function resizeMove(e: React.PointerEvent<HTMLDivElement>) {
+    const d = drag.current;
+    if (!d || d.id !== e.pointerId || !panel.current) return;
+    d.raw = d.h + (d.y - e.clientY); // respeita onde se agarrou a borda
+    d.moves.push({ y: e.clientY, t: e.timeStamp });
+    if (d.moves.length > 5) d.moves.shift();
+    const shownH = d.raw > max ? max + rubber(d.raw - max) : d.raw < MIN_HEIGHT ? Math.max(0, MIN_HEIGHT - rubber(MIN_HEIGHT - d.raw)) : d.raw;
+    panel.current.style.height = `${shownH}px`; // direto no DOM: sem re-render a cada movimento
+  }
+
+  function resizeEnd(e: React.PointerEvent<HTMLDivElement>) {
+    const d = drag.current;
+    const el = panel.current;
+    if (!d || d.id !== e.pointerId || !el) return;
+    drag.current = null;
+    setDragging(false);
+    el.style.transition = "";
+    const first = d.moves[0];
+    const last = d.moves[d.moves.length - 1];
+    const dt = first && last ? last.t - first.t : 0;
+    const velocity = first && last && dt > 0 ? (last.y - first.y) / dt : 0; // px/ms, positivo = pra baixo
+    // Soltou com tranco pra baixo ou bem abaixo do mínimo: fecha (animado; a altura anterior volta ao reabrir).
+    if (e.type === "pointerup" && (velocity > 0.6 || d.raw < MIN_HEIGHT - 64)) return onClose();
+    const next = Math.round(clamp(d.raw, MIN_HEIGHT, max));
+    if (d.raw < MIN_HEIGHT || d.raw > max) {
+      // Volta do elástico só nessa soltura; reduced motion pula direto.
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        el.style.transition = SNAP;
+        setTimeout(() => {
+          el.style.transition = "";
+        }, 220);
+      }
+    }
+    el.style.height = `${next}px`;
+    commit(next);
+  }
+
+  function resizeKey(e: React.KeyboardEvent<HTMLDivElement>) {
+    const step = e.shiftKey ? 96 : 24;
+    let next: number;
+    if (e.key === "ArrowUp") next = height + step;
+    else if (e.key === "ArrowDown") next = height - step;
+    else if (e.key === "Home") next = max;
+    else if (e.key === "End") next = MIN_HEIGHT;
+    else return;
+    e.preventDefault();
+    commit(Math.round(clamp(next, MIN_HEIGHT, max)));
+  }
 
   // Foco: entra no prompt ao abrir e volta pra quem tinha o foco ao fechar.
   useEffect(() => {
@@ -238,30 +393,66 @@ export function TerminalPanel({ locale, open, onClose, projects, posts }: Props)
       aria-label={copy.title}
       aria-modal="false"
       className={
-        "fixed inset-x-0 bottom-0 z-30 flex h-[clamp(200px,40dvh,420px)] flex-col border-white/10 border-t bg-[#1c1c1c] font-mono text-[#f5f5f5] text-sm shadow-[0_-12px_32px_-16px_rgb(0_0_0/0.5)] motion-reduce:[transition:none] print:hidden " +
+        "fixed inset-x-0 z-30 flex flex-col border-white/[0.06] border-t bg-[#1c1c1c] font-mono text-[#f5f5f5] text-sm print:hidden " +
         // `visibility` troca na hora ao abrir (precisa ser focável já) e só depois da saída ao fechar.
+        // Teclado: sem transição. Reduced motion: fade em vez de deslizar.
         (shown
-          ? "visible translate-y-0 [transition:translate_240ms_var(--ease-out),visibility_0s]"
-          : "invisible translate-y-full [transition:translate_180ms_var(--ease-out),visibility_0s_linear_180ms]")
+          ? `visible translate-y-0 ${
+              instant
+                ? "[transition:none]"
+                : `[transition:translate_260ms_var(--ease-drawer),visibility_0s] motion-reduce:[transition:opacity_150ms_ease,visibility_0s] ${
+                    fresh ? "starting:translate-y-full motion-reduce:starting:translate-y-0 motion-reduce:starting:opacity-0" : ""
+                  }`
+            }`
+          : `invisible translate-y-full motion-reduce:translate-y-0 motion-reduce:opacity-0 ${
+              instant
+                ? "[transition:none]"
+                : "[transition:translate_200ms_var(--ease-drawer),visibility_0s_linear_200ms] motion-reduce:[transition:opacity_150ms_ease,visibility_0s_linear_150ms]"
+            }`)
       }
       data-terminal=""
       inert={!shown}
       onKeyDown={(e) => {
         if (e.key === "Escape") {
           e.stopPropagation();
-          onClose();
+          onClose(true);
         }
       }}
       ref={panel}
       role="dialog"
+      style={{ height, bottom: vp.kb }}
     >
-      <div className="flex h-9 shrink-0 items-center border-white/10 border-b bg-[#222220]">
+      {/* Borda de cima: alça de redimensionar (faixa fina com mouse; pílula visível e área maior no toque). */}
+      <div
+        aria-label={locale === "pt" ? "redimensionar terminal" : "resize terminal"}
+        aria-orientation="horizontal"
+        aria-valuemax={max}
+        aria-valuemin={MIN_HEIGHT}
+        aria-valuenow={height}
+        className="group absolute inset-x-0 -top-1 z-10 h-2 cursor-row-resize touch-none outline-none pointer-coarse:inset-x-auto pointer-coarse:-top-2 pointer-coarse:left-1/2 pointer-coarse:h-6 pointer-coarse:w-24 pointer-coarse:-translate-x-1/2"
+        onDoubleClick={() => commit(null)}
+        onKeyDown={resizeKey}
+        onLostPointerCapture={resizeEnd}
+        onPointerCancel={resizeEnd}
+        onPointerDown={resizeStart}
+        onPointerMove={resizeMove}
+        onPointerUp={resizeEnd}
+        role="separator"
+        tabIndex={0}
+      >
+        <span className="absolute inset-x-0 top-[3px] h-0.5 transition-colors group-hover:bg-brand/50 group-focus-visible:bg-brand group-active:bg-brand pointer-coarse:top-[7px]" />
+        <span
+          aria-hidden
+          className="absolute top-[18px] left-1/2 hidden h-1 w-9 -translate-x-1/2 rounded-full bg-white/20 pointer-coarse:block"
+        />
+      </div>
+      <div className="flex h-9 shrink-0 items-center border-white/[0.06] border-b bg-[#222220] any-pointer-coarse:h-11">
         <div className="mx-auto flex w-full max-w-[640px] items-center justify-between pr-2.5 pl-4">
           <span className="text-[#818181] text-xs">{copy.title}</span>
           <button
             aria-label={copy.close}
-            className="grid size-6 place-items-center rounded-md text-[#818181] outline-none transition-colors hover:text-[#f5f5f5] focus-visible:ring-2 focus-visible:ring-brand"
-            onClick={onClose}
+            className="grid size-6 place-items-center rounded-md text-[#818181] outline-none [transition:color_150ms_ease,scale_100ms_var(--ease-out)] hover:text-[#f5f5f5] focus-visible:ring-2 active:scale-[0.98] focus-visible:ring-brand any-pointer-coarse:size-8"
+            onClick={() => onClose()}
             type="button"
           >
             <XIcon aria-hidden className="size-3.5" />
@@ -272,7 +463,9 @@ export function TerminalPanel({ locale, open, onClose, projects, posts }: Props)
       {/* O clique só devolve o foco ao campo (e deixa selecionar a saída); o teclado já vive no input. */}
       <div
         aria-label={copy.title}
-        className="min-h-0 flex-1 cursor-text overflow-y-auto overscroll-contain py-3 scrollbar-thin"
+        className={`min-h-0 flex-1 cursor-text overflow-y-auto overscroll-contain pt-3 scrollbar-thin [scrollbar-color:#2a2a27_transparent] ${
+          vp.kb > 0 ? "pb-3" : "pb-[calc(0.75rem+env(safe-area-inset-bottom))]"
+        }`}
         onClick={() => {
           if (!window.getSelection()?.toString()) input.current?.focus();
         }}
@@ -302,10 +495,14 @@ export function TerminalPanel({ locale, open, onClose, projects, posts }: Props)
             }}
           >
             <span aria-hidden="true" className="shrink-0 whitespace-pre">
-              <span className="font-bold">
-                cd<span className="text-brand">/</span>
-              </span>{" "}
-              <span className="text-[#818181]">{prompt} $</span>
+              <span className="max-sm:hidden">
+                <span className="font-bold">
+                  cd<span className="text-brand">/</span>
+                </span>{" "}
+              </span>
+              <span className="text-[#818181]">
+                <span className="max-sm:inline-block max-sm:max-w-[45vw] max-sm:truncate max-sm:align-bottom">{prompt}</span> $
+              </span>
             </span>
             <input
               aria-label={copy.label}

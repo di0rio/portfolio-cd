@@ -204,7 +204,7 @@ export const translations = {
 			today: "hoje",
 			bio: "sou dev front-end na Loopscape. Curto cuidar da parte que as pessoas usam de verdade: interface, interação e cada detalhe no caminho.",
 			security: "também estudo segurança: como detectar problemas, ler logs e entender onde as coisas quebram. Levo isso pro Sentinel Forge, meu projeto em Go.",
-			ai: "uso IA em muitos projetos pra explorar ideias e aprender mais rápido - sempre entendendo o que tá acontecendo por baixo.",
+			ai: "uso IA em muitos projetos pra explorar ideias e aprender mais rápido - sempre tentando entender o que tá acontecendo por baixo.",
 			projects: {
 				title: "projetos",
 				loopvet: "gestão de rotina pra clínicas veterinárias.",
@@ -290,7 +290,6 @@ export const translations = {
 					freela: "trabalhe comigo",
 					agora: "agora",
 					log: "log do site",
-					terminal: "abrir terminal",
 					terminalWords: "terminal shell console comando cmd",
 				},
 				footer: {
@@ -518,7 +517,7 @@ export const translations = {
 			today: "today",
 			bio: "I’m a front-end developer at Loopscape. I like working on the part people actually use: the interface, its interactions, and all the little details.",
 			security: "I also study security: spotting problems, reading logs, and figuring out where things break. I put that into Sentinel Forge, my project in Go.",
-			ai: "I use AI in plenty of projects to explore ideas and learn faster, while still understanding what’s happening under the hood.",
+			ai: "I use AI in plenty of projects to explore ideas and learn faster, while still trying to understand what’s happening under the hood.",
 			projects: {
 				title: "projects",
 				loopvet: "day-to-day management for veterinary clinics.",
@@ -604,7 +603,6 @@ export const translations = {
 					freela: "work with me",
 					agora: "now",
 					log: "site log",
-					terminal: "open terminal",
 					terminalWords: "terminal shell console command cmd",
 				},
 				footer: {
