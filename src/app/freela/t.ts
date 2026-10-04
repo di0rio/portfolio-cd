@@ -47,45 +47,38 @@ export default {
 		pt: "Veja o que cada projeto resolve e algumas das decisões por trás dele.",
 		en: "See what each project solves and some of the decisions behind it.",
 	},
-	ctaTitle: { pt: "vamos conversar", en: "let's talk" },
-	cta: {
-		pt: "Tem algo em mente? Me conta o que você quer fazer e eu te ajudo a encontrar por onde começar.",
-		en: "Have something in mind? Tell me what you’re trying to build and we’ll figure out where to start.",
-	},
 	faqTitle: { pt: "dúvidas comuns", en: "common questions" },
 	faqQ1: { pt: "quanto tempo leva?", en: "how long does it take?" },
 	faqA1: {
-		pt: "Depende do escopo. Uma landing page costuma sair em 1 a 2 semanas; um painel ou um design system leva mais. O prazo fica combinado antes de começar e você acompanha as entregas pelo caminho.",
-		en: "It depends on scope. A landing page usually takes 1 to 2 weeks; a dashboard or a design system takes longer. The timeline is agreed before we start and you follow each delivery along the way.",
+		pt: "Uma landing page costuma sair em 1 a 2 semanas. Um painel ou um design system leva de 3 a 6, dependendo de quantas telas e integrações entram. O prazo fica combinado antes de começar, e você vê o andamento a cada entrega.",
+		en: "A landing page usually takes 1 to 2 weeks. A dashboard or a design system takes 3 to 6, depending on how many screens and integrations are involved. The timeline is agreed before we start, and you see progress at every delivery.",
 	},
 	faqQ2: { pt: "como funciona o orçamento?", en: "how does pricing work?" },
 	faqA2: {
-		pt: "Depois da primeira conversa eu mando um valor fechado por escopo, com entregas e prazo descritos. Se o escopo mudar no meio do caminho, a gente conversa antes de qualquer custo novo.",
-		en: "After the first chat I send a fixed price per scope, with deliverables and timeline spelled out. If the scope changes along the way, we talk before any new cost.",
+		pt: "Depois da primeira conversa eu mando um valor fechado, com escopo, entregas e prazo descritos. Se algo mudar no meio do caminho, a gente alinha antes de qualquer custo novo. Sem surpresa na hora de pagar.",
+		en: "After the first chat I send a fixed price with scope, deliverables, and timeline spelled out. If something changes along the way, we align before any new cost. No surprises when it is time to pay.",
 	},
 	faqQ3: {
 		pt: "com quais tecnologias você trabalha?",
 		en: "which technologies do you use?",
 	},
 	faqA3: {
-		pt: "React, Next.js, TypeScript e Tailwind no dia a dia. Se o seu projeto já usa outra coisa na interface, a gente vê o que faz mais sentido.",
-		en: "React, Next.js, TypeScript, and Tailwind day to day. If your project already uses something else on the front end, we figure out what makes the most sense.",
+		pt: "React, Next.js, TypeScript e Tailwind no dia a dia, com componentes acessíveis e responsivos. Se o seu projeto já usa outra coisa na interface, eu me adapto à sua stack em vez de empurrar a minha.",
+		en: "React, Next.js, TypeScript, and Tailwind day to day, with accessible, responsive components. If your project already uses something else on the front end, I adapt to your stack instead of pushing mine.",
 	},
 	faqQ4: {
 		pt: "você faz manutenção depois da entrega?",
 		en: "do you maintain things after delivery?",
 	},
 	faqA4: {
-		pt: "Faço. Você recebe o código e o deploy prontos, e dá pra combinar ajustes e evolução depois. Nada de ficar preso a mim: o projeto fica no seu repositório.",
-		en: "Yes. You get the code and a ready deployment, and we can agree on tweaks and follow-up work later. No lock-in: the project lives in your repository.",
+		pt: "Faço. Você recebe o código e o deploy prontos, e dá pra combinar ajustes e evolução depois. Sem ficar preso a mim: tudo fica no seu repositório e qualquer dev consegue continuar de onde parei.",
+		en: "Yes. You get the code and a ready deployment, and we can agree on tweaks and follow-up work later. No lock-in: everything lives in your repository and any developer can pick up where I left off.",
 	},
 	faqQ5: { pt: "como começo?", en: "how do we start?" },
 	faqA5: {
-		pt: "Me manda uma mensagem pelo formulário abaixo ou pelo LinkedIn contando o que precisa. Eu respondo com algumas perguntas e um primeiro passo.",
-		en: "Send me a message through the form below or on LinkedIn telling me what you need. I’ll reply with a few questions and a first step.",
+		pt: "Preenche o formulário abaixo contando o que você precisa, ou chama pelo LinkedIn ou Instagram. Eu respondo com algumas perguntas e um primeiro passo, normalmente em até 2 dias úteis.",
+		en: "Fill in the form below telling me what you need, or message me on LinkedIn or Instagram. I will reply with a few questions and a first step, usually within 2 business days.",
 	},
-	ctaSticker: { pt: "sem compromisso", en: "no strings" },
-	ctaButton: { pt: "mandar mensagem", en: "send a message" },
 	contactTitle: { pt: "me manda uma mensagem", en: "send me a message" },
 	direct: { pt: "ou fala direto comigo", en: "or reach me directly" },
 	form: {
@@ -93,9 +86,14 @@ export default {
 		email: { pt: "e-mail", en: "email" },
 		topic: { pt: "o que você precisa", en: "what you need" },
 		message: { pt: "mensagem", en: "message" },
+		namePlaceholder: {
+			pt: "como posso te chamar?",
+			en: "what should I call you?",
+		},
+		emailPlaceholder: { pt: "voce@empresa.com", en: "you@company.com" },
 		placeholder: {
-			pt: "Conta o que você tem em mente, prazo e referências, se tiver.",
-			en: "Tell me what you have in mind, timing, and references if you have any.",
+			pt: "Qual o objetivo do projeto? Pra quando você precisa? Se tiver referências ou links, manda também.",
+			en: "What is the goal of the project? When do you need it? Send references or links too, if you have any.",
 		},
 		send: { pt: "enviar", en: "send" },
 		hint: {

@@ -22,6 +22,8 @@ export type FreelaFormLabels = {
 	email: string;
 	topic: string;
 	message: string;
+	namePlaceholder: string;
+	emailPlaceholder: string;
 	placeholder: string;
 	send: string;
 	hint: string;
@@ -94,12 +96,17 @@ export function FreelaContactForm({ labels }: { labels: FreelaFormLabels }) {
 			<div className="grid gap-5 sm:grid-cols-2">
 				<Field name="name">
 					<FieldLabel>{labels.name}</FieldLabel>
-					<Input autoComplete="name" />
+					<Input autoComplete="name" placeholder={labels.namePlaceholder} />
 					<FieldError />
 				</Field>
 				<Field name="email">
 					<FieldLabel>{labels.email}</FieldLabel>
-					<Input autoComplete="email" inputMode="email" type="email" />
+					<Input
+						autoComplete="email"
+						inputMode="email"
+						placeholder={labels.emailPlaceholder}
+						type="email"
+					/>
 					<FieldError />
 				</Field>
 			</div>

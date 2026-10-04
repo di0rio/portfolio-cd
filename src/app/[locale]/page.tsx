@@ -253,6 +253,7 @@ function personJsonLd(locale: string, role: string, bio: string) {
 		sameAs: [
 			`https://github.com/${site.github}`,
 			site.linkedin && `https://www.linkedin.com/in/${site.linkedin}`,
+			`https://www.instagram.com/${site.instagram}/`,
 		].filter(Boolean),
 	};
 }

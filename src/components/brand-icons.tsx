@@ -1,6 +1,6 @@
 import type { ComponentProps } from "react";
 
-// lucide não traz mais ícones de marca, então GitHub e LinkedIn ficam inline.
+// lucide não traz mais ícones de marca, então GitHub, LinkedIn e Instagram ficam inline.
 export function GithubIcon(props: ComponentProps<"svg">) {
 	return (
 		<svg aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" {...props}>
@@ -13,6 +13,25 @@ export function LinkedinIcon(props: ComponentProps<"svg">) {
 	return (
 		<svg aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" {...props}>
 			<path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.6c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21H9z" />
+		</svg>
+	);
+}
+
+export function InstagramIcon(props: ComponentProps<"svg">) {
+	return (
+		<svg
+			aria-hidden="true"
+			fill="none"
+			stroke="currentColor"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			strokeWidth="2"
+			viewBox="0 0 24 24"
+			{...props}
+		>
+			<rect height="18" rx="5" width="18" x="3" y="3" />
+			<circle cx="12" cy="12" r="4" />
+			<circle cx="17.5" cy="6.5" fill="currentColor" r="0.6" />
 		</svg>
 	);
 }

@@ -4,6 +4,7 @@ export const site = {
 	shortName: "cauã",
 	github: "di0rio",
 	linkedin: "cauã-diório",
+	instagram: "cauadiorio",
 	email: "caua.diorio29@gmail.com",
 	location: { city: "Jaú", region: "SP", country: "BR" },
 	company: {

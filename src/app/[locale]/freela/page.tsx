@@ -1,4 +1,4 @@
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowUpRightIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactLinks } from "@/components/contact-links";
@@ -11,7 +11,6 @@ import {
 	AccordionPanel,
 	AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
 import { projects } from "@/lib/projects";
@@ -60,30 +59,42 @@ export default async function Freela() {
 			<Section id="o-que-eu-faco" title={copy.whatTitle}>
 				<ul className="flex flex-col gap-3">
 					{what.map((item, i) => (
-						<li className="text-pretty" key={item}>
-							{item}
-							{i === 2 && cdui && (
-								<>
-									{" "}
-									<Link
-										className={link}
-										href={localePath(locale, `/projetos/${cdui.slug}`)}
-									>
-										{cdui.name}
-									</Link>
-									.
-								</>
-							)}
+						<li className="flex gap-3" key={item}>
+							<span
+								aria-hidden="true"
+								className="mt-[0.8em] h-0.5 w-3 shrink-0 rounded-full bg-brand"
+							/>
+							<span className="text-pretty">
+								{item}
+								{i === 2 && cdui && (
+									<>
+										{" "}
+										<Link
+											className={link}
+											href={localePath(locale, `/projetos/${cdui.slug}`)}
+										>
+											{cdui.name}
+										</Link>
+										.
+									</>
+								)}
+							</span>
 						</li>
 					))}
 				</ul>
 			</Section>
 
 			<Section id="como-funciona" title={copy.howTitle}>
-				<ol className="flex list-decimal flex-col gap-3 pl-5 marker:text-muted-foreground">
-					{how.map((step) => (
-						<li className="text-pretty" key={step}>
-							{step}
+				<ol className="flex flex-col gap-4">
+					{how.map((step, i) => (
+						<li className="flex gap-4" key={step}>
+							<span
+								aria-hidden="true"
+								className="w-5 shrink-0 pt-0.5 font-mono text-brand-foreground text-sm tabular-nums"
+							>
+								{String(i + 1).padStart(2, "0")}
+							</span>
+							<span className="text-pretty">{step}</span>
 						</li>
 					))}
 				</ol>
@@ -96,10 +107,14 @@ export default async function Freela() {
 						.map((p) => (
 							<li key={p.slug}>
 								<Link
-									className={link}
+									className={`${link} group inline-flex items-center gap-1`}
 									href={localePath(locale, `/projetos/${p.slug}`)}
 								>
 									{p.name}
+									<ArrowUpRightIcon
+										aria-hidden="true"
+										className="size-3.5 text-muted-foreground transition-transform duration-150 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transition-none"
+									/>
 								</Link>
 								<p className="text-muted-foreground">{t.app.projects[p.key]}</p>
 							</li>
@@ -111,50 +126,27 @@ export default async function Freela() {
 			</Section>
 
 			<Section id="duvidas" title={copy.faqTitle}>
-				<Accordion className="rounded-xl border bg-card px-4">
-					{faq.map(([q, a]) => (
+				<Accordion className="border-y">
+					{faq.map(([q, a], i) => (
 						<AccordionItem key={q} value={q}>
-							<AccordionTrigger>{q}</AccordionTrigger>
-							<AccordionPanel>
-								<p className="text-pretty pb-3.5">{a}</p>
+							<AccordionTrigger className="group items-baseline py-4 text-base">
+								<span className="flex flex-1 items-baseline gap-4">
+									<span
+										aria-hidden="true"
+										className="w-5 shrink-0 font-mono text-muted-foreground text-sm tabular-nums transition-colors duration-150 group-hover:text-brand-foreground group-data-[panel-open]:text-brand-foreground"
+									>
+										{String(i + 1).padStart(2, "0")}
+									</span>
+									<span className="text-pretty font-heading">{q}</span>
+								</span>
+							</AccordionTrigger>
+							<AccordionPanel className="text-base">
+								<p className="text-pretty pr-8 pl-9 leading-relaxed">{a}</p>
 							</AccordionPanel>
 						</AccordionItem>
 					))}
 				</Accordion>
 			</Section>
-
-			{/* Fechamento: faixa que acompanha o tema, adaptada do bloco cta-01 do cd/ui. */}
-			<section
-				aria-labelledby="vamos-conversar"
-				className="relative overflow-hidden rounded-3xl border bg-card px-6 py-10"
-			>
-				<div
-					aria-hidden="true"
-					className="absolute inset-0 opacity-[0.07] [background-image:radial-gradient(var(--foreground)_1px,transparent_1px)] [background-size:22px_22px]"
-				/>
-				<span className="absolute top-5 right-5 hidden rotate-6 rounded-xl border-[3px] border-foreground bg-brand px-3 py-1 font-heading font-semibold text-brand-contrast text-xs shadow-[3px_3px_0_var(--foreground)] sm:block">
-					{copy.ctaSticker}
-				</span>
-				<div className="relative max-w-md">
-					<h2
-						className="text-balance font-bold font-heading text-3xl leading-[1.05] tracking-[-0.03em]"
-						id="vamos-conversar"
-					>
-						{copy.ctaTitle}
-					</h2>
-					<p className="mt-3 text-pretty text-muted-foreground">{copy.cta}</p>
-					<div className="mt-6 flex flex-wrap gap-3">
-						<Button
-							nativeButton={false}
-							render={<a href="#contato" />}
-							variant="brand"
-						>
-							{copy.ctaButton}
-							<ArrowRightIcon aria-hidden="true" />
-						</Button>
-					</div>
-				</div>
-			</section>
 
 			<Section id="contato" title={copy.contactTitle}>
 				<div className="rounded-2xl border bg-card p-5 sm:p-6">
@@ -164,6 +156,8 @@ export default async function Freela() {
 							email: f.email,
 							topic: f.topic,
 							message: f.message,
+							namePlaceholder: f.namePlaceholder,
+							emailPlaceholder: f.emailPlaceholder,
 							placeholder: f.placeholder,
 							send: f.send,
 							hint: f.hint,
