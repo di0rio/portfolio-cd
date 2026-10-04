@@ -10,15 +10,28 @@ export const locales = Object.keys(translations) as Locale[];
  * O `[locale]` é o segmento raiz, então dá pra ler sem passar `params` adiante.
  */
 export async function getT() {
-  const value = await localeParam();
-  const locale: Locale = locales.includes(value as Locale) ? (value as Locale) : "pt";
-  return { locale, t: translations[locale], dateLocale: locale === "pt" ? "pt-BR" : "en-US" };
+	const value = await localeParam();
+	const locale: Locale = locales.includes(value as Locale)
+		? (value as Locale)
+		: "pt";
+	return {
+		locale,
+		t: translations[locale],
+		dateLocale: locale === "pt" ? "pt-BR" : "en-US",
+	};
 }
 
 /** Canonical + hreflang de uma página, pro Google ligar as duas versões. */
-export function alternates(locale: Locale, path: string): Metadata["alternates"] {
-  return {
-    canonical: localePath(locale, path),
-    languages: { "pt-BR": localePath("pt", path), en: localePath("en", path), "x-default": localePath("pt", path) },
-  };
+export function alternates(
+	locale: Locale,
+	path: string,
+): Metadata["alternates"] {
+	return {
+		canonical: localePath(locale, path),
+		languages: {
+			"pt-BR": localePath("pt", path),
+			en: localePath("en", path),
+			"x-default": localePath("pt", path),
+		},
+	};
 }

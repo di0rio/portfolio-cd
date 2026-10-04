@@ -16,16 +16,16 @@ export default {
 	bubble: { pt: "salve!", en: "hey!" },
 	today: { pt: "hoje", en: "today" },
 	bio: {
-		pt: "Na Loopscape, trabalho no front-end de produto. Curto cuidar do que faz diferença no uso: estados, interações e detalhes que deixam tudo mais claro.",
-		en: "At Loopscape, I work on product front ends. I like sweating the details that make things clearer: states, interactions, and the little touches along the way.",
+			pt: "Na Loopscape, trabalho no front-end de produto. Gosto de deixar cada tela clara de usar, dos estados e interações aos detalhes menores.",
+			en: "At Loopscape, I work on product front ends. I care about making each screen clear to use, from its states and interactions down to the small details.",
 	},
 	security: {
-		pt: "Fora do front-end, estudo segurança. Investigo logs, detecções e o jeito que sistemas falham no Sentinel Forge, meu projeto em Go.",
-		en: "Outside front-end, I study security. I dig into logs, detections, and how systems fail through Sentinel Forge, my Go project.",
+			pt: "Também estudo segurança. No Sentinel Forge, meu projeto em Go, investigo logs e testo formas de detectar ataques com sinais reais.",
+			en: "I also study security. With Sentinel Forge, my Go project, I dig into logs and test ways to spot attacks from real signals.",
 	},
 	ai: {
-		pt: "Uso IA pra explorar ideias e aprender mais rápido, mas gosto de entender exatamente o que vai pro código.",
-		en: "I use AI to explore ideas and learn faster, while making sure I understand what ends up in the code.",
+			pt: "Uso IA pra explorar ideias e aprender mais rápido. Antes de levar algo pro projeto, faço questão de entender o que o código está fazendo.",
+			en: "I use AI to explore ideas and learn faster. Before anything goes into a project, I make sure I understand what the code is doing.",
 	},
 	projects: {
 		title: { pt: "projetos", en: "projects" },
@@ -34,8 +34,8 @@ export default {
 			en: "Practice management for veterinary clinics.",
 		},
 		domus: {
-			pt: "Um CMS editorial que cresceu pra virar plataforma de conteúdo.",
-			en: "An editorial CMS that grew into a content platform.",
+			pt: "Um CMS editorial que virou plataforma pra organizar e publicar conteúdo.",
+			en: "An editorial CMS turned into a platform for organizing and publishing content.",
 		},
 		cdui: {
 			pt: "Componentes React enxutos, medidos em bytes e instalados no seu projeto.",
@@ -46,12 +46,16 @@ export default {
 			en: "Convert files without an upload. Everything runs in your browser.",
 		},
 		cdai: {
-			pt: "Um agente de código local. O modelo propõe, o código mantém o controle.",
-			en: "A local coding agent. The model proposes, the code stays in control.",
+			pt: "Um agente de código local em que o modelo sugere e o código decide o que pode acontecer.",
+			en: "A local coding agent where the model suggests and code decides what can happen.",
 		},
 		sentinel: {
 			pt: "Detecções de segurança em Go, com regras YAML testadas contra logs reais.",
 			en: "Security detections in Go, with YAML rules tested against real logs.",
+		},
+		fin: {
+			pt: "Finanças da família via Open Finance, só leitura: dashboard e avisos no Discord.",
+			en: "Family finances via Open Finance, read-only: a dashboard and Discord alerts.",
 		},
 		all: { pt: "todos os repositórios", en: "all repositories" },
 		contributions: {

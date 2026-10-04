@@ -6,7 +6,8 @@
 		"useIgnoreFile": true
 	},
 	"files": {
-		"ignoreUnknown": false
+		"ignoreUnknown": false,
+		"includes": ["**", "!**/*.svg", "!src/i18n/generated.ts"]
 	},
 	"formatter": {
 		"enabled": true,
@@ -16,6 +17,15 @@
 		"enabled": true,
 		"rules": {
 			"preset": "recommended"
+		},
+		"domains": {
+			"next": "recommended",
+			"react": "recommended"
+		}
+	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
 		}
 	},
 	"javascript": {

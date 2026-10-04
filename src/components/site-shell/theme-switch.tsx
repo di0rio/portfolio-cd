@@ -3,28 +3,43 @@
 import { MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
-import { buttonVariants } from "@/components/ui/button-variants";
+import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipPopup, TooltipTrigger } from "@/components/ui/tooltip";
 
 type Labels = { toLight: string; toDark: string };
 
 export function ThemeSwitch({ labels }: { labels: Labels }) {
-  const { resolvedTheme, setTheme } = useTheme();
-  // O tema só é conhecido no cliente; antes disso o botão fica sem ícone pra não piscar o errado.
-  const mounted = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false,
-  );
-  const dark = mounted && resolvedTheme === "dark";
+	const { resolvedTheme, setTheme } = useTheme();
+	// O tema só é conhecido no cliente; antes disso o botão fica sem ícone pra não piscar o errado.
+	const mounted = useSyncExternalStore(
+		() => () => {},
+		() => true,
+		() => false,
+	);
+	const dark = mounted && resolvedTheme === "dark";
+	const label = dark ? labels.toLight : labels.toDark;
 
-  return (
-    <button
-      aria-label={dark ? labels.toLight : labels.toDark}
-      className={buttonVariants({ size: "icon-sm", variant: "outline" })}
-      onClick={() => setTheme(dark ? "light" : "dark")}
-      type="button"
-    >
-      {mounted && (dark ? <SunIcon aria-hidden="true" /> : <MoonIcon aria-hidden="true" />)}
-    </button>
-  );
+	return (
+		<Tooltip>
+			<TooltipTrigger
+				render={
+					<Button
+						aria-label={label}
+						onClick={() => setTheme(dark ? "light" : "dark")}
+						size="icon-sm"
+						type="button"
+						variant="outline"
+					/>
+				}
+			>
+				{mounted &&
+					(dark ? (
+						<SunIcon aria-hidden="true" />
+					) : (
+						<MoonIcon aria-hidden="true" />
+					))}
+			</TooltipTrigger>
+			<TooltipPopup>{label}</TooltipPopup>
+		</Tooltip>
+	);
 }

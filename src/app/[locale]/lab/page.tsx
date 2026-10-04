@@ -5,12 +5,10 @@ import { ClipTabs } from "@/components/lab/clip-tabs";
 import { CopyButton } from "@/components/lab/copy-button";
 import { DragSheet } from "@/components/lab/drag-sheet";
 import { HoldToConfirm } from "@/components/lab/hold-to-confirm";
-import { PageHeader } from "@/components/page-header";
 import { PaletteDemo } from "@/components/lab/palette-demo";
 import { ReorderList } from "@/components/lab/reorder-list";
-// Terminal desativado junto com o experimento lá embaixo; volta com ele.
-// import { Terminal } from "@/components/lab/terminal";
 import { ToastStack } from "@/components/lab/toast-stack";
+import { PageHeader } from "@/components/page-header";
 import { alternates, getT } from "@/i18n/server";
 import { site } from "@/lib/site";
 
@@ -24,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Lab() {
-	const { t } = await getT(); // o `<Terminal>` comentado precisa de `locale` de volta
+	const { t } = await getT();
 	const copy = t.app.lab;
 
 	return (
@@ -127,10 +125,6 @@ export default async function Lab() {
 					label={copy.tabs.label}
 				/>
 			</Experiment>
-
-			{/* <Experiment desc={copy.terminal.desc} id="terminal" title={copy.terminal.title}> */}
-			{/* <Terminal locale={locale} /> */}
-			{/* </Experiment> */}
 		</>
 	);
 }

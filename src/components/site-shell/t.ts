@@ -6,7 +6,6 @@ export default {
 		lab: { pt: "lab", en: "lab" },
 		experience: { pt: "experiência", en: "experience" },
 		projects: { pt: "projetos", en: "projects" },
-		email: { pt: "e-mail", en: "email" },
 		cv: { pt: "CV", en: "CV" },
 	},
 	theme: {
@@ -34,7 +33,6 @@ export default {
 		dismiss: { pt: "fechar", en: "close" },
 		pages: { pt: "páginas", en: "pages" },
 		posts: { pt: "posts", en: "posts" },
-		actions: { pt: "ações", en: "actions" },
 		home: { pt: "início", en: "home" },
 		projects: { pt: "projetos", en: "projects" },
 		lab: { pt: "lab", en: "lab" },
@@ -43,11 +41,6 @@ export default {
 		freela: { pt: "trabalhe comigo", en: "work with me" },
 		agora: { pt: "agora", en: "now" },
 		log: { pt: "log do site", en: "site log" },
-		// terminal: { pt: "abrir terminal", en: "open terminal" },
-		terminalWords: {
-			pt: "terminal shell console comando cmd",
-			en: "terminal shell console command cmd",
-		},
 	},
 	footer: {
 		made: { pt: "feito por cauã.", en: "made by cauã." },
@@ -61,55 +54,5 @@ export default {
 			en: "type anywhere on the page:",
 		},
 		dismiss: { pt: "Fechar dica", en: "Dismiss hint" },
-	},
-	// Terminal global (Ctrl+J / Ctrl+`). Voz minúscula e curta.
-	terminal: {
-		title: { pt: "terminal", en: "terminal" },
-		close: { pt: "Fechar terminal", en: "Close terminal" },
-		label: { pt: "Comando", en: "Command" },
-		intro: {
-			pt: "digita help pra ver os comandos.",
-			en: "type help to see the commands.",
-		},
-		help: {
-			pt: [
-				"help          lista os comandos",
-				"ls            lista seções e projetos",
-				"cd <lugar>    navega: cd .., cd lab",
-				"pwd           onde você tá",
-				"open <proj>   abre o site ou o repo",
-				"theme [x]     troca o tema: light | dark",
-				"lang [x]      troca o idioma: pt | en",
-				"whoami        quem tá por aqui",
-				"clear         limpa a tela (ctrl+l)",
-				"tab completa, ↑ ↓ histórico, esc fecha.",
-			].join("\n"),
-			en: [
-				"help          list the commands",
-				"ls            list sections and projects",
-				"cd <place>    navigate: cd .., cd lab",
-				"pwd           where you are",
-				"open <proj>   open the site or repo",
-				"theme [x]     switch theme: light | dark",
-				"lang [x]      switch language: pt | en",
-				"whoami        who's around",
-				"clear         clear the screen (ctrl+l)",
-				"tab completes, ↑ ↓ history, esc closes.",
-			].join("\n"),
-		},
-		notFound: {
-			pt: "comando não encontrado: {cmd}",
-			en: "command not found: {cmd}",
-		},
-		noDir: {
-			pt: "cd: {dir}: lugar inexistente",
-			en: "cd: {dir}: no such place",
-		},
-		noProject: {
-			pt: "open: {name}: projeto inexistente",
-			en: "open: {name}: no such project",
-		},
-		usage: { pt: "uso: {use}", en: "usage: {use}" },
-		opening: { pt: "abrindo {url}", en: "opening {url}" },
 	},
 };

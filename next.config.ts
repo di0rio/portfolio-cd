@@ -1,6 +1,6 @@
-import type { NextConfig } from "next";
 import { networkInterfaces } from "node:os";
 import { withInternationalization } from "better-intl/next";
+import type { NextConfig } from "next";
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -40,7 +40,10 @@ const securityHeaders = [
 		key: "Permissions-Policy",
 		value: "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
 	},
-	{ key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" },
+	{
+		key: "Strict-Transport-Security",
+		value: "max-age=63072000; includeSubDomains",
+	},
 ];
 
 const nextConfig: NextConfig = {
@@ -75,8 +78,8 @@ const nextConfig: NextConfig = {
 			},
 		],
 	},
-	// Produção sem nenhum console.* do app; o aviso do console sai por alias (ver console-warning.tsx).
-	compiler: { removeConsole: !isDev },
+	// Produção sem console.* do app (exceto error, usado no envio do contato); o aviso do console sai por alias (ver console-warning.tsx).
+	compiler: { removeConsole: isDev ? false : { exclude: ["error"] } },
 };
 
 export default withInternationalization(nextConfig);

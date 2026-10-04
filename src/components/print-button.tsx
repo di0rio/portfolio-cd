@@ -1,19 +1,20 @@
 "use client";
 
 import { PrinterIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button-variants";
+import { Button } from "@/components/ui/button";
 
 export function PrintButton({ label }: { label: string }) {
-  return (
-    <button
-      className={cn(buttonVariants({ size: "sm", variant: "outline" }), "print:hidden")}
-      data-track="cv_pdf"
-      onClick={() => window.print()}
-      type="button"
-    >
-      <PrinterIcon aria-hidden="true" />
-      {label}
-    </button>
-  );
+	return (
+		<Button
+			className="print:hidden"
+			data-track="cv_pdf"
+			onClick={() => window.print()}
+			size="sm"
+			type="button"
+			variant="outline"
+		>
+			<PrinterIcon aria-hidden="true" />
+			{label}
+		</Button>
+	);
 }
