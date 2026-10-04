@@ -301,7 +301,6 @@ export const translations = {
 					title: "comandos",
 					intro: "digita em qualquer lugar da página:",
 					dismiss: "Fechar dica",
-					terminal: "ou abre o terminal:",
 				},
 				terminal: {
 					title: "terminal",
@@ -614,7 +613,6 @@ export const translations = {
 					title: "commands",
 					intro: "type anywhere on the page:",
 					dismiss: "Dismiss hint",
-					terminal: "or open the terminal:",
 				},
 				terminal: {
 					title: "terminal",

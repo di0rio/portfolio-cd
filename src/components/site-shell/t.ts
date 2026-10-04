@@ -61,7 +61,6 @@ export default {
 			en: "type anywhere on the page:",
 		},
 		dismiss: { pt: "Fechar dica", en: "Dismiss hint" },
-		terminal: { pt: "ou abre o terminal:", en: "or open the terminal:" },
 	},
 	// Terminal global (Ctrl+J / Ctrl+`). Voz minúscula e curta.
 	terminal: {

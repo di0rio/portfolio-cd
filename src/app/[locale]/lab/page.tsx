@@ -8,7 +8,8 @@ import { HoldToConfirm } from "@/components/lab/hold-to-confirm";
 import { PageHeader } from "@/components/page-header";
 import { PaletteDemo } from "@/components/lab/palette-demo";
 import { ReorderList } from "@/components/lab/reorder-list";
-import { Terminal } from "@/components/lab/terminal";
+// Terminal desativado junto com o experimento lá embaixo; volta com ele.
+// import { Terminal } from "@/components/lab/terminal";
 import { ToastStack } from "@/components/lab/toast-stack";
 import { alternates, getT } from "@/i18n/server";
 import { site } from "@/lib/site";
@@ -23,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Lab() {
-	const { t, locale } = await getT();
+	const { t } = await getT(); // o `<Terminal>` comentado precisa de `locale` de volta
 	const copy = t.app.lab;
 
 	return (

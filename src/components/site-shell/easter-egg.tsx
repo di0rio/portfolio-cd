@@ -5,11 +5,9 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { Locale } from "@/i18n/generated";
 import { localePath } from "@/i18n/path";
-import { Kbd } from "@/components/ui/kbd";
-import { useIsMac } from "./command-palette";
 import { sections } from "./shell-routes";
 
-type Copy = { title: string; intro: string; dismiss: string; terminal: string };
+type Copy = { title: string; intro: string; dismiss: string };
 
 const HINT_MS = 7000;
 
@@ -21,7 +19,6 @@ const hintNames = Object.keys(pages).filter((n) => n !== "~");
 
 export function EasterEgg({ locale, copy, slugs }: { locale: Locale; copy: Copy; slugs: string[] }) {
   const router = useRouter();
-  const mac = useIsMac();
   const [hint, setHint] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
@@ -79,9 +76,6 @@ export function EasterEgg({ locale, copy, slugs }: { locale: Locale; copy: Copy;
               </li>
             ))}
           </ul>
-          <p className="mt-2.5 text-muted-foreground text-xs">
-            {copy.terminal} <Kbd>{mac ? "⌘J" : "Ctrl J"}</Kbd>
-          </p>
           <button
             aria-label={copy.dismiss}
             className="absolute top-2 right-2 grid size-6 place-items-center rounded-md text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-brand"
