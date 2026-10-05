@@ -202,6 +202,7 @@ export const translations = {
 				repo: "ver repositório",
 				imageAlt: (v: { name: string }) => `captura de tela de ${v.name}`,
 				play: "reproduzir vídeo",
+				pause: "pausar vídeo",
 				nav: "outros projetos",
 				cdui: {
 					intro: "Componentes React que você instala no seu projeto. Cada byte é medido no build.",
@@ -528,6 +529,7 @@ export const translations = {
 				repo: "view repository",
 				imageAlt: (v: { name: string }) => `screenshot of ${v.name}`,
 				play: "play video",
+				pause: "pause video",
 				nav: "other projects",
 				cdui: {
 					intro: "React components you install into your project. Every byte is measured at build time.",

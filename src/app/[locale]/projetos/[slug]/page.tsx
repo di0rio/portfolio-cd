@@ -105,13 +105,13 @@ export default async function CaseStudy({
 						)}
 					</p>
 				)}
-				{/* Vídeos desligados por enquanto (ainda têm bugs). Pra religar: devolver `video={image.video}`
-            e os .mp4 de `.videos/` pra `public/projects/`. */}
 				{image && (
 					<ProjectMedia
 						alt={copy.imageAlt({ name: project.name })}
+						pause={copy.pause}
 						play={copy.play}
-						src={image.src} /* video={image.video} */
+						src={image.src}
+						video={image.video}
 					/>
 				)}
 			</PageHeader>

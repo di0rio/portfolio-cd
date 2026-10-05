@@ -1,35 +1,109 @@
 "use client";
 
-import { PlayIcon } from "lucide-react";
+import { PauseIcon, PlayIcon } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 /**
- * Print do projeto. Com vídeo, o print vira o poster e o vídeo só carrega e toca depois do clique
- * no botão de play (nada de autoplay). Daí em diante valem os controles nativos.
+ * Print do projeto. Com vídeo, ele toca sozinho, mudo e em loop, mas só baixa e roda enquanto está na
+ * tela (`preload="none"` + IntersectionObserver). Com movimento reduzido ou economia de dados, nada
+ * toca sozinho: o print fica com um botão de play e o vídeo só carrega depois do clique.
  */
 export function ProjectMedia({
 	src,
 	video,
 	alt,
 	play,
+	pause,
 }: {
 	src: string;
 	video?: string;
 	alt: string;
 	play: string;
+	pause: string;
 }) {
-	const [started, setStarted] = useState(false);
+	const [mode, setMode] = useState<"poster" | "auto" | "manual">("poster");
+	const [paused, setPaused] = useState(false);
 	const player = useRef<HTMLVideoElement>(null);
 
-	// O botão some ao clicar; o foco vai pro vídeo pra teclado e leitor de tela não se perderem.
+	// Só no cliente dá pra saber a preferência de movimento e a economia de dados.
 	useEffect(() => {
-		if (started) player.current?.focus();
-	}, [started]);
+		if (!video) return;
+		const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+		const saveData = (
+			navigator as Navigator & { connection?: { saveData?: boolean } }
+		).connection?.saveData;
+		if (!reduced && !saveData) setMode("auto");
+	}, [video]);
+
+	// Toca só enquanto pelo menos um quarto do vídeo está visível; fora da tela pausa e não baixa nada.
+	useEffect(() => {
+		const el = player.current;
+		if (mode !== "auto" || !el) return;
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting && !el.dataset.userPaused)
+					el.play().catch(() => {});
+				else el.pause();
+			},
+			{ threshold: 0.25 },
+		);
+		observer.observe(el);
+		return () => observer.disconnect();
+	}, [mode]);
+
+	// No modo manual o foco vai pro vídeo, pra teclado e leitor de tela não se perderem.
+	useEffect(() => {
+		if (mode === "manual") player.current?.focus();
+	}, [mode]);
+
+	function togglePause() {
+		const el = player.current;
+		if (!el) return;
+		if (el.paused) {
+			delete el.dataset.userPaused;
+			el.play().catch(() => {});
+			setPaused(false);
+		} else {
+			el.dataset.userPaused = "1";
+			el.pause();
+			setPaused(true);
+		}
+	}
 
 	return (
 		<div className="wide relative mt-8 aspect-video overflow-hidden rounded-xl border bg-card">
-			{started ? (
+			{mode === "auto" ? (
+				<>
+					<video
+						aria-label={alt}
+						className="block size-full object-cover"
+						loop
+						muted
+						playsInline
+						poster={src}
+						preload="none"
+						ref={player}
+						src={video}
+					/>
+					{/* Movimento automático de mais de 5s precisa de um jeito de parar (WCAG 2.2.2). */}
+					<button
+						aria-label={paused ? play : pause}
+						className="absolute right-3 bottom-3 grid size-9 cursor-pointer place-items-center rounded-full bg-background/80 text-foreground shadow-sm ring-1 ring-border outline-none backdrop-blur-sm transition-transform duration-150 ease-out focus-visible:ring-2 focus-visible:ring-ring motion-safe:active:scale-95"
+						onClick={togglePause}
+						type="button"
+					>
+						{paused ? (
+							<PlayIcon
+								aria-hidden="true"
+								className="size-4 translate-x-px fill-current"
+							/>
+						) : (
+							<PauseIcon aria-hidden="true" className="size-4 fill-current" />
+						)}
+					</button>
+				</>
+			) : mode === "manual" ? (
 				// biome-ignore lint/a11y/useMediaCaption: vídeo de demo sem fala
 				<video
 					aria-label={alt}
@@ -58,7 +132,7 @@ export function ProjectMedia({
 						<button
 							aria-label={play}
 							className="group absolute inset-0 grid cursor-pointer place-items-center outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
-							onClick={() => setStarted(true)}
+							onClick={() => setMode("manual")}
 							type="button"
 						>
 							<span className="grid size-14 place-items-center rounded-full bg-background/90 text-foreground shadow-sm ring-1 ring-border transition-transform duration-150 ease-out motion-safe:group-hover:scale-105 motion-safe:group-active:scale-95">

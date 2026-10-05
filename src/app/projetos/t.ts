@@ -6,6 +6,7 @@ export default {
 	repo: { pt: "ver repositório", en: "view repository" },
 	imageAlt: { pt: "captura de tela de {name}", en: "screenshot of {name}" },
 	play: { pt: "reproduzir vídeo", en: "play video" },
+	pause: { pt: "pausar vídeo", en: "pause video" },
 	nav: { pt: "outros projetos", en: "other projects" },
 
 	cdui: {

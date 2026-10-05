@@ -1,41 +1,57 @@
 {
-	"version": "0.0.1",
-	"configurations": [
-		{
-			"name": "portfolio-cd",
-			"runtimeExecutable": "bun",
-			"runtimeArgs": ["run", "dev"],
-			"port": 3000
-		},
-		{
-			"name": "cd-ui",
-			"runtimeExecutable": "bun",
-			"runtimeArgs": ["run", "--cwd=../cd-ui", "dev"],
-			"port": 3001
-		},
-		{
-			"name": "agenda-vet",
-			"runtimeExecutable": "bun",
-			"runtimeArgs": ["run", "--cwd=../agenda-vet", "dev"],
-			"port": 3002
-		},
-		{
-			"name": "converter-hub",
-			"runtimeExecutable": "bun",
-			"runtimeArgs": [
-				"run",
-				"--cwd=../Converter-Hub/apps/web",
-				"dev",
-				"-p",
-				"3004"
-			],
-			"port": 3004
-		},
-		{
-			"name": "portfolio-prod",
-			"runtimeExecutable": "bun",
-			"runtimeArgs": ["run", "start", "-p", "3005"],
-			"port": 3005
-		}
-	]
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "portfolio-cd",
+      "runtimeExecutable": "bun",
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "port": 3000
+    },
+    {
+      "name": "cd-ui",
+      "runtimeExecutable": "bun",
+      "runtimeArgs": [
+        "run",
+        "--cwd=../cd-ui",
+        "dev"
+      ],
+      "port": 3001
+    },
+    {
+      "name": "agenda-vet",
+      "runtimeExecutable": "bun",
+      "runtimeArgs": [
+        "run",
+        "--cwd=../agenda-vet",
+        "dev"
+      ],
+      "port": 3002
+    },
+    {
+      "name": "converter-hub",
+      "runtimeExecutable": "bun",
+      "runtimeArgs": [
+        "run",
+        "--cwd=../Converter-Hub/apps/web",
+        "dev",
+        "-p",
+        "3004"
+      ],
+      "port": 3004
+    },
+    {
+      "name": "portfolio-prod",
+      "runtimeExecutable": "bun",
+      "runtimeArgs": [
+        "run",
+        "start",
+        "-p",
+        "3011"
+      ],
+      "port": 3011
+    }
+  ]
 }
