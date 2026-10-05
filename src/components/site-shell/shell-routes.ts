@@ -8,7 +8,6 @@ export const sections = {
 	cv: "/cv",
 	freela: "/freela",
 	agora: "/agora",
-	processo: "/processo",
 	log: "/log",
 	projetos: "/projetos",
 } as const;

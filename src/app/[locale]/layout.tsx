@@ -126,12 +126,12 @@ export default async function RootLayout({
 									[
 										["/freela", t.app.freela.footerLink],
 										["/agora", t.app.agora.footerLink],
-										["/processo", t.app.processo.footerLink],
 										["/log", t.app.log.footerLink],
 									] as const
 								).map(([path, label]) => (
 									<Link
 										className="underline decoration-muted-foreground/40 underline-offset-4 hover:text-foreground hover:decoration-brand"
+										data-track={path === "/freela" ? "freela" : undefined}
 										href={localePath(locale, path)}
 										key={path}
 									>

@@ -9,6 +9,12 @@ export default {
 		projects: { pt: "projetos", en: "projects" },
 		cv: { pt: "CV", en: "CV" },
 		email: { pt: "E-mail", en: "Email" },
+		copyEmail: { pt: "Copiar e-mail", en: "Copy email" },
+		emailCopied: { pt: "E-mail copiado", en: "Email copied" },
+		reply: {
+			pt: "Respondo em até 1 dia útil. Manda o que você precisa e pra quando.",
+			en: "I reply within 1 business day. Send what you need and by when.",
+		},
 	},
 	theme: {
 		toLight: { pt: "Mudar pro tema claro", en: "Switch to light theme" },
@@ -46,7 +52,6 @@ export default {
 		cv: { pt: "CV", en: "CV" },
 		freela: { pt: "trabalhe comigo", en: "work with me" },
 		agora: { pt: "agora", en: "now" },
-		processo: { pt: "como eu trabalho", en: "how i work" },
 		log: { pt: "log do site", en: "site log" },
 	},
 	footer: {
