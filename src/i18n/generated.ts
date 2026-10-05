@@ -238,13 +238,13 @@ export const translations = {
 			},
 			meta: {
 				title: "Cauã Diório · desenvolvedor front-end",
-				description: "Dev front-end na Loopscape. Faço produto de ponta a ponta, do banco à tela, e fuço segurança nas horas vagas.",
+				description: "Dev front-end na Loopscape. Faço produto de ponta a ponta, do banco à tela, e estudo segurança de hobby.",
 			},
 			role: "desenvolvedor front-end júnior",
 			bubble: "salve!",
 			today: "hoje",
 			bio: "Trabalho na Loopscape fazendo produto de ponta a ponta. Meu forte é o front, mas pego do banco e da API até o último estado da tela.",
-			security: "Fora do trabalho eu fuço segurança. O Sentinel Forge é meu laboratório: leio log de sshd e nginx e testo jeito de pegar ataque.",
+			security: "Fora do trabalho eu estudo segurança, mais de hobby mesmo. O Sentinel Forge é onde eu testo isso: leio log de sshd e nginx e vejo como pegar ataque.",
 			ai: "Uso IA todo dia pra aprender mais rápido, mas nada entra no projeto sem eu entender o que o código tá fazendo.",
 			projects: {
 				title: "projetos",
@@ -604,13 +604,13 @@ export const translations = {
 			},
 			meta: {
 				title: "Cauã Diório · front-end developer",
-				description: "Front-end dev at Loopscape. I build products end to end, database to screen, and poke at security on the side.",
+				description: "Front-end dev at Loopscape. I build products end to end, database to screen, and study security as a hobby.",
 			},
 			role: "junior front-end developer",
 			bubble: "hey!",
 			today: "today",
 			bio: "I work at Loopscape building products end to end. Front-end is my thing, but I go from the database and API all the way to the last screen state.",
-			security: "Outside work I poke at security. Sentinel Forge is my playground: I read sshd and nginx logs and try out ways to catch attacks.",
+			security: "Outside work I study security, mostly as a hobby. Sentinel Forge is where I try it out: I read sshd and nginx logs and work out how to catch attacks.",
 			ai: "I use AI every day to learn faster, but nothing goes into a project until I understand what the code is doing.",
 			projects: {
 				title: "projects",

@@ -5,8 +5,8 @@ export default {
 			en: "Cauã Diório · front-end developer",
 		},
 		description: {
-			pt: "Dev front-end na Loopscape. Faço produto de ponta a ponta, do banco à tela, e fuço segurança nas horas vagas.",
-			en: "Front-end dev at Loopscape. I build products end to end, database to screen, and poke at security on the side.",
+			pt: "Dev front-end na Loopscape. Faço produto de ponta a ponta, do banco à tela, e estudo segurança de hobby.",
+			en: "Front-end dev at Loopscape. I build products end to end, database to screen, and study security as a hobby.",
 		},
 	},
 	role: {
@@ -20,8 +20,8 @@ export default {
 		en: "I work at Loopscape building products end to end. Front-end is my thing, but I go from the database and API all the way to the last screen state.",
 	},
 	security: {
-		pt: "Fora do trabalho eu fuço segurança. O Sentinel Forge é meu laboratório: leio log de sshd e nginx e testo jeito de pegar ataque.",
-		en: "Outside work I poke at security. Sentinel Forge is my playground: I read sshd and nginx logs and try out ways to catch attacks.",
+		pt: "Fora do trabalho eu estudo segurança, mais de hobby mesmo. O Sentinel Forge é onde eu testo isso: leio log de sshd e nginx e vejo como pegar ataque.",
+		en: "Outside work I study security, mostly as a hobby. Sentinel Forge is where I try it out: I read sshd and nginx logs and work out how to catch attacks.",
 	},
 	ai: {
 		pt: "Uso IA todo dia pra aprender mais rápido, mas nada entra no projeto sem eu entender o que o código tá fazendo.",
