@@ -8,6 +8,7 @@ export default {
 		pt: "Ainda não tem texto por aqui. Quando eu publicar um projeto com a tag `portfolio`, ele aparece nesta página.",
 		en: "No posts here yet. When I publish a project with the `portfolio` topic, it’ll show up on this page.",
 	},
+	nav: { pt: "outros posts", en: "other posts" },
 	back: { pt: "voltar pro blog", en: "back to blog" },
 	repo: { pt: "ver repositório", en: "view repository" },
 	onGithub: { pt: "ver no github", en: "view on github" },

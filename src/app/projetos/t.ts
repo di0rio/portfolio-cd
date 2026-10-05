@@ -7,8 +7,6 @@ export default {
 	imageAlt: { pt: "captura de tela de {name}", en: "screenshot of {name}" },
 	play: { pt: "reproduzir vídeo", en: "play video" },
 	nav: { pt: "outros projetos", en: "other projects" },
-	prev: { pt: "anterior", en: "previous" },
-	next: { pt: "próximo", en: "next" },
 
 	cdui: {
 		intro: {

@@ -560,7 +560,8 @@ html[data-pending] main {
 }
 
 /* Entrada escalonada das seções principais: opacidade + 6px pra cima + 2px de blur, 100ms entre elas
-   (--stagger). `backwards` não deixa filter/transform ativos depois do fim (evita contexto de empilhamento). */
+   (--stagger). `backwards` não deixa filter/transform ativos depois do fim (evita contexto de empilhamento).
+   Só no carregamento do documento: depois da 1ª troca de rota (`data-nav`, ver entry-once.tsx) o ViewTransition cuida. */
 @keyframes stagger-in {
 	from {
 		opacity: 0;
@@ -569,7 +570,7 @@ html[data-pending] main {
 	}
 }
 @media (prefers-reduced-motion: no-preference) {
-	main > * {
+	html:not([data-nav]) main > * {
 		animation: stagger-in 500ms var(--ease-out) calc(var(--stagger, 0) * 100ms)
 			backwards;
 	}

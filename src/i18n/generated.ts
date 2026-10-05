@@ -31,6 +31,7 @@ export const translations = {
 				title: "blog",
 				intro: "Textos sobre o que construí, o que aprendi e as decisões pelo caminho.",
 				empty: "Ainda não tem texto por aqui. Quando eu publicar um projeto com a tag `portfolio`, ele aparece nesta página.",
+				nav: "outros posts",
 				back: "voltar pro blog",
 				repo: "ver repositório",
 				onGithub: "ver no github",
@@ -202,8 +203,6 @@ export const translations = {
 				imageAlt: (v: { name: string }) => `captura de tela de ${v.name}`,
 				play: "reproduzir vídeo",
 				nav: "outros projetos",
-				prev: "anterior",
-				next: "próximo",
 				cdui: {
 					intro: "Componentes React que você instala no seu projeto. Cada byte é medido no build.",
 				},
@@ -291,6 +290,10 @@ export const translations = {
 					toLight: "Mudar pro tema claro",
 					toDark: "Mudar pro tema escuro",
 				},
+				stepper: {
+					prev: (v: { title: string }) => `anterior: ${v.title}`,
+					next: (v: { title: string }) => `próximo: ${v.title}`,
+				},
 				language: {
 					label: "Idioma",
 				},
@@ -354,6 +357,7 @@ export const translations = {
 				title: "blog",
 				intro: "Notes on what I’ve built, what I’ve learned, and the decisions along the way.",
 				empty: "No posts here yet. When I publish a project with the `portfolio` topic, it’ll show up on this page.",
+				nav: "other posts",
 				back: "back to blog",
 				repo: "view repository",
 				onGithub: "view on github",
@@ -525,8 +529,6 @@ export const translations = {
 				imageAlt: (v: { name: string }) => `screenshot of ${v.name}`,
 				play: "play video",
 				nav: "other projects",
-				prev: "previous",
-				next: "next",
 				cdui: {
 					intro: "React components you install into your project. Every byte is measured at build time.",
 				},
@@ -613,6 +615,10 @@ export const translations = {
 				theme: {
 					toLight: "Switch to light theme",
 					toDark: "Switch to dark theme",
+				},
+				stepper: {
+					prev: (v: { title: string }) => `previous: ${v.title}`,
+					next: (v: { title: string }) => `next: ${v.title}`,
 				},
 				language: {
 					label: "Language",

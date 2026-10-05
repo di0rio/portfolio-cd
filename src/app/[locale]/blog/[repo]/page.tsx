@@ -1,10 +1,11 @@
-import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
+import { ArrowLeftIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ViewTransition } from "react";
 import { ArticleToc } from "@/components/article-toc";
 import { Markdown } from "@/components/markdown";
+import { PageStepper } from "@/components/site-shell/page-stepper";
 import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
 import { getBlogPost, getBlogPosts, getReadme } from "@/lib/github";
@@ -40,9 +41,20 @@ export default async function Post({
 	const index = posts.findIndex((p) => p.slug === slug);
 	if (index < 0) notFound();
 	const post = posts[index];
-	const [newer, older] = [posts[index - 1], posts[index + 1]];
 
 	const copy = t.app.blog;
+	// A lista vem do mais novo pro mais velho: ← (anterior) é o post mais novo, → (próximo) o mais velho,
+	// e o contador segue a posição na lista.
+	const stepper = t.components["site-shell"].stepper;
+	const step = (
+		p: (typeof posts)[number] | undefined,
+		label: (v: { title: string }) => string,
+	) =>
+		p && {
+			href: localePath(locale, `/blog/${p.slug}`),
+			title: p.title,
+			label: label({ title: p.title }),
+		};
 	const { repo, note } = post;
 	const readme = note
 		? { markdown: note.markdown, translated: note.translated }
@@ -52,22 +64,26 @@ export default async function Post({
 		month: "long",
 		year: "numeric",
 	});
-	const shortFmt = new Intl.DateTimeFormat(dateLocale, {
-		day: "numeric",
-		month: "short",
-		year: "numeric",
-	});
 
 	return (
 		<article className="relative">
 			<div aria-hidden="true" className="read-progress" />
-			<Link
-				className="inline-flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground"
-				href={localePath(locale, "/blog")}
-			>
-				<ArrowLeftIcon aria-hidden="true" className="size-3.5" />
-				{copy.back}
-			</Link>
+			<div className="flex items-center justify-between gap-3">
+				<Link
+					className="inline-flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground"
+					href={localePath(locale, "/blog")}
+				>
+					<ArrowLeftIcon aria-hidden="true" className="size-3.5" />
+					{copy.back}
+				</Link>
+				<PageStepper
+					current={index + 1}
+					label={copy.nav}
+					next={step(posts[index + 1], stepper.next)}
+					prev={step(posts[index - 1], stepper.prev)}
+					total={posts.length}
+				/>
+			</div>
 
 			<header className="mt-6 mb-8 border-b pb-6">
 				{/* Mesmo nome do título na lista do blog: o título "voa" de um lugar pro outro. */}
@@ -150,46 +166,6 @@ export default async function Post({
 				</Markdown>
 			) : (
 				<p className="text-muted-foreground">{copy.noReadme}</p>
-			)}
-
-			{(newer || older) && (
-				<nav className="mt-16 grid gap-x-6 gap-y-4 border-t pt-6 sm:grid-cols-2">
-					{[newer, older].map((adjacent, i) =>
-						adjacent ? (
-							<Link
-								className={`group -mx-2 flex flex-col gap-0.5 rounded-lg px-2 py-2 outline-none focus-visible:ring-2 focus-visible:ring-brand ${i ? "sm:col-start-2 sm:items-end sm:text-right" : ""}`}
-								href={localePath(locale, `/blog/${adjacent.slug}`)}
-								key={adjacent.slug}
-								rel={i ? "next" : "prev"}
-							>
-								<time
-									className="text-muted-foreground text-sm tabular-nums"
-									dateTime={adjacent.date}
-								>
-									{shortFmt.format(new Date(adjacent.date))}
-								</time>
-								<span
-									className={`flex items-baseline gap-1.5 font-medium ${i ? "flex-row-reverse" : ""}`}
-								>
-									{i ? (
-										<ArrowRightIcon
-											aria-hidden="true"
-											className="size-3.5 shrink-0 translate-y-0.5 self-center text-muted-foreground transition-transform duration-150 ease-out group-hover:translate-x-0.5"
-										/>
-									) : (
-										<ArrowLeftIcon
-											aria-hidden="true"
-											className="size-3.5 shrink-0 translate-y-0.5 self-center text-muted-foreground transition-transform duration-150 ease-out group-hover:-translate-x-0.5"
-										/>
-									)}
-									<span className="underline decoration-transparent underline-offset-4 transition-[text-decoration-color] duration-150 ease-[ease] group-hover:decoration-brand group-focus-visible:decoration-brand">
-										{adjacent.title}
-									</span>
-								</span>
-							</Link>
-						) : null,
-					)}
-				</nav>
 			)}
 
 			{/* Índice no gutter direito, só onde cabe (>= 1200px); a coluna de 640px não muda. */}

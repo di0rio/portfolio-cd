@@ -12,6 +12,10 @@ export default {
 		toLight: { pt: "Mudar pro tema claro", en: "Switch to light theme" },
 		toDark: { pt: "Mudar pro tema escuro", en: "Switch to dark theme" },
 	},
+	stepper: {
+		prev: { pt: "anterior: {title}", en: "previous: {title}" },
+		next: { pt: "próximo: {title}", en: "next: {title}" },
+	},
 	language: {
 		label: { pt: "Idioma", en: "Language" },
 	},

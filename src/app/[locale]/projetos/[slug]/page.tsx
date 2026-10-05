@@ -1,10 +1,11 @@
-import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
+import { ArrowLeftIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Markdown } from "@/components/markdown";
 import { PageHeader } from "@/components/page-header";
 import { ProjectMedia } from "@/components/project-media";
+import { PageStepper } from "@/components/site-shell/page-stepper";
 import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
 import { projectArticle, projectImage, projects } from "@/lib/projects";
@@ -45,19 +46,37 @@ export default async function CaseStudy({
 	const c = copy[project.key];
 	const article = await projectArticle(project.slug, locale);
 	const image = projectImage(project.slug);
-	const siblings = [projects[index - 1], projects[index + 1]];
+	const stepper = t.components["site-shell"].stepper;
+	const step = (
+		p: (typeof projects)[number] | undefined,
+		label: (v: { title: string }) => string,
+	) =>
+		p && {
+			href: localePath(locale, `/projetos/${p.slug}`),
+			title: p.name,
+			label: label({ title: p.name }),
+		};
 
 	return (
 		<>
 			<PageHeader
 				back={
-					<Link
-						className="inline-flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground"
-						href={localePath(locale, "/#projetos")}
-					>
-						<ArrowLeftIcon aria-hidden="true" className="size-3.5" />
-						{copy.back}
-					</Link>
+					<div className="flex items-center justify-between gap-3">
+						<Link
+							className="inline-flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground"
+							href={localePath(locale, "/#projetos")}
+						>
+							<ArrowLeftIcon aria-hidden="true" className="size-3.5" />
+							{copy.back}
+						</Link>
+						<PageStepper
+							current={index + 1}
+							label={copy.nav}
+							next={step(projects[index + 1], stepper.next)}
+							prev={step(projects[index - 1], stepper.prev)}
+							total={projects.length}
+						/>
+					</div>
 				}
 				intro={c.intro}
 				title={project.name}
@@ -98,36 +117,6 @@ export default async function CaseStudy({
 			</PageHeader>
 
 			{article && <Markdown>{article}</Markdown>}
-
-			<nav
-				aria-label={copy.nav}
-				className="flex justify-between gap-4 border-t pt-6"
-			>
-				{siblings.map((p, i) =>
-					p ? (
-						<Link
-							className={`group/nav flex flex-col gap-0.5 ${i === 1 ? "ml-auto text-right" : ""}`}
-							href={localePath(locale, `/projetos/${p.slug}`)}
-							key={p.slug}
-						>
-							<span
-								className={`inline-flex items-center gap-1 text-muted-foreground text-sm ${i === 1 ? "justify-end" : ""}`}
-							>
-								{i === 0 && (
-									<ArrowLeftIcon aria-hidden="true" className="size-3.5" />
-								)}
-								{i === 0 ? copy.prev : copy.next}
-								{i === 1 && (
-									<ArrowRightIcon aria-hidden="true" className="size-3.5" />
-								)}
-							</span>
-							<span className="underline decoration-muted-foreground/40 underline-offset-4 transition-[text-decoration-color] duration-150 group-hover/nav:decoration-brand">
-								{p.name}
-							</span>
-						</Link>
-					) : null,
-				)}
-			</nav>
 		</>
 	);
 }

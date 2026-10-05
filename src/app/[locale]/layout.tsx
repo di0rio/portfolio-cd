@@ -8,6 +8,7 @@ import { ClickTracker } from "@/components/site-shell/click-tracker";
 import { CommandPalette } from "@/components/site-shell/command-palette";
 import { ConsoleWarning } from "@/components/site-shell/console-warning";
 import { EasterEgg } from "@/components/site-shell/easter-egg";
+import { EntryOnce } from "@/components/site-shell/entry-once";
 import { LocaleSwitch } from "@/components/site-shell/locale-switch";
 import { SiteNav } from "@/components/site-shell/site-nav";
 import { ThemeProvider } from "@/components/site-shell/theme-provider";
@@ -121,6 +122,7 @@ export default async function RootLayout({
 							locale={locale}
 							slugs={projects.map((p) => p.slug)}
 						/>
+						<EntryOnce />
 						<Analytics />
 						<ClickTracker />
 						<ConsoleWarning />
