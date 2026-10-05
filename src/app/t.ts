@@ -20,8 +20,8 @@ export default {
 		en: "At Loopscape, I build products end to end with a front-end focus: from the database and API down to every screen state.",
 	},
 	security: {
-		pt: "Também estudo segurança. No Sentinel Forge, meu projeto em Go, investigo logs e testo formas de detectar ataques com sinais reais.",
-		en: "I also study security. With Sentinel Forge, my Go project, I dig into logs and test ways to spot attacks from real signals.",
+		pt: "Também estudo segurança. No Sentinel Forge, meu projeto em Go, investigo logs de sshd e nginx e testo formas de detectar ataques.",
+		en: "I also study security. With Sentinel Forge, my Go project, I dig into sshd and nginx logs and test ways to spot attacks.",
 	},
 	ai: {
 		pt: "Uso IA pra explorar ideias e aprender mais rápido. Antes de levar algo pro projeto, faço questão de entender o que o código está fazendo.",
@@ -42,8 +42,8 @@ export default {
 			en: "A local coding agent where the model suggests and code decides what can happen.",
 		},
 		sentinel: {
-			pt: "Detecções de segurança em Go, com regras YAML testadas contra logs reais.",
-			en: "Security detections in Go, with YAML rules tested against real logs.",
+			pt: "Detecções de segurança em Go, com regras YAML testadas contra logs de sshd e nginx.",
+			en: "Security detections in Go, with YAML rules tested against sshd and nginx logs.",
 		},
 		hub: {
 			pt: "Ferramenta interna pra migrar clínicas pro Loopvet: auditoria sem escrita, importação e débitos.",
@@ -56,12 +56,12 @@ export default {
 		// Um número por projeto, tirado do estudo de caso (home e /projetos).
 		metric: {
 			cdui: {
-				pt: "27 componentes e 15 blocos, ~600 B em gzip cada",
-				en: "27 components and 15 blocks, ~600 B gzipped each",
+				pt: "27 componentes e 15 blocos, ~600 B em gzip em média",
+				en: "27 components and 15 blocks, ~600 B gzipped on average",
 			},
 			converter: {
-				pt: "0 bytes enviados: a CSP do app bloqueia upload",
-				en: "0 bytes uploaded: the app's CSP blocks it",
+				pt: "nada sai da aba: a CSP do app bloqueia upload",
+				en: "nothing leaves the tab: the app's CSP blocks uploads",
 			},
 			cdai: {
 				pt: "0 chamadas a API externa: tudo roda no Ollama",

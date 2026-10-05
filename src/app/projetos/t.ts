@@ -2,8 +2,8 @@
 export default {
 	title: { pt: "projetos", en: "projects" },
 	intro: {
-		pt: "O que eu construí, com o problema, as decisões e os números de cada um. Os privados não têm link, mas têm estudo de caso.",
-		en: "What I've built, with the problem, the decisions and the numbers behind each one. Private ones have no link, but they have a case study.",
+		pt: "O que eu construí, com o problema, as decisões e os números de cada um. Os privados não têm código público, mas têm estudo de caso.",
+		en: "What I've built, with the problem, the decisions and the numbers behind each one. Private ones have no public code, but they have a case study.",
 	},
 	private: { pt: "privado", en: "private" },
 	caseStudy: { pt: "estudo de caso", en: "case study" },
@@ -38,8 +38,8 @@ export default {
 
 	sentinel: {
 		intro: {
-			pt: "Regras YAML e um motor em Go pra testar detecções de segurança contra logs reais.",
-			en: "YAML rules and a Go engine for testing security detections against real logs.",
+			pt: "Regras YAML e um motor em Go pra testar detecções de segurança contra logs de sshd e nginx.",
+			en: "YAML rules and a Go engine for testing security detections against sshd and nginx logs.",
 		},
 	},
 

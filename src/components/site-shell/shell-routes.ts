@@ -62,9 +62,6 @@ export function resolvePath(
 	return undefined;
 }
 
-/** Rota real (sem idioma) pra um caminho virtual. Hoje são iguais; fica como ponto único se mudar. */
-export const hrefOf = (path: string) => path;
-
 /** Nomes dentro de um diretório virtual. */
 export function children(dir: string, tree: Tree): string[] {
 	if (dir === "/") return Object.keys(sections);

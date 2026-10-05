@@ -198,7 +198,7 @@ export const translations = {
 			},
 			projetos: {
 				title: "projetos",
-				intro: "O que eu construí, com o problema, as decisões e os números de cada um. Os privados não têm link, mas têm estudo de caso.",
+				intro: "O que eu construí, com o problema, as decisões e os números de cada um. Os privados não têm código público, mas têm estudo de caso.",
 				private: "privado",
 				caseStudy: "estudo de caso",
 				back: "projetos",
@@ -218,7 +218,7 @@ export const translations = {
 					intro: "Um agente de código que roda localmente. O modelo sugere; o código controla cada ação.",
 				},
 				sentinel: {
-					intro: "Regras YAML e um motor em Go pra testar detecções de segurança contra logs reais.",
+					intro: "Regras YAML e um motor em Go pra testar detecções de segurança contra logs de sshd e nginx.",
 				},
 				hub: {
 					intro: "A bancada de migração de clínicas do Loopvet: um auditor que só lê, um importador e um lançador que isola cada um.",
@@ -235,19 +235,19 @@ export const translations = {
 			bubble: "salve!",
 			today: "hoje",
 			bio: "Na Loopscape, construo produto de ponta a ponta com foco no front-end: do banco e da API até cada estado da tela.",
-			security: "Também estudo segurança. No Sentinel Forge, meu projeto em Go, investigo logs e testo formas de detectar ataques com sinais reais.",
+			security: "Também estudo segurança. No Sentinel Forge, meu projeto em Go, investigo logs de sshd e nginx e testo formas de detectar ataques.",
 			ai: "Uso IA pra explorar ideias e aprender mais rápido. Antes de levar algo pro projeto, faço questão de entender o que o código está fazendo.",
 			projects: {
 				title: "projetos",
 				cdui: "Componentes React enxutos, medidos em bytes e instalados no seu projeto.",
 				converter: "Converta arquivos sem upload. Tudo roda no navegador.",
 				cdai: "Um agente de código local em que o modelo sugere e o código decide o que pode acontecer.",
-				sentinel: "Detecções de segurança em Go, com regras YAML testadas contra logs reais.",
+				sentinel: "Detecções de segurança em Go, com regras YAML testadas contra logs de sshd e nginx.",
 				hub: "Ferramenta interna pra migrar clínicas pro Loopvet: auditoria sem escrita, importação e débitos.",
 				fin: "Finanças da família via Open Finance, só leitura: dashboard e avisos no Discord.",
 				metric: {
-					cdui: "27 componentes e 15 blocos, ~600 B em gzip cada",
-					converter: "0 bytes enviados: a CSP do app bloqueia upload",
+					cdui: "27 componentes e 15 blocos, ~600 B em gzip em média",
+					converter: "nada sai da aba: a CSP do app bloqueia upload",
 					cdai: "0 chamadas a API externa: tudo roda no Ollama",
 					sentinel: "mil tentativas de login viram 1 detecção, não cem",
 					hub: "hub com 22 MB, ferramenta abrindo em ~580 ms",
@@ -555,7 +555,7 @@ export const translations = {
 			},
 			projetos: {
 				title: "projects",
-				intro: "What I've built, with the problem, the decisions and the numbers behind each one. Private ones have no link, but they have a case study.",
+				intro: "What I've built, with the problem, the decisions and the numbers behind each one. Private ones have no public code, but they have a case study.",
 				private: "private",
 				caseStudy: "case study",
 				back: "projects",
@@ -575,7 +575,7 @@ export const translations = {
 					intro: "A coding agent that runs locally. The model suggests; code controls every action.",
 				},
 				sentinel: {
-					intro: "YAML rules and a Go engine for testing security detections against real logs.",
+					intro: "YAML rules and a Go engine for testing security detections against sshd and nginx logs.",
 				},
 				hub: {
 					intro: "Loopvet's clinic-migration workbench: a read-only auditor, an importer and a launcher that keeps each one isolated.",
@@ -592,19 +592,19 @@ export const translations = {
 			bubble: "hey!",
 			today: "today",
 			bio: "At Loopscape, I build products end to end with a front-end focus: from the database and API down to every screen state.",
-			security: "I also study security. With Sentinel Forge, my Go project, I dig into logs and test ways to spot attacks from real signals.",
+			security: "I also study security. With Sentinel Forge, my Go project, I dig into sshd and nginx logs and test ways to spot attacks.",
 			ai: "I use AI to explore ideas and learn faster. Before anything goes into a project, I make sure I understand what the code is doing.",
 			projects: {
 				title: "projects",
 				cdui: "Lean React components, measured in bytes and installed into your project.",
 				converter: "Convert files without an upload. Everything runs in your browser.",
 				cdai: "A local coding agent where the model suggests and code decides what can happen.",
-				sentinel: "Security detections in Go, with YAML rules tested against real logs.",
+				sentinel: "Security detections in Go, with YAML rules tested against sshd and nginx logs.",
 				hub: "Internal tool for migrating clinics into Loopvet: write-free auditing, importing and debts.",
 				fin: "Family finances via Open Finance, read-only: a dashboard and Discord alerts.",
 				metric: {
-					cdui: "27 components and 15 blocks, ~600 B gzipped each",
-					converter: "0 bytes uploaded: the app's CSP blocks it",
+					cdui: "27 components and 15 blocks, ~600 B gzipped on average",
+					converter: "nothing leaves the tab: the app's CSP blocks uploads",
 					cdai: "0 external API calls: everything runs on Ollama",
 					sentinel: "a thousand login attempts become 1 detection, not a hundred",
 					hub: "22 MB hub, tools open in ~580 ms",
