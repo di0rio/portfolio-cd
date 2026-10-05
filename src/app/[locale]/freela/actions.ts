@@ -1,6 +1,28 @@
 "use server";
 
+import { checkBotId } from "botid/server";
+import { headers } from "next/headers";
 import { type ContactResult, contactSchema } from "@/lib/contact";
+import { allowHit } from "@/lib/rate-limit";
+
+// Limite por IP: best-effort. O Map vive na memória da instância (o Fluid Compute reaproveita
+// instâncias, então ajuda), mas não é global: várias instâncias têm contagens separadas.
+const MAX_SENDS = 3;
+const WINDOW_MS = 10 * 60 * 1000;
+const hits = new Map<string, number[]>();
+
+async function clientIp(): Promise<string> {
+	try {
+		const h = await headers();
+		return (
+			h.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+			h.get("x-real-ip") ||
+			"unknown"
+		);
+	} catch {
+		return "unknown"; // fora de uma requisição (testes)
+	}
+}
 
 type Payload = {
 	name: string;
@@ -26,6 +48,8 @@ export async function sendContactMessage(
 		return { ok: true }; // bot: finge sucesso, não envia
 	}
 
+	if ((await checkBotId()).isBot) return { ok: true }; // BotID: idem
+
 	const parsed = contactSchema().safeParse({
 		name: payload?.name,
 		email: payload?.email,
@@ -38,6 +62,10 @@ export async function sendContactMessage(
 	const apiKey = process.env.RESEND_API_KEY;
 	const to = process.env.CONTACT_EMAIL;
 	if (!apiKey || !to) return { ok: false, error: "unavailable" };
+
+	if (!allowHit(hits, await clientIp(), Date.now(), MAX_SENDS, WINDOW_MS)) {
+		return { ok: false, error: "rate_limited" };
+	}
 
 	const cleanName = name.replace(/[\r\n]+/g, " ");
 	try {

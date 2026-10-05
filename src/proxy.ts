@@ -19,6 +19,8 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-	// Fora: arquivos internos, a imagem de prévia e qualquer arquivo com extensão (ícones, sitemap, robots, /public).
-	matcher: ["/((?!_next|api|opengraph-image|.*\\..*).*)"],
+	// Fora: arquivos internos, o proxy do BotID (rewrite do withBotId; reescrever pra /pt quebraria), a imagem de prévia e qualquer arquivo com extensão (ícones, sitemap, robots, /public).
+	matcher: [
+		"/((?!_next|api|opengraph-image|149e9513-01fa-4fb0-aad4-566afd725d1b|.*\\..*).*)",
+	],
 };

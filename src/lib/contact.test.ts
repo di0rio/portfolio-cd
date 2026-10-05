@@ -1,6 +1,12 @@
-import { afterEach, describe, expect, test } from "bun:test";
-import { sendContactMessage } from "../app/[locale]/freela/actions";
+import { afterEach, describe, expect, mock, test } from "bun:test";
 import { contactSchema } from "./contact";
+
+// Fora da Vercel o BotID reclama de falta de config; aqui só interessa a lógica da action.
+mock.module("botid/server", () => ({
+	checkBotId: async () => ({ isBot: false }),
+}));
+
+const { sendContactMessage } = await import("../app/[locale]/freela/actions");
 
 const ok = {
 	name: " Ana ",

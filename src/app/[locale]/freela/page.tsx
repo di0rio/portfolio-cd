@@ -167,6 +167,7 @@ export default async function Freela() {
 							sentTitle: f.sentTitle,
 							sentText: f.sentText,
 							errSend: f.errSend,
+							errRate: f.errRate,
 							topics,
 						}}
 					/>

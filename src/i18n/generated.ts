@@ -92,6 +92,7 @@ export const translations = {
 					sentTitle: "mensagem enviada",
 					sentText: "Valeu! Recebi aqui e te respondo em breve.",
 					errSend: "Não consegui enviar agora. Tenta de novo ou me chama pelo LinkedIn.",
+					errRate: "Muitas mensagens em pouco tempo. Tenta de novo daqui a alguns minutos.",
 					topicUi: "interface ou painel",
 					topicLanding: "landing page",
 					topicDs: "componentes ou design system",
@@ -278,6 +279,7 @@ export const translations = {
 		},
 		components: {
 			"site-shell": {
+				skip: "pular para o conteúdo",
 				nav: {
 					label: "Navegação",
 					home: "início",
@@ -419,6 +421,7 @@ export const translations = {
 					sentTitle: "message sent",
 					sentText: "Thanks! I got it and will get back to you soon.",
 					errSend: "Couldn't send it right now. Try again or message me on LinkedIn.",
+					errRate: "Too many messages in a short time. Try again in a few minutes.",
 					topicUi: "interface or dashboard",
 					topicLanding: "landing page",
 					topicDs: "components or design system",
@@ -605,6 +608,7 @@ export const translations = {
 		},
 		components: {
 			"site-shell": {
+				skip: "skip to content",
 				nav: {
 					label: "Navigation",
 					home: "home",

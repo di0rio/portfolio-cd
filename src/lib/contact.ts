@@ -31,4 +31,4 @@ export type ContactInput = z.infer<ReturnType<typeof contactSchema>>;
 
 export type ContactResult =
 	| { ok: true }
-	| { ok: false; error: "invalid" | "unavailable" | "failed" };
+	| { ok: false; error: "invalid" | "unavailable" | "failed" | "rate_limited" };

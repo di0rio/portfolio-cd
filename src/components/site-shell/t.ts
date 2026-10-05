@@ -1,4 +1,5 @@
 export default {
+	skip: { pt: "pular para o conteúdo", en: "skip to content" },
 	nav: {
 		label: { pt: "Navegação", en: "Navigation" },
 		home: { pt: "início", en: "home" },

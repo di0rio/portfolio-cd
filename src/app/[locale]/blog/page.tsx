@@ -13,7 +13,10 @@ export async function generateMetadata(): Promise<Metadata> {
 	return {
 		title: t.app.blog.title,
 		description: t.app.blog.intro,
-		alternates: alternates(locale, "/blog"),
+		alternates: {
+			...alternates(locale, "/blog"),
+			types: { "application/rss+xml": localePath(locale, "/feed.xml") },
+		},
 	};
 }
 

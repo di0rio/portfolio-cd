@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Ubuntu, Ubuntu_Mono } from "next/font/google";
 import Link from "next/link";
@@ -71,6 +72,13 @@ export default async function RootLayout({
 			<body className="flex min-h-full flex-col bg-background text-[15px] text-foreground leading-[1.65]">
 				<ThemeProvider>
 					<TooltipProvider>
+						{/* Primeiro foco da página: pula o header e vai direto pro conteúdo. */}
+						<a
+							className="sr-only rounded-md bg-background px-3 py-1.5 text-sm outline-none focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:ring-2 focus:ring-brand"
+							href="#conteudo"
+						>
+							{shell.skip}
+						</a>
 						{/* Uma coluna só (640px): header, conteúdo e rodapé alinhados no mesmo eixo. */}
 						{/* Grade de 3 colunas: o menu fica sempre no centro, não importa o tamanho do prompt (`~ $` vs `~/blog $`). */}
 						<header className="mx-auto grid w-full max-w-[640px] grid-cols-[1fr_auto] items-center gap-x-4 gap-y-3 px-4 pt-6 sm:grid-cols-[1fr_auto_1fr] print:hidden">
@@ -89,7 +97,11 @@ export default async function RootLayout({
 
 						{/* Trocar de página anima só o conteúdo; header e rodapé ficam parados. */}
 						<ViewTransition default="page">
-							<main className="mx-auto flex w-full min-w-0 max-w-[640px] flex-1 flex-col gap-16 px-4 pt-16 pb-24 print:max-w-none print:p-0">
+							<main
+								className="mx-auto flex w-full min-w-0 max-w-[640px] flex-1 flex-col gap-16 px-4 pt-16 pb-24 print:max-w-none print:p-0 outline-none"
+								id="conteudo"
+								tabIndex={-1}
+							>
 								{children}
 							</main>
 						</ViewTransition>
@@ -124,6 +136,7 @@ export default async function RootLayout({
 						/>
 						<EntryOnce />
 						<Analytics />
+						<SpeedInsights />
 						<ClickTracker />
 						<ConsoleWarning />
 					</TooltipProvider>

@@ -33,6 +33,7 @@ export type FreelaFormLabels = {
 	sentTitle: string;
 	sentText: string;
 	errSend: string;
+	errRate: string;
 	topics: { value: string; label: string }[];
 };
 
@@ -48,7 +49,9 @@ export function FreelaContactForm({ labels }: { labels: FreelaFormLabels }) {
 	});
 	const honeypot = useRef<HTMLInputElement>(null);
 	const [pending, setPending] = useState(false);
-	const [status, setStatus] = useState<"idle" | "sent" | "error">("idle");
+	const [status, setStatus] = useState<"idle" | "sent" | "error" | "rate">(
+		"idle",
+	);
 
 	if (status === "sent") {
 		return (
@@ -73,7 +76,7 @@ export function FreelaContactForm({ labels }: { labels: FreelaFormLabels }) {
 						track("freela_contact_sent", { kind: values.kind });
 						setStatus("sent");
 					} else {
-						setStatus("error");
+						setStatus(result.error === "rate_limited" ? "rate" : "error");
 					}
 				} catch {
 					// falha de rede ou da action: mostra o erro genérico
@@ -140,9 +143,9 @@ export function FreelaContactForm({ labels }: { labels: FreelaFormLabels }) {
 				</Button>
 				<p className="text-muted-foreground text-xs">{labels.hint}</p>
 			</div>
-			{status === "error" && (
+			{(status === "error" || status === "rate") && (
 				<p className="text-destructive text-sm" role="alert">
-					{labels.errSend}
+					{status === "rate" ? labels.errRate : labels.errSend}
 				</p>
 			)}
 		</Form>

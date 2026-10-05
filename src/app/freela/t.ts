@@ -118,6 +118,10 @@ export default {
 			pt: "Não consegui enviar agora. Tenta de novo ou me chama pelo LinkedIn.",
 			en: "Couldn't send it right now. Try again or message me on LinkedIn.",
 		},
+		errRate: {
+			pt: "Muitas mensagens em pouco tempo. Tenta de novo daqui a alguns minutos.",
+			en: "Too many messages in a short time. Try again in a few minutes.",
+		},
 		topicUi: { pt: "interface ou painel", en: "interface or dashboard" },
 		topicLanding: { pt: "landing page", en: "landing page" },
 		topicDs: {

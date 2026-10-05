@@ -1,5 +1,6 @@
 import { networkInterfaces } from "node:os";
 import { withInternationalization } from "better-intl/next";
+import { withBotId } from "botid/next/config";
 import type { NextConfig } from "next";
 
 const isDev = process.env.NODE_ENV === "development";
@@ -82,4 +83,4 @@ const nextConfig: NextConfig = {
 	compiler: { removeConsole: isDev ? false : { exclude: ["error"] } },
 };
 
-export default withInternationalization(nextConfig);
+export default withInternationalization(withBotId(nextConfig));
