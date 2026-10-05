@@ -9,7 +9,7 @@ export const sections = {
 	freela: "/freela",
 	agora: "/agora",
 	log: "/log",
-	projetos: "/#projetos",
+	projetos: "/projetos",
 } as const;
 
 /** Slugs dos estudos de caso (`/projetos/<slug>`) e dos posts (`/blog/<slug>`). */
@@ -62,9 +62,8 @@ export function resolvePath(
 	return undefined;
 }
 
-/** Rota real (sem idioma) pra um caminho virtual: a seção "projetos" é a âncora da home. */
-export const hrefOf = (path: string) =>
-	path === "/projetos" ? sections.projetos : path;
+/** Rota real (sem idioma) pra um caminho virtual. Hoje são iguais; fica como ponto único se mudar. */
+export const hrefOf = (path: string) => path;
 
 /** Nomes dentro de um diretório virtual. */
 export function children(dir: string, tree: Tree): string[] {

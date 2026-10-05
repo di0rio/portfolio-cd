@@ -53,11 +53,47 @@ export default {
 			pt: "Finanças da família via Open Finance, só leitura: dashboard e avisos no Discord.",
 			en: "Family finances via Open Finance, read-only: a dashboard and Discord alerts.",
 		},
+		// Um número por projeto, tirado do estudo de caso (home e /projetos).
+		metric: {
+			cdui: {
+				pt: "27 componentes e 15 blocos, ~600 B em gzip cada",
+				en: "27 components and 15 blocks, ~600 B gzipped each",
+			},
+			converter: {
+				pt: "0 bytes enviados: a CSP do app bloqueia upload",
+				en: "0 bytes uploaded: the app's CSP blocks it",
+			},
+			cdai: {
+				pt: "0 chamadas a API externa: tudo roda no Ollama",
+				en: "0 external API calls: everything runs on Ollama",
+			},
+			sentinel: {
+				pt: "mil tentativas de login viram 1 detecção, não cem",
+				en: "a thousand login attempts become 1 detection, not a hundred",
+			},
+			hub: {
+				pt: "hub com 22 MB, ferramenta abrindo em ~580 ms",
+				en: "22 MB hub, tools open in ~580 ms",
+			},
+			fin: {
+				pt: "350+ testes, nenhum valor gravado em disco",
+				en: "350+ tests, no amount ever written to disk",
+			},
+		},
 		all: { pt: "todos os repositórios", en: "all repositories" },
 		contributions: {
 			pt: "{count} contribuições no último ano",
 			en: "{count} contributions in the last year",
 		},
+	},
+	// Prévia do lab na home. A página em si usa `lab/t.ts`.
+	labTeaser: {
+		title: { pt: "lab", en: "lab" },
+		intro: {
+			pt: "Interações que eu estudo no detalhe. Segura o botão:",
+			en: "Interactions I study up close. Hold the button:",
+		},
+		all: { pt: "ver o lab", en: "open the lab" },
 	},
 	stack: {
 		title: { pt: "stack", en: "stack" },

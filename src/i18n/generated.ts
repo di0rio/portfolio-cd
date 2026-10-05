@@ -197,6 +197,9 @@ export const translations = {
 				filterBy: "filtrar por",
 			},
 			projetos: {
+				title: "projetos",
+				intro: "O que eu construí, com o problema, as decisões e os números de cada um. Os privados não têm link, mas têm estudo de caso.",
+				private: "privado",
 				caseStudy: "estudo de caso",
 				back: "projetos",
 				live: "ver no ar",
@@ -242,8 +245,21 @@ export const translations = {
 				sentinel: "Detecções de segurança em Go, com regras YAML testadas contra logs reais.",
 				hub: "Ferramenta interna pra migrar clínicas pro Loopvet: auditoria sem escrita, importação e débitos.",
 				fin: "Finanças da família via Open Finance, só leitura: dashboard e avisos no Discord.",
+				metric: {
+					cdui: "27 componentes e 15 blocos, ~600 B em gzip cada",
+					converter: "0 bytes enviados: a CSP do app bloqueia upload",
+					cdai: "0 chamadas a API externa: tudo roda no Ollama",
+					sentinel: "mil tentativas de login viram 1 detecção, não cem",
+					hub: "hub com 22 MB, ferramenta abrindo em ~580 ms",
+					fin: "350+ testes, nenhum valor gravado em disco",
+				},
 				all: "todos os repositórios",
 				contributions: (v: { count: string }) => `${v.count} contribuições no último ano`,
+			},
+			labTeaser: {
+				title: "lab",
+				intro: "Interações que eu estudo no detalhe. Segura o botão:",
+				all: "ver o lab",
 			},
 			stack: {
 				title: "stack",
@@ -538,6 +554,9 @@ export const translations = {
 				filterBy: "filter by",
 			},
 			projetos: {
+				title: "projects",
+				intro: "What I've built, with the problem, the decisions and the numbers behind each one. Private ones have no link, but they have a case study.",
+				private: "private",
 				caseStudy: "case study",
 				back: "projects",
 				live: "see it live",
@@ -583,8 +602,21 @@ export const translations = {
 				sentinel: "Security detections in Go, with YAML rules tested against real logs.",
 				hub: "Internal tool for migrating clinics into Loopvet: write-free auditing, importing and debts.",
 				fin: "Family finances via Open Finance, read-only: a dashboard and Discord alerts.",
+				metric: {
+					cdui: "27 components and 15 blocks, ~600 B gzipped each",
+					converter: "0 bytes uploaded: the app's CSP blocks it",
+					cdai: "0 external API calls: everything runs on Ollama",
+					sentinel: "a thousand login attempts become 1 detection, not a hundred",
+					hub: "22 MB hub, tools open in ~580 ms",
+					fin: "350+ tests, no amount ever written to disk",
+				},
 				all: "all repositories",
 				contributions: (v: { count: string }) => `${v.count} contributions in the last year`,
+			},
+			labTeaser: {
+				title: "lab",
+				intro: "Interactions I study up close. Hold the button:",
+				all: "open the lab",
 			},
 			stack: {
 				title: "stack",

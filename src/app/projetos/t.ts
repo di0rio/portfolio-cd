@@ -1,5 +1,11 @@
 // O corpo de cada estudo de caso mora em `content/projetos/<slug>.<pt|en>.md`; aqui ficam só as strings da página.
 export default {
+	title: { pt: "projetos", en: "projects" },
+	intro: {
+		pt: "O que eu construí, com o problema, as decisões e os números de cada um. Os privados não têm link, mas têm estudo de caso.",
+		en: "What I've built, with the problem, the decisions and the numbers behind each one. Private ones have no link, but they have a case study.",
+	},
+	private: { pt: "privado", en: "private" },
 	caseStudy: { pt: "estudo de caso", en: "case study" },
 	back: { pt: "projetos", en: "projects" },
 	live: { pt: "ver no ar", en: "see it live" },

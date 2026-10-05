@@ -73,7 +73,7 @@ export function CommandPaletteDialog({
 			value: copy.pages,
 			items: [
 				page("home", copy.home, "/"),
-				page("projects", copy.projects, "/#projetos"),
+				page("projects", copy.projects, "/projetos"),
 				...projects.map((p) =>
 					page(`projeto-${p.slug}`, p.name, `/projetos/${p.slug}`),
 				),

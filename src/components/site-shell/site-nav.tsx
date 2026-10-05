@@ -22,7 +22,7 @@ export function SiteNav({ locale, copy }: { locale: Locale; copy: NavCopy }) {
 	const path = stripLocale(usePathname() ?? "/");
 	const segment = path.split("/")[1] ?? "";
 	const links = [
-		{ href: "/#projetos", label: copy.projects, match: null },
+		{ href: "/projetos", label: copy.projects, match: "projetos" },
 		{ href: "/lab", label: copy.lab, match: "lab" },
 		{ href: "/blog", label: copy.blog, match: "blog" },
 		{ href: "/cv", label: copy.cv, match: "cv" },

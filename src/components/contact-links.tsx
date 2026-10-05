@@ -1,10 +1,6 @@
 import { FileTextIcon, MailIcon } from "lucide-react";
 import Link from "next/link";
-import {
-	GithubIcon,
-	InstagramIcon,
-	LinkedinIcon,
-} from "@/components/brand-icons";
+import { GithubIcon, LinkedinIcon } from "@/components/brand-icons";
 import { Button } from "@/components/ui/button";
 import type { Locale } from "@/i18n/generated";
 import { localePath } from "@/i18n/path";
@@ -21,7 +17,7 @@ type ContactLink = {
 	target?: string;
 };
 
-/** Ações de contato (CV, e-mail, LinkedIn, Instagram, GitHub). Na /freela também tem o formulário. */
+/** Ações de contato (CV, e-mail, LinkedIn, GitHub). O Instagram fica no rodapé; na /freela também tem o formulário. */
 export function ContactLinks({
 	locale,
 	labels,
@@ -57,13 +53,6 @@ export function ContactLinks({
 			...external,
 		});
 	}
-	links.push({
-		track: "instagram",
-		href: `https://www.instagram.com/${site.instagram}/`,
-		label: "Instagram",
-		icon: <InstagramIcon aria-hidden="true" />,
-		...external,
-	});
 	links.push({
 		track: "github",
 		href: `https://github.com/${site.github}`,

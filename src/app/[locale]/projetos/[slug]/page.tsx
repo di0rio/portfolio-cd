@@ -65,7 +65,7 @@ export default async function CaseStudy({
 					<div className="flex items-center justify-between gap-3">
 						<Link
 							className="inline-flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground"
-							href={localePath(locale, "/#projetos")}
+							href={localePath(locale, "/projetos")}
 						>
 							<ArrowLeftIcon aria-hidden="true" className="size-3.5" />
 							{copy.back}

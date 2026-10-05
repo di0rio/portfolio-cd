@@ -5,6 +5,7 @@ import { Ubuntu, Ubuntu_Mono } from "next/font/google";
 import Link from "next/link";
 import { ViewTransition } from "react";
 import "../globals.css";
+import { InstagramIcon } from "@/components/brand-icons";
 import { ClickTracker } from "@/components/site-shell/click-tracker";
 import { CommandPalette } from "@/components/site-shell/command-palette";
 import { ConsoleWarning } from "@/components/site-shell/console-warning";
@@ -107,7 +108,19 @@ export default async function RootLayout({
 						</ViewTransition>
 
 						<footer className="mx-auto flex w-full max-w-[640px] flex-wrap items-center justify-between gap-4 border-t px-4 py-6 text-muted-foreground text-sm print:hidden">
-							<span>{shell.footer.made}</span>
+							<span className="flex items-center gap-3">
+								{shell.footer.made}
+								<a
+									aria-label="Instagram"
+									className="rounded-sm hover:text-foreground"
+									data-track="instagram"
+									href={`https://www.instagram.com/${site.instagram}/`}
+									rel="noopener"
+									target="_blank"
+								>
+									<InstagramIcon aria-hidden="true" className="size-3.5" />
+								</a>
+							</span>
 							<span className="flex items-center gap-4">
 								{(
 									[

@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ContactLinks } from "@/components/contact-links";
+import { HoldToConfirm } from "@/components/lab/hold-to-confirm";
+import { ProjectMetric } from "@/components/project-metric";
 import { Section } from "@/components/section";
 import { StackList } from "@/components/stack-list";
 import { localePath } from "@/i18n/path";
@@ -187,6 +189,7 @@ export default async function Home() {
 								)}
 							</p>
 							<p className="text-muted-foreground">{copy.projects[p.key]}</p>
+							<ProjectMetric>{copy.projects.metric[p.key]}</ProjectMetric>
 							<StackList
 								className="mt-2"
 								items={p.stack}
@@ -211,6 +214,31 @@ export default async function Home() {
 						</a>
 					</p>
 				)}
+			</Section>
+
+			<Section
+				action={
+					<Link
+						className="inline-flex items-center gap-1 text-muted-foreground text-sm transition-colors duration-150 hover:text-foreground"
+						href={localePath(locale, "/lab")}
+					>
+						{copy.labTeaser.all}
+						<ArrowRightIcon aria-hidden="true" className="size-3.5" />
+					</Link>
+				}
+				id="lab"
+				title={copy.labTeaser.title}
+			>
+				<p className="text-pretty">{copy.labTeaser.intro}</p>
+				<div className="mt-4 flex min-h-32 items-center justify-center rounded-xl border bg-card px-6 py-8">
+					<HoldToConfirm
+						done={copy.lab.hold.done}
+						label={copy.lab.hold.label}
+					/>
+				</div>
+				<p className="mt-2 text-muted-foreground text-sm">
+					{copy.lab.hold.desc}
+				</p>
 			</Section>
 
 			{site.stack.length > 0 && (
