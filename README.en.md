@@ -62,6 +62,3 @@ Each `t.ts` keeps both languages side by side (`{ pt, en }`). `src/i18n/generate
 - [`PRODUCT.md`](PRODUCT.md): audience, goals, and product principles.
 - [`DESIGN.md`](DESIGN.md): the visual system, "The Home Terminal", including colors, typography, layout, components, and rules.
 
-## Easter egg
-
-Type `cd ..` (or `cd ~`) on any page to go home, or `cd blog` to open the blog.
