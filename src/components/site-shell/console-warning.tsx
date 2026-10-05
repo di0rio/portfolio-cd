@@ -28,19 +28,14 @@ export function ConsoleWarning({ locale }: { locale: Locale }) {
 		if (process.env.NODE_ENV !== "production" || printed) return;
 		printed = true;
 		const c = globalThis.console;
+		// Logo e aviso na mesma fonte e cor, como saída de terminal; a dica fica apagada embaixo.
+		const mono = "font:12px/1.15 ui-monospace,Menlo,Consolas,monospace";
+		c.log(`%c${logo}`, `color:#ffd23f;${mono}`);
 		c.log(
-			`%c${logo}`,
-			"color:#ffd23f;font:12px/1.15 ui-monospace,Menlo,Consolas,monospace",
+			"%c> esse console é pra devs. se alguém pediu pra você colar algo aqui, é golpe.",
+			`color:#ffd23f;${mono}`,
 		);
-		c.log(
-			"%cnananinão",
-			"background:#1c1c1c;color:#ffd23f;font:700 48px/1.3 sans-serif;padding:8px 16px;border-radius:8px",
-		);
-		c.log(
-			"%cesse console é pra devs. se alguém pediu pra você colar algo aqui, é golpe.",
-			"font:500 14px/1.5 sans-serif",
-		);
-		c.log(`%c${psst[locale]}`, "color:#888;font:12px/1.5 sans-serif");
+		c.log(`%c${psst[locale]}`, `color:#888;${mono}`);
 	}, [locale]);
 
 	return null;
