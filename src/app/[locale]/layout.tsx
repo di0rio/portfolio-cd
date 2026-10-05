@@ -152,7 +152,7 @@ export default async function RootLayout({
 						<Analytics />
 						<SpeedInsights />
 						<ClickTracker />
-						<ConsoleWarning />
+						<ConsoleWarning locale={locale} />
 					</TooltipProvider>
 				</ThemeProvider>
 			</body>

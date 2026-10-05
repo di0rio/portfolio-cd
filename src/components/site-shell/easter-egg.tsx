@@ -3,13 +3,33 @@
 import { XIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { Achievement } from "@/components/achievement";
+import { Confetti } from "@/components/confetti";
 import type { Locale } from "@/i18n/generated";
 import { localePath } from "@/i18n/path";
 import { sections } from "./shell-routes";
 
-type Copy = { title: string; intro: string; dismiss: string };
+type Copy = {
+	title: string;
+	intro: string;
+	dismiss: string;
+	unlocked: string;
+	achievement: string;
+};
 
 const HINT_MS = 7000;
+const KONAMI = [
+	"arrowup",
+	"arrowup",
+	"arrowdown",
+	"arrowdown",
+	"arrowleft",
+	"arrowright",
+	"arrowleft",
+	"arrowright",
+	"b",
+	"a",
+];
 
 // Digitar `cd ..` (ou `cd ~`) em qualquer lugar volta pro começo; `cd blog`, `cd lab`... abrem a página;
 // `cd <projeto>` abre o estudo de caso; `help` (ou `ls`) lista os comandos.
@@ -28,6 +48,8 @@ export function EasterEgg({
 }) {
 	const router = useRouter();
 	const [hint, setHint] = useState(false);
+	const [toast, setToast] = useState(0);
+	const [burst, setBurst] = useState(0);
 	const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
 	useEffect(() => {
@@ -41,6 +63,11 @@ export function EasterEgg({
 		);
 		const size = Math.max(...names.map((n) => n.length + 3)) + 1;
 		let buffer = "";
+		let konami = 0;
+		function unlock() {
+			setToast((n) => n + 1);
+			setBurst((n) => n + 1);
+		}
 		function show() {
 			clearTimeout(timer.current);
 			setHint(true);
@@ -50,9 +77,10 @@ export function EasterEgg({
 			if (e.key === "Escape") {
 				clearTimeout(timer.current);
 				setHint(false);
+				setToast(0);
 				return;
 			}
-			if (e.key.length !== 1 || e.ctrlKey || e.metaKey || e.altKey) return;
+			if (e.ctrlKey || e.metaKey || e.altKey) return;
 			// Campos de texto (inclusive o prompt do terminal) e diálogos modais ficam fora do jogo.
 			// O terminal global é um diálogo não modal (`data-terminal`): a página segue usável com ele aberto.
 			if (
@@ -62,6 +90,13 @@ export function EasterEgg({
 				return;
 			if (document.querySelector('[role="dialog"]:not([data-terminal])'))
 				return;
+			const key = e.key.toLowerCase();
+			konami = key === KONAMI[konami] ? konami + 1 : Number(key === KONAMI[0]);
+			if (konami === KONAMI.length) {
+				konami = 0;
+				return unlock();
+			}
+			if (e.key.length !== 1) return;
 			buffer = (buffer + e.key.toLowerCase()).slice(-size);
 			const match = buffer.match(pattern);
 			if (!match) return;
@@ -79,38 +114,59 @@ export function EasterEgg({
 
 	// A região `aria-live` fica sempre no DOM; só o conteúdo entra e sai, então o leitor de tela anuncia.
 	return (
-		<div
-			aria-live="polite"
-			className="pointer-events-none fixed bottom-4 left-4 z-40 print:hidden"
-			role="status"
-		>
-			{hint && (
-				<div className="pointer-events-auto relative w-[min(22rem,calc(100vw-2rem))] rounded-xl border bg-card p-3 pr-9 text-sm shadow-lg">
-					<p className="font-mono text-muted-foreground">
-						<span className="text-brand-foreground">~</span> $ help
-					</p>
-					<p className="mt-1.5 mb-2 font-medium">{copy.title}</p>
-					<p className="mb-2 text-muted-foreground text-xs">{copy.intro}</p>
-					<ul className="flex flex-wrap gap-1.5">
-						{[...hintNames, ...slugs].map((n) => (
-							<li
-								className="rounded-sm border bg-background px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground"
-								key={n}
-							>
-								cd {n}
-							</li>
-						))}
-					</ul>
-					<button
-						aria-label={copy.dismiss}
-						className="absolute top-2 right-2 grid size-6 place-items-center rounded-md text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-brand"
-						onClick={() => setHint(false)}
-						type="button"
-					>
-						<XIcon aria-hidden className="size-3.5" />
-					</button>
-				</div>
+		<>
+			<div
+				aria-live="polite"
+				className="pointer-events-none fixed bottom-4 left-4 z-40 print:hidden"
+				role="status"
+			>
+				{hint && (
+					<div className="pointer-events-auto relative w-[min(22rem,calc(100vw-2rem))] rounded-xl border bg-card p-3 pr-9 text-sm shadow-lg">
+						<p className="font-mono text-muted-foreground">
+							<span className="text-brand-foreground">~</span> $ help
+						</p>
+						<p className="mt-1.5 mb-2 font-medium">{copy.title}</p>
+						<p className="mb-2 text-muted-foreground text-xs">{copy.intro}</p>
+						<ul className="flex flex-wrap gap-1.5">
+							{[...hintNames, ...slugs].map((n) => (
+								<li
+									className="rounded-sm border bg-background px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground"
+									key={n}
+								>
+									cd {n}
+								</li>
+							))}
+						</ul>
+						<button
+							aria-label={copy.dismiss}
+							className="absolute top-2 right-2 grid size-6 place-items-center rounded-md text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-brand"
+							onClick={() => setHint(false)}
+							type="button"
+						>
+							<XIcon aria-hidden className="size-3.5" />
+						</button>
+					</div>
+				)}
+			</div>
+			{burst > 0 && (
+				<Confetti
+					key={burst}
+					onDone={() => setBurst((n) => (n === burst ? 0 : n))}
+				/>
 			)}
-		</div>
+			<div
+				className="pointer-events-none fixed bottom-4 left-1/2 z-50 -translate-x-1/2 print:hidden"
+				role="status"
+			>
+				{toast > 0 && (
+					<Achievement
+						key={toast}
+						label={copy.unlocked}
+						name={copy.achievement}
+						onDone={() => setToast((n) => (n === toast ? 0 : n))}
+					/>
+				)}
+			</div>
+		</>
 	);
 }

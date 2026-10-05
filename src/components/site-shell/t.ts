@@ -61,5 +61,7 @@ export default {
 			en: "type anywhere on the page:",
 		},
 		dismiss: { pt: "Fechar dica", en: "Dismiss hint" },
+		unlocked: { pt: "conquista desbloqueada", en: "achievement unlocked" },
+		achievement: { pt: "curioso", en: "curious" },
 	},
 };
