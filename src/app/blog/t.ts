@@ -1,11 +1,11 @@
 export default {
 	title: { pt: "blog", en: "blog" },
 	intro: {
-		pt: "Textos sobre o que construí, o que aprendi e as decisões pelo caminho.",
+		pt: "Texto sobre o que eu construí, o que aprendi e as decisões no caminho.",
 		en: "Notes on what I’ve built, what I’ve learned, and the decisions along the way.",
 	},
 	empty: {
-		pt: "Ainda não tem texto por aqui. Quando eu publicar um projeto com a tag `portfolio`, ele aparece nesta página.",
+		pt: "Ainda não tem texto aqui. Quando eu publicar um projeto com a tag `portfolio`, ele aparece nesta página.",
 		en: "No posts here yet. When I publish a project with the `portfolio` topic, it’ll show up on this page.",
 	},
 	nav: { pt: "outros posts", en: "other posts" },

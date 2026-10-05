@@ -5,8 +5,8 @@ export default {
 			en: "Cauã Diório · front-end developer",
 		},
 		description: {
-			pt: "Desenvolvedor front-end na Loopscape. Construo produto de ponta a ponta, do banco à interface, e estudo segurança.",
-			en: "Front-end developer at Loopscape. I build products end to end, from the database to the interface, and study security.",
+			pt: "Dev front-end na Loopscape. Faço produto de ponta a ponta, do banco à tela, e fuço segurança nas horas vagas.",
+			en: "Front-end dev at Loopscape. I build products end to end, database to screen, and poke at security on the side.",
 		},
 	},
 	role: {
@@ -16,42 +16,42 @@ export default {
 	bubble: { pt: "salve!", en: "hey!" },
 	today: { pt: "hoje", en: "today" },
 	bio: {
-		pt: "Na Loopscape, construo produto de ponta a ponta com foco no front-end: do banco e da API até cada estado da tela.",
-		en: "At Loopscape, I build products end to end with a front-end focus: from the database and API down to every screen state.",
+		pt: "Trabalho na Loopscape fazendo produto de ponta a ponta. Meu forte é o front, mas pego do banco e da API até o último estado da tela.",
+		en: "I work at Loopscape building products end to end. Front-end is my thing, but I go from the database and API all the way to the last screen state.",
 	},
 	security: {
-		pt: "Também estudo segurança. No Sentinel Forge, meu projeto em Go, investigo logs de sshd e nginx e testo formas de detectar ataques.",
-		en: "I also study security. With Sentinel Forge, my Go project, I dig into sshd and nginx logs and test ways to spot attacks.",
+		pt: "Fora do trabalho eu fuço segurança. O Sentinel Forge é meu laboratório: leio log de sshd e nginx e testo jeito de pegar ataque.",
+		en: "Outside work I poke at security. Sentinel Forge is my playground: I read sshd and nginx logs and try out ways to catch attacks.",
 	},
 	ai: {
-		pt: "Uso IA pra explorar ideias e aprender mais rápido. Antes de levar algo pro projeto, faço questão de entender o que o código está fazendo.",
-		en: "I use AI to explore ideas and learn faster. Before anything goes into a project, I make sure I understand what the code is doing.",
+		pt: "Uso IA todo dia pra aprender mais rápido, mas nada entra no projeto sem eu entender o que o código tá fazendo.",
+		en: "I use AI every day to learn faster, but nothing goes into a project until I understand what the code is doing.",
 	},
 	projects: {
 		title: { pt: "projetos", en: "projects" },
 		cdui: {
-			pt: "Componentes React enxutos, medidos em bytes e instalados no seu projeto.",
-			en: "Lean React components, measured in bytes and installed into your project.",
+			pt: "Meus componentes React: cada um tem o peso medido em bytes, e você instala direto no seu projeto.",
+			en: "My React components: each one has its weight measured in bytes, and you install them right into your project.",
 		},
 		converter: {
-			pt: "Converta arquivos sem upload. Tudo roda no navegador.",
-			en: "Convert files without an upload. Everything runs in your browser.",
+			pt: "Converte arquivo sem subir nada pra servidor nenhum. Roda tudo no navegador.",
+			en: "Converts files without uploading anything anywhere. It all runs in your browser.",
 		},
 		cdai: {
-			pt: "Um agente de código local em que o modelo sugere e o código decide o que pode acontecer.",
-			en: "A local coding agent where the model suggests and code decides what can happen.",
+			pt: "Um agente de código que roda na sua máquina. O modelo dá a ideia, mas quem decide o que acontece é o código.",
+			en: "A coding agent that runs on your machine. The model pitches ideas, but code decides what actually happens.",
 		},
 		sentinel: {
-			pt: "Detecções de segurança em Go, com regras YAML testadas contra logs de sshd e nginx.",
-			en: "Security detections in Go, with YAML rules tested against sshd and nginx logs.",
+			pt: "Detecção de ataque em Go, com regra em YAML testada contra log de sshd e nginx.",
+			en: "Attack detection in Go, with YAML rules tested against sshd and nginx logs.",
 		},
 		hub: {
-			pt: "Ferramenta interna pra migrar clínicas pro Loopvet: auditoria sem escrita, importação e débitos.",
-			en: "Internal tool for migrating clinics into Loopvet: write-free auditing, importing and debts.",
+			pt: "A ferramenta que eu fiz pra migrar clínica pro Loopvet: confere tudo antes, importa e traz os débitos.",
+			en: "The tool I built to migrate clinics into Loopvet: it checks everything first, imports, and brings the debts over.",
 		},
 		fin: {
-			pt: "Finanças da família via Open Finance, só leitura: dashboard e avisos no Discord.",
-			en: "Family finances via Open Finance, read-only: a dashboard and Discord alerts.",
+			pt: "As finanças lá de casa pelo Open Finance. Só lê: um dashboard e uns avisos no Discord.",
+			en: "Our household finances through Open Finance. Read-only: a dashboard and a few Discord pings.",
 		},
 		// Um número por projeto, tirado do estudo de caso (home e /projetos).
 		metric: {
@@ -72,11 +72,11 @@ export default {
 				en: "a thousand login attempts become 1 detection, not a hundred",
 			},
 			hub: {
-				pt: "migrações em teste: de 1 por dia pra até 10",
+				pt: "migração em teste: de 1 por dia pra até 10",
 				en: "test migrations: from 1 a day to up to 10",
 			},
 			fin: {
-				pt: "350+ testes, nenhum valor gravado em disco",
+				pt: "350+ testes e nenhum valor salvo em disco",
 				en: "350+ tests, no amount ever written to disk",
 			},
 		},
@@ -90,10 +90,10 @@ export default {
 	labTeaser: {
 		title: { pt: "lab", en: "lab" },
 		intro: {
-			pt: "Interações que eu estudo no detalhe. Segura o botão:",
-			en: "Interactions I study up close. Hold the button:",
+			pt: "Interações que eu fico lapidando até ficar gostoso de usar. Segura o botão aí:",
+			en: "Interactions I keep polishing until they feel right. Go ahead, hold the button:",
 		},
-		all: { pt: "ver o lab", en: "open the lab" },
+		all: { pt: "ver o lab inteiro", en: "see the whole lab" },
 	},
 	stack: {
 		title: { pt: "stack", en: "stack" },
@@ -103,7 +103,7 @@ export default {
 	error: {
 		title: { pt: "algo deu errado.", en: "something went wrong." },
 		body: {
-			pt: "Não consegui carregar os dados do GitHub agora. Tenta de novo daqui a pouco.",
+			pt: "Não rolou carregar os dados do GitHub agora. Tenta de novo daqui a pouco.",
 			en: "I couldn’t load GitHub data just now. Give it another try in a bit.",
 		},
 		retry: { pt: "tentar de novo", en: "try again" },
@@ -127,7 +127,7 @@ export default {
 		},
 		title: { pt: "essa página não existe.", en: "this page doesn't exist." },
 		body: {
-			pt: "Esse caminho não existe por aqui. Digita cd .. ou usa o link abaixo pra voltar.",
+			pt: "Esse caminho não existe por aqui. Manda um cd .. ou usa o link aí embaixo pra voltar.",
 			en: "That path doesn’t exist here. Type cd .. or use the link below to head back.",
 		},
 		home: { pt: "voltar pro começo", en: "back to the start" },
@@ -151,7 +151,7 @@ export default {
 				en: "technologies used at work",
 			},
 			cms: {
-				pt: "Construí do zero o CMS interno, do banco à interface: vários portais de conteúdo, um único código servindo as instalações Loopvet e Domus, editor rico, API pública de conteúdo e um encurtador de links com métricas de clique na borda da Cloudflare.",
+				pt: "Fiz o CMS interno do zero, do banco à interface: vários portais de conteúdo, um único código servindo as instalações Loopvet e Domus, editor rico, API pública de conteúdo e um encurtador de links com métricas de clique na borda da Cloudflare.",
 				en: "Built the internal CMS from scratch, database to UI: multiple content portals, one codebase serving the Loopvet and Domus installations, a rich text editor, a public content API and a link shortener with click analytics at the Cloudflare edge.",
 			},
 			security: {
@@ -159,7 +159,7 @@ export default {
 				en: "Handled server-side security: role- and portal-based authorization enforced in the service layer, 2FA, decompression-bomb-safe image uploads and per-portal cache invalidation.",
 			},
 			importer: {
-				pt: "Desenvolvi o importador de planilhas da Loopvet (CSV, XLS, XLSX), com mapeamento automático e manual, modelos, várias abas, prévia, motor de transformação em etapas e validação.",
+				pt: "Fiz o importador de planilhas da Loopvet (CSV, XLS, XLSX), com mapeamento automático e manual, modelos, várias abas, prévia, motor de transformação em etapas e validação.",
 				en: "Developed Loopvet's spreadsheet importer (CSV, XLS, XLSX): smart and manual column mapping, templates, multi-sheet support, preview, a step-based transformation engine and validation.",
 			},
 		},

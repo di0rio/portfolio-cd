@@ -1,8 +1,8 @@
 export default {
 	title: { pt: "lab", en: "lab" },
 	intro: {
-		pt: "Um laboratório de interface pra testar interações no detalhe: arraste, compare e veja tudo funcionando no navegador.",
-		en: "A UI lab for trying interactions up close: drag, compare, and see everything work in your browser.",
+		pt: "Meu laboratório de interface: cada interação aqui eu fiquei lapidando no detalhe. Arrasta, compara e brinca à vontade.",
+		en: "My UI lab: every interaction here got polished down to the details. Drag, compare and play around.",
 	},
 	toasts: {
 		title: { pt: "pilha de toasts", en: "toast stack" },
@@ -29,7 +29,7 @@ export default {
 	palette: {
 		title: { pt: "paleta de comandos", en: "command palette" },
 		desc: {
-			pt: "essa já está no site inteiro: aperte ⌘K (ctrl+k no windows e linux) em qualquer página pra buscar páginas, posts e ações. setas navegam, enter abre, esc fecha e o foco volta pra onde estava.",
+			pt: "essa já tá no site inteiro: aperte ⌘K (ctrl+k no windows e linux) em qualquer página pra buscar páginas, posts e ações. setas navegam, enter abre, esc fecha e o foco volta pra onde estava.",
 			en: "this one is already live site-wide: press ⌘K (ctrl+k on windows and linux) on any page to search pages, posts and actions. arrows navigate, enter opens, esc closes and focus returns to where it was.",
 		},
 		open: { pt: "abrir agora", en: "open now" },
@@ -37,7 +37,7 @@ export default {
 	hold: {
 		title: { pt: "segurar pra confirmar", en: "hold to confirm" },
 		desc: {
-			pt: "ação destrutiva pede intenção: o preenchimento leva 1,6 s enquanto você segura e volta em 200 ms quando solta. funciona com espaço ou enter também.",
+			pt: "ação destrutiva tem que ter intenção: enche em 1,6 s enquanto você segura e volta em 200 ms quando solta. funciona no espaço ou no enter também.",
 			en: "destructive actions need intent: the fill takes 1.6 s while you hold and snaps back in 200 ms when you let go. space or enter work too.",
 		},
 		label: { pt: "segure pra apagar", en: "hold to delete" },

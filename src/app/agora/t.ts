@@ -1,11 +1,11 @@
 export default {
 	title: { pt: "agora", en: "now" },
 	description: {
-		pt: "Um recorte do que estou construindo e estudando agora. Os projetos em andamento vêm direto do GitHub.",
+		pt: "Um recorte do que eu tô construindo e estudando agora. Os projetos em andamento vêm direto do GitHub.",
 		en: "A quick look at what I’m building and learning right now. Ongoing projects come straight from GitHub.",
 	},
 	intro: {
-		pt: "O que está ocupando meu tempo e no que estou mexendo agora.",
+		pt: "O que tá ocupando meu tempo e no que eu tô mexendo agora.",
 		en: "What’s taking up my time and what I’m working on right now.",
 	},
 	workingTitle: { pt: "no que eu tô mexendo", en: "what i'm working on" },
@@ -22,10 +22,13 @@ export default {
 		en: "front-end: interfaces, interaction, and accessibility.",
 	},
 	study2: {
-		pt: "segurança: detecção de ataques e análise de logs.",
+		pt: "segurança: detecção de ataque e análise de log.",
 		en: "security: attack detection and log analysis.",
 	},
-	study3: { pt: "go.", en: "go." },
+	study3: {
+		pt: "go e rust, aprendendo com IA e revisando cada linha.",
+		en: "go and rust, learning with AI and reviewing every line.",
+	},
 	lastUpdated: { pt: "última atualização: {date}", en: "last updated: {date}" },
 	footerLink: { pt: "agora", en: "now" },
 	contribTitle: { pt: "contribuições", en: "contributions" },

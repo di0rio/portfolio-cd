@@ -75,9 +75,7 @@ export default async function Cv() {
 			<Separator />
 
 			<Section title={copy.cv.summary}>
-				<p className="text-pretty">
-					{copy.bio} {copy.security} {copy.ai}
-				</p>
+				<p className="text-pretty">{t.app.cv.about}</p>
 			</Section>
 
 			{/* Entregas em nível de produto: nada de infra, dados ou detalhe interno da empresa. */}
@@ -113,7 +111,7 @@ export default async function Cv() {
 						<li className="break-inside-avoid" key={p.slug}>
 							<p className="font-medium">{p.name}</p>
 							<p className="text-pretty text-muted-foreground">
-								{copy.projects[p.key]}
+								{t.app.cv.projects[p.key]}
 							</p>
 							<p className="text-muted-foreground text-sm">
 								{p.stack.join(" · ")}

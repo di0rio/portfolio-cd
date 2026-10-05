@@ -5,7 +5,7 @@ export default {
 		en: "What’s changed on the site, pulled straight from its commit history.",
 	},
 	intro: {
-		pt: "Novidades, ajustes e ideias que foram parar no código.",
+		pt: "Novidade, ajuste e ideia que foi parar no código.",
 		en: "Updates, tweaks, and ideas that made it into the code.",
 	},
 	empty: {

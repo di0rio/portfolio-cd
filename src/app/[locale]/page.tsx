@@ -74,7 +74,7 @@ export default async function Home() {
 					// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD gerado por nós, `<` escapado
 					dangerouslySetInnerHTML={{
 						__html: JSON.stringify(
-							personJsonLd(locale, copy.role, `${copy.bio} ${copy.ai}`),
+							personJsonLd(locale, copy.role, t.app.cv.about),
 						).replace(/</g, "\\u003c"),
 					}}
 					type="application/ld+json"
