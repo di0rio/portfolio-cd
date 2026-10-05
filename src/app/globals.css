@@ -281,7 +281,11 @@
 		@apply text-2xl;
 	}
 	.markdown h2 {
-		@apply text-xl;
+		@apply mt-14 text-xl;
+	}
+	/* Título logo abaixo de título: sem o respiro de seção, senão o par vira um buraco. */
+	.markdown :is(h2, h3) + :is(h2, h3) {
+		@apply mt-4;
 	}
 	.markdown h3 {
 		@apply text-lg;
@@ -314,7 +318,7 @@
 		@apply border-l pl-4 text-muted-foreground italic;
 	}
 	.markdown :not(pre) > code {
-		@apply rounded-md bg-accent px-1.5 py-0.5 text-[0.9em];
+		@apply box-decoration-clone rounded-md bg-accent px-1 py-0.5 text-[0.9em] leading-none;
 	}
 	.markdown pre {
 		@apply overflow-x-auto rounded-xl border bg-card p-4 text-sm leading-6;
@@ -330,11 +334,18 @@
 		@apply flex items-center justify-between gap-2 border-b py-1 pr-1 pl-4 font-mono text-muted-foreground text-xs;
 	}
 	.markdown table {
-		@apply block w-full overflow-x-auto text-sm;
+		@apply block w-full overflow-x-auto text-sm tabular-nums;
 	}
+	/* Tabela como texto: só linhas horizontais, cabeçalho discreto, primeira coluna alinhada com a coluna do texto. */
 	.markdown th,
 	.markdown td {
-		@apply border px-3 py-1.5 text-left;
+		@apply border-b px-3 py-1.5 text-left;
+	}
+	.markdown :is(th, td):first-child {
+		@apply pl-0;
+	}
+	.markdown th {
+		@apply font-medium text-muted-foreground;
 	}
 	.markdown hr {
 		@apply my-8 border-border;

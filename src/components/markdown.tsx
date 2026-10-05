@@ -72,7 +72,7 @@ function enhance(copy?: CopyLabels): Components {
 			return (
 				<div className="code">
 					<div className="code-bar">
-						<span>{lang}</span>
+						<span>{lang !== "text" && lang}</span>
 						{copy && (
 							<CodeCopy
 								done={copy.done}
