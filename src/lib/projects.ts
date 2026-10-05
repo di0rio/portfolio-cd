@@ -48,12 +48,18 @@ export const projects: readonly Project[] = [
 const has = (file: string) =>
 	existsSync(join(process.cwd(), "public", "projects", file));
 
-/** Mídia opcional (checada no build): print `<slug>.webp` em 2x e, se houver, vídeo `<slug>.mp4`. */
+/**
+ * Mídia opcional (checada no build): print `<slug>.webp` em 2x e, se houver, vídeo `<slug>.mp4`.
+ * Com vídeo, o print vira `<slug>-poster.webp` (1º frame do vídeo, com a mesma moldura), pra troca
+ * do print pelo vídeo não dar salto de enquadramento nem de cor.
+ */
 export function projectImage(slug: string) {
 	if (!has(`${slug}.webp`)) return undefined;
+	const video = has(`${slug}.mp4`) ? `/projects/${slug}.mp4` : undefined;
+	const poster = video && has(`${slug}-poster.webp`);
 	return {
-		src: `/projects/${slug}.webp`,
-		video: has(`${slug}.mp4`) ? `/projects/${slug}.mp4` : undefined,
+		src: `/projects/${slug}${poster ? "-poster" : ""}.webp`,
+		video,
 	};
 }
 
