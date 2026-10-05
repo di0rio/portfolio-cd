@@ -104,9 +104,10 @@ export function CommandPaletteDialog({
 
 	return (
 		<Dialog onOpenChange={onOpenChange} open={open}>
-			{/* Popup do cd/ui: tira padding/gap e ancora no topo via position="top". */}
+			{/* Popup do cd/ui: tira padding/gap, ancora no topo e abre sem animação (atalho usado o tempo todo). */}
 			<DialogPopup
 				aria-label={copy.title}
+				instant
 				position="top"
 				className="max-h-[min(30rem,calc(100dvh-5rem))] max-w-[520px] gap-0 overflow-hidden rounded-xl p-0 shadow-none"
 				// O Autocomplete engole o 1º Esc (fecha a lista inline); aqui Esc sempre fecha a paleta.

@@ -486,9 +486,9 @@ html[data-pending] main {
 	}
 }
 @utility animate-bubble {
-	animation: bubble-in 360ms var(--ease-out) 450ms both;
+	animation: bubble-in 300ms var(--ease-out) 200ms both;
 	@media (prefers-reduced-motion: reduce) {
-		animation: fade-in 200ms ease 450ms both;
+		animation: fade-in 200ms ease 200ms both;
 	}
 }
 
@@ -559,34 +559,25 @@ html[data-pending] main {
 	}
 }
 
-/* Entrada escalonada das seções principais: opacidade + 6px pra cima + 2px de blur, 100ms entre elas
-   (--stagger). `backwards` não deixa filter/transform ativos depois do fim (evita contexto de empilhamento).
-   Só no carregamento do documento: depois da 1ª troca de rota (`data-nav`, ver entry-once.tsx) o ViewTransition cuida. */
+/* Entrada escalonada das seções principais: opacidade + 4px pra cima, 250ms, 50ms entre elas, no máximo
+   3 passos (tudo assenta em ~350ms). Sem blur: filtrar blocos grandes pesa no GPU. `backwards` não deixa
+   transform ativo depois do fim. Só no carregamento do documento: depois da 1ª troca de rota (`data-nav`,
+   ver entry-once.tsx) o ViewTransition cuida. Páginas com lista que já entra item a item (`.rise`) ficam de fora. */
 @keyframes stagger-in {
 	from {
 		opacity: 0;
-		transform: translateY(6px);
-		filter: blur(2px);
+		transform: translateY(4px);
 	}
 }
 @media (prefers-reduced-motion: no-preference) {
-	html:not([data-nav]) main > * {
-		animation: stagger-in 500ms var(--ease-out) calc(var(--stagger, 0) * 100ms)
+	html:not([data-nav]) main:not(:has(.rise)) > * {
+		animation: stagger-in 250ms var(--ease-out) calc(var(--stagger, 0) * 50ms)
 			backwards;
 	}
 	main > :nth-child(2) {
 		--stagger: 1;
 	}
-	main > :nth-child(3) {
+	main > :nth-child(n + 3) {
 		--stagger: 2;
-	}
-	main > :nth-child(4) {
-		--stagger: 3;
-	}
-	main > :nth-child(5) {
-		--stagger: 4;
-	}
-	main > :nth-child(n + 6) {
-		--stagger: 5;
 	}
 }
