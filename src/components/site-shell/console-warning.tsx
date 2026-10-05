@@ -35,7 +35,11 @@ export function ConsoleWarning({ locale }: { locale: Locale }) {
 			"%c> esse console é pra devs. se alguém pediu pra você colar algo aqui, é golpe.",
 			`color:#ffd23f;${mono}`,
 		);
-		c.log(`%c${psst[locale]}`, `color:#888;${mono}`);
+		// A dica fica minúscula e apagada de propósito: é pra achar, não pra ler de cara.
+		c.log(
+			`%c${psst[locale]}`,
+			"color:#666;font:5px/1 ui-monospace,Menlo,Consolas,monospace",
+		);
 	}, [locale]);
 
 	return null;
