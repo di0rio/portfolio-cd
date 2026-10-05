@@ -126,6 +126,7 @@ export default async function RootLayout({
 									[
 										["/freela", t.app.freela.footerLink],
 										["/agora", t.app.agora.footerLink],
+										["/processo", t.app.processo.footerLink],
 										["/log", t.app.log.footerLink],
 									] as const
 								).map(([path, label]) => (

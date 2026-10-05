@@ -46,6 +46,7 @@ export default {
 		cv: { pt: "CV", en: "CV" },
 		freela: { pt: "trabalhe comigo", en: "work with me" },
 		agora: { pt: "agora", en: "now" },
+		processo: { pt: "como eu trabalho", en: "how i work" },
 		log: { pt: "log do site", en: "site log" },
 	},
 	footer: {

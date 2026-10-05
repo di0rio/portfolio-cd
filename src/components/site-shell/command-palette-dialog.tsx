@@ -27,6 +27,7 @@ export type Copy = {
 	cv: string;
 	freela: string;
 	agora: string;
+	processo: string;
 	log: string;
 };
 
@@ -82,6 +83,7 @@ export function CommandPaletteDialog({
 				page("cv", copy.cv, "/cv"),
 				page("freela", copy.freela, "/freela"),
 				page("agora", copy.agora, "/agora"),
+				page("processo", copy.processo, "/processo"),
 				page("log", copy.log, "/log"),
 			],
 		},

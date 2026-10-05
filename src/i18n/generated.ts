@@ -204,6 +204,50 @@ export const translations = {
 				noMatch: "nenhum commit com esse filtro.",
 				filterBy: "filtrar por",
 			},
+			processo: {
+				title: "como eu trabalho",
+				description: "Como eu faço os projetos, com o link pra prova de cada coisa.",
+				intro: "Nada aqui é promessa: cada item aponta pra onde dá pra conferir.",
+				sectionTitle: "o processo",
+				proof: "prova:",
+				footerLink: "processo",
+				problem: {
+					title: "começo por um problema de verdade",
+					text: "O loopvet hub nasceu de uma dor minha na migração de clínicas. Ninguém pediu: eu precisava e fiz.",
+					caseStudy: "estudo de caso do loopvet hub",
+				},
+				ai: {
+					title: "uso IA com regras que eu escrevi",
+					text: "Programo com o Claude Code seguindo uma skill minha, a clean-code-ai, e não entra nada que eu não entenda.",
+					repo: "o repositório da skill",
+					post: "o post contando como ela surgiu",
+				},
+				test: {
+					title: "testo antes de afirmar",
+					text: "Rodei a skill às cegas contra outras regras: 191 de 200, contra 176 sem regra nenhuma.",
+					results: "os resultados do teste",
+				},
+				measure: {
+					title: "meço o que entrego",
+					text: "No cd/ui o build mede o tamanho de cada componente em bytes, e nos vídeos dos projetos eu conferi a qualidade depois de comprimir.",
+					caseStudy: "estudo de caso do cd/ui",
+				},
+				machine: {
+					title: "a máquina confere, não a memória",
+					text: "Neste site, lint, tipos, testes e build rodam a cada push. Se algo quebra, eu vejo antes de seguir.",
+					ci: "o CI deste site",
+				},
+				decisions: {
+					title: "deixo as decisões escritas",
+					text: "O porquê de cada escolha fica num arquivo ou no estudo de caso, pra mim e pra quem vier depois.",
+					design: "o DESIGN.md deste site",
+				},
+				demo: {
+					title: "mostro funcionando",
+					text: "Os projetos principais têm demo em vídeo, e o lab tem os componentes pra você mexer.",
+					lab: "o lab",
+				},
+			},
 			projetos: {
 				title: "projetos",
 				intro: "Tudo que eu construí, com o problema, as decisões e os números de cada um. Os privados não têm código aberto, mas têm estudo de caso.",
@@ -355,6 +399,7 @@ export const translations = {
 					cv: "CV",
 					freela: "trabalhe comigo",
 					agora: "agora",
+					processo: "como eu trabalho",
 					log: "log do site",
 				},
 				footer: {
@@ -569,6 +614,50 @@ export const translations = {
 				noMatch: "no commits match this filter.",
 				filterBy: "filter by",
 			},
+			processo: {
+				title: "how i work",
+				description: "How I build things, with a link to the proof for each one.",
+				intro: "None of this is a promise: every item points to where you can check it.",
+				sectionTitle: "the process",
+				proof: "proof:",
+				footerLink: "process",
+				problem: {
+					title: "start from a real problem",
+					text: "loopvet hub came from my own pain migrating clinics. Nobody asked for it: I needed it and built it.",
+					caseStudy: "loopvet hub case study",
+				},
+				ai: {
+					title: "use AI with rules I wrote",
+					text: "I code with Claude Code following a skill of mine, clean-code-ai, and nothing goes in that I don't understand.",
+					repo: "the skill's repository",
+					post: "the post on how it came about",
+				},
+				test: {
+					title: "test before claiming",
+					text: "I ran the skill blind against other rules: 191 out of 200, against 176 with no rules at all.",
+					results: "the test results",
+				},
+				measure: {
+					title: "measure what I ship",
+					text: "In cd/ui the build measures each component's size in bytes, and for the project videos I checked the quality after compressing them.",
+					caseStudy: "cd/ui case study",
+				},
+				machine: {
+					title: "the machine checks, not my memory",
+					text: "On this site, lint, types, tests and build run on every push. If something breaks, I see it before moving on.",
+					ci: "this site's CI",
+				},
+				decisions: {
+					title: "write decisions down",
+					text: "The why behind each choice lives in a file or in the case study, for me and whoever comes next.",
+					design: "this site's DESIGN.md",
+				},
+				demo: {
+					title: "show it working",
+					text: "The main projects have video demos, and the lab has components you can play with.",
+					lab: "the lab",
+				},
+			},
 			projetos: {
 				title: "projects",
 				intro: "Everything I've built, with the problem, the decisions and the numbers behind each one. The private ones don't have public code, but they do have a case study.",
@@ -720,6 +809,7 @@ export const translations = {
 					cv: "CV",
 					freela: "work with me",
 					agora: "now",
+					processo: "how i work",
 					log: "site log",
 				},
 				footer: {
