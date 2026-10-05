@@ -1,6 +1,6 @@
 ## tl;dr
 
-O loopvet hub é a bancada que eu uso pra migrar clínicas veterinárias de outros sistemas pro Loopvet. Ele reúne três ferramentas: um **auditor** que prevê o que a importação faria com os arquivos, **sem escrever nada**; um **importador** que envia a fila de arquivos pelo painel de verdade; e uma ferramenta de **débitos**, que traz o que cada cliente devia no sistema antigo. O hub só abre e fecha cada uma, e cada uma roda no próprio processo, com as próprias travas. É uma **ferramenta interna**: o código é privado e aqui não aparece nenhum dado de clínica.
+O loopvet hub é a bancada que eu uso pra migrar clínicas veterinárias de outros sistemas pro Loopvet. Ele reúne três ferramentas: um **auditor** que prevê o que a importação faria com os arquivos, **sem escrever nada**; um **importador** que envia a fila de arquivos pelo painel de verdade; e uma ferramenta de **débitos**, que traz o que cada cliente devia no sistema antigo. O hub só abre e fecha cada uma, e cada uma roda no próprio processo, com as próprias travas. É um **projeto meu**: ninguém pediu, eu fiz pra usar no meu trabalho, consumindo a API do Loopvet. O código é privado e aqui não aparece nenhum dado de clínica.
 
 ## o problema
 

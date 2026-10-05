@@ -30,8 +30,8 @@ export default {
 			en: "Attack detection engine in Go, with YAML rules tested against sshd and nginx logs.",
 		},
 		hub: {
-			pt: "Ferramenta interna de migração de clínicas pro Loopvet: auditoria sem escrita, importação e débitos.",
-			en: "Internal tool for migrating clinics into Loopvet: write-free auditing, importing and debts.",
+			pt: "Projeto pessoal pra migrar clínicas pro Loopvet pela API: auditoria sem escrita, importação e débitos.",
+			en: "Personal project for migrating clinics into Loopvet through its API: write-free auditing, importing and debts.",
 		},
 		fin: {
 			pt: "Finanças da família via Open Finance, somente leitura: dashboard e avisos no Discord.",

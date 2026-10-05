@@ -1,6 +1,6 @@
 ## tl;dr
 
-loopvet hub is the workbench I use to migrate veterinary clinics from other systems into Loopvet. It brings together three tools: an **auditor** that predicts what an import would do with the files, **without writing anything**; an **importer** that sends the file queue through the real admin panel; and a **debts** tool that carries over what each client owed in the old system. The hub only opens and closes them, and each one runs in its own process with its own safeguards. It's an **internal tool**: the code is private, and no clinic data appears here.
+loopvet hub is the workbench I use to migrate veterinary clinics from other systems into Loopvet. It brings together three tools: an **auditor** that predicts what an import would do with the files, **without writing anything**; an **importer** that sends the file queue through the real admin panel; and a **debts** tool that carries over what each client owed in the old system. The hub only opens and closes them, and each one runs in its own process with its own safeguards. It's a **personal project**: nobody asked for it, I built it for my own work, on top of the Loopvet API. The code is private, and no clinic data appears here.
 
 ## the problem
 

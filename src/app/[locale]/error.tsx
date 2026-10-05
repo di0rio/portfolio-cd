@@ -10,10 +10,10 @@ type Copy = (typeof translations)[Locale]["app"]["error"];
 // As traduções de todas as páginas (~27 KB gzip) só baixam quando algo quebra: importar direto
 // punha o dicionário inteiro no bundle de toda página, já que o error boundary vai no layout.
 export default function ErrorPage({
-	reset,
+	retry,
 }: {
 	error: Error & { digest?: string };
-	reset: () => void;
+	retry: () => void;
 }) {
 	const { locale } = useParams<{ locale: Locale }>();
 	const [copy, setCopy] = useState<Copy>();
@@ -34,7 +34,7 @@ export default function ErrorPage({
 			<p className="mt-2 max-w-[460px] text-muted-foreground">{copy.body}</p>
 			<button
 				className="mt-6 underline decoration-brand underline-offset-4 outline-none hover:decoration-2 focus-visible:ring-2 focus-visible:ring-brand"
-				onClick={reset}
+				onClick={retry}
 				type="button"
 			>
 				{copy.retry}

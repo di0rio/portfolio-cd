@@ -53,7 +53,7 @@ export const projects: readonly Project[] = [
 		stack: ["Go", "YAML"],
 		repo: "https://github.com/di0rio/sentinel-forge",
 	},
-	// Repositórios privados: sem live nem repo. O hub é ferramenta interna da Loopscape.
+	// Repositórios privados: sem live nem repo. O hub é projeto pessoal em cima da API do Loopvet.
 	{
 		slug: "loopvet-hub",
 		name: "loopvet hub",
