@@ -61,7 +61,3 @@ Cada `t.ts` tem as duas línguas lado a lado (`{ pt, en }`). O `src/i18n/generat
 
 - [`PRODUCT.md`](PRODUCT.md): público, objetivo e princípios do site.
 - [`DESIGN.md`](DESIGN.md): sistema visual ("O Terminal de Casa"): cores, tipografia, layout, componentes e regras.
-
-## Easter egg
-
-Digita `cd ..` (ou `cd ~`) em qualquer página pra voltar pro começo, ou `cd blog` pra abrir o blog.
