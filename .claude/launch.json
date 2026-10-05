@@ -24,7 +24,7 @@
 			"runtimeExecutable": "bun",
 			"runtimeArgs": [
 				"run",
-				"--cwd=../Converter-Hub/apps/web",
+				"--cwd=../cd/Converter-Hub/apps/web",
 				"dev",
 				"-p",
 				"3004"
