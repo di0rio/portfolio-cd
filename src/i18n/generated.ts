@@ -108,7 +108,6 @@ export const translations = {
 					topicApi: "integração com API",
 					topicOther: "outra coisa",
 				},
-				homeLink: "faz freela? faço sim",
 				footerLink: "trabalhe comigo",
 			},
 			lab: {
@@ -474,7 +473,6 @@ export const translations = {
 					topicApi: "API integration",
 					topicOther: "something else",
 				},
-				homeLink: "freelance? yep, I do",
 				footerLink: "work with me",
 			},
 			lab: {

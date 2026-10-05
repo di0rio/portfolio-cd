@@ -30,8 +30,8 @@ read-only  drives the panel    orders API
    └── entities (shared package: what exists and in which order it goes up)
 ```
 
-- **auditor:** answers, file by file, "if this went up right now, what would happen?". it shows rejections, partial files, discarded rows, clients that would become ghosts and master data that would be duplicated. the only `POST` it ever makes is the login, and it aborts before any request if the target isn't the test environment.
-- **importer:** instead of calling the API directly, it attaches to the already logged-in browser (via CDP) and operates the panel the way a person would. it has a queue, an emergency stop and resume.
+- **auditor:** answers, file by file, "if this went up right now, what would happen?". it shows rejections, partial files, discarded rows, clients that would become ghosts and master data that would be duplicated. it only reads: it has no way to write anything, and it refuses to run outside the test environment.
+- **importer:** instead of calling the API directly, it operates the real admin panel the way a person would. it has a queue, an emergency stop and resume.
 - **debts:** opens each client's debt as an open order through the orders API, with no console script.
 - **hub:** a bare Bun server that starts the tool you opened, waits for it to answer and stops it when you leave.
 
@@ -45,7 +45,7 @@ read-only  drives the panel    orders API
 
 **open fast.** switching the tools from `next dev` to `next start` cut the time from click to screen from **2283 ms** to about **580 ms**.
 
-**security that fails closed.** in production, without a password, every route returns 503. the single exception needs two things at once: the tool was launched by the hub, and the request comes from `127.0.0.1`. either one alone isn't enough: the variable by itself would be a switch that turns security off.
+**security that fails closed.** in production, without a password, no route answers. opening without one only works on the machine itself and through the hub, both at once. either one alone isn't enough: by itself, it would be a switch that turns security off.
 
 **never kill an import halfway.** closing the hub stops the tools, except one that reports work in progress. the importer with a running queue stays up and says so, because a file cut off mid-upload ends up in a state nobody can know.
 

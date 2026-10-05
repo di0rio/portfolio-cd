@@ -131,9 +131,5 @@ export default {
 		topicApi: { pt: "integração com API", en: "API integration" },
 		topicOther: { pt: "outra coisa", en: "something else" },
 	},
-	homeLink: {
-		pt: "faz freela? faço sim",
-		en: "freelance? yep, I do",
-	},
 	footerLink: { pt: "trabalhe comigo", en: "work with me" },
 };

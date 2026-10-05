@@ -30,8 +30,8 @@ só leitura  dirige o painel     API de ordens
    └── entidades (pacote comum: o que existe e em que ordem sobe)
 ```
 
-- **auditor:** responde, arquivo por arquivo, "se isto subisse agora, o que aconteceria?". mostra recusas, partes, descartes, clientes que viram fantasma e dado mestre que vai duplicar. o único `POST` que ele faz é o de login, e ele aborta antes de qualquer requisição se o alvo não for o ambiente de testes.
-- **importador:** em vez de falar direto com a API, se anexa ao navegador já logado (via CDP) e opera o painel como uma pessoa faria. tem fila, parada de emergência e retomada.
+- **auditor:** responde, arquivo por arquivo, "se isto subisse agora, o que aconteceria?". mostra recusas, partes, descartes, clientes que viram fantasma e dado mestre que vai duplicar. ele só lê: não tem como escrever nada, e se recusa a rodar fora do ambiente de testes.
+- **importador:** em vez de falar direto com a API, opera o painel de verdade, do jeito que uma pessoa faria. tem fila, parada de emergência e retomada.
 - **débitos:** abre o débito de cada cliente como uma ordem em aberto, pela API de ordens, sem script no console.
 - **hub:** um servidor Bun cru, que sobe a ferramenta que você abriu, espera ela responder e derruba quando você sai.
 
@@ -45,7 +45,7 @@ só leitura  dirige o painel     API de ordens
 
 **abrir rápido.** trocar `next dev` por `next start` nas ferramentas derrubou o tempo do clique até a tela de **2283 ms** pra cerca de **580 ms**.
 
-**segurança que falha fechada.** em produção, sem senha, toda rota responde 503. a única exceção exige duas coisas juntas: a ferramenta ter sido aberta pelo hub e a requisição chegar de `127.0.0.1`. só uma das duas não basta: a variável sozinha seria um interruptor que desliga a segurança.
+**segurança que falha fechada.** em produção, sem senha, nenhuma rota responde. abrir sem senha só funciona na própria máquina e por dentro do hub, as duas coisas juntas. uma só não basta: sozinha, ela viraria um interruptor que desliga a segurança.
 
 **nunca matar uma importação no meio.** fechar o hub derruba as ferramentas, menos a que declara trabalho em andamento. o importador com fila rodando fica de pé e avisa, porque um arquivo cortado no meio do envio fica num estado que ninguém sabe qual é.
 

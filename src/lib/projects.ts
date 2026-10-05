@@ -58,7 +58,7 @@ export const projects: readonly Project[] = [
 		slug: "loopvet-hub",
 		name: "loopvet hub",
 		key: "hub",
-		stack: ["Bun", "Next.js", "TypeScript", "Base UI", "Playwright (CDP)"],
+		stack: ["Bun", "Next.js", "TypeScript", "Base UI", "Playwright"],
 	},
 	{
 		slug: "fin",

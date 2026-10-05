@@ -87,18 +87,9 @@ export default async function Home() {
 					<p className="text-pretty">{copy.security}</p>
 					<p className="text-pretty">{copy.ai}</p>
 				</div>
+				{/* Freela fica só no rodapé: com emprego fixo, anúncio no topo passa o recado errado. */}
 				<div className="mt-6">
 					<ContactLinks labels={nav} locale={locale} />
-					<Link
-						className="group/freela mt-4 inline-flex items-center gap-1 text-muted-foreground text-sm transition-colors duration-150 hover:text-foreground"
-						href={localePath(locale, "/freela")}
-					>
-						{copy.freela.homeLink}
-						<ArrowRightIcon
-							aria-hidden="true"
-							className="size-3.5 transition-transform duration-200 ease-out group-hover/freela:text-brand-foreground motion-safe:group-hover/freela:translate-x-0.5"
-						/>
-					</Link>
 				</div>
 			</Section>
 
