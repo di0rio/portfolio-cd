@@ -1,4 +1,4 @@
-import { FileTextIcon } from "lucide-react";
+import { FileTextIcon, MailIcon } from "lucide-react";
 import Link from "next/link";
 import {
 	GithubIcon,
@@ -10,7 +10,7 @@ import type { Locale } from "@/i18n/generated";
 import { localePath } from "@/i18n/path";
 import { site } from "@/lib/site";
 
-type Labels = { cv: string };
+type Labels = { cv: string; email: string };
 type ContactLink = {
 	track: string;
 	href: string;
@@ -21,7 +21,7 @@ type ContactLink = {
 	target?: string;
 };
 
-/** Ações de contato (CV, LinkedIn, Instagram, GitHub). O contato por mensagem fica no formulário da /freela. */
+/** Ações de contato (CV, e-mail, LinkedIn, Instagram, GitHub). Na /freela também tem o formulário. */
 export function ContactLinks({
 	locale,
 	labels,
@@ -40,6 +40,13 @@ export function ContactLinks({
 			label: labels.cv,
 			icon: <FileTextIcon aria-hidden="true" />,
 			internal: true,
+		});
+	if (site.email)
+		links.push({
+			track: "email",
+			href: `mailto:${site.email}`,
+			label: labels.email,
+			icon: <MailIcon aria-hidden="true" />,
 		});
 	if (site.linkedin) {
 		links.push({

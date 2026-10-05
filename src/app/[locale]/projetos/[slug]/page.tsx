@@ -6,6 +6,7 @@ import { Markdown } from "@/components/markdown";
 import { PageHeader } from "@/components/page-header";
 import { ProjectMedia } from "@/components/project-media";
 import { PageStepper } from "@/components/site-shell/page-stepper";
+import { StackList } from "@/components/stack-list";
 import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
 import { projectArticle, projectImage, projects } from "@/lib/projects";
@@ -81,6 +82,11 @@ export default async function CaseStudy({
 				intro={c.intro}
 				title={project.name}
 			>
+				<StackList
+					className="mt-4"
+					items={project.stack}
+					label={t.app.stack.project({ name: project.name })}
+				/>
 				{(project.live || project.repo) && (
 					<p className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm">
 						{project.live && (

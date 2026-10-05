@@ -8,6 +8,7 @@ export default {
 		experience: { pt: "experiência", en: "experience" },
 		projects: { pt: "projetos", en: "projects" },
 		cv: { pt: "CV", en: "CV" },
+		email: { pt: "E-mail", en: "Email" },
 	},
 	theme: {
 		toLight: { pt: "Mudar pro tema claro", en: "Switch to light theme" },

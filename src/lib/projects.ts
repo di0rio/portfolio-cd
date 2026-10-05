@@ -7,8 +7,9 @@ export type Project = {
 	slug: string;
 	name: string;
 	/** Chave da descrição curta da home (`t.app.projects`) e do estudo de caso (`t.app.projetos`). */
-	key: "cdui" | "converter" | "cdai" | "sentinel" | "fin";
-	/** Tecnologias principais, mostradas como badges na home. */
+	key: "cdui" | "converter" | "cdai" | "sentinel" | "hub" | "fin";
+	/** Tecnologias principais: chips na home e no estudo de caso, texto corrido no /cv. */
+	stack: readonly string[];
 	live?: string;
 	repo?: string;
 };
@@ -19,6 +20,14 @@ export const projects: readonly Project[] = [
 		slug: "cd-ui",
 		name: "cd/ui",
 		key: "cdui",
+		stack: [
+			"React",
+			"TypeScript",
+			"Base UI",
+			"Tailwind v4",
+			"shadcn registry",
+			"Zod",
+		],
 		live: "https://cd-ui.vercel.app",
 		repo: "https://github.com/di0rio/cd-ui",
 	},
@@ -26,6 +35,7 @@ export const projects: readonly Project[] = [
 		slug: "converter-hub",
 		name: "converter-hub",
 		key: "converter",
+		stack: ["TypeScript", "SQLite (WebAssembly)", "Vitest"],
 		live: "https://convert-hub-web.vercel.app",
 		repo: "https://github.com/di0rio/Converter-Hub",
 	},
@@ -33,16 +43,35 @@ export const projects: readonly Project[] = [
 		slug: "cd-ai",
 		name: "cd-ai",
 		key: "cdai",
+		stack: ["Rust", "Tauri", "Ollama", "Next.js"],
 		repo: "https://github.com/di0rio/cd-ai",
 	},
 	{
 		slug: "sentinel-forge",
 		name: "sentinel-forge",
 		key: "sentinel",
+		stack: ["Go", "YAML"],
 		repo: "https://github.com/di0rio/sentinel-forge",
 	},
-	// Repositório privado: sem live nem repo.
-	{ slug: "fin", name: "fin", key: "fin" },
+	// Repositórios privados: sem live nem repo. O hub é ferramenta interna da Loopscape.
+	{
+		slug: "loopvet-hub",
+		name: "loopvet hub",
+		key: "hub",
+		stack: ["Bun", "Next.js", "TypeScript", "Base UI", "Playwright (CDP)"],
+	},
+	{
+		slug: "fin",
+		name: "fin",
+		key: "fin",
+		stack: [
+			"Next.js",
+			"TypeScript",
+			"Open Finance (Pluggy)",
+			"Vercel Cron",
+			"Discord",
+		],
+	},
 ];
 
 const has = (file: string) =>

@@ -5,7 +5,7 @@ import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
 import { getFeaturedRepos } from "@/lib/github";
 import { projects } from "@/lib/projects";
-import { site } from "@/lib/site";
+import { highlights, site } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
 	const { t, locale } = await getT();
@@ -28,7 +28,7 @@ export default async function Cv() {
 	const strip = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
 	const local = site.url.includes("localhost");
 	const contacts = [
-		site.email && { text: site.email },
+		site.email && { href: `mailto:${site.email}`, text: site.email },
 		site.linkedin && {
 			href: `https://www.linkedin.com/in/${site.linkedin}`,
 			text: `linkedin.com/in/${site.linkedin}`,
@@ -76,11 +76,11 @@ export default async function Cv() {
 
 			<Section title={copy.cv.summary}>
 				<p className="text-pretty">
-					{copy.bio} {copy.ai}
+					{copy.bio} {copy.security} {copy.ai}
 				</p>
 			</Section>
 
-			{/* Só cargo, empresa e período: o que eu faço lá dentro não é público. */}
+			{/* Entregas em nível de produto: nada de infra, dados ou detalhe interno da empresa. */}
 			<Section title={copy.experience.title}>
 				<div className="flex flex-wrap items-baseline justify-between gap-x-4">
 					<p className="font-medium">
@@ -94,6 +94,17 @@ export default async function Cv() {
 				<p className="mt-1 text-pretty text-muted-foreground">
 					{copy.experience.path}
 				</p>
+				<ul
+					aria-label={copy.experience.highlights.label}
+					className="mt-2 list-disc space-y-1 pl-5 text-pretty"
+				>
+					{highlights.map((key) => (
+						<li key={key}>{copy.experience.highlights[key]}</li>
+					))}
+				</ul>
+				<p className="mt-2 text-muted-foreground text-sm">
+					{site.company.stack.join(" · ")}
+				</p>
 			</Section>
 
 			<Section title={copy.projects.title}>
@@ -103,6 +114,9 @@ export default async function Cv() {
 							<p className="font-medium">{p.name}</p>
 							<p className="text-pretty text-muted-foreground">
 								{copy.projects[p.key]}
+							</p>
+							<p className="text-muted-foreground text-sm">
+								{p.stack.join(" · ")}
 							</p>
 							<a
 								className="text-sm underline decoration-muted-foreground/40 underline-offset-4 hover:decoration-brand"
@@ -118,6 +132,11 @@ export default async function Cv() {
 			{site.stack.length > 0 && (
 				<Section title={copy.stack.title}>
 					<p>{site.stack.join(" · ")}</p>
+					{site.learning.length > 0 && (
+						<p className="mt-1 text-muted-foreground text-sm">
+							{copy.stack.learning}: {site.learning.join(" · ")}
+						</p>
+					)}
 				</Section>
 			)}
 

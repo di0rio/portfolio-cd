@@ -4,11 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { ContactLinks } from "@/components/contact-links";
 import { Section } from "@/components/section";
+import { StackList } from "@/components/stack-list";
 import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
 import { getBlogPosts, getContributions } from "@/lib/github";
 import { projects } from "@/lib/projects";
-import { site } from "@/lib/site";
+import { highlights, site } from "@/lib/site";
 
 // Lista curada: o trabalho que eu quero mostrar, com descrição escrita por mim (não a do GitHub).
 // Quem tem estudo de caso (lib/projects) ganha link interno; o "ver ↗" aponta pro site ou repositório.
@@ -16,6 +17,7 @@ const projectItems = projects.map((p) => ({
 	name: p.name,
 	key: p.key,
 	slug: p.slug,
+	stack: p.stack,
 	href: p.live ?? p.repo,
 }));
 
@@ -116,6 +118,27 @@ export default async function Home() {
 					</a>
 				</p>
 				<p className="text-muted-foreground">{copy.experience.path}</p>
+				<ul
+					aria-label={copy.experience.highlights.label}
+					className="mt-4 flex flex-col gap-2.5"
+				>
+					{highlights.map((key) => (
+						<li className="flex gap-3" key={key}>
+							<span
+								aria-hidden="true"
+								className="mt-2.5 size-1.5 shrink-0 bg-brand"
+							/>
+							<span className="text-pretty">
+								{copy.experience.highlights[key]}
+							</span>
+						</li>
+					))}
+				</ul>
+				<StackList
+					className="mt-4"
+					items={site.company.stack}
+					label={copy.experience.highlights.stack}
+				/>
 			</Section>
 
 			<Section
@@ -164,6 +187,11 @@ export default async function Home() {
 								)}
 							</p>
 							<p className="text-muted-foreground">{copy.projects[p.key]}</p>
+							<StackList
+								className="mt-2"
+								items={p.stack}
+								label={copy.stack.project({ name: p.name })}
+							/>
 						</li>
 					))}
 				</ul>
@@ -188,6 +216,11 @@ export default async function Home() {
 			{site.stack.length > 0 && (
 				<Section id="stack" title={copy.stack.title}>
 					<p className="text-muted-foreground">{site.stack.join(" · ")}</p>
+					{site.learning.length > 0 && (
+						<p className="mt-1.5 text-muted-foreground text-sm">
+							{copy.stack.learning}: {site.learning.join(" · ")}
+						</p>
+					)}
 				</Section>
 			)}
 

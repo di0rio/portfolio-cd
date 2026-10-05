@@ -217,34 +217,38 @@ export const translations = {
 				sentinel: {
 					intro: "Regras YAML e um motor em Go pra testar detecções de segurança contra logs reais.",
 				},
+				hub: {
+					intro: "A bancada de migração de clínicas do Loopvet: um auditor que só lê, um importador e um lançador que isola cada um.",
+				},
 				fin: {
 					intro: "Finanças da família pelo Open Finance. Só leitura: um dashboard e avisos no Discord.",
 				},
 			},
 			meta: {
 				title: "Cauã Diório · desenvolvedor front-end",
-				description: "Desenvolvedor front-end na Loopscape. Crio interfaces acessíveis, interações claras e detalhes que fazem diferença no uso.",
+				description: "Desenvolvedor front-end na Loopscape. Construo produto de ponta a ponta, do banco à interface, e estudo segurança.",
 			},
 			role: "desenvolvedor front-end júnior",
 			bubble: "salve!",
 			today: "hoje",
-			bio: "Na Loopscape, trabalho no front-end de produto. Gosto de deixar cada tela clara de usar, dos estados e interações aos detalhes menores.",
+			bio: "Na Loopscape, construo produto de ponta a ponta com foco no front-end: do banco e da API até cada estado da tela.",
 			security: "Também estudo segurança. No Sentinel Forge, meu projeto em Go, investigo logs e testo formas de detectar ataques com sinais reais.",
 			ai: "Uso IA pra explorar ideias e aprender mais rápido. Antes de levar algo pro projeto, faço questão de entender o que o código está fazendo.",
 			projects: {
 				title: "projetos",
-				loopvet: "Sistema de gestão para clínicas veterinárias.",
-				domus: "Um CMS editorial que virou plataforma pra organizar e publicar conteúdo.",
 				cdui: "Componentes React enxutos, medidos em bytes e instalados no seu projeto.",
 				converter: "Converta arquivos sem upload. Tudo roda no navegador.",
 				cdai: "Um agente de código local em que o modelo sugere e o código decide o que pode acontecer.",
 				sentinel: "Detecções de segurança em Go, com regras YAML testadas contra logs reais.",
+				hub: "Ferramenta interna pra migrar clínicas pro Loopvet: auditoria sem escrita, importação e débitos.",
 				fin: "Finanças da família via Open Finance, só leitura: dashboard e avisos no Discord.",
 				all: "todos os repositórios",
 				contributions: (v: { count: string }) => `${v.count} contribuições no último ano`,
 			},
 			stack: {
 				title: "stack",
+				project: (v: { name: string }) => `tecnologias de ${v.name}`,
+				learning: "estudando",
 			},
 			error: {
 				title: "algo deu errado.",
@@ -275,6 +279,13 @@ export const translations = {
 				role: "desenvolvedor front-end júnior",
 				professional: "profissional",
 				path: "de estagiário front-end a desenvolvedor front-end júnior",
+				highlights: {
+					label: "principais entregas",
+					stack: "tecnologias usadas na empresa",
+					cms: "Construí do zero o CMS interno, do banco à interface: vários portais de conteúdo, um único código servindo as instalações Loopvet e Domus, editor rico, API pública de conteúdo e um encurtador de links com métricas de clique na borda da Cloudflare.",
+					security: "Cuidei da segurança no servidor: autorização por papel e por portal validada na regra de negócio, 2FA, upload de imagem protegido contra bomba de descompressão e cache invalidado por portal.",
+					importer: "Desenvolvi o importador de planilhas da Loopvet (CSV, XLS, XLSX), com mapeamento automático e manual, modelos, várias abas, prévia, motor de transformação em etapas e validação.",
+				},
 			},
 		},
 		components: {
@@ -288,6 +299,7 @@ export const translations = {
 					experience: "experiência",
 					projects: "projetos",
 					cv: "CV",
+					email: "E-mail",
 				},
 				theme: {
 					toLight: "Mudar pro tema claro",
@@ -546,34 +558,38 @@ export const translations = {
 				sentinel: {
 					intro: "YAML rules and a Go engine for testing security detections against real logs.",
 				},
+				hub: {
+					intro: "Loopvet's clinic-migration workbench: a read-only auditor, an importer and a launcher that keeps each one isolated.",
+				},
 				fin: {
 					intro: "Family finances through Open Finance. Read-only: a dashboard and Discord alerts.",
 				},
 			},
 			meta: {
 				title: "Cauã Diório · front-end developer",
-				description: "Front-end developer at Loopscape. I build accessible interfaces, clear interactions, and details that make a difference.",
+				description: "Front-end developer at Loopscape. I build products end to end, from the database to the interface, and study security.",
 			},
 			role: "junior front-end developer",
 			bubble: "hey!",
 			today: "today",
-			bio: "At Loopscape, I work on product front ends. I care about making each screen clear to use, from its states and interactions down to the small details.",
+			bio: "At Loopscape, I build products end to end with a front-end focus: from the database and API down to every screen state.",
 			security: "I also study security. With Sentinel Forge, my Go project, I dig into logs and test ways to spot attacks from real signals.",
 			ai: "I use AI to explore ideas and learn faster. Before anything goes into a project, I make sure I understand what the code is doing.",
 			projects: {
 				title: "projects",
-				loopvet: "Practice management for veterinary clinics.",
-				domus: "An editorial CMS turned into a platform for organizing and publishing content.",
 				cdui: "Lean React components, measured in bytes and installed into your project.",
 				converter: "Convert files without an upload. Everything runs in your browser.",
 				cdai: "A local coding agent where the model suggests and code decides what can happen.",
 				sentinel: "Security detections in Go, with YAML rules tested against real logs.",
+				hub: "Internal tool for migrating clinics into Loopvet: write-free auditing, importing and debts.",
 				fin: "Family finances via Open Finance, read-only: a dashboard and Discord alerts.",
 				all: "all repositories",
 				contributions: (v: { count: string }) => `${v.count} contributions in the last year`,
 			},
 			stack: {
 				title: "stack",
+				project: (v: { name: string }) => `${v.name} tech stack`,
+				learning: "learning",
 			},
 			error: {
 				title: "something went wrong.",
@@ -604,6 +620,13 @@ export const translations = {
 				role: "junior front-end developer",
 				professional: "professional",
 				path: "from front-end intern to junior front-end developer",
+				highlights: {
+					label: "key work",
+					stack: "technologies used at work",
+					cms: "Built the internal CMS from scratch, database to UI: multiple content portals, one codebase serving the Loopvet and Domus installations, a rich text editor, a public content API and a link shortener with click analytics at the Cloudflare edge.",
+					security: "Handled server-side security: role- and portal-based authorization enforced in the service layer, 2FA, decompression-bomb-safe image uploads and per-portal cache invalidation.",
+					importer: "Developed Loopvet's spreadsheet importer (CSV, XLS, XLSX): smart and manual column mapping, templates, multi-sheet support, preview, a step-based transformation engine and validation.",
+				},
 			},
 		},
 		components: {
@@ -617,6 +640,7 @@ export const translations = {
 					experience: "experience",
 					projects: "projects",
 					cv: "CV",
+					email: "Email",
 				},
 				theme: {
 					toLight: "Switch to light theme",

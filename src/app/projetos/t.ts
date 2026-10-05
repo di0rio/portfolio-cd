@@ -37,6 +37,13 @@ export default {
 		},
 	},
 
+	hub: {
+		intro: {
+			pt: "A bancada de migração de clínicas do Loopvet: um auditor que só lê, um importador e um lançador que isola cada um.",
+			en: "Loopvet's clinic-migration workbench: a read-only auditor, an importer and a launcher that keeps each one isolated.",
+		},
+	},
+
 	fin: {
 		intro: {
 			pt: "Finanças da família pelo Open Finance. Só leitura: um dashboard e avisos no Discord.",

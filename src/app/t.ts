@@ -5,8 +5,8 @@ export default {
 			en: "Cauã Diório · front-end developer",
 		},
 		description: {
-			pt: "Desenvolvedor front-end na Loopscape. Crio interfaces acessíveis, interações claras e detalhes que fazem diferença no uso.",
-			en: "Front-end developer at Loopscape. I build accessible interfaces, clear interactions, and details that make a difference.",
+			pt: "Desenvolvedor front-end na Loopscape. Construo produto de ponta a ponta, do banco à interface, e estudo segurança.",
+			en: "Front-end developer at Loopscape. I build products end to end, from the database to the interface, and study security.",
 		},
 	},
 	role: {
@@ -16,8 +16,8 @@ export default {
 	bubble: { pt: "salve!", en: "hey!" },
 	today: { pt: "hoje", en: "today" },
 	bio: {
-		pt: "Na Loopscape, trabalho no front-end de produto. Gosto de deixar cada tela clara de usar, dos estados e interações aos detalhes menores.",
-		en: "At Loopscape, I work on product front ends. I care about making each screen clear to use, from its states and interactions down to the small details.",
+		pt: "Na Loopscape, construo produto de ponta a ponta com foco no front-end: do banco e da API até cada estado da tela.",
+		en: "At Loopscape, I build products end to end with a front-end focus: from the database and API down to every screen state.",
 	},
 	security: {
 		pt: "Também estudo segurança. No Sentinel Forge, meu projeto em Go, investigo logs e testo formas de detectar ataques com sinais reais.",
@@ -29,14 +29,6 @@ export default {
 	},
 	projects: {
 		title: { pt: "projetos", en: "projects" },
-		loopvet: {
-			pt: "Sistema de gestão para clínicas veterinárias.",
-			en: "Practice management for veterinary clinics.",
-		},
-		domus: {
-			pt: "Um CMS editorial que virou plataforma pra organizar e publicar conteúdo.",
-			en: "An editorial CMS turned into a platform for organizing and publishing content.",
-		},
 		cdui: {
 			pt: "Componentes React enxutos, medidos em bytes e instalados no seu projeto.",
 			en: "Lean React components, measured in bytes and installed into your project.",
@@ -53,6 +45,10 @@ export default {
 			pt: "Detecções de segurança em Go, com regras YAML testadas contra logs reais.",
 			en: "Security detections in Go, with YAML rules tested against real logs.",
 		},
+		hub: {
+			pt: "Ferramenta interna pra migrar clínicas pro Loopvet: auditoria sem escrita, importação e débitos.",
+			en: "Internal tool for migrating clinics into Loopvet: write-free auditing, importing and debts.",
+		},
 		fin: {
 			pt: "Finanças da família via Open Finance, só leitura: dashboard e avisos no Discord.",
 			en: "Family finances via Open Finance, read-only: a dashboard and Discord alerts.",
@@ -63,7 +59,11 @@ export default {
 			en: "{count} contributions in the last year",
 		},
 	},
-	stack: { title: { pt: "stack", en: "stack" } },
+	stack: {
+		title: { pt: "stack", en: "stack" },
+		project: { pt: "tecnologias de {name}", en: "{name} tech stack" },
+		learning: { pt: "estudando", en: "learning" },
+	},
 	error: {
 		title: { pt: "algo deu errado.", en: "something went wrong." },
 		body: {
@@ -107,6 +107,25 @@ export default {
 		path: {
 			pt: "de estagiário front-end a desenvolvedor front-end júnior",
 			en: "from front-end intern to junior front-end developer",
+		},
+		highlights: {
+			label: { pt: "principais entregas", en: "key work" },
+			stack: {
+				pt: "tecnologias usadas na empresa",
+				en: "technologies used at work",
+			},
+			cms: {
+				pt: "Construí do zero o CMS interno, do banco à interface: vários portais de conteúdo, um único código servindo as instalações Loopvet e Domus, editor rico, API pública de conteúdo e um encurtador de links com métricas de clique na borda da Cloudflare.",
+				en: "Built the internal CMS from scratch, database to UI: multiple content portals, one codebase serving the Loopvet and Domus installations, a rich text editor, a public content API and a link shortener with click analytics at the Cloudflare edge.",
+			},
+			security: {
+				pt: "Cuidei da segurança no servidor: autorização por papel e por portal validada na regra de negócio, 2FA, upload de imagem protegido contra bomba de descompressão e cache invalidado por portal.",
+				en: "Handled server-side security: role- and portal-based authorization enforced in the service layer, 2FA, decompression-bomb-safe image uploads and per-portal cache invalidation.",
+			},
+			importer: {
+				pt: "Desenvolvi o importador de planilhas da Loopvet (CSV, XLS, XLSX), com mapeamento automático e manual, modelos, várias abas, prévia, motor de transformação em etapas e validação.",
+				en: "Developed Loopvet's spreadsheet importer (CSV, XLS, XLSX): smart and manual column mapping, templates, multi-sheet support, preview, a step-based transformation engine and validation.",
+			},
 		},
 	},
 };
