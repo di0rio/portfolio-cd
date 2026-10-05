@@ -7,7 +7,8 @@ Cauã Diório's personal portfolio ([@di0rio](https://github.com/di0rio)), built
 - [Next.js 16](https://nextjs.org) (App Router, Turbopack) + React 19
 - [Tailwind CSS v4](https://tailwindcss.com) + [coss ui](https://coss.com/ui) (Base UI)
 - [better-intl](https://www.npmjs.com/package/better-intl) for translations, [next-themes](https://github.com/pacocoursey/next-themes) for themes
-- [Vercel Analytics](https://vercel.com/docs/analytics)
+- [Vercel Analytics](https://vercel.com/docs/analytics) + [Speed Insights](https://vercel.com/docs/speed-insights)
+- [Vercel BotID](https://vercel.com/docs/botid) on the contact form
 - [Bun](https://bun.sh) for package management
 
 ## Run locally
@@ -17,13 +18,16 @@ bun install
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Other scripts: `bun run build`, `bun start`, and `bun run lint`.
+Open [http://localhost:3000](http://localhost:3000). Other scripts: `bun run build`, `bun start`, `bun run lint`, `bun run typecheck`, and `bun test`.
 
 ### Environment variables
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
 | `GITHUB_TOKEN` | No | Raises the GitHub API limit from 60 to 5,000 requests per hour and enables pinned repositories. Without it, the featured section shows repositories with the most stars. A classic token with no scopes is enough for public data. |
+| `RESEND_API_KEY` | For `/freela` | [Resend](https://resend.com) key that emails the contact form. Without it, the form says sending is unavailable. |
+| `CONTACT_EMAIL` | For `/freela` | Who receives the messages. Without a verified domain on Resend, it must be the Resend account email. |
+| `CONTACT_FROM` | No | Sender on a verified domain. Defaults to `onboarding@resend.dev`. |
 
 Create `.env.local` in the project root for local development. On Vercel, add it under *Settings → Environment Variables*.
 
@@ -38,6 +42,8 @@ Create `.env.local` in the project root for local development. On Vercel, add it
 
 Data refreshes hourly, except contributions, which refresh every 6 hours.
 
+The blog is also published as an RSS feed: `/feed.xml` in Portuguese and `/en/feed.xml` in English.
+
 ## Where to edit
 
 | What | File |
@@ -50,6 +56,8 @@ Data refreshes hourly, except contributions, which refresh every 6 hours.
 | Header, navigation, footer, theme, locale | `src/components/site-shell/` |
 | Colors, fonts, animations | `src/app/globals.css` |
 | Link preview image (OG) | `src/app/opengraph-image.tsx` |
+| Blog RSS feed | `src/lib/feed.ts` |
+| Contact form (sending, BotID, per-IP limit) | `src/app/[locale]/freela/actions.ts` |
 
 ### Locales and URLs
 

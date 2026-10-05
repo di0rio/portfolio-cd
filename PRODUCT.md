@@ -27,14 +27,16 @@ A front-end developer who cares about the details people see and use. The site i
 - Built with Next.js 16 (App Router), Tailwind CSS v4, coss ui (Base UI), `better-intl` for translations, `next-themes` for light/dark.
 - Content sources: colocated `t.ts` translation files for copy, `src/lib/site.ts` for personal data, GitHub API for blog posts and README content, a public contributions API for the activity graph. `GITHUB_TOKEN` is optional (rate limit 60 req/h without it).
 - Blog convention: `README.md` in Portuguese, `README.en.md` in English; missing English falls back to Portuguese with a notice.
-- Deploy target: Vercel (final domain undecided; `site.url` reads `VERCEL_PROJECT_PRODUCTION_URL`).
+- Deploy target: Vercel, staying on the `*.vercel.app` domain (no custom domain planned); `site.url` reads `VERCEL_PROJECT_PRODUCTION_URL`.
+- Contact: `/freela` form sends email through Resend (`RESEND_API_KEY`, `CONTACT_EMAIL`), protected by a honeypot, Vercel BotID and a best-effort per-IP limit.
+- Blog also ships as RSS (`/feed.xml`, `/en/feed.xml`). Vercel Analytics and Speed Insights are on.
 
 ## Capabilities and Constraints
 
 - Two locales, **pt and en with equal weight**; every user-facing string must exist in both (`onMissing: "error"`).
 - Light, dark and system themes.
 - Easter egg: typing `cd ..`, `cd ~` or `cd blog` anywhere navigates.
-- Open / undecided: LinkedIn handle, contact email, CV file, final domain, real dates for the Loopvet experience entry, and whether projects link to repositories or live sites.
+- Settled: LinkedIn and contact email live in `src/lib/site.ts`; the CV is the `/cv` page saved as PDF through print; Loopvet entry starts mar 2026; projects link to both the live site and the repository when they exist (`live` / `repo` in `src/lib/projects.ts`).
 
 ## Brand Commitments
 

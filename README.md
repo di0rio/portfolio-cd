@@ -7,7 +7,8 @@ Portfólio pessoal do Cauã Diório ([@di0rio](https://github.com/di0rio)), dese
 - [Next.js 16](https://nextjs.org) (App Router, Turbopack) + React 19
 - [Tailwind CSS v4](https://tailwindcss.com) + [coss ui](https://coss.com/ui) (Base UI)
 - [better-intl](https://www.npmjs.com/package/better-intl) para pt/en, [next-themes](https://github.com/pacocoursey/next-themes) para o tema
-- [Vercel Analytics](https://vercel.com/docs/analytics)
+- [Vercel Analytics](https://vercel.com/docs/analytics) + [Speed Insights](https://vercel.com/docs/speed-insights)
+- [Vercel BotID](https://vercel.com/docs/botid) no formulário de contato
 - [Bun](https://bun.sh) como gerenciador de pacotes
 
 ## Rodando
@@ -17,13 +18,16 @@ bun install
 bun dev
 ```
 
-Abre em [http://localhost:3000](http://localhost:3000). Outros scripts: `bun run build`, `bun start`, `bun run lint`.
+Abre em [http://localhost:3000](http://localhost:3000). Outros scripts: `bun run build`, `bun start`, `bun run lint`, `bun run typecheck`, `bun test`.
 
 ### Variáveis de ambiente
 
 | Variável | Obrigatória | Para quê |
 | --- | --- | --- |
 | `GITHUB_TOKEN` | não | Sobe o limite da API do GitHub de 60 para 5.000 req/h e libera os repositórios **fixados** no perfil. Sem ele, a seção "em destaque" mostra os repositórios com mais estrelas. Um token clássico sem escopos (só leitura pública) basta. |
+| `RESEND_API_KEY` | para o `/freela` | Chave do [Resend](https://resend.com), que envia o formulário de contato por e-mail. Sem ela, o formulário avisa que o envio está indisponível. |
+| `CONTACT_EMAIL` | para o `/freela` | Quem recebe as mensagens. Sem domínio verificado no Resend, precisa ser o e-mail da conta Resend. |
+| `CONTACT_FROM` | não | Remetente com domínio verificado. Se omitido, usa `onboarding@resend.dev`. |
 
 Crie um `.env.local` na raiz para rodar localmente; na Vercel, configure em *Settings → Environment Variables*.
 
@@ -38,6 +42,8 @@ Crie um `.env.local` na raiz para rodar localmente; na Vercel, configure em *Set
 
 Tudo é revalidado a cada hora (contribuições a cada 6 h).
 
+O blog também sai como feed RSS: `/feed.xml` em português e `/en/feed.xml` em inglês.
+
 ## Onde mexer
 
 | O quê | Arquivo |
@@ -50,6 +56,8 @@ Tudo é revalidado a cada hora (contribuições a cada 6 h).
 | Header (prompt e navegação), rodapé, tema, idioma | `src/components/site-shell/` |
 | Cores, fontes, animações | `src/app/globals.css` |
 | Imagem de prévia do link (OG) | `src/app/opengraph-image.tsx` |
+| Feed RSS do blog | `src/lib/feed.ts` |
+| Formulário de contato (envio, BotID, limite por IP) | `src/app/[locale]/freela/actions.ts` |
 
 ### Idiomas e URLs
 
