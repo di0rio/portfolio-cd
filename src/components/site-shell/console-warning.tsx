@@ -8,11 +8,15 @@ const psst: Record<Locale, string> = {
 	en: "psst: try ↑ ↑ ↓ ↓ ← → ← → B A on any page.",
 };
 
-// O que eu curto fora do código: fica só aqui, pra quem abriu o DevTools.
-const likes: Record<Locale, string> = {
-	pt: "fora do código: Scissor Seven, Castle Crashers, Primeira Mensagem (Jotapê) e Daniel Caesar.",
-	en: "outside of code: Scissor Seven, Castle Crashers, Primeira Mensagem (Jotapê) and Daniel Caesar.",
-};
+// O "cd/" do header em letras de bloco, pra quem abriu o DevTools.
+const logo = [
+	" ██████╗██████╗     ██╗",
+	"██╔════╝██╔══██╗   ██╔╝",
+	"██║     ██║  ██║  ██╔╝ ",
+	"██║     ██║  ██║ ██╔╝  ",
+	"╚██████╗██████╔╝██╔╝   ",
+	" ╚═════╝╚═════╝ ╚═╝    ",
+].join("\n");
 
 // Uma vez por carregamento de página: StrictMode e remontagens não repetem.
 let printed = false;
@@ -25,6 +29,10 @@ export function ConsoleWarning({ locale }: { locale: Locale }) {
 		printed = true;
 		const c = globalThis.console;
 		c.log(
+			`%c${logo}`,
+			"color:#ffd23f;font:12px/1.15 ui-monospace,Menlo,Consolas,monospace",
+		);
+		c.log(
 			"%cnananinão",
 			"background:#1c1c1c;color:#ffd23f;font:700 48px/1.3 sans-serif;padding:8px 16px;border-radius:8px",
 		);
@@ -33,7 +41,6 @@ export function ConsoleWarning({ locale }: { locale: Locale }) {
 			"font:500 14px/1.5 sans-serif",
 		);
 		c.log(`%c${psst[locale]}`, "color:#888;font:12px/1.5 sans-serif");
-		c.log(`%c${likes[locale]}`, "color:#888;font:12px/1.5 sans-serif");
 	}, [locale]);
 
 	return null;
