@@ -2,6 +2,8 @@
 
 O cd-ai é um agente de código que roda **na sua máquina**, usando modelos locais pelo Ollama. Ele cuida do ciclo completo - do plano à validação - sem chamar uma API externa. O núcleo é feito em Rust, o app desktop usa Tauri e a interface, Next.js. A regra é simples: o modelo **propõe**; o código **decide**.
 
+**projeto de estudo.** comecei sem saber Rust nem Tauri. escrevi com o Claude Code: a IA me explica os conceitos, eu reviso cada mudança antes de entrar e decido o que o agente pode ou não fazer. é onde eu aprendo a ler e revisar código numa linguagem que ainda não domino.
+
 [código](https://github.com/di0rio/cd-ai)
 
 ## o problema

@@ -2,6 +2,8 @@
 
 sentinel-forge is a **detection-as-code** engine in Go. Rules live in versioned YAML, go through review, and are validated before they run. The engine reads events or sshd and nginx logs, then returns detections with their context: rule, version, window, threshold, and MITRE ATT&CK technique. It’s where I study security hands-on.
 
+**a study project.** I started without knowing Go. I built it with Claude Code: the AI explains the concepts, I review every change before it goes in, and I decide what the engine detects and how it’s tested. it’s where I learn security and a new language at the same time.
+
 [code](https://github.com/di0rio/sentinel-forge)
 
 ## the problem
