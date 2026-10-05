@@ -56,8 +56,8 @@ export default {
 		// Um número por projeto, tirado do estudo de caso (home e /projetos).
 		metric: {
 			cdui: {
-				pt: "27 componentes e 15 blocos, ~600 B em gzip em média",
-				en: "27 components and 15 blocks, ~600 B gzipped on average",
+				pt: "32 componentes e 15 blocos, ~695 B em gzip em média",
+				en: "32 components and 15 blocks, ~695 B gzipped on average",
 			},
 			converter: {
 				pt: "nada sai da aba: a CSP do app bloqueia upload",

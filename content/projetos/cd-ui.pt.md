@@ -1,6 +1,6 @@
 ## tl;dr
 
-O cd/ui reúne 27 componentes React e 15 blocos (telas prontas), tudo em Base UI + Tailwind v4, num **registry do shadcn**. Você instala o código direto no projeto e pode adaptar como quiser. O build mede o tamanho de cada componente em gzip; a média atual fica em cerca de 600 B.
+O cd/ui reúne 32 componentes React e 15 blocos (telas prontas), tudo em Base UI + Tailwind v4, num **registry do shadcn**. Você instala o código direto no projeto e pode adaptar como quiser. O build mede o tamanho de cada componente em gzip; a média atual fica em cerca de 695 B.
 
 [docs](https://cd-ui.vercel.app/docs) · [blocos](https://cd-ui.vercel.app/blocks) · [performance](https://cd-ui.vercel.app/docs/performance) · [código](https://github.com/di0rio/cd-ui)
 
@@ -26,15 +26,23 @@ três apostas simples:
 
 ## como fica
 
-instalar é o fluxo normal do shadcn:
+sem `shadcn init`. você cria um `components.json` mínimo:
 
-```bash
-npx shadcn@latest init
-npx shadcn@latest add https://cd-ui.vercel.app/r/theme.json
-npx shadcn@latest add https://cd-ui.vercel.app/r/button.json https://cd-ui.vercel.app/r/form.json
+```json
+{
+  "style": "new-york",
+  "tailwind": { "css": "src/app/globals.css", "baseColor": "neutral" },
+  "aliases": { "components": "@/components", "utils": "@/lib/utils" }
+}
 ```
 
-ou registre o namespace uma vez no `components.json` e use nomes curtos:
+e um comando instala o tema, o `utils` e todos os componentes:
+
+```bash
+npx shadcn@latest add https://cd-ui.vercel.app/r/all.json
+```
+
+os blocos têm o `all-blocks.json`. item avulso também funciona, por URL ou registrando o namespace no `components.json`:
 
 ```json
 { "registries": { "@cd": "https://cd-ui.vercel.app/r/{name}.json" } }
@@ -46,7 +54,7 @@ npx shadcn@latest add @cd/button @cd/dialog
 
 as dependências (Base UI, Zod quando precisa) e os outros componentes necessários vêm juntos. e a home já mostra a ideia do projeto.
 
-![home do cd/ui: o prompt mostra a rota atual, Ctrl K abre a busca e a média de 600 B em gzip é medida no build](/projects/cd-ui-home.webp)
+![home do cd/ui: o prompt mostra a rota atual, Ctrl K abre a busca e a média de 695 B em gzip é medida no build](/projects/cd-ui-home.webp)
 
 cada componente tem uma página própria, com preview, código, API, teclas e notas de acessibilidade. o selo de tamanho e o selo client/server saem da medição do build.
 
@@ -93,10 +101,11 @@ resultado: se o componente passa a importar outra coisa, o registry já sabe. n�
 
 ### o que aprendi instalando num projeto de verdade
 
-depois de instalar o cd/ui num projeto de fora, apareceram três problemas que o meu próprio site não mostrava:
+depois de instalar o cd/ui num projeto de fora, apareceram quatro problemas que o meu próprio site não mostrava:
 
 - **o `cn` era o do shadcn.** sem uma URL pro `utils`, o shadcn cai no item embutido dele, que instala `export { cn } from "cn"`. agora o cd/ui entrega o próprio item `utils` (clsx + tailwind-merge) e todo componente depende dele.
 - **Server Component não chamava `buttonVariants`.** ele morava no `button.tsx`, que é `"use client"`, e uma função exportada de um módulo client não roda no servidor. mudou pra `button-variants.ts`, sem `"use client"`, e o `button.tsx` só reexporta. no registry, arquivos irmãos que o componente importa e que não estão no catálogo viajam no mesmo item.
+- **sem `components.json`, o `add` não faz o que parece.** num app vazio ele joga os arquivos na pasta atual e não mexe no CSS, e o modo interativo oferece um `init` que traz os padrões do shadcn (tw-animate, os tokens dele). por isso o `components.json` mínimo é o passo que importa.
 - **os blocos importam do caminho do registry.** eles usam `@/registry/cd/ui/button` e a CLI reescreve esse caminho pro alias do `components.json` do projeto de quem instala.
 
 ### o peso é medido, não chutado
@@ -125,7 +134,7 @@ o mesmo script marca cada componente como client ou servidor, só olhando se o a
 client: /^["']use client["']/.test(source),
 ```
 
-da medição saem os números do site. os 27 componentes, do menor ao maior:
+da medição saem os números do site. os 32 componentes, do menor ao maior:
 
 | componente | gzip | roda onde |
 | --- | --- | --- |
@@ -135,29 +144,34 @@ da medição saem os números do site. os 27 componentes, do menor ao maior:
 | card | 377 B | servidor |
 | avatar | 383 B | client |
 | spinner | 398 B | servidor |
-| textarea | 445 B | client |
+| textarea | 451 B | client |
 | field | 451 B | client |
 | badge | 453 B | servidor |
-| switch | 474 B | client |
-| progress | 475 B | client |
-| tooltip | 482 B | client |
-| input | 516 B | client |
-| alert | 530 B | servidor |
-| radio-group | 535 B | client |
+| progress | 465 B | client |
+| popover | 478 B | client |
+| radio-group | 522 B | client |
+| input | 525 B | client |
+| otp-input | 539 B | client |
 | form | 553 B | client |
-| table | 586 B | servidor |
-| popover | 588 B | client |
-| tabs | 628 B | client |
-| slider | 668 B | client |
-| checkbox | 702 B | client |
-| accordion | 721 B | client |
-| dialog | 945 B | client |
-| select | 990 B | client |
-| button | 1,1 kB | client |
-| dropdown-menu | 1,1 kB | client |
+| auth-shell | 573 B | servidor |
+| tabs | 613 B | client |
+| switch | 660 B | client |
+| slider | 667 B | client |
+| checkbox | 688 B | client |
+| alert | 776 B | servidor |
+| tooltip | 794 B | client |
+| pricing-toggle | 885 B | client |
+| dialog | 898 B | client |
+| accordion | 912 B | client |
+| table | 930 B | servidor |
+| dropdown-menu | 1,0 kB | client |
+| logo | 1,1 kB | client |
+| button | 1,2 kB | client |
+| select | 1,2 kB | client |
 | toast | 1,3 kB | client |
+| password-input | 1,7 kB | client |
 
-média de cerca de 600 B. 8 dos 27 (alert, badge, card, kbd, separator, skeleton, spinner e table) não mandam JS.
+média de cerca de 695 B. 9 dos 32 (alert, auth-shell, badge, card, kbd, separator, skeleton, spinner e table) não mandam JS.
 
 ### formulário com Zod sem carregar o Zod inteiro
 
@@ -202,14 +216,21 @@ const schema = z.object({
 
 **importar só o que usa.** cada componente importa a parte do Base UI que usa (`@base-ui/react/dialog`), nunca o pacote inteiro. animação, crescimento do textarea e spinner são CSS.
 
-**movimento com propósito.** o botão afunda 2% em 100 ms ao clicar. de modo geral são 100 a 250 ms, curvas fortes, só `transform` e `opacity`, e `prefers-reduced-motion` respeitado em todos. a busca (⌘K) abre e fecha sem animação nenhuma: quem usa o atalho abre centenas de vezes por dia.
+**movimento com propósito.** o botão afunda 2% em 80 ms ao clicar. de modo geral são 80 a 240 ms, curvas fortes, só `transform` e `opacity`, e `prefers-reduced-motion` respeitado em todos. a busca (⌘K) abre e fecha sem animação nenhuma: quem usa o atalho abre centenas de vezes por dia.
 
 **o prompt como logo.** o cabeçalho das docs mostra `cd/ui ~/docs/button $` com um cursor piscando: o texto é a logo e ainda diz em que página você está.
 
 **o nome do componente é validado.** o nome vira caminho de arquivo e URL, então o build só aceita letras minúsculas, números e hífen (`/^[a-z][a-z0-9-]*$/`).
 
+### o que mudou depois
+
+- **performance.** clicar entre as páginas das docs parecia lento. no output do build, toda rota era dinâmica (ƒ, `no-store`) porque o layout raiz lia o idioma de um cookie. o idioma virou segmento de rota (`[locale]`), lido dos params: agora toda página é estática, com cache de CDN de 1 ano e navegação com prefetch. carregar a busca sob demanda só economizou ~4 KB (o Base UI já estava nos chunks compartilhados). o ganho real foi a página estática.
+- **tokens de movimento e raio.** as durações eram fixas em cada componente (uns 20 arquivos). agora são `--cd-duration-instant/fast/base/slow` (80/120/160/240 ms), `--cd-ease-out` e `--cd-scale-enter`, com um bloco só de `prefers-reduced-motion` e a utility `cd-popup` pros 5 popups. sobrescrever um token no `:root` reajusta tudo, ou um componente só com `[--cd-duration-base:300ms]`. removi o tw-animate-css, que estava importado e sem uso. a escala de raio antiga (6/8/10/14/18 px) parecia tudo igual: agora é uma base de 12 px com 4/6/9/12/18/24, mais `--radius-button` e `--radius-field`.
+- **o Select travava.** o `alignItemWithTrigger` padrão do Base UI fazia o popup pular por cima do gatilho conforme o item selecionado. desliguei por padrão (continua sendo uma prop), com o check à direita e destaque visível.
+- **peças com cara própria.** accordion "prompt tree" (marcador ▸ que gira, linha da marca no item aberto; o chevron antigo continua), alert como linha de log de terminal (`[warn] disk almost full - 14 GB left`, `role="alert"` só em warn e error), botão `key` inspirado no Kbd, tooltip estilo Material com o wrapper `Tip`, SwitchRow (a linha inteira clica), tabela com numérico, densidade e cabeçalho fixo, Logo, e PasswordInput, OtpInput, AuthShell e PricingToggle extraídos dos blocos.
+
 ## status e próximos passos
 
-o cd/ui está na v0.2, com 27 componentes, 15 blocos, tema claro e escuro e o site de docs no ar, em português e inglês. é open source: licença MIT, guia de contribuição e CI que roda lint, tipos e build em todo pull request. um detalhe pra ser honesto sobre a medição: ela conta o código do cd/ui, não o Base UI nem o Zod que vêm junto.
+o cd/ui está na v0.2, com 32 componentes, 15 blocos, tema claro e escuro e o site de docs no ar, em português e inglês. é open source: licença MIT, guia de contribuição e CI que roda lint, tipos e build em todo pull request. um detalhe pra ser honesto sobre a medição: ela conta o código do cd/ui, não o Base UI nem o Zod que vêm junto.
 
 pra adicionar um componente o caminho é curto: o arquivo em `src/registry/cd/ui`, a entrada no catálogo, os exemplos e a documentação, e `bun run registry:build` gera o resto.

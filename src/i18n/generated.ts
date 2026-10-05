@@ -298,7 +298,7 @@ export const translations = {
 				hub: "A ferramenta que eu fiz pra migrar clínica pro Loopvet: confere tudo antes, importa e traz os débitos.",
 				fin: "As finanças lá de casa pelo Open Finance. Só lê: um dashboard e uns avisos no Discord.",
 				metric: {
-					cdui: "27 componentes e 15 blocos, ~600 B em gzip em média",
+					cdui: "32 componentes e 15 blocos, ~695 B em gzip em média",
 					converter: "nada sai da aba: a CSP do app bloqueia upload",
 					cdai: "0 chamadas a API externa: tudo roda no Ollama",
 					sentinel: "mil tentativas de login viram 1 detecção, não cem",
@@ -708,7 +708,7 @@ export const translations = {
 				hub: "The tool I built to migrate clinics into Loopvet: it checks everything first, imports, and brings the debts over.",
 				fin: "Our household finances through Open Finance. Read-only: a dashboard and a few Discord pings.",
 				metric: {
-					cdui: "27 components and 15 blocks, ~600 B gzipped on average",
+					cdui: "32 components and 15 blocks, ~695 B gzipped on average",
 					converter: "nothing leaves the tab: the app's CSP blocks uploads",
 					cdai: "0 external API calls: everything runs on Ollama",
 					sentinel: "a thousand login attempts become 1 detection, not a hundred",
