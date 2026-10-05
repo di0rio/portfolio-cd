@@ -72,8 +72,8 @@ export default {
 				en: "a thousand login attempts become 1 detection, not a hundred",
 			},
 			hub: {
-				pt: "hub com 22 MB, ferramenta abrindo em ~580 ms",
-				en: "22 MB hub, tools open in ~580 ms",
+				pt: "migrações em teste: de 1 por dia pra até 10",
+				en: "test migrations: from 1 a day to up to 10",
 			},
 			fin: {
 				pt: "350+ testes, nenhum valor gravado em disco",

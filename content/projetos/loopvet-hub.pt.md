@@ -65,6 +65,7 @@ o portão é o mesmo da CI: `bun test`, typecheck e lint em todo push.
 
 ## em números
 
+- migração pro ambiente de testes: antes **uma por dia**, tomando o dia inteiro; hoje **até dez no mesmo dia**, duas em paralelo, junto com outros projetos. o teto depende do volume de dados de cada clínica;
 - **3** ferramentas e **11** entidades de importação;
 - **7** ADRs e **21** tarefas documentadas;
 - **43** arquivos de teste e CI em todo push e PR;

@@ -65,6 +65,7 @@ the gate is the same as CI: `bun test`, typecheck and lint on every push.
 
 ## by the numbers
 
+- migrating into the test environment: before, **one a day**, taking the whole day; now **up to ten in the same day**, two in parallel, alongside other projects. the ceiling depends on how much data each clinic has;
 - **3** tools and **11** import entities;
 - **7** ADRs and **21** documented tasks;
 - **43** test files and CI on every push and PR;
