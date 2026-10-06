@@ -2,6 +2,7 @@
 
 import { PauseIcon, PlayIcon } from "lucide-react";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
 
 /**
@@ -12,12 +13,15 @@ import { useEffect, useRef, useState } from "react";
 export function ProjectMedia({
 	src,
 	video,
+	light,
 	alt,
 	play,
 	pause,
 }: {
 	src: string;
 	video?: string;
+	/** Versão gravada no tema claro, quando existe. */
+	light?: { src: string; video?: string };
 	alt: string;
 	play: string;
 	pause: string;
@@ -25,6 +29,9 @@ export function ProjectMedia({
 	const [mode, setMode] = useState<"poster" | "auto" | "manual">("poster");
 	const [paused, setPaused] = useState(false);
 	const player = useRef<HTMLVideoElement>(null);
+	// No servidor o tema ainda não é conhecido: o vídeo começa pelo escuro e troca depois de montar.
+	const { resolvedTheme } = useTheme();
+	const current = light && resolvedTheme === "light" ? light : { src, video };
 
 	// Só no cliente dá pra saber a preferência de movimento e a economia de dados.
 	useEffect(() => {
@@ -39,7 +46,8 @@ export function ProjectMedia({
 	// Toca só enquanto pelo menos um quarto do vídeo está visível; fora da tela pausa e não baixa nada.
 	useEffect(() => {
 		const el = player.current;
-		if (mode !== "auto" || !el) return;
+		// Trocar o tema remonta o <video> com outra gravação: o efeito roda de novo e observa o elemento novo.
+		if (mode !== "auto" || !el || !current.video) return;
 		const observer = new IntersectionObserver(
 			([entry]) => {
 				if (entry.isIntersecting && !el.dataset.userPaused)
@@ -50,7 +58,7 @@ export function ProjectMedia({
 		);
 		observer.observe(el);
 		return () => observer.disconnect();
-	}, [mode]);
+	}, [mode, current.video]);
 
 	// No modo manual o foco vai pro vídeo, pra teclado e leitor de tela não se perderem.
 	useEffect(() => {
@@ -81,10 +89,11 @@ export function ProjectMedia({
 						loop
 						muted
 						playsInline
-						poster={src}
+						key={current.video}
+						poster={current.src}
 						preload="none"
 						ref={player}
-						src={video}
+						src={current.video}
 					/>
 					{/* Movimento automático de mais de 5s precisa de um jeito de parar (WCAG 2.2.2). */}
 					<button
@@ -111,16 +120,18 @@ export function ProjectMedia({
 					className="block size-full object-cover"
 					controls
 					playsInline
-					poster={src}
+					key={current.video}
+					poster={current.src}
 					preload="none"
 					ref={player}
-					src={video}
+					src={current.video}
 				/>
 			) : (
 				<>
+					{/* Print por CSS, sem esperar o JS: o claro some no tema escuro e vice-versa. */}
 					<Image
 						alt={alt}
-						className="block size-full object-cover"
+						className={`block size-full object-cover ${light ? "hidden dark:block" : ""}`}
 						height={2160}
 						priority
 						quality={90}
@@ -128,6 +139,18 @@ export function ProjectMedia({
 						src={src}
 						width={3840}
 					/>
+					{light && (
+						<Image
+							alt={alt}
+							className="block size-full object-cover dark:hidden"
+							height={2160}
+							priority
+							quality={90}
+							sizes="(min-width: 1056px) 1024px, 100vw"
+							src={light.src}
+							width={3840}
+						/>
+					)}
 					{video && (
 						<button
 							aria-label={play}

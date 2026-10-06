@@ -43,14 +43,26 @@ export default async function Projects() {
 								tabIndex={-1}
 							>
 								{image ? (
-									<Image
-										alt=""
-										className="size-full object-cover transition-transform duration-300 ease-out motion-safe:group-hover/card:scale-[1.03]"
-										height={1080}
-										sizes="(min-width: 640px) 200px, 100vw"
-										src={image.src}
-										width={1920}
-									/>
+									<>
+										<Image
+											alt=""
+											className={`size-full object-cover transition-transform duration-300 ease-out motion-safe:group-hover/card:scale-[1.03] ${image.light ? "hidden dark:block" : ""}`}
+											height={1080}
+											sizes="(min-width: 640px) 200px, 100vw"
+											src={image.src}
+											width={1920}
+										/>
+										{image.light && (
+											<Image
+												alt=""
+												className="size-full object-cover transition-transform duration-300 ease-out motion-safe:group-hover/card:scale-[1.03] dark:hidden"
+												height={1080}
+												sizes="(min-width: 640px) 200px, 100vw"
+												src={image.light.src}
+												width={1920}
+											/>
+										)}
+									</>
 								) : (
 									<span className="grid size-full place-items-center font-mono text-muted-foreground text-sm">
 										<span>

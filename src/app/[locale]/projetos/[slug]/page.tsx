@@ -116,6 +116,7 @@ export default async function CaseStudy({
 						alt={copy.imageAlt({ name: project.name })}
 						pause={copy.pause}
 						play={copy.play}
+						light={image.light}
 						src={image.src}
 						video={image.video}
 					/>

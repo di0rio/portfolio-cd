@@ -81,15 +81,22 @@ const has = (file: string) =>
  * Mídia opcional (checada no build): print `<slug>.webp` em 2x e, se houver, vídeo `<slug>.mp4`.
  * Com vídeo, o print vira `<slug>-poster.webp` (1º frame do vídeo, com a mesma moldura), pra troca
  * do print pelo vídeo não dar salto de enquadramento nem de cor.
+ * As gravações são no tema escuro; a versão do tema claro é a mesma coisa com `-light` no nome
+ * (`<slug>-light.webp`, `<slug>-light.mp4`, `<slug>-light-poster.webp`) e entra quando existir.
  */
-export function projectImage(slug: string) {
-	if (!has(`${slug}.webp`)) return undefined;
-	const video = has(`${slug}.mp4`) ? `/projects/${slug}.mp4` : undefined;
-	const poster = video && has(`${slug}-poster.webp`);
+function media(name: string) {
+	if (!has(`${name}.webp`)) return undefined;
+	const video = has(`${name}.mp4`) ? `/projects/${name}.mp4` : undefined;
+	const poster = video && has(`${name}-poster.webp`);
 	return {
-		src: `/projects/${slug}${poster ? "-poster" : ""}.webp`,
+		src: `/projects/${name}${poster ? "-poster" : ""}.webp`,
 		video,
 	};
+}
+
+export function projectImage(slug: string) {
+	const dark = media(slug);
+	return dark && { ...dark, light: media(`${slug}-light`) };
 }
 
 /** Corpo do estudo de caso em `content/projetos/<slug>.<locale>.md`; sem a versão do idioma, cai pro português. */
