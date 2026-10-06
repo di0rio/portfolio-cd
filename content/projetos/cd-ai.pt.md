@@ -1,6 +1,6 @@
 ## tl;dr
 
-O cd-ai é um agente de código que roda **na sua máquina**, usando modelos locais pelo Ollama. Ele cuida do ciclo completo - do plano à validação - sem chamar uma API externa. O núcleo é feito em Rust, o app desktop usa Tauri e a interface, Next.js. A regra é simples: o modelo **propõe**; o código **decide**.
+O cd-ai é um agente de código que roda **na sua máquina**, com modelo local pelo Ollama. Ele faz o ciclo inteiro, do plano à validação, sem chamar API de fora. O núcleo é em Rust, o app desktop usa Tauri e a interface é Next.js. A regra é simples: o modelo **sugere**; quem **decide** é o código.
 
 **projeto de estudo.** comecei sem saber Rust nem Tauri. escrevi com o Claude Code: a IA me explica os conceitos, eu reviso cada mudança antes de entrar e decido o que o agente pode ou não fazer. é onde eu aprendo a ler e revisar código numa linguagem que ainda não domino.
 
@@ -8,34 +8,34 @@ O cd-ai é um agente de código que roda **na sua máquina**, usando modelos loc
 
 ## o problema
 
-agente de código normalmente é um serviço: seu código sai da máquina e cada token custa dinheiro.
+agente de código geralmente é um serviço: seu código sai da máquina e cada token custa dinheiro.
 
-rodando local isso some. sem custo de token, os únicos limites são operacionais e de segurança: memória, tempo, número de iterações e loops. mas aparece outro problema: o modelo local erra mais, principalmente no formato das chamadas de ferramenta. no benchmark do projeto, o `qwen3-coder:30b` acertou 8 de 10 chamadas, e só com um parser tolerante.
+rodando local isso some. sem custo de token, os únicos limites são de operação e de segurança: memória, tempo, número de voltas e loop. só que aparece outro problema: modelo local erra mais, principalmente no formato das chamadas de ferramenta. no benchmark do projeto, o `qwen3-coder:30b` acertou 8 de 10 chamadas, e isso só com um parser tolerante.
 
-então não dá pra confiar no modelo pra ser o sistema de segurança. quem cuida disso tem que ser código determinístico.
+então não dá pra confiar no modelo pra ser a segurança. quem cuida disso tem que ser código que sempre responde igual.
 
 ## a ideia
 
-o modelo só **sugere** ações (ler um arquivo, editar, rodar um comando). cada ação passa por código que não lê o texto do modelo pra decidir nada:
+o modelo só **sugere** ação (ler um arquivo, editar, rodar um comando). cada ação passa por código que não lê o texto do modelo pra decidir nada:
 
-- o caminho precisa estar dentro do workspace;
+- o caminho tem que estar dentro do workspace;
 - o comando é classificado por regras fixas;
 - a permissão sai de uma tabela;
-- o resultado final é julgado por testes e checks, não pela opinião do modelo.
+- o resultado final é julgado por teste e check, não pela opinião do modelo.
 
-e tudo isso mora no Rust. a interface web nunca é fronteira de confiança.
+e tudo isso fica no Rust. a interface web nunca é onde se decide o que é confiável.
 
 ## como fica
 
-a CLI roda uma tarefa de ponta a ponta no terminal. pelo README:
+a CLI roda uma tarefa do começo ao fim no terminal. pelo README:
 
 ```bash
 cargo run -p cd-ai-cli -- task --model <modelo> [--workspace <pasta>] [--mode ask|auto|full-access] "<pedido>"
 ```
 
-no modo padrão (ASK), cada escrita e cada comando que não seja leitura pedem aprovação no terminal (`Aprovar? [s/N]`). sem terminal interativo a ação é **negada**: não existe `--yes`. uma tarefa interrompida volta com `--resume <id>`, e o Ctrl+C cancela a tarefa e os processos filhos.
+no modo padrão (ASK), toda escrita e todo comando que não seja leitura pedem aprovação no terminal (`Aprovar? [s/N]`). sem terminal interativo a ação é **negada**: não existe `--yes`. uma tarefa interrompida volta com `--resume <id>`, e o Ctrl+C cancela a tarefa e os processos filhos.
 
-o desktop usa o mesmo núcleo, com a interface por cima. a mesma CLI, em modo headless, roda a suíte de eval:
+o desktop usa o mesmo núcleo, com a interface por cima. a mesma CLI, sem interface, roda a suíte de eval:
 
 ```bash
 cargo run -p cd-ai-cli -- eval --scripted
@@ -43,7 +43,7 @@ cargo run -p cd-ai-cli -- eval --scripted
 
 ## como funciona por trás
 
-o núcleo (`crates/agent-core`) é compartilhado. o desktop e a CLI são só adaptadores em volta dele, sem lógica de agente própria:
+o núcleo (`crates/agent-core`) é compartilhado. o desktop e a CLI só fazem a ponte com ele, sem lógica de agente própria:
 
 ```text
                  ┌── desktop (src-tauri, Tauri)
@@ -51,7 +51,7 @@ agent-core ──────┤
  (Rust)          └── CLI headless (apps/cli), a mesma que roda o eval
 ```
 
-e o ciclo de uma tarefa é uma máquina de estados em código, não um agente de LLM decidindo o que fazer a seguir:
+e o ciclo de uma tarefa é uma máquina de estados em código, não um LLM decidindo o que fazer depois:
 
 ```text
 pedido ─► classifica ─► contexto ─► modelo ⇄ tool calls ─► verifier ─► relatório
@@ -59,11 +59,11 @@ pedido ─► classifica ─► contexto ─► modelo ⇄ tool calls ─► ver
                                          └── corrige (até o limite) ◄─ falhou
 ```
 
-cada tool call passa por um funil antes de executar. os passos abaixo são esse funil, na ordem.
+toda tool call passa por um funil antes de executar. os passos abaixo são esse funil, na ordem.
 
-### 1. o caminho precisa ficar dentro do workspace
+### 1. o caminho tem que ficar dentro do workspace
 
-o `Workspace::resolve` (em `workspace.rs`) normaliza o caminho, deixa o sistema operacional resolver os symlinks na parte que já existe e confere se o destino final continua dentro da pasta aberta:
+o `Workspace::resolve` (no `workspace.rs`) normaliza o caminho, deixa o sistema operacional resolver os symlinks na parte que já existe e confere se o destino final continua dentro da pasta aberta:
 
 ```rust
 // 2. Let the OS resolve symlinks on the deepest part that exists; the rest are plain names to be created.
@@ -74,11 +74,11 @@ if !canonical.starts_with(&self.root) {
 }
 ```
 
-`../`, symlink pra fora, symlink quebrado e (no Windows) nomes que o sistema trata como outra coisa são recusados. o modelo pedir um caminho não é motivo pro agente tocar nele.
+`../`, symlink pra fora, symlink quebrado e (no Windows) nome que o sistema trata como outra coisa são recusados. o modelo pedir um caminho não é motivo pro agente mexer nele.
 
-### 2. o comando é classificado por regras, não por interpretação
+### 2. o comando é classificado por regra, não por interpretação
 
-antes de executar, o argv vira uma classe: `read`, `validate`, `write`, `network`, `destructive` ou `unknown`. o `classify` (em `permissions.rs`) olha o nome do programa e as flags:
+antes de rodar, o argv vira uma classe: `read`, `validate`, `write`, `network`, `destructive` ou `unknown`. o `classify` (no `permissions.rs`) olha o nome do programa e as flags:
 
 ```rust
 // Basename only: `grep | xargs rm` must never become a `read`.
@@ -90,16 +90,16 @@ if compound {
 }
 ```
 
-alguns detalhes que importam:
+uns detalhes que importam:
 
-- comando composto (pipe, `&&`, `;`) assume a classe **mais perigosa** das partes;
-- `./ls` ou `target/debug/cargo` não valem como `ls` e `cargo`: caminho qualificado cai em `unknown`, porque pode ser qualquer coisa que o agente construiu;
-- `rg --pre` roda um programa arbitrário em cada arquivo, então deixa de ser leitura;
-- um validador (teste, lint, build) roda código do próprio repositório, então opções como `cargo --config` que trocam o programa executado também derrubam pra `unknown`.
+- comando composto (pipe, `&&`, `;`) pega a classe **mais perigosa** das partes;
+- `./ls` ou `target/debug/cargo` não contam como `ls` e `cargo`: caminho com pasta cai em `unknown`, porque pode ser qualquer coisa que o agente montou;
+- `rg --pre` roda um programa qualquer em cada arquivo, então deixa de ser leitura;
+- um validador (teste, lint, build) roda código do próprio repositório, então opção tipo `cargo --config`, que troca o programa que vai rodar, também derruba pra `unknown`.
 
 ### 3. a permissão é uma tabela
 
-o resultado da classe entra numa função pura, que **nunca lê texto do modelo nem saída de ferramenta**:
+a classe entra numa função pura, que **nunca lê texto do modelo nem saída de ferramenta**:
 
 ```rust
 PermissionKind::RunCommand { class } => match class {
@@ -115,17 +115,17 @@ PermissionKind::RunCommand { class } => match class {
 },
 ```
 
-são três modos: ASK (o padrão), AUTO e FULL ACCESS. leitura de arquivo comum é automática, e arquivo de secret sempre pede. rede, comando destrutivo e comando desconhecido sempre pedem, em qualquer modo. o diálogo de aprovação mostra o comando completo ou o diff completo, nunca um resumo escrito pelo modelo.
+são três modos: ASK (o padrão), AUTO e FULL ACCESS. ler arquivo comum é automático, e arquivo de secret sempre pede. rede, comando destrutivo e comando desconhecido sempre pedem, em qualquer modo. a tela de aprovação mostra o comando inteiro ou o diff inteiro, nunca um resumo escrito pelo modelo.
 
 ### 4. sem sandbox, sem FULL ACCESS
 
-validar o caminho não protege o shell: `run_command` pode fazer o que o usuário faria. por isso existe sandbox do sistema operacional:
+checar o caminho não protege o shell: o `run_command` pode fazer qualquer coisa que o usuário faria. por isso tem sandbox do sistema operacional:
 
-- **Linux:** Landlock pro sistema de arquivos e um namespace de rede, sem rota pra fora (a menos que o comando seja `network` e aprovado);
+- **Linux:** Landlock pro sistema de arquivos e um namespace de rede sem saída pra fora (a não ser que o comando seja `network` e tenha sido aprovado);
 - **macOS:** `sandbox-exec` com perfil Seatbelt;
 - **Windows:** um AppContainer.
 
-e o modo FULL ACCESS só existe se o sandbox estiver completo:
+e o modo FULL ACCESS só existe se o sandbox tiver completo:
 
 ```rust
 pub fn effective_mode(mode: PermissionMode, caps: SandboxCapabilities) -> PermissionMode {
@@ -136,30 +136,30 @@ pub fn effective_mode(mode: PermissionMode, caps: SandboxCapabilities) -> Permis
 }
 ```
 
-sem sandbox, todo comando fora da classe `read` pede aprovação, até os validadores. e o que roda **depois**, fora do sandbox (como `~/.cargo/bin`), nunca fica gravável: um comando não pode plantar um binário que o usuário vai executar em seguida.
+sem sandbox, todo comando fora da classe `read` pede aprovação, até os validadores. e o que roda **depois**, fora do sandbox (tipo `~/.cargo/bin`), nunca fica liberado pra escrita: um comando não pode deixar plantado um binário que você vai rodar em seguida.
 
-### 5. secrets não chegam no modelo
+### 5. secret não chega no modelo
 
-o `redactor.rs` olha o **nome** do arquivo (`.env`, `id_rsa`, `.npmrc`, `.pem`…) e o **conteúdo**: prefixos conhecidos de token (`sk-`, `ghp_`, `AKIA`), blocos de chave privada, JWT, usuário e senha dentro de URL, `password=…` e `Bearer …`, e por último uma checagem de entropia:
+o `redactor.rs` olha o **nome** do arquivo (`.env`, `id_rsa`, `.npmrc`, `.pem`…) e o **conteúdo**: prefixo conhecido de token (`sk-`, `ghp_`, `AKIA`), bloco de chave privada, JWT, usuário e senha dentro de URL, `password=…` e `Bearer …`, e por último uma checagem de entropia:
 
 ```rust
 const ENTROPY_WINDOW: usize = 32;
 const ENTROPY_LIMIT: f64 = 4.7;
 ```
 
-o que bate vira `[REDIGIDO:…]` antes de ir pro modelo. vale também pra saída de comando (um `env`, um stack trace), não só pra arquivo.
+o que bate vira `[REDIGIDO:…]` antes de ir pro modelo. vale pra saída de comando também (um `env`, um stack trace), não só pra arquivo.
 
 ### 6. editar é trocar um trecho exato
 
-pra arquivo existente, o modelo manda um bloco de busca e um de substituição. o `edit_file` tenta o match exato e depois um tolerante só a espaços em branco. sem match, devolve o erro pro modelo em vez de editar errado. depois da edição o arquivo passa por parse sintático, a escrita é atômica e o diff completo é o que o usuário aprova. arquivo de secret é negado direto.
+pra arquivo que já existe, o modelo manda um bloco de busca e um de substituição. o `edit_file` tenta o match exato e depois um que só ignora espaço em branco. se não achar, devolve o erro pro modelo em vez de editar errado. depois da edição o arquivo passa por um parse de sintaxe, a escrita é atômica e o que você aprova é o diff completo. arquivo de secret é negado direto.
 
 as ferramentas são poucas: `read_file`, `list_directory`, `search`, `edit_file`, `write_file`, `run_command` e quatro de git (`git_status`, `git_diff`, `git_log` e `git_branch`).
 
-### 7. o verifier julga, o modelo não
+### 7. quem julga é o verifier, não o modelo
 
-o `verify.rs` só **julga** o que já está no disco. primeiro o parse dos arquivos alterados e checks baratos de diff (lockfile mexido, arquivo de secret tocado, diff desproporcional). depois os comandos de validação **do próprio workspace** (descobertos de `package.json`, `Cargo.toml`…). uma frase do modelo dizendo "terminei" nunca conta como evidência: a tarefa só termina como `verified` se um comando de validação passou depois da última edição.
+o `verify.rs` só **julga** o que já tá no disco. primeiro faz o parse dos arquivos alterados e uns checks baratos no diff (lockfile mexido, arquivo de secret tocado, diff grande demais pro pedido). depois roda os comandos de validação **do próprio workspace** (achados no `package.json`, no `Cargo.toml`…). o modelo falar "terminei" nunca conta como prova: a tarefa só termina como `verified` se um comando de validação passou depois da última edição.
 
-se falhar, o modelo volta pra corrigir, até um limite. há ainda um review opcional por LLM, que recebe só o diff e o resultado, e uma falha determinística sempre ganha de um "PASS" do modelo.
+se falhar, o modelo volta pra corrigir, até um limite. tem também um review opcional por LLM, que recebe só o diff e o resultado, e uma falha determinística sempre ganha de um "PASS" do modelo.
 
 ### 8. limites, loop e desfazer
 
@@ -177,34 +177,34 @@ Self {
 }
 ```
 
-repetir a mesma tool call com os mesmos argumentos, ou o mesmo erro, é detectado e interrompe a tarefa (`LoopDetected`).
+repetir a mesma tool call com os mesmos argumentos, ou o mesmo erro, é detectado e para a tarefa (`LoopDetected`).
 
-pra poder desfazer, o agente não depende do git do usuário. ele mantém um **repositório git sombra** com o git dir fora do projeto, e o workspace só como work tree. o `.git` do usuário nunca é tocado. o hash de cada arquivo escrito é registrado, e o rollback reverte só o que o agente mudou: se o usuário mexeu no arquivo depois, ele não restaura sem perguntar.
+pra poder desfazer, o agente não depende do teu git. ele mantém um **repositório git sombra**, com o git dir fora do projeto e o workspace só como work tree. o teu `.git` nunca é tocado. o hash de cada arquivo escrito fica registrado, e o rollback desfaz só o que o agente mudou: se você mexeu no arquivo depois, ele não restaura sem perguntar.
 
-### contexto: compactar, não estender
+### contexto: resumir, não esticar
 
-a janela do `qwen3-coder:30b` é de 32k. perto de estourar, o histórico vira um resumo estruturado, feito só com fatos do engine (arquivos alterados, comandos rodados), e a tarefa segue num turno limpo. o progresso de verdade fica no disco, no git e nos checkpoints, não na memória do modelo. só o pedido do usuário sozinho não caber na janela dá `ContextExhausted`.
+a janela do `qwen3-coder:30b` é de 32k. quando tá perto de estourar, o histórico vira um resumo organizado, feito só com fatos do próprio motor (arquivos alterados, comandos rodados), e a tarefa segue num turno limpo. o progresso de verdade fica no disco, no git e nos checkpoints, não na memória do modelo. só dá `ContextExhausted` se o pedido sozinho não couber na janela.
 
 ## decisões
 
-as decisões estão em ADRs no repositório (`docs/decisions/`). as que mais moldaram o projeto:
+as decisões tão em ADRs no repositório (`docs/decisions/`). as que mais mudaram o projeto:
 
-**núcleo em Rust, compartilhado.** uma fronteira de confiança só, uma CLI headless natural pro eval, e nenhum segundo runtime no backend. a webview só apresenta dados e manda comandos por IPC.
+**núcleo em Rust, compartilhado.** um lugar só decidindo o que é confiável, uma CLI sem interface que serve direto pro eval, e nenhum segundo runtime no backend. a webview só mostra dado e manda comando por IPC.
 
-**exclusivamente local na v1.** sem API externa, telemetria, login ou billing. o provider de modelo é uma interface abstrata só pra não acoplar o código a um provider específico.
+**só local na v1.** sem API de fora, telemetria, login ou cobrança. o provider de modelo é uma interface abstrata só pra não amarrar o código num provider específico.
 
-**Next.js em static export.** o Tauri não tem runtime de servidor, então a interface não pode ter SSR, API routes nem Server Actions. toda operação com privilégio passa pelo Rust. a ADR registra o trade-off: a documentação do Tauri recomenda Vite, e o Next foi escolhido pela familiaridade.
+**Next.js em static export.** o Tauri não tem servidor rodando, então a interface não pode ter SSR, API routes nem Server Actions. toda operação com privilégio passa pelo Rust. a ADR registra a troca: a documentação do Tauri recomenda Vite, e eu escolhi o Next porque já conheço.
 
-**aprovação por padrão, só a segurança pausa.** o agente não para por custo ou quota, só por um pedido de aprovação ou cancelamento seu.
+**aprovação por padrão, e só segurança pausa.** o agente não para por custo ou cota, só pra pedir tua aprovação ou se você cancelar.
 
-**modelos são configuração.** `qwen3:4b` (rápido), `qwen3-coder:30b` (coder) e alternativas são recomendações pro meu hardware, descobertas pelo provider, não dependências no código.
+**modelo é configuração.** `qwen3:4b` (rápido), `qwen3-coder:30b` (coder) e as alternativas são recomendações pro meu hardware, descobertas pelo provider, não dependência no código.
 
 ## status e próximos passos
 
-o roadmap da especificação está fechado pro primeiro release Linux: núcleo, CLI, app desktop, permissões, sandbox, verifier, checkpoints, context manager, skills e roteador de modelo. a suíte de eval com o modelo roteirizado passa as 3 tarefas (`soma`, `greet` e `dobro`). ela é pequena de propósito: a meta é entre 20 e 50 tarefas.
+o roadmap da especificação tá fechado pro primeiro release no Linux: núcleo, CLI, app desktop, permissões, sandbox, verifier, checkpoints, context manager, skills e roteador de modelo. a suíte de eval com o modelo roteirizado passa as 3 tarefas (`soma`, `greet` e `dobro`). ela é pequena de propósito: a meta é ter entre 20 e 50 tarefas.
 
-o primeiro release só empacota `.deb` e AppImage (Linux x86_64). ficam pra depois:
+o primeiro release só empacota `.deb` e AppImage (Linux x86_64). fica pra depois:
 
 - Flatpak, RPM, Windows e macOS;
 - assinatura dos pacotes e atualização automática;
-- medir a taxa de sucesso ao vivo com o `qwen3-coder:30b` numa máquina com Ollama.
+- medir a taxa de acerto ao vivo com o `qwen3-coder:30b` numa máquina com Ollama.
