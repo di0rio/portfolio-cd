@@ -582,27 +582,22 @@ html[data-pending] main {
 	}
 }
 
-/* Cursor da marca: seta de cantos redondos, contorno grosso (invertida no escuro); em algo clicável ela fica cheia.
-   Nativo e sem animação: cursor aparece centenas de vezes por minuto, qualquer efeito vira atraso.
-   Só com mouse; texto editável e os demais estados (arrastar, bloqueado, redimensionar) ficam com o cursor do sistema. */
+/* Cursor da marca: seta de cantos redondos e contorno grosso (invertida no escuro), do tamanho do cursor do sistema.
+   Um formato só, sem trocar em link nem ao clicar e sem animação. Só com mouse; texto editável fica com o do sistema. */
 @media (pointer: fine) {
 	:root {
-		--cursor-arrow: url("/cursors/arrow-light.svg") 6 6, auto;
-		--cursor-pointer: url("/cursors/pointer-light.svg") 6 6, pointer;
+		--cursor-arrow: url("/cursors/arrow-light.svg") 3 3, auto;
 	}
 	.dark {
-		--cursor-arrow: url("/cursors/arrow-dark.svg") 6 6, auto;
-		--cursor-pointer: url("/cursors/pointer-dark.svg") 6 6, pointer;
+		--cursor-arrow: url("/cursors/arrow-dark.svg") 3 3, auto;
 	}
-	/* Sem @layer de propósito: vence o `cursor-pointer` do Tailwind; quem pede outro `cursor-*` por classe mantém o seu. */
-	html {
-		cursor: var(--cursor-arrow);
-	}
+	/* Sem @layer de propósito: vence o `cursor-pointer` do Tailwind, que trocaria pela mão do sistema. */
+	html,
 	:where(a[href], button, [role="button"], summary, label, select):not(
 		[class*="cursor-"]
 	),
 	.cursor-pointer {
-		cursor: var(--cursor-pointer);
+		cursor: var(--cursor-arrow);
 	}
 	:where(
 		input:not(
