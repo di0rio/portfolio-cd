@@ -1,6 +1,6 @@
 ## tl;dr
 
-cd-ai is a coding agent that runs **on your machine** with local models through Ollama. It handles the full loop, from planning to validation, without calling an external API. Its core is built in Rust, its desktop app uses Tauri, and its interface runs on Next.js. The rule is simple: the model **proposes**; the code **decides**.
+cd-ai is a coding agent that runs **on your machine** with local models through Ollama. It does the whole loop, from planning to validation, without calling any outside API. The core is Rust, the desktop app is Tauri and the interface is Next.js. The rule is simple: the model **suggests**; the code **decides**.
 
 **a study project.** I started without knowing Rust or Tauri. I built it with Claude Code: the AI explains the concepts, I review every change before it goes in, and I decide what the agent can and can't do. it's where I learn to read and review code in a language I don't master yet.
 
@@ -10,9 +10,9 @@ cd-ai is a coding agent that runs **on your machine** with local models through 
 
 a coding agent is usually a service: your code leaves the machine and every token costs money.
 
-running locally makes that go away. with no token cost, the only limits are operational and safety ones: memory, time, number of iterations and loops. but a different problem shows up: a local model makes more mistakes, mostly in the format of tool calls. in the project's benchmark, `qwen3-coder:30b` got 8 out of 10 calls right, and only with a tolerant parser.
+running it locally makes that go away. no token cost, so the only limits are about operations and safety: memory, time, how many rounds and loops. but another problem shows up: a local model messes up more, mostly in the format of tool calls. in the project's benchmark, `qwen3-coder:30b` got 8 out of 10 calls right, and only with a tolerant parser.
 
-so the model can't be trusted to be the safety system. whatever does that job has to be deterministic code.
+so you can't trust the model to be the safety net. that job has to go to code that always answers the same way.
 
 ## the idea
 
@@ -23,7 +23,7 @@ the model only **suggests** actions (read a file, edit, run a command). every ac
 - the permission comes from a table;
 - the final result is judged by tests and checks, not by the model's opinion.
 
-and all of that lives in Rust. the web interface is never a trust boundary.
+and all of that lives in Rust. the web interface never gets to decide what's trusted.
 
 ## what it looks like
 
@@ -43,7 +43,7 @@ cargo run -p cd-ai-cli -- eval --scripted
 
 ## how it works under the hood
 
-the core (`crates/agent-core`) is shared. the desktop app and the CLI are just adapters around it, with no agent logic of their own:
+the core (`crates/agent-core`) is shared. the desktop app and the CLI just wrap it, with no agent logic of their own:
 
 ```text
                  ┌── desktop (src-tauri, Tauri)
@@ -51,7 +51,7 @@ agent-core ──────┤
  (Rust)          └── headless CLI (apps/cli), the same one that runs the eval
 ```
 
-and a task's loop is a state machine in code, not an LLM agent deciding what to do next:
+and a task's loop is a state machine in code, not an LLM deciding what to do next:
 
 ```text
 request ─► classify ─► context ─► model ⇄ tool calls ─► verifier ─► report
@@ -74,9 +74,9 @@ if !canonical.starts_with(&self.root) {
 }
 ```
 
-`../`, a symlink pointing out, a dangling symlink and (on Windows) names the system treats as something else are refused. the model asking for a path is no reason for the agent to touch it.
+`../`, a symlink pointing out, a dangling symlink and (on Windows) names the system treats as something else are refused. the model asking for a path is no reason for the agent to go touch it.
 
-### 2. the command is classified by rules, not interpretation
+### 2. commands are sorted by rules, not by reading between the lines
 
 before running, the argv becomes a class: `read`, `validate`, `write`, `network`, `destructive` or `unknown`. `classify` (in `permissions.rs`) looks at the program name and the flags:
 
@@ -119,7 +119,7 @@ there are three modes: ASK (the default), AUTO and FULL ACCESS. reading a regula
 
 ### 4. no sandbox, no FULL ACCESS
 
-validating the path doesn't protect the shell: `run_command` can do what the user could do. that's why there's an operating system sandbox:
+checking the path doesn't protect the shell: `run_command` can do anything you could do. that's why there's an OS sandbox:
 
 - **Linux:** Landlock for the file system and a network namespace with no route out (unless the command is an approved `network` one);
 - **macOS:** `sandbox-exec` with a Seatbelt profile;
@@ -136,7 +136,7 @@ pub fn effective_mode(mode: PermissionMode, caps: SandboxCapabilities) -> Permis
 }
 ```
 
-without a sandbox, every command outside the `read` class asks for approval, validators included. and what runs **later**, outside the sandbox (like `~/.cargo/bin`), is never writable: a command can't plant a binary the user will run next.
+without a sandbox, every command outside the `read` class asks for approval, validators included. and what runs **later**, outside the sandbox (like `~/.cargo/bin`), is never writable: a command can't leave behind a binary you're about to run.
 
 ### 5. secrets don't reach the model
 
@@ -151,13 +151,13 @@ whatever matches becomes `[REDIGIDO:…]` before it goes to the model. that appl
 
 ### 6. editing is swapping an exact snippet
 
-for an existing file, the model sends a search block and a replacement block. `edit_file` tries an exact match and then one that tolerates whitespace only. with no match, it sends the error back to the model instead of editing wrong. after the edit the file goes through a syntax parse, the write is atomic and the full diff is what the user approves. a secret file is denied outright.
+for an existing file, the model sends a search block and a replacement block. `edit_file` tries an exact match and then one that tolerates whitespace only. if nothing matches, it sends the error back to the model instead of editing the wrong thing. after the edit the file goes through a syntax parse, the write is atomic and the full diff is what the user approves. a secret file is denied outright.
 
 the tools are few: `read_file`, `list_directory`, `search`, `edit_file`, `write_file`, `run_command` and four git ones (`git_status`, `git_diff`, `git_log` and `git_branch`).
 
-### 7. the verifier judges, the model doesn't
+### 7. the verifier is the judge, not the model
 
-`verify.rs` only **judges** what's already on disk. first a parse of the changed files and cheap diff checks (a lockfile touched, a secret file touched, a disproportionate diff). then the **workspace's own** validation commands (found from `package.json`, `Cargo.toml`…). a sentence from the model saying "done" never counts as evidence: a task only ends as `verified` if a validation command passed after the last edit.
+`verify.rs` only **judges** what's already on disk. first a parse of the changed files and cheap diff checks (a lockfile touched, a secret file touched, a disproportionate diff). then the **workspace's own** validation commands (found from `package.json`, `Cargo.toml`…). the model saying "done" never counts as proof: a task only ends as `verified` if a validation command passed after the last edit.
 
 if it fails, the model goes back to fix it, up to a limit. there's also an optional LLM review, which receives only the diff and the result, and a deterministic failure always beats a model "PASS".
 
@@ -179,29 +179,29 @@ Self {
 
 repeating the same tool call with the same arguments, or the same error, is detected and stops the task (`LoopDetected`).
 
-to be able to undo, the agent doesn't depend on the user's git. it keeps a **shadow git repository** with the git dir outside the project and the workspace only as the work tree. the user's `.git` is never touched. the hash of every file written is recorded, and rollback only reverts what the agent changed: if the user edited the file afterwards, it won't restore without asking.
+to be able to undo things, the agent doesn't lean on your git. it keeps a **shadow git repository** with the git dir outside the project and the workspace only as the work tree. your `.git` is never touched. the hash of every file written is recorded, and rollback only reverts what the agent changed: if you edited the file afterwards, it won't restore it without asking.
 
-### context: compact, don't extend
+### context: summarize, don't stretch
 
-`qwen3-coder:30b`'s window is 32k. near the limit, the history becomes a structured summary, built only from engine facts (changed files, commands run), and the task continues in a clean turn. real progress lives on disk, in git and in checkpoints, not in the model's memory. only the user's request alone not fitting in the window gives `ContextExhausted`.
+`qwen3-coder:30b`'s window is 32k. near the limit, the history becomes a structured summary, built only from engine facts (changed files, commands run), and the task continues in a clean turn. real progress lives on disk, in git and in checkpoints, not in the model's memory. you only get `ContextExhausted` if the request alone doesn't fit in the window.
 
 ## decisions
 
-the decisions are written down as ADRs in the repository (`docs/decisions/`). the ones that shaped the project the most:
+the decisions are written down as ADRs in the repo (`docs/decisions/`). the ones that shaped the project the most:
 
-**a shared Rust core.** one trust boundary, a headless CLI that's natural for the eval, and no second runtime in the backend. the webview only presents data and sends commands over IPC.
+**a shared Rust core.** one place deciding what's trusted, a headless CLI that fits the eval perfectly, and no second runtime on the backend. the webview only presents data and sends commands over IPC.
 
-**strictly local in v1.** no external API, telemetry, login or billing. the model provider is an abstract interface only so the code doesn't get coupled to one specific provider.
+**local only in v1.** no external API, telemetry, login or billing. the model provider is an abstract interface only so the code doesn't get coupled to one specific provider.
 
-**Next.js with static export.** Tauri has no server runtime, so the interface can't have SSR, API routes or Server Actions. every privileged operation goes through Rust. the ADR records the trade-off: Tauri's docs recommend Vite, and Next was picked for familiarity.
+**Next.js with static export.** Tauri has no server runtime, so the interface can't have SSR, API routes or Server Actions. every privileged operation goes through Rust. the ADR writes down the trade-off: Tauri's docs recommend Vite, and I went with Next because I already know it.
 
-**approval by default, only safety pauses.** the agent doesn't stop for cost or quota, only for an approval request or for you cancelling.
+**approval by default, and only safety hits pause.** the agent doesn't stop for cost or quota, only for an approval request or for you cancelling.
 
 **models are configuration.** `qwen3:4b` (fast), `qwen3-coder:30b` (coder) and alternatives are recommendations for my hardware, discovered through the provider, not dependencies in the code.
 
 ## status and next steps
 
-the spec's roadmap is closed for the first Linux release: core, CLI, desktop app, permissions, sandbox, verifier, checkpoints, context manager, skills and the model router. the eval suite with the scripted model passes all 3 tasks (`soma`, `greet` and `dobro`). it's small on purpose: the target is between 20 and 50 tasks.
+the spec's roadmap is closed for the first Linux release: core, CLI, desktop app, permissions, sandbox, verifier, checkpoints, context manager, skills and the model router. the eval suite with the scripted model passes all 3 tasks (`soma`, `greet` and `dobro`). it's small on purpose: the goal is somewhere between 20 and 50 tasks.
 
 the first release only packages `.deb` and AppImage (Linux x86_64). left for later:
 

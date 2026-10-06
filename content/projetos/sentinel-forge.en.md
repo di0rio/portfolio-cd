@@ -1,6 +1,6 @@
 ## tl;dr
 
-sentinel-forge is a **detection-as-code** engine in Go. Rules live in versioned YAML, go through review, and are validated before they run. The engine reads events or sshd and nginx logs, then returns detections with their context: rule, version, window, threshold, and MITRE ATT&CK technique. It’s where I study security hands-on.
+sentinel-forge is a **detection-as-code** engine in Go. Rules live in versioned YAML, go through review, and are validated before they run. The engine reads events or sshd and nginx logs, then returns detections with their context: rule, version, window, threshold, and MITRE ATT&CK technique. It’s where I study security, as a hobby, hands-on.
 
 **a study project.** I started without knowing Go. I built it with Claude Code: the AI explains the concepts, I review every change before it goes in, and I decide what the engine detects and how it’s tested. it’s where I learn security and a new language at the same time.
 
@@ -8,7 +8,7 @@ sentinel-forge is a **detection-as-code** engine in Go. Rules live in versioned 
 
 ## the problem
 
-detection logic usually lives in dashboards and ad-hoc queries. that brings three pains:
+detection logic usually lives in dashboards and one-off queries. that causes three headaches:
 
 - **hard to review:** nobody code-reviews a filter in a dashboard;
 - **hard to test:** changing the query can break the detection without anyone noticing;
@@ -19,9 +19,9 @@ detection logic usually lives in dashboards and ad-hoc queries. that brings thre
 treat detection like code:
 
 - **a rule is versioned YAML**, reviewed in a PR and validated before it runs;
-- **every rule is tested** against artificial fixtures, so a change can't silently break a detection;
-- **every detection explains itself**;
-- **deterministic:** windows use event time, not the wall clock, so replaying the same events always gives the same result.
+- **every rule is tested** against made-up fixtures, so a change can't quietly break a detection;
+- **every detection tells you why it fired**;
+- **same input, same answer:** windows use event time, not the wall clock, so replaying the same events always gives the same result.
 
 ## what it looks like
 
@@ -67,7 +67,7 @@ reading it top to bottom: **10 events** of type `authentication_failure` **withi
 
 ### the input log
 
-the engine reads a real sshd `auth.log`. an excerpt of the test file (`fixtures/authentication/auth.log`):
+the engine reads an `auth.log` in sshd's real format. a chunk of the test file (`fixtures/authentication/auth.log`):
 
 ```text
 Oct  3 14:31:05 bastion01 sshd[1180]: Accepted publickey for deploy from 198.51.100.7 port 50022 ssh2: ED25519 SHA256:EXAMPLEFINGERPRINTNOTAREALKEY0000000000000
@@ -82,7 +82,7 @@ Oct  3 14:32:18 bastion01 sshd[1307]: Invalid user test from 203.0.113.45 port 5
 Oct  3 14:32:19 bastion01 sshd[1307]: Failed password for invalid user test from 203.0.113.45 port 51252 ssh2
 ```
 
-the whole file has 35 lines: regular people logging in, `alice` getting her password wrong twice and then right, and an attacker at `203.0.113.45` trying `admin`, `root`, `test`, `oracle`, `ubuntu` and `postgres` for about 40 seconds. the IPs are documentation addresses (`192.0.2.0/24`, `198.51.100.0/24` and `203.0.113.0/24`), not anybody's real ones.
+the whole file has 35 lines: regular people logging in, `alice` getting her password wrong twice and then right, and an attacker at `203.0.113.45` trying `admin`, `root`, `test`, `oracle`, `ubuntu` and `postgres` for about 40 seconds. the IPs are documentation addresses (`192.0.2.0/24`, `198.51.100.0/24` and `203.0.113.0/24`), not anyone's real address.
 
 ### the replay
 
@@ -121,11 +121,11 @@ Reason:
 1 detections in 10ms
 ```
 
-out of 35 lines, 25 became events and 10 were skipped for not being security events (the PAM session lines, CRON, `Server listening`…). `alice` got it wrong twice, but stayed under the threshold: nothing. the attacker got it wrong 14 times in 42 seconds: one detection. and those 14 attempts became **one** detection, not fourteen.
+out of 35 lines, 25 became events and 10 were skipped for not being security events (the PAM session lines, CRON, `Server listening`…). `alice` got it wrong twice, but stayed under the threshold: nothing happens. the attacker got it wrong 14 times in 42 seconds: one detection. and those 14 attempts became **one** detection, not fourteen.
 
 ### a second rule, on nginx
 
-`WEB-001` (`rules/web/WEB-001.yml`) detects directory and vulnerability scanners, the kind that probe for paths that don't exist:
+`WEB-001` (`rules/web/WEB-001.yml`) detects directory and vulnerability scanners, the kind that keeps poking at paths that don't exist:
 
 ```yaml
 id: WEB-001
@@ -207,7 +207,7 @@ Reason:
 1 detections in 14ms
 ```
 
-the skipped line is a line from nginx's **error** log that ended up in the same file. the lone `favicon.ico` 404 from another IP doesn't come close to 20.
+the skipped line is a line from nginx's **error** log that ended up in the same file. the lone `favicon.ico` 404 from another IP doesn't get anywhere near 20.
 
 and validating the rules before running is a single command:
 
@@ -264,7 +264,7 @@ for every event that matches `when`, the engine drops the hits older than the wi
 
 replay sorts the events by timestamp before handing them to the engine, because the engine expects order.
 
-### 3. alert storm protection
+### 3. no alert storms
 
 when the threshold is reached, the detection stays **open**. while more hits keep arriving within the window, they **extend** the detection instead of opening another one:
 
@@ -281,7 +281,7 @@ if d := e.open[key]; d != nil {
 
 in the sample log, the attacker's tenth failure (14:32:36) opens the detection. the next four (14:32:39, 43, 46 and 54) join it, and that's why the report says **14** events. a 1,000-attempt attack is one detection, not a hundred.
 
-### 4. the rule is a strict DSL, treated as untrusted input
+### 4. rules are a small, locked-down language, treated as untrusted input
 
 the rule language is declarative and **restricted**: no expressions, templates or code execution. `when` is just text equality (`field: value`), and the fields a rule can reference are a fixed list. when loading (`internal/rule`):
 
@@ -293,9 +293,9 @@ the rule language is declarative and **restricted**: no expressions, templates o
 
 a fuzz test (`FuzzParse`) already found a case where the YAML decoder panicked on a malformed tag. now a bad file becomes an error, not a crash.
 
-### 5. hardening: logs and events are untrusted input too
+### 5. hardening: logs and events can't be trusted either
 
-a log can be written by whoever is attacking. so:
+a log can be written by whoever's attacking you. so:
 
 - lines are limited to **64 KiB**. a longer line is rejected and reading continues with the next one. (a `bufio.Scanner` would stop for good on that line.)
 - patterns are anchored and Go's `regexp` runs in linear time, so there's no catastrophic backtracking;
@@ -310,19 +310,19 @@ func unsafeRune(r rune) bool { return unicode.IsControl(r) || unicode.Is(unicode
 
 ## decisions
 
-**declarative and restricted.** a small language is easier to review, validate and protect. a rule can't execute anything, because the language doesn't offer that.
+**declarative and locked down.** a small language is easier to review, validate and protect. a rule can't run anything, because the language doesn't even offer that.
 
 **event time, not the wall clock.** that's what makes detection reproducible and testable with a fixture.
 
-**explainable by default.** the output says rule, version, group, how many events, window, threshold, ATT&CK technique and the reason. you can understand the alert without opening the code.
+**explains itself by default.** the output tells you the rule, version, group, how many events, window, threshold, ATT&CK technique and the reason. you can understand the alert without opening the code.
 
-**one normalized event.** a new parser only has to produce that event, and a new rule only has to cite its fields. that's why the same `AUTH-001` works on the test JSON and on a real `auth.log`.
+**one normalized event.** a new parser only has to produce that event, and a new rule only has to cite its fields. that's why the same `AUTH-001` works on the test JSON and on an `auth.log`.
 
-**fail safe.** malformed input is skipped and counted, hitting a limit is an explicit error. CI runs tests with `-race`, lint, [govulncheck](https://go.dev/doc/security/vuln/) and [gitleaks](https://github.com/gitleaks/gitleaks) on every push.
+**when in doubt, fail safe.** malformed input is skipped and counted, hitting a limit is an error right in your face. CI runs tests with `-race`, lint, [govulncheck](https://go.dev/doc/security/vuln/) and [gitleaks](https://github.com/gitleaks/gitleaks) on every push.
 
 ## status and next steps
 
-the project is in early development (pre-1.0): the detection core works end to end, but the API and the rule format may still change. it already has the threshold engine, YAML rules, the replay CLI and parsers for sshd `auth.log` and nginx access logs.
+the project is still early (pre-1.0): the detection core works end to end, but the API and the rule format may still change. it already has the threshold engine, YAML rules, the replay CLI and parsers for sshd `auth.log` and nginx access logs.
 
 one limit the code documents itself: the engine expects events in time order (replay sorts them first) and doesn't tolerate out-of-order events yet. an event with a far-future timestamp would expire its group's windows.
 

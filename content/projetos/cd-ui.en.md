@@ -1,20 +1,20 @@
 ## tl;dr
 
-cd/ui ships 32 React components and 15 blocks (ready-made screens), all on Base UI + Tailwind v4, as a **shadcn registry**. Install the code into your project and adapt it as you like. Every build measures each component’s gzip size; the current average is about 695 B.
+cd/ui is 32 React components and 15 blocks (ready-made screens), all on Base UI + Tailwind v4, as a **shadcn registry**. You drop the code straight into your project and tweak it however you want. Every build measures each component’s gzip size; right now the average is about 695 B.
 
 [docs](https://cd-ui.vercel.app/docs) · [blocks](https://cd-ui.vercel.app/blocks) · [performance](https://cd-ui.vercel.app/docs/performance) · [code](https://github.com/di0rio/cd-ui)
 
 ## the problem
 
-a component library is usually a dependency: you install it, import it and hope it keeps doing what you need. when a detail has to change, you fight its API or its CSS.
+a component library is usually a dependency: you install it, import it and hope it keeps doing what you need. when some detail has to change, you end up fighting its API or its CSS.
 
-and almost every library says it's "lightweight". hardly any says **how much**.
+and pretty much every library says it's "lightweight". almost none tells you **how much**.
 
-i wanted the opposite:
+I wanted the opposite:
 
 - accessible components that become **my own code**, not a dependency;
 - the weight of each one **measured**, not guessed;
-- as little JavaScript in the browser as possible.
+- as little JavaScript in the browser as I can get away with.
 
 ## the idea
 
@@ -26,7 +26,7 @@ three simple bets:
 
 ## what it looks like
 
-no `shadcn init`. you create a minimal `components.json`:
+no `shadcn init` needed. you create a tiny `components.json`:
 
 ```json
 {
@@ -36,7 +36,7 @@ no `shadcn init`. you create a minimal `components.json`:
 }
 ```
 
-and one command installs the theme, `utils` and every component:
+and one command installs the theme, `utils` and every single component:
 
 ```bash
 npx shadcn@latest add https://cd-ui.vercel.app/r/all.json
@@ -52,7 +52,7 @@ blocks have `all-blocks.json`. single items work too, by URL or by registering t
 npx shadcn@latest add @cd/button @cd/dialog
 ```
 
-the dependencies (Base UI, Zod when needed) and the other components it needs come along. and the home page already shows the idea of the project.
+the dependencies (Base UI, and Zod when needed) and any other components it uses come along for the ride. and the home page already gets the idea across.
 
 ![cd/ui home: the prompt shows the current route, Ctrl K opens search and the 695 B gzip average is measured at build time](/projects/cd-ui-home.webp)
 
@@ -60,7 +60,7 @@ every component has its own page, with preview, code, API, keys and accessibilit
 
 ![the Button docs page: badges with the gzip size and where it runs, preview and code tabs and the rsc marker in the sidebar](/projects/cd-ui-docs.webp)
 
-besides the components, cd/ui has 15 blocks: complete ready-made screens (5 for auth, 7 for marketing and 3 for apps, like login, hero, pricing, FAQ and settings), built only from the library's own components. a block installs with one command and brings the components it uses along:
+on top of the components, cd/ui has 15 blocks: full ready-made screens (5 for auth, 7 for marketing and 3 for apps, like login, hero, pricing, FAQ and settings), built only from the library's own components. a block installs with one command and pulls in the components it uses:
 
 ```bash
 npx shadcn@latest add https://cd-ui.vercel.app/r/login-01.json
@@ -82,7 +82,7 @@ src/registry/cd/ui/*.tsx ─┬─► build-registry.mjs ─► registry.json �
 
 `bun run build` runs `registry:build` (both scripts and `shadcn build`) and only then `next build`.
 
-### the registry is never written by hand
+### nobody writes the registry by hand
 
 `scripts/build-registry.mjs` finds the dependencies by reading the file's own imports:
 
@@ -97,15 +97,15 @@ function importsOf(file) {
 
 anything that isn't `@/` or `react` becomes an npm dependency. anything under `@/registry/cd/ui/other` becomes a registry dependency (the URL of the other component). the `theme` item copies the tokens from `globals.css`, the `:root` and `.dark` blocks.
 
-result: if a component starts importing something else, the registry already knows. there's no list to forget to update. the same goes for blocks: the components they import become registry dependencies, so installing a block installs everything it uses.
+bottom line: if a component starts importing something else, the registry already knows. there's no list to forget to update. the same goes for blocks: the components they import become registry dependencies, so installing a block installs everything it uses.
 
 ### what I learned installing it into a real project
 
-after installing cd/ui into a project outside the repo, four problems showed up that my own site never showed:
+when I installed cd/ui into a project outside the repo, four problems popped up that my own site never showed me:
 
 - **`cn` was shadcn's.** without a URL for `utils`, shadcn falls back to its built-in item, which installs `export { cn } from "cn"`. now cd/ui ships its own `utils` item (clsx + tailwind-merge) and every component depends on it.
 - **Server Components couldn't call `buttonVariants`.** it lived in `button.tsx`, which is `"use client"`, and a function exported from a client module doesn't run on the server. it moved to `button-variants.ts`, with no `"use client"`, and `button.tsx` just re-exports it. in the registry, sibling files a component imports that aren't in the catalog travel in the same item.
-- **without `components.json`, `add` doesn't do what it looks like.** in an empty app it dumps the files in the current folder and doesn't touch the CSS, and the interactive mode offers an `init` that pulls in shadcn's defaults (tw-animate, its tokens). that's why the minimal `components.json` is the step that matters.
+- **without `components.json`, `add` doesn't do what it looks like.** in an empty app it dumps the files in the current folder and doesn't touch the CSS, and the interactive mode offers an `init` that pulls in shadcn's defaults (tw-animate, its tokens). that's why the tiny `components.json` is the step that actually matters.
 - **blocks import from the registry path.** they use `@/registry/cd/ui/button` and the CLI rewrites that path to the alias in the `components.json` of whoever installs.
 
 ### the weight is measured, not guessed
@@ -126,7 +126,7 @@ const code = result.outputFiles[0].contents;
 metrics[name] = { gzip: gzipSync(code, { level: 9 }).length, /* … */ };
 ```
 
-the libraries stay out **on purpose**: Base UI and Zod already live in your project or are shared. the number is the code that enters your project *on top of* them, which is the part cd/ui controls.
+the libraries are left out **on purpose**: Base UI and Zod already live in your project or are shared. the number is the code that enters your project *on top of* them, which is the part cd/ui controls.
 
 the same script flags each component as client or server just by checking whether the file starts with `"use client"`:
 
@@ -210,27 +210,27 @@ const schema = z.object({
 
 ## decisions
 
-**copy instead of depend.** a component is a file of yours. if the button needs another variant, you edit the file. the cost is that updating later is on you.
+**copy instead of depend.** a component is just a file of yours. if the button needs another variant, you edit the file and that's it. the catch is that updating later is on you.
 
 **Base UI underneath.** focus, keyboard and aria come from Base UI. cd/ui adds the look and the variants on top, and every component page lists the keys and the accessibility notes.
 
 **import only what it uses.** each component imports the part of Base UI it needs (`@base-ui/react/dialog`), never the whole package. animations, the textarea growing and the spinner are CSS.
 
-**motion with purpose.** the button sinks 2% in 80 ms when clicked. in general it's 80 to 240 ms, strong curves, only `transform` and `opacity`, and `prefers-reduced-motion` respected in all of them. search (⌘K) opens and closes with no animation at all: people who use the shortcut open it hundreds of times a day.
+**motion with a reason.** the button sinks 2% in 80 ms when clicked. in general it's 80 to 240 ms, strong curves, only `transform` and `opacity`, and `prefers-reduced-motion` respected in all of them. search (⌘K) opens and closes with no animation at all: if you use the shortcut, you open it hundreds of times a day.
 
-**the prompt as the logo.** the docs header shows `cd/ui ~/docs/button $` with a blinking cursor: the text is the logo and it also tells you which page you're on.
+**the prompt is the logo.** the docs header shows `cd/ui ~/docs/button $` with a blinking cursor: the text is the logo and it also tells you which page you're on.
 
 **the component name is validated.** the name becomes a file path and a URL, so the build only accepts lowercase letters, numbers and hyphens (`/^[a-z][a-z0-9-]*$/`).
 
 ### what changed later
 
-- **performance.** clicking between docs pages felt slow. in the build output every route was dynamic (ƒ, `no-store`) because the root layout read the locale from a cookie. the locale became a route segment (`[locale]`), read from params: now every page is static, CDN-cached for 1 year and navigation is prefetched. lazy-loading search only saved ~4 KB (Base UI was already in the shared chunks). the real win was the static pages.
-- **motion and radius tokens.** durations were hardcoded in each component (about 20 files). now they're `--cd-duration-instant/fast/base/slow` (80/120/160/240 ms), `--cd-ease-out` and `--cd-scale-enter`, with a single `prefers-reduced-motion` block and a `cd-popup` utility for the 5 popups. overriding a token in `:root` retunes everything, or one component with `[--cd-duration-base:300ms]`. i removed tw-animate-css, which was imported but unused. the old radius scale (6/8/10/14/18 px) looked all the same: now it's a 12 px base with 4/6/9/12/18/24, plus `--radius-button` and `--radius-field`.
-- **Select felt janky.** Base UI's default `alignItemWithTrigger` made the popup jump over the trigger depending on the selected item. i turned it off by default (it's still a prop), with the check on the right and a visible highlight.
+- **performance.** jumping between docs pages felt slow. looking at the build output, every route was dynamic (ƒ, `no-store`) because the root layout read the locale from a cookie. the locale became a route segment (`[locale]`), read from params: now every page is static, CDN-cached for 1 year and navigation is prefetched. lazy-loading search only saved ~4 KB (Base UI was already in the shared chunks). the real win was making the pages static.
+- **motion and radius tokens.** durations were hardcoded in each component (about 20 files). now they're `--cd-duration-instant/fast/base/slow` (80/120/160/240 ms), `--cd-ease-out` and `--cd-scale-enter`, with a single `prefers-reduced-motion` block and a `cd-popup` utility for the 5 popups. overriding a token in `:root` retunes everything, or one component with `[--cd-duration-base:300ms]`. I dropped tw-animate-css, which was imported and nobody used. the old radius scale (6/8/10/14/18 px) made everything look the same: now it's a 12 px base with 4/6/9/12/18/24, plus `--radius-button` and `--radius-field`.
+- **Select felt janky.** Base UI's default `alignItemWithTrigger` made the popup jump over the trigger depending on the selected item. I turned it off by default (it's still a prop), with the check on the right and a visible highlight.
 - **signature pieces.** a "prompt tree" accordion (a ▸ marker that turns, a brand rule on the open item; the old chevron is still there), alert as a terminal log line (`[warn] disk almost full - 14 GB left`, `role="alert"` only for warn and error), a `key` button variant inspired by Kbd, a Material-style tooltip with a `Tip` wrapper, SwitchRow (the whole row is clickable), a table with numeric, density and sticky header, Logo, and PasswordInput, OtpInput, AuthShell and PricingToggle extracted from the blocks.
 
 ## status and next steps
 
-cd/ui is at v0.2, with 32 components, 15 blocks, light and dark themes and the docs site live, in Portuguese and English. it's open source: MIT license, a contributing guide and CI that runs lint, types and build on every pull request. one detail to be honest about the measurement: it counts cd/ui's code, not the Base UI or Zod that come along.
+cd/ui is at v0.2, with 32 components, 15 blocks, light and dark themes and the docs site live, in Portuguese and English. it's open source: MIT license, a contributing guide and CI that runs lint, types and build on every pull request. to be upfront about the measurement: it counts cd/ui's code, not the Base UI or Zod that come with it.
 
-adding a component is a short path: the file in `src/registry/cd/ui`, the catalog entry, the examples and the docs, and `bun run registry:build` generates the rest.
+adding a component is quick: the file in `src/registry/cd/ui`, the catalog entry, the examples and the docs, and `bun run registry:build` generates the rest.
