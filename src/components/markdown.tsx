@@ -108,20 +108,27 @@ const article: Components = {
 			!existsSync(join(process.cwd(), "public", src))
 		)
 			return null;
+		// Versão do tema claro com `-light` no nome, quando existe: troca por CSS, sem esperar o JS.
+		const light = src.replace(/\.webp$/, "-light.webp");
+		const hasLight = existsSync(join(process.cwd(), "public", light));
+		const image = (file: string, className: string) => (
+			<a className={className} href={file} rel="noopener" target="_blank">
+				<Image
+					alt={alt ?? ""}
+					className="block h-auto w-full"
+					height={2160}
+					quality={90}
+					sizes="(min-width: 1056px) 1024px, 100vw"
+					src={file}
+					width={3840}
+				/>
+			</a>
+		);
 		return (
 			<figure className="wide">
 				{/* O print é de uma tela inteira: clicar abre em tamanho real pra ler os detalhes. */}
-				<a href={src} rel="noopener" target="_blank">
-					<Image
-						alt={alt ?? ""}
-						className="block h-auto w-full"
-						height={2160}
-						quality={90}
-						sizes="(min-width: 1056px) 1024px, 100vw"
-						src={src}
-						width={3840}
-					/>
-				</a>
+				{image(src, hasLight ? "hidden dark:block" : "block")}
+				{hasLight && image(light, "block dark:hidden")}
 				{alt && <figcaption>{alt}</figcaption>}
 			</figure>
 		);
