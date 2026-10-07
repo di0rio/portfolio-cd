@@ -9,6 +9,7 @@ import { InstagramIcon } from "@/components/brand-icons";
 import { ClickTracker } from "@/components/site-shell/click-tracker";
 import { CommandPalette } from "@/components/site-shell/command-palette";
 import { ConsoleWarning } from "@/components/site-shell/console-warning";
+import { CursorSpin } from "@/components/site-shell/cursor-spin";
 import { EasterEgg } from "@/components/site-shell/easter-egg";
 import { EntryOnce } from "@/components/site-shell/entry-once";
 import { LocaleSwitch } from "@/components/site-shell/locale-switch";
@@ -153,6 +154,7 @@ export default async function RootLayout({
 						<SpeedInsights />
 						<ClickTracker />
 						<ConsoleWarning locale={locale} />
+						<CursorSpin />
 					</TooltipProvider>
 				</ThemeProvider>
 			</body>

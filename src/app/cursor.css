@@ -1,0 +1,212 @@
+/* Cursor da marca (cd): recheio branco e borda preta no claro, invertido no escuro.
+   SVGs em public/cursor/<tema>/. O arco do wait/progress gira via <CursorSpin />. */
+:root {
+	--cursor-default: url(/cursor/light/default.svg) 5 3, default;
+	--cursor-pointer: url(/cursor/light/pointer.svg) 10 2, pointer;
+	--cursor-grab: url(/cursor/light/grab.svg) 12 12, grab;
+	--cursor-grabbing: url(/cursor/light/grabbing.svg) 12 12, grabbing;
+	--cursor-text: url(/cursor/light/text.svg) 12 12, text;
+	--cursor-vertical-text:
+		url(/cursor/light/vertical-text.svg) 12 12, vertical-text;
+	--cursor-wait: url(/cursor/light/wait.svg) 12 12, wait;
+	--cursor-progress: url(/cursor/light/progress.svg) 5 3, progress;
+	--cursor-help: url(/cursor/light/help.svg) 5 3, help;
+	--cursor-copy: url(/cursor/light/copy.svg) 5 3, copy;
+	--cursor-alias: url(/cursor/light/alias.svg) 5 3, alias;
+	--cursor-no-drop: url(/cursor/light/no-drop.svg) 5 3, no-drop;
+	--cursor-context-menu: url(/cursor/light/context-menu.svg) 5 3, context-menu;
+	--cursor-crosshair: url(/cursor/light/crosshair.svg) 12 12, crosshair;
+	--cursor-cell: url(/cursor/light/cell.svg) 12 12, cell;
+	--cursor-move: url(/cursor/light/move.svg) 12 12, move;
+	--cursor-all-scroll: url(/cursor/light/all-scroll.svg) 12 12, all-scroll;
+	--cursor-not-allowed: url(/cursor/light/not-allowed.svg) 12 12, not-allowed;
+	--cursor-zoom-in: url(/cursor/light/zoom-in.svg) 10 10, zoom-in;
+	--cursor-zoom-out: url(/cursor/light/zoom-out.svg) 10 10, zoom-out;
+	--cursor-ew-resize: url(/cursor/light/ew-resize.svg) 12 12, ew-resize;
+	--cursor-ns-resize: url(/cursor/light/ns-resize.svg) 12 12, ns-resize;
+	--cursor-nwse-resize: url(/cursor/light/nwse-resize.svg) 12 12, nwse-resize;
+	--cursor-nesw-resize: url(/cursor/light/nesw-resize.svg) 12 12, nesw-resize;
+	--cursor-col-resize: url(/cursor/light/col-resize.svg) 12 12, col-resize;
+	--cursor-row-resize: url(/cursor/light/row-resize.svg) 12 12, row-resize;
+	--cursor-e-resize: url(/cursor/light/ew-resize.svg) 12 12, e-resize;
+	--cursor-w-resize: url(/cursor/light/ew-resize.svg) 12 12, w-resize;
+	--cursor-n-resize: url(/cursor/light/ns-resize.svg) 12 12, n-resize;
+	--cursor-s-resize: url(/cursor/light/ns-resize.svg) 12 12, s-resize;
+	--cursor-nw-resize: url(/cursor/light/nwse-resize.svg) 12 12, nw-resize;
+	--cursor-se-resize: url(/cursor/light/nwse-resize.svg) 12 12, se-resize;
+	--cursor-ne-resize: url(/cursor/light/nesw-resize.svg) 12 12, ne-resize;
+	--cursor-sw-resize: url(/cursor/light/nesw-resize.svg) 12 12, sw-resize;
+}
+
+.dark {
+	--cursor-default: url(/cursor/dark/default.svg) 5 3, default;
+	--cursor-pointer: url(/cursor/dark/pointer.svg) 10 2, pointer;
+	--cursor-grab: url(/cursor/dark/grab.svg) 12 12, grab;
+	--cursor-grabbing: url(/cursor/dark/grabbing.svg) 12 12, grabbing;
+	--cursor-text: url(/cursor/dark/text.svg) 12 12, text;
+	--cursor-vertical-text:
+		url(/cursor/dark/vertical-text.svg) 12 12, vertical-text;
+	--cursor-wait: url(/cursor/dark/wait.svg) 12 12, wait;
+	--cursor-progress: url(/cursor/dark/progress.svg) 5 3, progress;
+	--cursor-help: url(/cursor/dark/help.svg) 5 3, help;
+	--cursor-copy: url(/cursor/dark/copy.svg) 5 3, copy;
+	--cursor-alias: url(/cursor/dark/alias.svg) 5 3, alias;
+	--cursor-no-drop: url(/cursor/dark/no-drop.svg) 5 3, no-drop;
+	--cursor-context-menu: url(/cursor/dark/context-menu.svg) 5 3, context-menu;
+	--cursor-crosshair: url(/cursor/dark/crosshair.svg) 12 12, crosshair;
+	--cursor-cell: url(/cursor/dark/cell.svg) 12 12, cell;
+	--cursor-move: url(/cursor/dark/move.svg) 12 12, move;
+	--cursor-all-scroll: url(/cursor/dark/all-scroll.svg) 12 12, all-scroll;
+	--cursor-not-allowed: url(/cursor/dark/not-allowed.svg) 12 12, not-allowed;
+	--cursor-zoom-in: url(/cursor/dark/zoom-in.svg) 10 10, zoom-in;
+	--cursor-zoom-out: url(/cursor/dark/zoom-out.svg) 10 10, zoom-out;
+	--cursor-ew-resize: url(/cursor/dark/ew-resize.svg) 12 12, ew-resize;
+	--cursor-ns-resize: url(/cursor/dark/ns-resize.svg) 12 12, ns-resize;
+	--cursor-nwse-resize: url(/cursor/dark/nwse-resize.svg) 12 12, nwse-resize;
+	--cursor-nesw-resize: url(/cursor/dark/nesw-resize.svg) 12 12, nesw-resize;
+	--cursor-col-resize: url(/cursor/dark/col-resize.svg) 12 12, col-resize;
+	--cursor-row-resize: url(/cursor/dark/row-resize.svg) 12 12, row-resize;
+	--cursor-e-resize: url(/cursor/dark/ew-resize.svg) 12 12, e-resize;
+	--cursor-w-resize: url(/cursor/dark/ew-resize.svg) 12 12, w-resize;
+	--cursor-n-resize: url(/cursor/dark/ns-resize.svg) 12 12, n-resize;
+	--cursor-s-resize: url(/cursor/dark/ns-resize.svg) 12 12, s-resize;
+	--cursor-nw-resize: url(/cursor/dark/nwse-resize.svg) 12 12, nw-resize;
+	--cursor-se-resize: url(/cursor/dark/nwse-resize.svg) 12 12, se-resize;
+	--cursor-ne-resize: url(/cursor/dark/nesw-resize.svg) 12 12, ne-resize;
+	--cursor-sw-resize: url(/cursor/dark/nesw-resize.svg) 12 12, sw-resize;
+}
+
+/* As classes cursor-* do Tailwind passam a usar o desenho da marca (com fallback pro cursor do sistema). */
+@utility cursor-default {
+	cursor: var(--cursor-default);
+}
+@utility cursor-pointer {
+	cursor: var(--cursor-pointer);
+}
+@utility cursor-grab {
+	cursor: var(--cursor-grab);
+}
+@utility cursor-grabbing {
+	cursor: var(--cursor-grabbing);
+}
+@utility cursor-text {
+	cursor: var(--cursor-text);
+}
+@utility cursor-vertical-text {
+	cursor: var(--cursor-vertical-text);
+}
+@utility cursor-wait {
+	cursor: var(--cursor-wait);
+}
+@utility cursor-progress {
+	cursor: var(--cursor-progress);
+}
+@utility cursor-help {
+	cursor: var(--cursor-help);
+}
+@utility cursor-copy {
+	cursor: var(--cursor-copy);
+}
+@utility cursor-alias {
+	cursor: var(--cursor-alias);
+}
+@utility cursor-no-drop {
+	cursor: var(--cursor-no-drop);
+}
+@utility cursor-context-menu {
+	cursor: var(--cursor-context-menu);
+}
+@utility cursor-crosshair {
+	cursor: var(--cursor-crosshair);
+}
+@utility cursor-cell {
+	cursor: var(--cursor-cell);
+}
+@utility cursor-move {
+	cursor: var(--cursor-move);
+}
+@utility cursor-all-scroll {
+	cursor: var(--cursor-all-scroll);
+}
+@utility cursor-not-allowed {
+	cursor: var(--cursor-not-allowed);
+}
+@utility cursor-zoom-in {
+	cursor: var(--cursor-zoom-in);
+}
+@utility cursor-zoom-out {
+	cursor: var(--cursor-zoom-out);
+}
+@utility cursor-ew-resize {
+	cursor: var(--cursor-ew-resize);
+}
+@utility cursor-ns-resize {
+	cursor: var(--cursor-ns-resize);
+}
+@utility cursor-nwse-resize {
+	cursor: var(--cursor-nwse-resize);
+}
+@utility cursor-nesw-resize {
+	cursor: var(--cursor-nesw-resize);
+}
+@utility cursor-col-resize {
+	cursor: var(--cursor-col-resize);
+}
+@utility cursor-row-resize {
+	cursor: var(--cursor-row-resize);
+}
+@utility cursor-e-resize {
+	cursor: var(--cursor-e-resize);
+}
+@utility cursor-w-resize {
+	cursor: var(--cursor-w-resize);
+}
+@utility cursor-n-resize {
+	cursor: var(--cursor-n-resize);
+}
+@utility cursor-s-resize {
+	cursor: var(--cursor-s-resize);
+}
+@utility cursor-nw-resize {
+	cursor: var(--cursor-nw-resize);
+}
+@utility cursor-se-resize {
+	cursor: var(--cursor-se-resize);
+}
+@utility cursor-ne-resize {
+	cursor: var(--cursor-ne-resize);
+}
+@utility cursor-sw-resize {
+	cursor: var(--cursor-sw-resize);
+}
+
+@layer base {
+	html {
+		cursor: var(--cursor-default);
+	}
+	a[href] {
+		cursor: var(--cursor-pointer);
+	}
+	input:not([type]),
+	input:is(
+		[type="text"],
+		[type="email"],
+		[type="search"],
+		[type="password"],
+		[type="url"],
+		[type="tel"],
+		[type="number"]
+	),
+	textarea,
+	[contenteditable=""],
+	[contenteditable="true"] {
+		cursor: var(--cursor-text);
+	}
+	:disabled,
+	[aria-disabled="true"] {
+		cursor: var(--cursor-not-allowed);
+	}
+	[aria-busy="true"] {
+		cursor: var(--cursor-progress);
+	}
+}
