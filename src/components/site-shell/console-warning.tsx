@@ -31,10 +31,7 @@ export function ConsoleWarning({ locale }: { locale: Locale }) {
 		// Logo e aviso na mesma fonte e cor, como saída de terminal; a dica fica apagada embaixo.
 		const mono = "font:12px/1.15 ui-monospace,Menlo,Consolas,monospace";
 		c.log(`%c${logo}`, `color:#ffd23f;${mono}`);
-		c.log(
-			"%c> esse console é pra devs. se alguém pediu pra você colar algo aqui, é golpe.",
-			`color:#ffd23f;${mono}`,
-		);
+		c.log("%c> sai daqui rapai.", `color:#ffd23f;${mono}`);
 		// A dica fica minúscula e apagada de propósito: é pra achar, não pra ler de cara.
 		c.log(
 			`%c${psst[locale]}`,
