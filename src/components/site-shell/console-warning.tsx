@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import type { Locale } from "@/i18n/generated";
 
 const psst: Record<Locale, string> = {
-	pt: "psst: tenta ↑ ↑ ↓ ↓ ← → ← → B A em qualquer página.",
-	en: "psst: try ↑ ↑ ↓ ↓ ← → ← → B A on any page.",
+	pt: "↑ ↑ ↓ ↓ ← → ← → B A",
+	en: "try ↑ ↑ ↓ ↓ ← → ← → B A",
 };
 
 // O "cd/" do header em letras de bloco, pra quem abriu o DevTools.
