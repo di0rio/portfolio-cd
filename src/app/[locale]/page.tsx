@@ -50,27 +50,21 @@ export default async function Home() {
 				<div className="relative shrink-0">
 					{/* Avatar e "sombra" giram juntos num wrapper. A sombra é um bloco amarelo atrás, não box-shadow:
 					    box-shadow não pinta embaixo da própria borda, e a borda girada (suavizada) deixava ver o fundo
-					    numa fresta de 1px. Fundo do adesivo segue o tema (papel branco no claro, grafite no escuro), por CSS. */}
+					    numa fresta de 1px. O desenho não tem fundo: o do adesivo segue o tema (papel branco no claro, grafite no escuro). */}
 					<div className="relative size-16 -rotate-3 transition-transform duration-200 ease-out motion-safe:hover:rotate-0">
 						<span
 							aria-hidden="true"
 							className="absolute inset-0 translate-x-1 translate-y-1 rounded-2xl bg-brand"
 						/>
-						{[
-							["/avatar-light.svg", "bg-white dark:hidden"],
-							["/avatar.svg", "hidden bg-[#1c1c1c] dark:block"],
-						].map(([src, theme]) => (
-							<Image
-								alt=""
-								className={`relative size-16 rounded-2xl ${theme}`}
-								height={64}
-								key={src}
-								priority
-								src={src}
-								unoptimized
-								width={64}
-							/>
-						))}
+						<Image
+							alt=""
+							className="relative size-16 rounded-2xl bg-white dark:bg-[#1c1c1c]"
+							height={64}
+							priority
+							src="/avatar-cartoon.svg"
+							unoptimized
+							width={64}
+						/>
 						{/* Borda por cima da imagem, não em volta: cobre a beira suavizada do desenho, que no claro deixava
 						    aparecer uma listra do fundo branco entre a borda e o preto do desenho. */}
 						<span
