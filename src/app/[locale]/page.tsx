@@ -55,7 +55,7 @@ export default async function Home() {
 					].map(([src, theme]) => (
 						<Image
 							alt=""
-							className={`size-16 -rotate-3 rounded-2xl border-2 border-black shadow-[4px_4px_0_var(--brand)] transition-transform duration-200 ease-out motion-safe:hover:rotate-0 ${theme}`}
+							className={`size-16 -rotate-3 rounded-2xl border-2 border-black shadow-[4px_4px_0_1px_var(--brand)] transition-transform duration-200 ease-out motion-safe:hover:rotate-0 ${theme}`}
 							height={64}
 							key={src}
 							priority
