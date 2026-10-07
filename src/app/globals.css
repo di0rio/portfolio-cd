@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./cursor.css";
 
 @custom-variant dark (&:is(.dark *));
 /* Hover só onde existe hover de verdade (mouse/trackpad): no toque o :hover "gruda" depois do tap. */
@@ -366,7 +367,7 @@
 	summary,
 	label[for],
 	select {
-		cursor: pointer;
+		cursor: var(--cursor-pointer);
 	}
 	html {
 		caret-color: var(--brand-foreground);
@@ -438,7 +439,8 @@ html[data-pending] main {
 ::view-transition-new(root) {
 	animation: none;
 }
-/* Conteúdo: sai rápido, entra subindo 6px. Sem blur: filtrar um snapshot de 6000px de altura pesa no GPU. */
+/* Conteúdo: crossfade de 120ms, sem deslocar nem atrasar. Navegar é coisa que se faz o tempo todo:
+   a página nova tem que aparecer na hora, a animação só suaviza a troca. Sem blur: filtrar um snapshot de 6000px pesa no GPU. */
 ::view-transition-group(.page) {
 	animation: none;
 }
@@ -446,22 +448,16 @@ html[data-pending] main {
 	animation: vt-out 120ms ease-out both;
 }
 ::view-transition-new(.page) {
-	animation: vt-in 240ms var(--ease-out) 60ms both;
+	animation: vt-fade 120ms ease-out both;
 }
-/* Título do post: voa da lista pro cabeçalho do post. */
+/* Título do post: voa da lista pro cabeçalho do post, no mesmo tempo da troca. */
 ::view-transition-group(.morph) {
-	animation-duration: 320ms;
-	animation-timing-function: var(--ease-in-out);
+	animation-duration: 120ms;
+	animation-timing-function: var(--ease-out);
 }
 @keyframes vt-out {
 	to {
 		opacity: 0;
-	}
-}
-@keyframes vt-in {
-	from {
-		opacity: 0;
-		transform: translateY(6px);
 	}
 }
 @media (prefers-reduced-motion: reduce) {
