@@ -62,7 +62,7 @@ export default async function Home() {
 						].map(([src, theme]) => (
 							<Image
 								alt=""
-								className={`relative size-16 rounded-2xl border-2 border-black ${theme}`}
+								className={`relative size-16 rounded-2xl ${theme}`}
 								height={64}
 								key={src}
 								priority
@@ -71,6 +71,12 @@ export default async function Home() {
 								width={64}
 							/>
 						))}
+						{/* Borda por cima da imagem, não em volta: cobre a beira suavizada do desenho, que no claro deixava
+						    aparecer uma listra do fundo branco entre a borda e o preto do desenho. */}
+						<span
+							aria-hidden="true"
+							className="pointer-events-none absolute inset-0 rounded-2xl border-2 border-black"
+						/>
 					</div>
 					<span
 						aria-hidden="true"
