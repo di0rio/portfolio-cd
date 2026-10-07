@@ -48,15 +48,22 @@ export default async function Home() {
           O fundo escuro no <img> tapa a fresta clara que o antialias da rotação deixa entre borda e imagem. */}
 			<section className="flex items-center gap-4">
 				<div className="relative shrink-0">
-					<Image
-						alt=""
-						className="size-16 -rotate-3 rounded-2xl border-2 border-black bg-[#1c1c1c] shadow-[4px_4px_0_var(--brand)] transition-transform duration-200 ease-out motion-safe:hover:rotate-0"
-						height={64}
-						priority
-						src="/avatar.svg"
-						unoptimized
-						width={64}
-					/>
+					{/* Fundo do adesivo segue o tema (papel branco no claro, grafite no escuro), trocado por CSS. */}
+					{[
+						["/avatar-light.svg", "bg-white dark:hidden"],
+						["/avatar.svg", "hidden bg-[#1c1c1c] dark:block"],
+					].map(([src, theme]) => (
+						<Image
+							alt=""
+							className={`size-16 -rotate-3 rounded-2xl border-2 border-black shadow-[4px_4px_0_var(--brand)] transition-transform duration-200 ease-out motion-safe:hover:rotate-0 ${theme}`}
+							height={64}
+							key={src}
+							priority
+							src={src}
+							unoptimized
+							width={64}
+						/>
+					))}
 					<span
 						aria-hidden="true"
 						className="absolute bottom-[calc(100%-4px)] left-[62%] origin-bottom-left animate-bubble whitespace-nowrap rounded-lg border-2 border-black bg-white px-1.5 font-heading font-medium text-brand-contrast text-xs leading-5 after:absolute after:top-full after:left-2 after:-mt-1 after:size-2 after:rotate-45 after:border-black after:border-r-2 after:border-b-2 after:bg-white"
