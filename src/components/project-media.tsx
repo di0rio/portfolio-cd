@@ -128,12 +128,14 @@ export function ProjectMedia({
 				/>
 			) : (
 				<>
-					{/* Print por CSS, sem esperar o JS: o claro some no tema escuro e vice-versa. */}
+					{/* Print por CSS, sem esperar o JS: o claro some no tema escuro e vice-versa. Com os dois temas não usa `priority`:
+					    o preload baixaria os dois; <img> lazy escondido (display:none) não baixa, e o visível sobe com fetchpriority alto. */}
 					<Image
 						alt={alt}
 						className={`block size-full object-cover ${light ? "hidden dark:block" : ""}`}
+						fetchPriority="high"
 						height={2160}
-						priority
+						priority={!light}
 						quality={90}
 						sizes="(min-width: 1056px) 1024px, 100vw"
 						src={src}
@@ -143,8 +145,8 @@ export function ProjectMedia({
 						<Image
 							alt={alt}
 							className="block size-full object-cover dark:hidden"
+							fetchPriority="high"
 							height={2160}
-							priority
 							quality={90}
 							sizes="(min-width: 1056px) 1024px, 100vw"
 							src={light.src}
