@@ -488,22 +488,18 @@ html[data-pending] main {
 	}
 }
 
-/* Entrada escalonada das listas (blog, log): o atraso vem de --i, em passos de 40ms.
-   Só opacidade: a página já sobe 6px na troca (view transition), e dois deslocamentos somados pulam. */
-@keyframes rise-in {
-	from {
-		opacity: 0;
-	}
-}
-@keyframes fade-only {
-	from {
-		opacity: 0;
-	}
-}
+/* Entrada escalonada das listas (blog, log): o atraso vem de --i, em passos de 40ms. Só opacidade: dois
+   deslocamentos somados com a troca de página pulam. Transição com @starting-style, não animação com
+   `fill: both`: o estado normal do item é visível, então se a entrada não rodar (troca de página interrompida,
+   aba em segundo plano) ele aparece mesmo assim, em vez de ficar preso invisível. */
 @utility rise {
-	animation: rise-in 220ms var(--ease-out) calc(var(--i, 0) * 40ms) both;
+	transition: opacity 220ms var(--ease-out) calc(var(--i, 0) * 40ms);
+	@starting-style {
+		opacity: 0;
+	}
 	@media (prefers-reduced-motion: reduce) {
-		animation: fade-only 150ms ease both;
+		transition-duration: 150ms;
+		transition-delay: 0ms;
 	}
 }
 
