@@ -23,6 +23,7 @@ What happens on a visit:
 | `/` | Bio, projects, experience, featured repositories and contribution graph | `src/app/t.ts` + GitHub |
 | `/projetos`, `/projetos/<slug>` | Project case studies | `src/lib/projects.ts` + `content/projetos/<slug>.<pt\|en>.md` |
 | `/blog`, `/blog/<repo>` | Posts written as repository READMEs | GitHub (see below) |
+| `/skills` | Landing for my AI agent skills (install, idea, benchmark and levels), linking to the cd-skills repo | `src/lib/skills.ts` + `src/app/skills/t.ts` |
 | `/agora` | What I'm building and learning right now, with the most recently updated repositories | GitHub + `src/app/agora/t.ts` |
 | `/log` | This site's commit history, with a heatmap and filter | GitHub (this repo's commits) |
 | `/lab` | Interactive component and animation demos | `src/components/lab/` |
@@ -99,6 +100,7 @@ The blog is also published as an RSS feed: `/feed.xml` in Portuguese and `/en/fe
 | Pages (home, blog, 404) | `src/app/[locale]/` |
 | Homepage copy (bio, projects, experience) | `src/app/t.ts` |
 | Blog copy | `src/app/blog/t.ts` |
+| Skills page (`/skills`: list, links and blocks) | `src/lib/skills.ts` + `src/app/skills/t.ts` + `src/components/skills/` |
 | Header, navigation, footer, theme, locale | `src/components/site-shell/` |
 | Colors, fonts, animations | `src/app/globals.css` |
 | Link preview image (OG) | `src/app/opengraph-image.tsx` |

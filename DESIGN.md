@@ -236,6 +236,13 @@ Prefer plain stacked lists (title, then a one-line description, 24px between ite
 - Mono lines styled as a shell: a Cursor Yellow Ink `~`, a muted `$`, the command, then output in Ink. The 404 page ends with a blinking yellow block cursor (`caret-blink`, 1s), static under reduced motion.
 - The footer hint renders `cd ..` as inline code on a 4% tint with an 8px radius.
 
+### Skills (`/skills`)
+- A landing for the AI agent skills in the public cd-skills repo, same single column and `main` rhythm as every other page: `PageHeader`, then an install fragment, then one section per skill. The skill name is the only mono heading (an identifier); its sub-blocks are muted `h3` labels 12px above their content, 32px apart.
+- **Install fragment:** the terminal-fragment style (a Cursor Yellow Ink `~`, a muted `$`, the command) on a raised surface with a hairline, plus a copy button. Long commands scroll inside the block, never the page. Install options are the cd/ui `Tabs` (Base UI: arrows move focus, Enter or Space selects); the active tab is an Ink pill that slides, switching without sliding under reduced motion.
+- **Diff block:** a raised block with a file label and a `-4 +1` counter. Removed lines are muted with a strikethrough, added lines are Ink with a Cursor Yellow Ink `+`; no green or red. Lines are real `<del>` / `<ins>` with a visually hidden "removed" / "added".
+- **Stat row:** three tabular numbers at most Title size (22px bold) with a small muted label under each; the leading one is Ink and the others muted. No cards.
+- **Steps and definitions:** the ladder and the workflow are plain numbered lists (muted tabular numbers); levels and modes are a two-column term/description list with the term in mono.
+
 ### Lab (`/lab`)
 - A page of live interaction experiments. Each one is a section: lowercase title, one sentence explaining the technique, then a **stage** (raised surface, hairline, 14px radius, min 160px tall, content centered).
 - Current experiments: hold-to-confirm (yellow `clip-path` fill, 1.6s linear while holding, 200ms back on release), copy button with blurred icon swap (200ms), clip-path tabs (inverted copy of the list clipped to the active tab, 250ms ease-in-out), and a mock terminal that navigates the site (no animation, keyboard-first).

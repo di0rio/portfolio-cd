@@ -23,6 +23,7 @@ O caminho de uma visita:
 | `/` | Bio, projetos, experiência, repositórios em destaque e gráfico de contribuições | `src/app/t.ts` + GitHub |
 | `/projetos`, `/projetos/<slug>` | Estudos de caso dos projetos | `src/lib/projects.ts` + `content/projetos/<slug>.<pt\|en>.md` |
 | `/blog`, `/blog/<repo>` | Posts escritos como README de repositórios | GitHub (ver abaixo) |
+| `/skills` | Landing das minhas skills de agente de IA (instalação, ideia, teste e níveis), com link pro repo cd-skills | `src/lib/skills.ts` + `src/app/skills/t.ts` |
 | `/agora` | O que estou construindo e estudando agora, com os repositórios mexidos por último | GitHub + `src/app/agora/t.ts` |
 | `/log` | Histórico de commits deste site, com heatmap e filtro | GitHub (commits do próprio repo) |
 | `/lab` | Demos interativas de componentes e animações | `src/components/lab/` |
@@ -99,6 +100,7 @@ O blog também sai como feed RSS: `/feed.xml` em português e `/en/feed.xml` em 
 | Páginas (home, blog, 404) | `src/app/[locale]/` |
 | Textos da home (bio, projetos, experiência) | `src/app/t.ts` |
 | Textos do blog | `src/app/blog/t.ts` |
+| Página de skills (`/skills`: lista, links e blocos) | `src/lib/skills.ts` + `src/app/skills/t.ts` + `src/components/skills/` |
 | Header (prompt e navegação), rodapé, tema, idioma | `src/components/site-shell/` |
 | Cores, fontes, animações | `src/app/globals.css` |
 | Imagem de prévia do link (OG) | `src/app/opengraph-image.tsx` |
