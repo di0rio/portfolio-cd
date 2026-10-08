@@ -238,8 +238,8 @@ Prefer plain stacked lists (title, then a one-line description, 24px between ite
 
 ### Skills (`/skills`)
 - A landing for the AI agent skills in the public cd-skills repo, same single column and `main` rhythm as every other page: `PageHeader`, then an install fragment, then one section per skill. The skill name is the only mono heading (an identifier); its sub-blocks are muted `h3` labels 12px above their content, 32px apart.
-- **Install fragment:** the terminal-fragment style (a Cursor Yellow Ink `~`, a muted `$`, the command) on a raised surface with a hairline, plus a copy button. Long commands scroll inside the block, never the page. Install options are the cd/ui `Tabs` (Base UI: arrows move focus, Enter or Space selects); the active tab is an Ink pill that slides, switching without sliding under reduced motion.
-- **Diff block:** a raised block with a file label and a `-4 +1` counter. Removed lines are muted with a strikethrough, added lines are Ink with a Cursor Yellow Ink `+`; no green or red. Lines are real `<del>` / `<ins>` with a visually hidden "removed" / "added".
+- **Install fragment:** the terminal-fragment style (a Cursor Yellow Ink `~`, a muted `$`, the command) on a raised surface with a hairline, plus a copy button. Long commands scroll inside the block, never the page. Install options are the cd/ui `Tabs` (Base UI: arrows move focus, Enter or Space selects); the active tab gets the same 4% tint and Ink text as the locale switch, sliding between tabs, switching without sliding under reduced motion.
+- **Diff block:** a raised block with a file label and a `-6 +1` counter. Removed lines are muted with a strikethrough, added lines are Ink with a Cursor Yellow Ink `+`; no green or red. Lines are real `<del>` / `<ins>` with a visually hidden "removed" / "added".
 - **Stat row:** three tabular numbers at most Title size (22px bold) with a small muted label under each; the leading one is Ink and the others muted. No cards.
 - **Steps and definitions:** the ladder and the workflow are plain numbered lists (muted tabular numbers); levels and modes are a two-column term/description list with the term in mono.
 

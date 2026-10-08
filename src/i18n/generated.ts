@@ -278,7 +278,7 @@ export const translations = {
 				},
 				demo: {
 					tagline: "vídeo de demo que mostra o produto, não um tour pela tela.",
-					before: "antes: 72s, tour por 4 componentes sem fio",
+					before: "antes: 72s, Button, Zod, Dialog e Table sem nada ligando um no outro",
 					after: "depois: 45s, um fluxo: busca → componente → bloco",
 					ideaCaption: "Exemplo do vídeo do cd/ui. A IA escolhe um fluxo, ensaia no navegador, captura por script (ou te passa o roteiro pra gravar no Recordly) e revisa o vídeo quadro a quadro.",
 					flowTitle: "o fluxo",
@@ -713,7 +713,7 @@ export const translations = {
 				},
 				demo: {
 					tagline: "demo videos that show the product, not a screen tour.",
-					before: "before: 72s, a tour of 4 unrelated components",
+					before: "before: 72s, Button, Zod, Dialog and Table with nothing tying them together",
 					after: "after: 45s, one flow: search → component → block",
 					ideaCaption: "Example from the cd/ui video. The AI picks a flow, rehearses in the browser, captures by script (or hands you the shot list to record in Recordly) and reviews the video frame by frame.",
 					flowTitle: "the workflow",

@@ -91,8 +91,8 @@ export default {
 			en: "demo videos that show the product, not a screen tour.",
 		},
 		before: {
-			pt: "antes: 72s, tour por 4 componentes sem fio",
-			en: "before: 72s, a tour of 4 unrelated components",
+			pt: "antes: 72s, Button, Zod, Dialog e Table sem nada ligando um no outro",
+			en: "before: 72s, Button, Zod, Dialog and Table with nothing tying them together",
 		},
 		after: {
 			pt: "depois: 45s, um fluxo: busca → componente → bloco",

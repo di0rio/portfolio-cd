@@ -39,10 +39,9 @@ const link =
 const diff = [
 	["-", "interface PriceCalculator { calculate(items: Item[]): number }"],
 	["-", "class DefaultPriceCalculator implements PriceCalculator {"],
-	[
-		"-",
-		"  calculate(items: Item[]) { return items.reduce((sum, item) => sum + item.price, 0) }",
-	],
+	["-", "  calculate(items: Item[]) {"],
+	["-", "    return items.reduce((sum, item) => sum + item.price, 0)"],
+	["-", "  }"],
 	["-", "}"],
 	["+", "const total = items.reduce((sum, item) => sum + item.price, 0)"],
 ] as const;
@@ -108,7 +107,7 @@ export default async function Skills() {
 						<div className="overflow-hidden rounded-xl border bg-card">
 							<div className="flex items-center justify-between border-b px-4 py-1.5 font-mono text-muted-foreground text-xs">
 								<span>total.ts</span>
-								<span className="tabular-nums">-4 +1</span>
+								<span className="tabular-nums">-6 +1</span>
 							</div>
 							<pre className="overflow-x-auto py-3 font-mono text-sm leading-relaxed">
 								<code className="block w-max min-w-full">
