@@ -423,6 +423,7 @@ export const translations = {
 					freela: "trabalhe comigo",
 					agora: "agora",
 					log: "log do site",
+					skills: "skills",
 				},
 				footer: {
 					made: "feito por cauã.",
@@ -857,6 +858,7 @@ export const translations = {
 					freela: "work with me",
 					agora: "now",
 					log: "site log",
+					skills: "skills",
 				},
 				footer: {
 					made: "made by cauã.",

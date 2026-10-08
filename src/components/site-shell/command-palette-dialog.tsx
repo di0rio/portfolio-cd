@@ -28,6 +28,7 @@ export type Copy = {
 	freela: string;
 	agora: string;
 	log: string;
+	skills: string;
 };
 
 type Item = {
@@ -83,6 +84,7 @@ export function CommandPaletteDialog({
 				page("freela", copy.freela, "/freela"),
 				page("agora", copy.agora, "/agora"),
 				page("log", copy.log, "/log"),
+				page("skills", copy.skills, "/skills"),
 			],
 		},
 		...(posts.length

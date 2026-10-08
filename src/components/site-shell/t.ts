@@ -53,6 +53,7 @@ export default {
 		freela: { pt: "trabalhe comigo", en: "work with me" },
 		agora: { pt: "agora", en: "now" },
 		log: { pt: "log do site", en: "site log" },
+		skills: { pt: "skills", en: "skills" },
 	},
 	footer: {
 		made: { pt: "feito por cauã.", en: "made by cauã." },
