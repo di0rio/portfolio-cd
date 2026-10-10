@@ -12,8 +12,8 @@ export default {
 		copyEmail: { pt: "Copiar e-mail", en: "Copy email" },
 		emailCopied: { pt: "E-mail copiado", en: "Email copied" },
 		reply: {
-			pt: "Respondo em até 1 dia útil. Manda o que você precisa e pra quando.",
-			en: "I reply within 1 business day. Send what you need and by when.",
+			pt: "Respondo em até 1 dia útil.",
+			en: "I reply within 1 business day.",
 		},
 	},
 	theme: {

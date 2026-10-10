@@ -406,7 +406,7 @@ export const translations = {
 					email: "E-mail",
 					copyEmail: "Copiar e-mail",
 					emailCopied: "E-mail copiado",
-					reply: "Respondo em até 1 dia útil. Manda o que você precisa e pra quando.",
+					reply: "Respondo em até 1 dia útil.",
 				},
 				theme: {
 					toLight: "Mudar pro tema claro",
@@ -857,7 +857,7 @@ export const translations = {
 					email: "Email",
 					copyEmail: "Copy email",
 					emailCopied: "Email copied",
-					reply: "I reply within 1 business day. Send what you need and by when.",
+					reply: "I reply within 1 business day.",
 				},
 				theme: {
 					toLight: "Switch to light theme",
