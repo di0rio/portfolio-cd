@@ -2,8 +2,8 @@
 export default {
 	title: { pt: "skills", en: "skills" },
 	intro: {
-		pt: "Regras que eu escrevi pra agentes de IA (Claude Code, Codex, Cursor) trabalharem do jeito que eu trabalho. Cada uma é um arquivo SKILL.md, em português e inglês, e são de graça.",
-		en: "Rules I wrote so AI agents (Claude Code, Codex, Cursor) work the way I do. Each one is a SKILL.md file, in Portuguese and English, and they're free.",
+		pt: "Regras que eu escrevi pra agentes de IA (Claude Code, Codex, Cursor) trabalharem do jeito que eu trabalho. Cada skill é um arquivo SKILL.md, em português e em inglês. São de graça, com licença MIT.",
+		en: "Rules I wrote so AI agents (Claude Code, Codex, Cursor) work the way I do. Each skill is a single SKILL.md file, in Portuguese and English. Free, under the MIT license.",
 	},
 	github: { pt: "ver no github", en: "view on github" },
 	installTitle: { pt: "instalar", en: "install" },
@@ -28,8 +28,8 @@ export default {
 			en: "the smallest correct, safe and readable change that fits the project.",
 		},
 		diffCaption: {
-			pt: "Mesmo comportamento, sem abstração pra um uso só. Menor não quer dizer menos seguro: validação, erro e acessibilidade nunca saem.",
-			en: "Same behavior, no abstraction for a single use. Smaller doesn't mean less safe: validation, errors and accessibility never go.",
+			pt: "Faz a mesma coisa sem uma interface e uma classe pra um cálculo que só aparece aqui. Encurtar nunca vale tirar validação, tratamento de erro ou acessibilidade.",
+			en: "Same result, without an interface and a class for a sum that only happens here. Shorter is never worth dropping validation, error handling or accessibility.",
 		},
 		removed: { pt: "removido", en: "removed" },
 		added: { pt: "adicionado", en: "added" },
@@ -53,7 +53,7 @@ export default {
 			pt: "dependência já instalada",
 			en: "an already-installed dependency",
 		},
-		step7: { pt: "umas poucas linhas", en: "a few lines" },
+		step7: { pt: "poucas linhas de código", en: "a few lines of code" },
 		step8: {
 			pt: "abstração, só com 2+ usos reais ou fronteira externa",
 			en: "abstraction, only with 2+ real uses or an external boundary",
@@ -63,8 +63,8 @@ export default {
 		benchTitle: { pt: "teste", en: "benchmark" },
 		benchNone: { pt: "sem regras", en: "no rules" },
 		benchCaption: {
-			pt: "5 tarefas pequenas, avaliadas às cegas por outro modelo. É um teste rápido, não prova.",
-			en: "5 small tasks, graded blind by another model. A quick test, not proof.",
+			pt: "5 tarefas pequenas que eu escrevi, avaliadas às cegas por outro modelo. Rodei cada versão uma vez só, então serve de termômetro, não de prova.",
+			en: "5 small tasks I wrote, graded blind by another model. Each version ran once, so read it as a rough check, not proof.",
 		},
 		benchLink: { pt: "ver resultados", en: "see results" },
 		levelsTitle: { pt: "níveis", en: "levels" },
@@ -77,18 +77,18 @@ export default {
 			en: "does what was asked and mentions the simplest alternative in one line.",
 		},
 		full: {
-			pt: "padrão: aplica a escada e o critério de parada.",
-			en: "default: applies the ladder and the stopping rule.",
+			pt: "o padrão. Segue a escada e, se a mudança passa de ~50 linhas ou cria arquivo, abstração ou dependência, explica por quê.",
+			en: "the default. Follows the ladder and, when a change goes past ~50 lines or adds a file, abstraction or dependency, says why.",
 		},
 		ultra: {
-			pt: "YAGNI extremo: remove antes de adicionar e questiona o resto do pedido.",
-			en: "extreme YAGNI: removes before adding and questions the rest of the request.",
+			pt: "YAGNI extremo. Remove antes de adicionar e questiona o resto do pedido.",
+			en: "extreme YAGNI. Removes before adding and questions the rest of the request.",
 		},
 	},
 	demo: {
 		tagline: {
-			pt: "vídeo de demo que mostra o produto, não um tour pela tela.",
-			en: "demo videos that show the product, not a screen tour.",
+			pt: "vídeo de demo curto, com um fluxo só, que termina no resultado.",
+			en: "short demo videos that follow one flow and end on the result.",
 		},
 		before: {
 			pt: "antes: 72s, Button, Zod, Dialog e Table sem nada ligando um no outro",
@@ -99,8 +99,8 @@ export default {
 			en: "after: 45s, one flow: search → component → block",
 		},
 		ideaCaption: {
-			pt: "Exemplo do vídeo do cd/ui. A IA escolhe um fluxo, ensaia no navegador, captura por script (ou te passa o roteiro pra gravar no Recordly) e revisa o vídeo quadro a quadro.",
-			en: "Example from the cd/ui video. The AI picks a flow, rehearses in the browser, captures by script (or hands you the shot list to record in Recordly) and reviews the video frame by frame.",
+			pt: "O vídeo do cd/ui antes e depois da skill. O antigo pulava de componente em componente sem explicar nenhum. O novo vai do Ctrl K até o bloco pronto e para ali.",
+			en: "The cd/ui video before and after the skill. The old one jumped from component to component without explaining any of them. The new one goes from Ctrl K to a finished block and stops there.",
 		},
 		flowTitle: { pt: "o fluxo", en: "the workflow" },
 		flow1: { pt: "descobrir", en: "discover" },
@@ -112,12 +112,12 @@ export default {
 		flow7: { pt: "revisar e integrar", en: "review and integrate" },
 		modesTitle: { pt: "modos", en: "modes" },
 		script: {
-			pt: "padrão quando o fluxo roda no navegador.",
-			en: "default when the flow runs in the browser.",
+			pt: "o padrão quando o fluxo roda no navegador. A IA captura, edita e revisa.",
+			en: "the default when the flow runs in the browser. The AI captures, edits and reviews it.",
 		},
 		manual: {
-			pt: "Recordly, pra UI nativa do sistema ou ritmo feito à mão.",
-			en: "Recordly, for native system UI or a hand-made pace.",
+			pt: "você grava no Recordly seguindo o roteiro. Serve quando o fluxo usa janela do sistema, como o seletor de arquivo.",
+			en: "you record in Recordly from the shot list. For flows that use system windows, like the file picker.",
 		},
 		numbersTitle: { pt: "em números", en: "in numbers" },
 		videos: { pt: "vídeos no portfólio", en: "videos in the portfolio" },
