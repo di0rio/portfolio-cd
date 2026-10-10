@@ -1,12 +1,12 @@
 export default {
 	title: { pt: "trabalhe comigo", en: "work with me" },
 	description: {
-		pt: "Tiro interface do papel: do primeiro rascunho ao código, com entrega curta e tudo no seu repositório.",
-		en: "I bring interfaces to life, from the first draft to working code, in short cycles and in your repository.",
+		pt: "Faço a interface do seu produto, a partir do seu design ou só da ideia. Você acompanha cada etapa e o código fica com você.",
+		en: "I build your product's interface, from your design or just from the idea. You follow every step and the code stays with you.",
 	},
 	pitch: {
-		pt: "Eu cuido do front: tela, interação e aqueles detalhes que fazem o produto ser bom de usar no dia a dia.",
-		en: "I handle the front end: screens, interactions, and the little details that make a product nice to use every day.",
+		pt: "Eu cuido do front, com atenção na animação e no design. E também dos detalhes que costumam ficar pra depois, tipo funcionar bem no celular e mostrar uma mensagem clara quando algo dá errado.",
+		en: "I handle the front end, with a close eye on motion and design. Also the details that usually get left for later, like working well on mobile and showing a clear message when something goes wrong.",
 	},
 	whatTitle: { pt: "o que eu faço", en: "what i do" },
 	what1: {
@@ -55,8 +55,8 @@ export default {
 	},
 	faqQ2: { pt: "como funciona o orçamento?", en: "how does pricing work?" },
 	faqA2: {
-		pt: "Depois da primeira conversa eu mando um valor fechado, com escopo, entrega e prazo escritos. Se mudar algo no meio do caminho, a gente conversa antes de qualquer custo novo. Nada de surpresa na hora de pagar.",
-		en: "After the first chat I send a fixed price with scope, deliverables, and timeline spelled out. If something changes along the way, we align before any new cost. No surprises when it is time to pay.",
+		pt: "Depois da primeira conversa eu mando um valor fechado, com escopo, entrega e prazo escritos. Se mudar algo no meio do caminho, a gente conversa antes de qualquer custo novo.",
+		en: "After the first chat I send a fixed price with scope, deliverables, and timeline spelled out. If something changes along the way, we talk before any new cost.",
 	},
 	faqQ3: {
 		pt: "com quais tecnologias você trabalha?",
@@ -71,13 +71,13 @@ export default {
 		en: "do you maintain things after delivery?",
 	},
 	faqA4: {
-		pt: "Faço sim. Você recebe o código e o deploy prontos, e dá pra combinar ajuste e evolução depois. Sem ficar preso em mim: tá tudo no seu repositório e qualquer dev continua de onde eu parei.",
-		en: "Yes. You get the code and a ready deployment, and we can agree on tweaks and follow-up work later. No lock-in: everything lives in your repository and any developer can pick up where I left off.",
+		pt: "Faço sim. Você recebe o código e o site no ar, e dá pra combinar ajuste depois. Tá tudo no seu repositório, então qualquer dev consegue continuar de onde eu parei.",
+		en: "Yes. You get the code and the site live, and we can agree on tweaks later. Everything is in your repository, so any developer can pick up where I left off.",
 	},
 	faqQ5: { pt: "como começo?", en: "how do we start?" },
 	faqA5: {
-		pt: "Preenche o formulário aí embaixo contando o que você precisa, ou me chama no LinkedIn ou por e-mail. Eu volto com umas perguntas e um primeiro passo, geralmente em até 2 dias úteis.",
-		en: "Fill in the form below and tell me what you need, or hit me up on LinkedIn or by email. I'll get back with a few questions and a first step, usually within 2 business days.",
+		pt: "Preenche o formulário aí embaixo contando o que você precisa, ou me chama no LinkedIn ou por e-mail. Eu volto com umas perguntas e um primeiro passo, geralmente em até 1 dia útil.",
+		en: "Fill in the form below and tell me what you need, or hit me up on LinkedIn or by email. I'll get back with a few questions and a first step, usually within 1 business day.",
 	},
 	contactTitle: { pt: "me manda uma mensagem", en: "send me a message" },
 	direct: { pt: "ou fala direto comigo", en: "or reach me directly" },
@@ -93,7 +93,7 @@ export default {
 		emailPlaceholder: { pt: "voce@empresa.com", en: "you@company.com" },
 		placeholder: {
 			pt: "Qual a ideia do projeto? Pra quando você precisa? Se tiver referência ou link, manda junto.",
-			en: "What is the goal of the project? When do you need it? Send references or links too, if you have any.",
+			en: "What's the project about? When do you need it? If you have references or links, send them along.",
 		},
 		send: { pt: "enviar", en: "send" },
 		hint: {

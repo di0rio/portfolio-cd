@@ -5,8 +5,8 @@ export default {
 			en: "Cauã Diório · front-end developer",
 		},
 		description: {
-			pt: "Dev front-end na Loopscape. Faço produto de ponta a ponta, do banco à tela, e estudo segurança de hobby.",
-			en: "Front-end dev at Loopscape. I build products end to end, database to screen, and study security as a hobby.",
+			pt: "Dev front-end júnior na Loopscape. Curto motion e design e estudo segurança no tempo livre.",
+			en: "Junior front-end dev at Loopscape. I'm into motion and design, and I study security in my free time.",
 		},
 	},
 	role: {
@@ -16,42 +16,38 @@ export default {
 	bubble: { pt: "salve!", en: "hey!" },
 	today: { pt: "hoje", en: "today" },
 	bio: {
-		pt: "Trabalho na Loopscape fazendo produto de ponta a ponta. Onde eu mais manjo é o front, mas se a tela precisa de uma rota nova na API ou de uma mudança no banco, eu faço também.",
-		en: "I work at Loopscape building products end to end. Front-end is where I'm strongest, but if a screen needs a new API route or a database change, I build that too.",
+		pt: "Sou dev front-end júnior na Loopscape e trabalho na Loopvet, um sistema pra clínica veterinária. O que eu mais curto é motion e design, e o lab aqui do site é onde eu demonstro isso.",
+		en: "I'm a junior front-end dev at Loopscape, working on Loopvet, a system for veterinary clinics. What I enjoy most is motion and design, and the lab on this site is where I show that.",
 	},
-	security: {
-		pt: "Fora do trabalho eu estudo segurança, mais de hobby mesmo. O Sentinel Forge é onde eu testo isso: leio log de sshd e nginx e vejo como pegar ataque.",
-		en: "Outside work I study security, mostly as a hobby. Sentinel Forge is where I try it out: I read sshd and nginx logs and work out how to catch attacks.",
-	},
-	ai: {
-		pt: "Uso IA todo dia pra aprender mais rápido. O código que ela escreve eu leio com calma, pergunto o que não entendi e só commito quando consigo explicar cada parte.",
-		en: "I use AI every day to learn faster. When it writes code, I read it slowly, ask about whatever I don't get, and only commit once I can explain every part.",
+	side: {
+		pt: "No tempo livre eu toco o cd/ui e o converter-hub e estudo segurança no Sentinel Forge. Uso IA todo dia pra aprender mais rápido, mas tento entender ao máximo o que acontece no código e reviso bastante. Ainda tô aprendendo o que é o ideal.",
+		en: "In my free time I work on cd/ui and converter-hub and study security with Sentinel Forge. I use AI every day to learn faster, but I try hard to understand what's going on in the code and I review a lot. I'm still learning what works best.",
 	},
 	projects: {
 		title: { pt: "projetos", en: "projects" },
 		cdui: {
-			pt: "Meus componentes React: cada um tem o peso medido em bytes, e você instala direto no seu projeto.",
-			en: "My React components: each one has its weight measured in bytes, and you install them right into your project.",
+			pt: "Meus componentes React. Dá pra ver quanto cada um pesa e instalar direto no seu projeto.",
+			en: "My React components. You can see how much each one weighs and install it right into your project.",
 		},
 		converter: {
-			pt: "Converte arquivo sem subir nada pra servidor nenhum. Roda tudo no navegador.",
-			en: "Converts files without uploading anything anywhere. It all runs in your browser.",
+			pt: "Converte planilha, imagem e outros arquivos direto no navegador.",
+			en: "Converts spreadsheets, images and other files right in your browser.",
 		},
 		cdai: {
-			pt: "Um agente de código que roda na sua máquina. O modelo dá a ideia, mas quem decide o que acontece é o código.",
-			en: "A coding agent that runs on your machine. The model pitches ideas, but code decides what actually happens.",
+			pt: "Um agente de código em que a IA sugere e o próprio programa confere antes de fazer qualquer coisa.",
+			en: "A coding agent where the AI suggests and the program itself checks before doing anything.",
 		},
 		sentinel: {
-			pt: "Detecção de ataque em Go, com regra em YAML testada contra log de sshd e nginx.",
-			en: "Attack detection in Go, with YAML rules tested against sshd and nginx logs.",
+			pt: "Lê log de servidor e avisa quando parece ataque. É onde eu estudo segurança.",
+			en: "Reads server logs and flags what looks like an attack. It's where I study security.",
 		},
 		hub: {
-			pt: "A ferramenta que eu fiz pra migrar clínica pro Loopvet: confere tudo antes, importa e traz os débitos.",
-			en: "The tool I built to migrate clinics into Loopvet: it checks everything first, imports, and brings the debts over.",
+			pt: "A ferramenta que eu uso pra trazer os dados de uma clínica de outro sistema pra Loopvet, conferindo tudo antes de importar.",
+			en: "The tool I use to bring a clinic's data from another system into Loopvet, checking everything before it imports.",
 		},
 		fin: {
-			pt: "As finanças lá de casa pelo Open Finance. Só lê: um dashboard e uns avisos no Discord.",
-			en: "Our household finances through Open Finance. Read-only: a dashboard and a few Discord pings.",
+			pt: "As finanças lá de casa num painel, com aviso no Discord. Só lê os dados do banco, nunca mexe em dinheiro.",
+			en: "Our household finances in one dashboard, with alerts on Discord. It only reads bank data and never moves money.",
 		},
 		// Um número por projeto, tirado do estudo de caso (home e /projetos).
 		metric: {
@@ -60,24 +56,24 @@ export default {
 				en: "32 components and 15 blocks, ~695 B gzipped on average",
 			},
 			converter: {
-				pt: "nada sai da aba: a CSP do app bloqueia upload",
-				en: "nothing leaves the tab: the app's CSP blocks uploads",
+				pt: "nenhum arquivo sai do navegador",
+				en: "no file ever leaves the browser",
 			},
 			cdai: {
-				pt: "0 chamadas a API externa: tudo roda no Ollama",
-				en: "0 external API calls: everything runs on Ollama",
+				pt: "roda 100% no seu computador, com Ollama",
+				en: "runs 100% on your computer, with Ollama",
 			},
 			sentinel: {
-				pt: "mil tentativas de login viram 1 detecção, não cem",
-				en: "a thousand login attempts become 1 detection, not a hundred",
+				pt: "mil tentativas de login viram um alerta só",
+				en: "a thousand login attempts become a single alert",
 			},
 			hub: {
-				pt: "migração em teste: de 1 por dia pra até 10",
-				en: "test migrations: from 1 a day to up to 10",
+				pt: "de 1 pra até 10 clínicas migradas por dia, em teste",
+				en: "from 1 to up to 10 clinics migrated a day, in testing",
 			},
 			fin: {
-				pt: "350+ testes e nenhum valor salvo em disco",
-				en: "350+ tests, no amount ever written to disk",
+				pt: "350+ testes, e nenhum valor fica salvo",
+				en: "350+ tests, and no amount is ever stored",
 			},
 		},
 		all: { pt: "todos os repositórios", en: "all repositories" },
@@ -151,16 +147,16 @@ export default {
 				en: "technologies used at work",
 			},
 			cms: {
-				pt: "Fiz o CMS interno do zero, do banco à interface: vários portais de conteúdo, um único código servindo as instalações Loopvet e Domus, editor rico, API pública de conteúdo e um encurtador de links com métricas de clique na borda da Cloudflare.",
-				en: "Built the internal CMS from scratch, database to UI: multiple content portals, one codebase serving the Loopvet and Domus installations, a rich text editor, a public content API and a link shortener with click analytics at the Cloudflare edge.",
+				pt: "Fiz o CMS interno do zero. Um código só atende vários portais de conteúdo da Loopvet e da Domus, com editor de texto, API pública e um encurtador de links que conta os cliques.",
+				en: "Built the internal CMS from scratch. One codebase runs several content portals for Loopvet and Domus, with a text editor, a public API and a link shortener that counts clicks.",
 			},
 			security: {
-				pt: "Cuidei da segurança no servidor: autorização por papel e por portal validada na regra de negócio, 2FA, upload de imagem protegido contra bomba de descompressão e cache invalidado por portal.",
-				en: "Handled server-side security: role- and portal-based authorization enforced in the service layer, 2FA, decompression-bomb-safe image uploads and per-portal cache invalidation.",
+				pt: "Cuidei da segurança do CMS. Cada pessoa só mexe no que o cargo e o portal dela permitem, e o login tem verificação em duas etapas. O upload de imagem também barra arquivo feito pra derrubar o servidor.",
+				en: "Handled the CMS security. Each person can only touch what their role and portal allow, and login uses two-factor authentication. Image uploads also block files made to take the server down.",
 			},
 			importer: {
-				pt: "Fiz o importador de planilhas da Loopvet (CSV, XLS, XLSX), com mapeamento automático e manual, modelos, várias abas, prévia, motor de transformação em etapas e validação.",
-				en: "Developed Loopvet's spreadsheet importer (CSV, XLS, XLSX): smart and manual column mapping, templates, multi-sheet support, preview, a step-based transformation engine and validation.",
+				pt: "Fiz o importador de planilhas da Loopvet. Ele lê CSV e Excel, liga as colunas sozinho ou na mão e mostra uma prévia já validada antes de importar.",
+				en: "Built Loopvet's spreadsheet importer. It reads CSV and Excel, matches columns automatically or by hand, and shows a validated preview before importing.",
 			},
 		},
 	},

@@ -108,7 +108,7 @@ when I installed cd/ui into a project outside the repo, four problems popped up 
 - **without `components.json`, `add` doesn't do what it looks like.** in an empty app it dumps the files in the current folder and doesn't touch the CSS, and the interactive mode offers an `init` that pulls in shadcn's defaults (tw-animate, its tokens). that's why the tiny `components.json` is the step that actually matters.
 - **blocks import from the registry path.** they use `@/registry/cd/ui/button` and the CLI rewrites that path to the alias in the `components.json` of whoever installs.
 
-### the weight is measured, not guessed
+### how the weight is measured
 
 `scripts/metrics.mjs` bundles each component with esbuild and measures it in gzip:
 

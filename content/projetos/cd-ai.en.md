@@ -1,6 +1,6 @@
 ## tl;dr
 
-cd-ai is a coding agent that runs **on your machine** with local models through Ollama. It does the whole loop, from planning to validation, without calling any outside API. The core is Rust, the desktop app is Tauri and the interface is Next.js. The rule is simple: the model **suggests**; the code **decides**.
+cd-ai is a coding agent that runs **on your machine** with local models through Ollama. It does the whole loop, from planning to validation, without calling any outside API. The core is Rust, the desktop app is Tauri and the interface is Next.js. The model **suggests**, and the code **decides**.
 
 **a study project.** I started without knowing Rust or Tauri. I built it with Claude Code: the AI explains the concepts, I review every change before it goes in, and I decide what the agent can and can't do. it's where I learn to read and review code in a language I don't master yet.
 
@@ -76,7 +76,7 @@ if !canonical.starts_with(&self.root) {
 
 `../`, a symlink pointing out, a dangling symlink and (on Windows) names the system treats as something else are refused. the model asking for a path is no reason for the agent to go touch it.
 
-### 2. commands are sorted by rules, not by reading between the lines
+### 2. commands are sorted by fixed rules
 
 before running, the argv becomes a class: `read`, `validate`, `write`, `network`, `destructive` or `unknown`. `classify` (in `permissions.rs`) looks at the program name and the flags:
 
@@ -155,7 +155,7 @@ for an existing file, the model sends a search block and a replacement block. `e
 
 the tools are few: `read_file`, `list_directory`, `search`, `edit_file`, `write_file`, `run_command` and four git ones (`git_status`, `git_diff`, `git_log` and `git_branch`).
 
-### 7. the verifier is the judge, not the model
+### 7. the verifier is the judge
 
 `verify.rs` only **judges** what's already on disk. first a parse of the changed files and cheap diff checks (a lockfile touched, a secret file touched, a disproportionate diff). then the **workspace's own** validation commands (found from `package.json`, `Cargo.toml`…). the model saying "done" never counts as proof: a task only ends as `verified` if a validation command passed after the last edit.
 
@@ -181,7 +181,7 @@ repeating the same tool call with the same arguments, or the same error, is dete
 
 to be able to undo things, the agent doesn't lean on your git. it keeps a **shadow git repository** with the git dir outside the project and the workspace only as the work tree. your `.git` is never touched. the hash of every file written is recorded, and rollback only reverts what the agent changed: if you edited the file afterwards, it won't restore it without asking.
 
-### context: summarize, don't stretch
+### context: summarize when the window fills up
 
 `qwen3-coder:30b`'s window is 32k. near the limit, the history becomes a structured summary, built only from engine facts (changed files, commands run), and the task continues in a clean turn. real progress lives on disk, in git and in checkpoints, not in the model's memory. you only get `ContextExhausted` if the request alone doesn't fit in the window.
 

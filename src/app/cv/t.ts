@@ -9,8 +9,8 @@ export default {
 	openSource: { pt: "open source", en: "open source" },
 	// O /cv vai impresso pro RH: aqui o tom é sóbrio. A home usa a versão do meu jeito (`app/t.ts`).
 	about: {
-		pt: "Desenvolvedor front-end na Loopscape, onde construo produto de ponta a ponta. Além das telas, faço as rotas de API e as mudanças de banco que elas precisam. Estudo segurança no Sentinel Forge, meu projeto de detecção de ataques em logs de sshd e nginx. Uso IA pra aprender mais rápido e reviso o código que ela gera até conseguir explicar cada parte, antes de levar pro projeto.",
-		en: "Front-end developer at Loopscape, building products end to end. Besides the screens, I build the API routes and database changes they need. I study security through Sentinel Forge, my project for detecting attacks in sshd and nginx logs. I use AI to learn faster and review the code it writes until I can explain every part before it goes into a project.",
+		pt: "Desenvolvedor front-end júnior na Loopscape, trabalhando na Loopvet, um sistema pra clínicas veterinárias. Meu foco é motion e design de interface. Estudo segurança no Sentinel Forge, meu projeto que lê logs de servidor e avisa quando parece ataque. Uso IA todo dia pra aprender mais rápido e reviso bastante o código antes de levar pro projeto.",
+		en: "Junior front-end developer at Loopscape, working on Loopvet, a system for veterinary clinics. My focus is motion and interface design. I study security through Sentinel Forge, my project that reads server logs and flags what looks like an attack. I use AI every day to learn faster and review the code carefully before it goes into a project.",
 	},
 	projects: {
 		cdui: {
@@ -30,8 +30,8 @@ export default {
 			en: "Attack detection engine in Go, with YAML rules tested against sshd and nginx logs.",
 		},
 		hub: {
-			pt: "Projeto pessoal pra migrar clínicas pro Loopvet pela API: auditoria sem escrita, importação e débitos.",
-			en: "Personal project for migrating clinics into Loopvet through its API: write-free auditing, importing and debts.",
+			pt: "Projeto pessoal pra trazer os dados de clínicas pra Loopvet, conferindo tudo antes de importar.",
+			en: "Personal project for bringing clinic data into Loopvet, checking everything before it imports.",
 		},
 		fin: {
 			pt: "Finanças da família via Open Finance, somente leitura: dashboard e avisos no Discord.",

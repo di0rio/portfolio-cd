@@ -99,8 +99,7 @@ export default async function Home() {
 			<Section id="hoje" title={copy.today}>
 				<div className="flex flex-col gap-3">
 					<p className="text-pretty">{copy.bio}</p>
-					<p className="text-pretty">{copy.security}</p>
-					<p className="text-pretty">{copy.ai}</p>
+					<p className="text-pretty">{copy.side}</p>
 				</div>
 				{/* Freela fica só no rodapé: com emprego fixo, anúncio no topo passa o recado errado. */}
 				<div className="mt-6">

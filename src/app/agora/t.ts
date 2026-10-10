@@ -18,16 +18,16 @@ export default {
 	studyingTitle: { pt: "estudando", en: "studying" },
 	// atualizar à mão quando mudar
 	study1: {
-		pt: "front-end: interfaces, interação e acessibilidade.",
-		en: "front-end: interfaces, interaction, and accessibility.",
+		pt: "front-end, principalmente motion e design.",
+		en: "front-end, mostly motion and design.",
 	},
 	study2: {
-		pt: "segurança: detecção de ataque e análise de log.",
-		en: "security: attack detection and log analysis.",
+		pt: "segurança, lendo log pra pegar ataque.",
+		en: "security, reading logs to catch attacks.",
 	},
 	study3: {
-		pt: "go e rust, aprendendo com IA e revisando cada linha.",
-		en: "go and rust, learning with AI and reviewing every line.",
+		pt: "go e rust, com a IA me ajudando a aprender.",
+		en: "go and rust, with AI helping me learn.",
 	},
 	lastUpdated: { pt: "última atualização: {date}", en: "last updated: {date}" },
 	footerLink: { pt: "agora", en: "now" },

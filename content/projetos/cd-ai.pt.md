@@ -1,6 +1,6 @@
 ## tl;dr
 
-O cd-ai é um agente de código que roda **na sua máquina**, com modelo local pelo Ollama. Ele faz o ciclo inteiro, do plano à validação, sem chamar API de fora. O núcleo é em Rust, o app desktop usa Tauri e a interface é Next.js. A regra é simples: o modelo **sugere**; quem **decide** é o código.
+O cd-ai é um agente de código que roda **na sua máquina**, com modelo local pelo Ollama. Ele faz o ciclo inteiro, do plano à validação, sem chamar API de fora. O núcleo é em Rust, o app desktop usa Tauri e a interface é Next.js. O modelo **sugere**, e quem **decide** é o código.
 
 **projeto de estudo.** comecei sem saber Rust nem Tauri. escrevi com o Claude Code: a IA me explica os conceitos, eu reviso cada mudança antes de entrar e decido o que o agente pode ou não fazer. é onde eu aprendo a ler e revisar código numa linguagem que ainda não domino.
 
@@ -76,7 +76,7 @@ if !canonical.starts_with(&self.root) {
 
 `../`, symlink pra fora, symlink quebrado e (no Windows) nome que o sistema trata como outra coisa são recusados. o modelo pedir um caminho não é motivo pro agente mexer nele.
 
-### 2. o comando é classificado por regra, não por interpretação
+### 2. o comando é classificado por regra fixa
 
 antes de rodar, o argv vira uma classe: `read`, `validate`, `write`, `network`, `destructive` ou `unknown`. o `classify` (no `permissions.rs`) olha o nome do programa e as flags:
 
@@ -155,7 +155,7 @@ pra arquivo que já existe, o modelo manda um bloco de busca e um de substituiç
 
 as ferramentas são poucas: `read_file`, `list_directory`, `search`, `edit_file`, `write_file`, `run_command` e quatro de git (`git_status`, `git_diff`, `git_log` e `git_branch`).
 
-### 7. quem julga é o verifier, não o modelo
+### 7. quem julga é o verifier
 
 o `verify.rs` só **julga** o que já tá no disco. primeiro faz o parse dos arquivos alterados e uns checks baratos no diff (lockfile mexido, arquivo de secret tocado, diff grande demais pro pedido). depois roda os comandos de validação **do próprio workspace** (achados no `package.json`, no `Cargo.toml`…). o modelo falar "terminei" nunca conta como prova: a tarefa só termina como `verified` se um comando de validação passou depois da última edição.
 
@@ -181,7 +181,7 @@ repetir a mesma tool call com os mesmos argumentos, ou o mesmo erro, é detectad
 
 pra poder desfazer, o agente não depende do teu git. ele mantém um **repositório git sombra**, com o git dir fora do projeto e o workspace só como work tree. o teu `.git` nunca é tocado. o hash de cada arquivo escrito fica registrado, e o rollback desfaz só o que o agente mudou: se você mexeu no arquivo depois, ele não restaura sem perguntar.
 
-### contexto: resumir, não esticar
+### contexto: resumir quando a janela enche
 
 a janela do `qwen3-coder:30b` é de 32k. quando tá perto de estourar, o histórico vira um resumo organizado, feito só com fatos do próprio motor (arquivos alterados, comandos rodados), e a tarefa segue num turno limpo. o progresso de verdade fica no disco, no git e nos checkpoints, não na memória do modelo. só dá `ContextExhausted` se o pedido sozinho não couber na janela.
 

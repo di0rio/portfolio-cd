@@ -1,6 +1,6 @@
 ## tl;dr
 
-O loopvet hub é a bancada que eu uso pra migrar clínica veterinária de outro sistema pro Loopvet. Ele junta três ferramentas: um **auditor**, que mostra o que a importação faria com os arquivos **sem escrever nada**; um **importador**, que manda a fila de arquivos pelo painel de verdade; e uma de **débitos**, que traz o que cada cliente devia no sistema antigo. O hub só abre e fecha cada uma, e cada uma roda no seu próprio processo, com as suas próprias travas. É um **projeto meu**: ninguém pediu, eu fiz pra usar no meu trabalho, em cima da API do Loopvet. O código é privado e aqui não aparece nenhum dado de clínica.
+O loopvet hub é a bancada que eu uso pra migrar clínica veterinária de outro sistema pra Loopvet. Ele junta três ferramentas: um auditor, que mostra o que a importação faria com os arquivos **sem escrever nada**; um importador, que manda a fila de arquivos pelo painel de verdade; e uma de débitos, que traz o que cada cliente devia no sistema antigo. O hub só abre e fecha cada uma, e cada uma roda no seu próprio processo, com as suas próprias travas. É um projeto meu: ninguém pediu, eu fiz pra usar no meu trabalho, em cima da API do Loopvet. O código é privado e aqui não aparece nenhum dado de clínica.
 
 ## o problema
 
@@ -17,7 +17,7 @@ e o pior: importação em produção **não tem desfazer**.
 
 ## a ideia
 
-a ideia foi simples: o que só **lê** fica de um lado, o que **escreve** fica do outro. e isso tá na arquitetura, não depende de ninguém lembrar.
+o que só **lê** fica de um lado, o que **escreve** fica do outro. essa separação tá na arquitetura, então não depende de ninguém lembrar.
 
 ```text
             hub (lança e encerra, não sabe de clínica nenhuma)

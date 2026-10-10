@@ -2,8 +2,8 @@
 export default {
 	title: { pt: "projetos", en: "projects" },
 	intro: {
-		pt: "Tudo que eu construí, com o problema, as decisões e os números de cada um. Os privados não têm código aberto, mas têm estudo de caso.",
-		en: "Everything I've built, with the problem, the decisions and the numbers behind each one. The private ones don't have public code, but they do have a case study.",
+		pt: "Tudo que eu construí e o porquê de cada decisão. Os privados não têm código aberto, mas têm estudo de caso.",
+		en: "Everything I've built and why I made each call. The private ones don't have public code, but they do have a case study.",
 	},
 	private: { pt: "privado", en: "private" },
 	caseStudy: { pt: "estudo de caso", en: "case study" },
@@ -17,43 +17,43 @@ export default {
 
 	cdui: {
 		intro: {
-			pt: "Componentes React que você instala direto no seu projeto. Cada byte é medido no build.",
-			en: "React components you install into your project. Every byte is measured at build time.",
+			pt: "Componentes React que você instala direto no seu projeto, e dá pra ver quanto cada um pesa.",
+			en: "React components you install right into your project, and you can see how much each one weighs.",
 		},
 	},
 
 	converter: {
 		intro: {
-			pt: "Converte planilha, dado e imagem sem subir nada. Roda tudo na sua máquina.",
-			en: "Converts spreadsheets, data and images without uploading a thing. It all runs on your device.",
+			pt: "Converte planilha, imagem e outros arquivos direto no navegador.",
+			en: "Converts spreadsheets, images and other files right in your browser.",
 		},
 	},
 
 	cdai: {
 		intro: {
-			pt: "Um agente de código que roda na sua máquina. O modelo sugere, mas cada ação passa pelo código.",
-			en: "A coding agent that runs locally. The model suggests; code controls every action.",
+			pt: "Um agente de código em que a IA sugere e o próprio programa confere antes de fazer qualquer coisa.",
+			en: "A coding agent where the AI suggests and the program itself checks before doing anything.",
 		},
 	},
 
 	sentinel: {
 		intro: {
-			pt: "Regra em YAML e um motor em Go pra testar detecção de ataque contra log de sshd e nginx.",
-			en: "YAML rules and a Go engine for testing security detections against sshd and nginx logs.",
+			pt: "Lê log de servidor e avisa quando parece ataque. É onde eu estudo segurança.",
+			en: "Reads server logs and flags what looks like an attack. It's where I study security.",
 		},
 	},
 
 	hub: {
 		intro: {
-			pt: "A bancada que eu uso pra migrar clínica pro Loopvet: um auditor que só lê, um importador e um hub que deixa cada um no seu canto.",
-			en: "The workbench I use to migrate clinics into Loopvet: a read-only auditor, an importer and a hub that keeps each one in its own lane.",
+			pt: "O que eu uso pra trazer os dados de uma clínica pra Loopvet. Antes de importar, ele mostra o que ia acontecer sem mexer em nada.",
+			en: "What I use to bring a clinic's data into Loopvet. Before importing, it shows what would happen without touching anything.",
 		},
 	},
 
 	fin: {
 		intro: {
-			pt: "As finanças lá de casa pelo Open Finance. Só leitura: um dashboard e uns avisos no Discord.",
-			en: "Our household finances through Open Finance. Read-only: a dashboard and a few Discord pings.",
+			pt: "As finanças lá de casa num painel, com aviso no Discord. Só lê os dados do banco, nunca mexe em dinheiro.",
+			en: "Our household finances in one dashboard, with alerts on Discord. It only reads bank data and never moves money.",
 		},
 	},
 };

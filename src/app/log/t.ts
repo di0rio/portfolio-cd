@@ -5,8 +5,8 @@ export default {
 		en: "What’s changed on the site, pulled straight from its commit history.",
 	},
 	intro: {
-		pt: "Novidade, ajuste e ideia que foi parar no código.",
-		en: "Updates, tweaks, and ideas that made it into the code.",
+		pt: "Cada mudança que foi parar no código do site.",
+		en: "Every change that made it into the site's code.",
 	},
 	empty: {
 		pt: "não consegui carregar os commits agora. o histórico completo tá no github.",

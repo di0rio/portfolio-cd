@@ -108,7 +108,7 @@ quando instalei o cd/ui num projeto de fora, apareceram quatro problemas que o m
 - **sem `components.json`, o `add` não faz o que parece.** num app vazio ele joga os arquivos na pasta atual e não mexe no CSS, e o modo interativo oferece um `init` que traz os padrões do shadcn (tw-animate, os tokens dele). por isso o `components.json` mínimo é o passo que importa.
 - **os blocos importam pelo caminho do registry.** eles usam `@/registry/cd/ui/button`, e a CLI troca esse caminho pelo alias do `components.json` de quem instala.
 
-### o peso é medido, não chutado
+### como o peso é medido
 
 o `scripts/metrics.mjs` empacota cada componente com esbuild e mede em gzip:
 

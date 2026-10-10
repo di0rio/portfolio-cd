@@ -1,8 +1,8 @@
 export default {
 	title: { pt: "lab", en: "lab" },
 	intro: {
-		pt: "Meu laboratório de interface: cada interação aqui eu fiquei lapidando no detalhe. Arrasta, compara e brinca à vontade.",
-		en: "My UI lab: every interaction here got polished down to the details. Drag, compare and play around.",
+		pt: "Interações que eu fiquei lapidando até ficarem do jeito que eu queria. Pode mexer à vontade.",
+		en: "Interactions I kept polishing until they felt the way I wanted. Go ahead and play with them.",
 	},
 	toasts: {
 		title: { pt: "pilha de toasts", en: "toast stack" },

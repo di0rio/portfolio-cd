@@ -1,8 +1,8 @@
 export default {
 	title: { pt: "blog", en: "blog" },
 	intro: {
-		pt: "Texto sobre o que eu construí, o que aprendi e as decisões no caminho.",
-		en: "Notes on what I’ve built, what I’ve learned, and the decisions along the way.",
+		pt: "O que eu construí e o que aprendi fazendo.",
+		en: "What I've built and what I learned building it.",
 	},
 	empty: {
 		pt: "Ainda não tem texto aqui. Quando eu publicar um projeto com a tag `portfolio`, ele aparece nesta página.",

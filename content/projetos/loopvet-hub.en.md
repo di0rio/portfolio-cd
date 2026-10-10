@@ -1,6 +1,6 @@
 ## tl;dr
 
-loopvet hub is the workbench I use to move vet clinics from other systems into Loopvet. It puts three tools together: an **auditor** that shows what an import would do with the files **without writing a thing**; an **importer** that pushes the file queue through the real admin panel; and a **debts** tool that brings over what each client owed in the old system. The hub just opens and closes them, and each one runs in its own process with its own guardrails. It's a **personal project**: nobody asked for it, I built it for my own work, on top of the Loopvet API. The code is private, and there's no clinic data here.
+loopvet hub is the workbench I use to move vet clinics from other systems into Loopvet. It puts three tools together: an auditor that shows what an import would do with the files **without writing a thing**; an importer that pushes the file queue through the real admin panel; and a debts tool that brings over what each client owed in the old system. The hub just opens and closes them, and each one runs in its own process with its own guardrails. It's a personal project: nobody asked for it, I built it for my own work, on top of the Loopvet API. The code is private, and there's no clinic data here.
 
 ## the problem
 
@@ -17,7 +17,7 @@ and the worst part: importing into production has **no undo**.
 
 ## the idea
 
-pretty simple: whatever only **reads** lives on one side, whatever **writes** lives on the other. and that's baked into the architecture, so it doesn't depend on anyone remembering.
+whatever only **reads** lives on one side, whatever **writes** lives on the other. that split is baked into the architecture, so it doesn't depend on anyone remembering.
 
 ```text
             hub (launches and stops, knows nothing about clinics)
