@@ -51,8 +51,9 @@ export default async function Skills() {
 	const copy = t.app.skills;
 	const cc = copy.cleanCode;
 	const demo = copy.demo;
+	const hum = copy.humanize;
 	const copyLabels = t.app.lab.copy;
-	const [cleanCode, portfolioDemo] = skills;
+	const [cleanCode, portfolioDemo, humanizar] = skills;
 	const first = cleanCode.slug;
 
 	return (
@@ -245,6 +246,43 @@ export default async function Skills() {
 						{demo.watch}
 					</Link>
 				</SkillLinks>
+			</SkillSection>
+
+			<SkillSection slug={humanizar.slug} tagline={hum.tagline}>
+				<Block title={copy.idea}>
+					<ul className="flex flex-col gap-3">
+						<li className="text-muted-foreground">{hum.before}</li>
+						<li>{hum.after}</li>
+					</ul>
+					<p className="mt-3 text-pretty text-muted-foreground text-sm">
+						{hum.ideaCaption}
+					</p>
+				</Block>
+
+				<Block title={hum.catchTitle}>
+					<Steps
+						items={[
+							hum.catch1,
+							hum.catch2,
+							hum.catch3,
+							hum.catch4,
+							hum.catch5,
+							hum.catch6,
+						]}
+					/>
+				</Block>
+
+				<Block title={hum.modesTitle}>
+					<Definitions
+						items={[
+							{ term: "reescrever", description: hum.rewrite },
+							{ term: "escrever", description: hum.write },
+							{ term: "inspirar", description: hum.inspire },
+						]}
+					/>
+				</Block>
+
+				<SkillLinks locale={locale} postLabel={copy.post} skill={humanizar} />
 			</SkillSection>
 
 			<p className="text-muted-foreground text-sm">

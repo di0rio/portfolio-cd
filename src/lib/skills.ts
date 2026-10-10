@@ -3,7 +3,7 @@ export const skillsRepo = "https://github.com/di0rio/cd-skills";
 export const skillsInstall = "npx skills add di0rio/cd-skills";
 
 export type Skill = {
-	slug: "clean-code-ai" | "portfolio-demo";
+	slug: "clean-code-ai" | "portfolio-demo" | "humanizar";
 	/** Slug do post do blog que conta a história da skill. */
 	post: string;
 };
@@ -11,6 +11,7 @@ export type Skill = {
 export const skills: readonly Skill[] = [
 	{ slug: "clean-code-ai", post: "skill-de-codigo-pragmatico" },
 	{ slug: "portfolio-demo", post: "videos-de-demo-do-portfolio" },
+	{ slug: "humanizar", post: "skill-humanizar" },
 ];
 
 export const skillUrl = (slug: Skill["slug"]) =>

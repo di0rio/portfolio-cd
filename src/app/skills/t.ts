@@ -14,7 +14,7 @@ export default {
 	cliPick: { pt: "pra escolher só uma:", en: "to pick just one:" },
 	claudeNote: {
 		pt: "Pra versão em português, baixe `SKILL.pt.md` e salve como `SKILL.md`. Pra outra skill, troque o nome dela na pasta e na URL.",
-		en: "For the Portuguese version, download `SKILL.pt.md` and save it as `SKILL.md`. For the other skill, swap its name in the folder and the URL.",
+		en: "For the Portuguese version, download `SKILL.pt.md` and save it as `SKILL.md`. For another skill, swap its name in the folder and the URL.",
 	},
 	others: {
 		pt: "Cola o corpo do `SKILL.md` no `AGENTS.md`, no `CLAUDE.md` ou em `.cursor/rules`.",
@@ -124,5 +124,61 @@ export default {
 		length: { pt: "de duração", en: "per video" },
 		themes: { pt: "temas (escuro e claro)", en: "themes (dark and light)" },
 		watch: { pt: "ver os vídeos", en: "watch the videos" },
+	},
+	humanize: {
+		tagline: {
+			pt: "deixa o texto com a voz de quem assina, sem cara de IA.",
+			en: "keeps the text in the voice of whoever signs it, without the AI feel.",
+		},
+		before: {
+			pt: "antes: Trabalho na Loopscape fazendo produto de ponta a ponta. Meu forte é o front, mas pego do banco e da API até o último estado da tela.",
+			en: "before: I work at Loopscape building products end to end. Front-end is my thing, but I go from the database and API all the way to the last screen state.",
+		},
+		after: {
+			pt: "depois: Sou dev front-end júnior na Loopscape e trabalho na Loopvet, um sistema pra clínica veterinária. O que eu mais curto é motion e design, e o lab aqui do site é onde eu demonstro isso.",
+			en: "after: I'm a junior front-end dev at Loopscape, working on Loopvet, a system for veterinary clinics. What I enjoy most is motion and design, and the lab on this site is where I show that.",
+		},
+		ideaCaption: {
+			pt: "A bio da home antes e depois. O 'antes' é onde a IA chega sozinha. O 'depois' saiu de várias rodadas de 'não, eu não falo assim'.",
+			en: "The home bio before and after. The 'before' is where AI gets on its own. The 'after' came out of several rounds of 'no, I don't talk like that'.",
+		},
+		catchTitle: { pt: "o que ela pega", en: "what it catches" },
+		catch1: {
+			pt: 'faixa abstrata tipo "do banco até a tela"',
+			en: 'abstract ranges like "from the database to the screen"',
+		},
+		catch2: {
+			pt: "frase de efeito no fim do parágrafo",
+			en: "a slogan at the end of the paragraph",
+		},
+		catch3: {
+			pt: "dois-pontos seguido de lista de três",
+			en: "a colon followed by a list of three",
+		},
+		catch4: {
+			pt: "imagem esperta que ninguém entende",
+			en: "a clever image nobody gets",
+		},
+		catch5: {
+			pt: "termo técnico que a pessoa não falaria",
+			en: "jargon the person wouldn't say",
+		},
+		catch6: {
+			pt: "cópia da referência em vez de inspiração",
+			en: "copying the reference instead of taking inspiration",
+		},
+		modesTitle: { pt: "modos", en: "modes" },
+		rewrite: {
+			pt: "você cola o texto e ela devolve na sua voz.",
+			en: "you paste a text and get it back in your voice.",
+		},
+		write: {
+			pt: "ela já escreve post, bio ou README seguindo as regras.",
+			en: "it writes posts, bios or READMEs following the rules from the start.",
+		},
+		inspire: {
+			pt: "você manda o texto de outra pessoa e ela pega a ideia, sem copiar.",
+			en: "you send someone else's text and it takes the idea without copying it.",
+		},
 	},
 };
