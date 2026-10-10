@@ -46,7 +46,7 @@ export const translations = {
 				print: "salvar em PDF",
 				summary: "resumo",
 				openSource: "open source",
-				about: "Desenvolvedor front-end na Loopscape, onde construo produto de ponta a ponta: do banco e da API até cada estado da tela. Estudo segurança no Sentinel Forge, meu projeto de detecção de ataques em logs de sshd e nginx. Uso IA pra aprender mais rápido e só levo pro projeto o código que eu entendo.",
+				about: "Desenvolvedor front-end na Loopscape, onde construo produto de ponta a ponta. Além das telas, faço as rotas de API e as mudanças de banco que elas precisam. Estudo segurança no Sentinel Forge, meu projeto de detecção de ataques em logs de sshd e nginx. Uso IA pra aprender mais rápido e reviso o código que ela gera até conseguir explicar cada parte, antes de levar pro projeto.",
 				projects: {
 					cdui: "Componentes React enxutos, medidos em bytes e instalados no projeto via registry do shadcn.",
 					converter: "Conversor de planilhas, dados e imagens que roda inteiro no navegador, sem upload.",
@@ -481,7 +481,7 @@ export const translations = {
 				print: "save as PDF",
 				summary: "summary",
 				openSource: "open source",
-				about: "Front-end developer at Loopscape, building products end to end: from the database and API down to every screen state. I study security through Sentinel Forge, my project for detecting attacks in sshd and nginx logs. I use AI to learn faster and only ship code I understand.",
+				about: "Front-end developer at Loopscape, building products end to end. Besides the screens, I build the API routes and database changes they need. I study security through Sentinel Forge, my project for detecting attacks in sshd and nginx logs. I use AI to learn faster and review the code it writes until I can explain every part before it goes into a project.",
 				projects: {
 					cdui: "Lean React components, measured in bytes and installed through a shadcn registry.",
 					converter: "Spreadsheet, data and image converter that runs entirely in the browser, with no upload.",

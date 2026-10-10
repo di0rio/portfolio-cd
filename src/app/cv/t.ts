@@ -9,8 +9,8 @@ export default {
 	openSource: { pt: "open source", en: "open source" },
 	// O /cv vai impresso pro RH: aqui o tom é sóbrio. A home usa a versão do meu jeito (`app/t.ts`).
 	about: {
-		pt: "Desenvolvedor front-end na Loopscape, onde construo produto de ponta a ponta: do banco e da API até cada estado da tela. Estudo segurança no Sentinel Forge, meu projeto de detecção de ataques em logs de sshd e nginx. Uso IA pra aprender mais rápido e só levo pro projeto o código que eu entendo.",
-		en: "Front-end developer at Loopscape, building products end to end: from the database and API down to every screen state. I study security through Sentinel Forge, my project for detecting attacks in sshd and nginx logs. I use AI to learn faster and only ship code I understand.",
+		pt: "Desenvolvedor front-end na Loopscape, onde construo produto de ponta a ponta. Além das telas, faço as rotas de API e as mudanças de banco que elas precisam. Estudo segurança no Sentinel Forge, meu projeto de detecção de ataques em logs de sshd e nginx. Uso IA pra aprender mais rápido e reviso o código que ela gera até conseguir explicar cada parte, antes de levar pro projeto.",
+		en: "Front-end developer at Loopscape, building products end to end. Besides the screens, I build the API routes and database changes they need. I study security through Sentinel Forge, my project for detecting attacks in sshd and nginx logs. I use AI to learn faster and review the code it writes until I can explain every part before it goes into a project.",
 	},
 	projects: {
 		cdui: {
