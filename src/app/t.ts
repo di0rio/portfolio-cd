@@ -16,16 +16,16 @@ export default {
 	bubble: { pt: "salve!", en: "hey!" },
 	today: { pt: "hoje", en: "today" },
 	bio: {
-		pt: "Trabalho na Loopscape fazendo produto de ponta a ponta. Meu forte é o front, mas pego do banco e da API até o último estado da tela.",
-		en: "I work at Loopscape building products end to end. Front-end is my thing, but I go from the database and API all the way to the last screen state.",
+		pt: "Trabalho na Loopscape fazendo produto de ponta a ponta. Onde eu mais manjo é o front, mas se a tela precisa de uma rota nova na API ou de uma mudança no banco, eu faço também.",
+		en: "I work at Loopscape building products end to end. Front-end is where I'm strongest, but if a screen needs a new API route or a database change, I build that too.",
 	},
 	security: {
 		pt: "Fora do trabalho eu estudo segurança, mais de hobby mesmo. O Sentinel Forge é onde eu testo isso: leio log de sshd e nginx e vejo como pegar ataque.",
 		en: "Outside work I study security, mostly as a hobby. Sentinel Forge is where I try it out: I read sshd and nginx logs and work out how to catch attacks.",
 	},
 	ai: {
-		pt: "Uso IA todo dia pra aprender mais rápido, mas nada entra no projeto sem eu entender o que o código tá fazendo.",
-		en: "I use AI every day to learn faster, but nothing goes into a project until I understand what the code is doing.",
+		pt: "Uso IA todo dia pra aprender mais rápido. O código que ela escreve eu leio com calma, pergunto o que não entendi e só commito quando consigo explicar cada parte.",
+		en: "I use AI every day to learn faster. When it writes code, I read it slowly, ask about whatever I don't get, and only commit once I can explain every part.",
 	},
 	projects: {
 		title: { pt: "projetos", en: "projects" },
