@@ -235,6 +235,15 @@
 	--heat-2: #f2cf5e;
 	--heat-3: #e0b320;
 	--heat-4: #a98300;
+
+	/* Cartoon (cartoon.ts): tinta na cor do texto, sombra dura, quanto o aperto afunda e a mola da volta. */
+	--cartoon-ink: var(--foreground);
+	--cartoon-border: 2px;
+	--cartoon-offset: 3px;
+	--press-depth: 3px;
+	--cd-duration-instant: 75ms;
+	--cd-duration-slow: 300ms;
+	--cd-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .dark {
@@ -376,6 +385,10 @@
 		scrollbar-gutter: stable;
 		/* O fundo no <html> evita o quadro branco entre um documento e outro (ex.: troca pt/en). */
 		background: var(--background);
+		color-scheme: light;
+	}
+	html.dark {
+		color-scheme: dark;
 	}
 }
 
