@@ -52,6 +52,11 @@ export default async function Agora() {
 		year: "numeric",
 	});
 	const study = [copy.study1, copy.study2, copy.study3];
+	const recent = [copy.recent1, copy.recent2, copy.recent3, copy.recent4];
+	const recentLinks = [
+		"https://github.com/luannzin/better-intl/pull/1",
+		"https://github.com/loopscape/blog-nextjs/pull/9",
+	];
 
 	return (
 		<>
@@ -132,6 +137,30 @@ export default async function Agora() {
 						</li>
 					))}
 				</ul>
+			</Section>
+
+			<Section id="recente" title={copy.recentTitle}>
+				<ul className="flex list-disc flex-col gap-3 pl-5 marker:text-muted-foreground">
+					{recent.map((item, i) => (
+						<li className="text-pretty" key={item}>
+							{item}
+							{recentLinks[i] && (
+								<>
+									{" "}
+									<a
+										className={link}
+										href={recentLinks[i]}
+										rel="noopener noreferrer"
+										target="_blank"
+									>
+										{copy.recentPr}
+									</a>
+								</>
+							)}
+						</li>
+					))}
+				</ul>
+				<p className="mt-4 text-muted-foreground">{copy.recentNote}</p>
 			</Section>
 
 			{repos.length > 0 && (
