@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useTransition } from "react";
 import type { Locale } from "@/i18n/generated";
 import { localePath, stripLocale } from "@/i18n/path";
+import { unlock } from "@/lib/achievements";
 import { cn } from "@/lib/utils";
 
 const locales: Locale[] = ["pt", "en"];
@@ -48,6 +49,7 @@ export function LocaleSwitch({
 						onClick={(e) => {
 							e.preventDefault();
 							if (current) return;
+							unlock("poliglota");
 							// Mesma página na outra URL de idioma (mantém a âncora, se tiver).
 							const { pathname, hash } = window.location;
 							startTransition(() =>

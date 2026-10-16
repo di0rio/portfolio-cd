@@ -3,18 +3,16 @@
 import { XIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Achievement } from "@/components/achievement";
 import { Confetti } from "@/components/confetti";
 import type { Locale } from "@/i18n/generated";
 import { localePath } from "@/i18n/path";
+import { unlock } from "@/lib/achievements";
 import { sections } from "./shell-routes";
 
 type Copy = {
 	title: string;
 	intro: string;
 	dismiss: string;
-	unlocked: string;
-	achievement: string;
 };
 
 const HINT_MS = 7000;
@@ -48,7 +46,6 @@ export function EasterEgg({
 }) {
 	const router = useRouter();
 	const [hint, setHint] = useState(false);
-	const [toast, setToast] = useState(0);
 	const [burst, setBurst] = useState(0);
 	const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
@@ -64,10 +61,6 @@ export function EasterEgg({
 		const size = Math.max(...names.map((n) => n.length + 3)) + 1;
 		let buffer = "";
 		let konami = 0;
-		function unlock() {
-			setToast((n) => n + 1);
-			setBurst((n) => n + 1);
-		}
 		function show() {
 			clearTimeout(timer.current);
 			setHint(true);
@@ -77,7 +70,6 @@ export function EasterEgg({
 			if (e.key === "Escape") {
 				clearTimeout(timer.current);
 				setHint(false);
-				setToast(0);
 				return;
 			}
 			if (e.ctrlKey || e.metaKey || e.altKey) return;
@@ -94,7 +86,8 @@ export function EasterEgg({
 			konami = key === KONAMI[konami] ? konami + 1 : Number(key === KONAMI[0]);
 			if (konami === KONAMI.length) {
 				konami = 0;
-				return unlock();
+				if (unlock("curioso")) setBurst((n) => n + 1);
+				return;
 			}
 			if (e.key.length !== 1) return;
 			buffer = (buffer + e.key.toLowerCase()).slice(-size);
@@ -154,19 +147,6 @@ export function EasterEgg({
 					onDone={() => setBurst((n) => (n === burst ? 0 : n))}
 				/>
 			)}
-			<div
-				className="pointer-events-none fixed bottom-4 left-1/2 z-50 -translate-x-1/2 print:hidden"
-				role="status"
-			>
-				{toast > 0 && (
-					<Achievement
-						key={toast}
-						label={copy.unlocked}
-						name={copy.achievement}
-						onDone={() => setToast((n) => (n === toast ? 0 : n))}
-					/>
-				)}
-			</div>
 		</>
 	);
 }

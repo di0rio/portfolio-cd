@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ViewTransition } from "react";
 import "../globals.css";
 import { InstagramIcon } from "@/components/brand-icons";
+import { AchievementsHost } from "@/components/site-shell/achievements-host";
 import { ClickTracker } from "@/components/site-shell/click-tracker";
 import { CommandPalette } from "@/components/site-shell/command-palette";
 import { ConsoleWarning } from "@/components/site-shell/console-warning";
@@ -20,6 +21,7 @@ import { Kbd } from "@/components/ui/kbd";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { localePath } from "@/i18n/path";
 import { getT, locales } from "@/i18n/server";
+import { achievements } from "@/lib/achievements";
 import { getBlogPosts } from "@/lib/github";
 import { projects } from "@/lib/projects";
 import { site } from "@/lib/site";
@@ -37,6 +39,10 @@ const ubuntuMono = Ubuntu_Mono({
 });
 
 export const dynamicParams = false;
+
+// Aplica o tema antes do primeiro quadro. O script do next-themes fica no <body>, e a troca de
+// idioma é um documento novo (com view transition): sem isto o primeiro quadro sai claro no tema escuro.
+const themeBoot = `try{var t=localStorage.getItem("theme"),d=t==="dark"||((!t||t==="system")&&matchMedia("(prefers-color-scheme:dark)").matches),e=document.documentElement;e.classList.toggle("dark",d);e.style.colorScheme=d?"dark":"light"}catch(e){}`;
 
 export function generateStaticParams() {
 	return locales.map((locale) => ({ locale }));
@@ -71,6 +77,12 @@ export default async function RootLayout({
 			lang={locale}
 			suppressHydrationWarning
 		>
+			<head>
+				<script
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: constante nossa, sem entrada do usuário
+					dangerouslySetInnerHTML={{ __html: themeBoot }}
+				/>
+			</head>
 			<body className="flex min-h-full flex-col bg-background text-[15px] text-foreground leading-[1.65]">
 				<ThemeProvider>
 					<TooltipProvider>
@@ -128,6 +140,7 @@ export default async function RootLayout({
 										["/freela", t.app.freela.footerLink],
 										["/agora", t.app.agora.footerLink],
 										["/skills", t.app.skills.title],
+										["/conquistas", t.app.conquistas.title],
 										["/log", t.app.log.footerLink],
 									] as const
 								).map(([path, label]) => (
@@ -149,6 +162,15 @@ export default async function RootLayout({
 							copy={shell.egg}
 							locale={locale}
 							slugs={projects.map((p) => p.slug)}
+						/>
+						<AchievementsHost
+							label={shell.egg.unlocked}
+							names={Object.fromEntries(
+								achievements.map(({ id }) => [
+									id,
+									t.app.conquistas.items[id].name,
+								]),
+							)}
 						/>
 						<EntryOnce />
 						<Analytics />

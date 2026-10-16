@@ -11,6 +11,7 @@ export const sections = {
 	log: "/log",
 	skills: "/skills",
 	projetos: "/projetos",
+	conquistas: "/conquistas",
 } as const;
 
 /** Slugs dos estudos de caso (`/projetos/<slug>`) e dos posts (`/blog/<slug>`). */

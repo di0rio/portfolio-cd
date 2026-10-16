@@ -6,6 +6,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { Button } from "@/components/ui/button";
 import { Kbd } from "@/components/ui/kbd";
 import { Tooltip, TooltipPopup, TooltipTrigger } from "@/components/ui/tooltip";
+import { unlock } from "@/lib/achievements";
 import type { Props } from "./command-palette-dialog";
 
 // O diálogo (base-ui Dialog + Autocomplete, ~50 KB gzip) só baixa na primeira abertura.
@@ -27,13 +28,24 @@ export function useIsMac() {
 /**
  * Paleta de comandos global (⌘K / Ctrl+K): páginas, posts e ações num campo só. O gatilho fica no
  * header; o atalho vale na página inteira. O campo é um `input`, então o easter egg do `cd ..` ignora o que se digita aqui.
- * Aqui só ficam o botão e os atalhos; o diálogo carrega na primeira abertura (ou ao passar o mouse/foco no botão).
+ * Aqui só ficam o botão e os atalhos; o diálogo pré-carrega em ociosidade (e ao passar o mouse/foco no botão).
  */
 export function CommandPalette(props: Props) {
 	const [open, setOpen] = useState(false);
 	const [loaded, setLoaded] = useState(false); // depois da 1ª abertura o diálogo fica montado (animação de saída)
 	const mac = useIsMac();
 	if (open && !loaded) setLoaded(true); // ajuste de estado na renderização (padrão do React), sem efeito
+
+	// Baixa e monta o diálogo em ociosidade após a hidratação: o 1º Ctrl+K abre sem esperar rede.
+	useEffect(() => {
+		const warm = () => void loadDialog().then(() => setLoaded(true));
+		if (typeof requestIdleCallback === "function") {
+			const id = requestIdleCallback(warm, { timeout: 3000 });
+			return () => cancelIdleCallback(id);
+		}
+		const id = setTimeout(warm, 1500);
+		return () => clearTimeout(id);
+	}, []);
 
 	useEffect(() => {
 		function onKey(e: KeyboardEvent) {
@@ -58,7 +70,10 @@ export function CommandPalette(props: Props) {
 		return () => window.removeEventListener("cd:terminal-open", close);
 	}, []);
 	useEffect(() => {
-		if (open) window.dispatchEvent(new Event("cd:palette-open"));
+		if (open) {
+			window.dispatchEvent(new Event("cd:palette-open"));
+			unlock("atalhista");
+		}
 	}, [open]);
 
 	return (

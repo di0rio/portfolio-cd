@@ -5,6 +5,7 @@ import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipPopup, TooltipTrigger } from "@/components/ui/tooltip";
+import { unlock } from "@/lib/achievements";
 
 type Labels = { toLight: string; toDark: string };
 
@@ -23,7 +24,10 @@ export function ThemeSwitch({ labels }: { labels: Labels }) {
 		<Tooltip>
 			<TooltipTrigger
 				aria-label={label}
-				onClick={() => setTheme(dark ? "light" : "dark")}
+				onClick={() => {
+					setTheme(dark ? "light" : "dark");
+					unlock("chave");
+				}}
 				render={<Button size="icon-sm" type="button" variant="outline" />}
 			>
 				{mounted &&
