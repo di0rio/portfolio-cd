@@ -3,6 +3,7 @@
 import { CheckIcon, CopyIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { unlock } from "@/lib/achievements";
 
 /** Copia o e-mail: muita gente não tem cliente de e-mail configurado e o `mailto:` não abre nada. */
 export function CopyEmail({
@@ -34,6 +35,7 @@ export function CopyEmail({
 						return; // sem permissão de área de transferência: não finge que copiou
 					}
 					setCopied(true);
+					unlock("recado");
 					clearTimeout(timer.current);
 					timer.current = setTimeout(() => setCopied(false), 1500);
 				}}

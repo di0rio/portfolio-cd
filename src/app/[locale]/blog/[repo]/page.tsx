@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ViewTransition } from "react";
 import { ArticleToc } from "@/components/article-toc";
 import { Markdown } from "@/components/markdown";
+import { ReadEnd } from "@/components/read-end";
 import { PageStepper } from "@/components/site-shell/page-stepper";
 import { localePath } from "@/i18n/path";
 import { alternates, getT } from "@/i18n/server";
@@ -167,6 +168,7 @@ export default async function Post({
 			) : (
 				<p className="text-muted-foreground">{copy.noReadme}</p>
 			)}
+			{readme && <ReadEnd />}
 
 			{/* Índice no gutter direito, só onde cabe (>= 1200px); a coluna de 640px não muda. */}
 			<aside className="absolute top-0 left-full hidden h-full pl-10 min-[1200px]:block">

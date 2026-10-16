@@ -192,7 +192,7 @@ function LogContent({
 								id={`dia-${key}`}
 								title={fmt.format(new Date(items[0].date))}
 							>
-								<Table>
+								<Table containerClassName="rounded-none border-0 bg-transparent">
 									<TableBody>
 										{items.map((c) => (
 											<TableRow
@@ -230,7 +230,7 @@ function LogContent({
 														))}
 													{c.text}
 												</TableCell>
-												<TableCell className="py-2 text-right align-baseline text-muted-foreground text-xs">
+												<TableCell className="py-2 text-right align-baseline text-muted-foreground text-xs whitespace-nowrap">
 													<time
 														className="tabular-nums"
 														dateTime={c.date}

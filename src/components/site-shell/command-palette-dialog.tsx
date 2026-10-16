@@ -29,6 +29,7 @@ export type Copy = {
 	agora: string;
 	log: string;
 	skills: string;
+	conquistas: string;
 };
 
 type Item = {
@@ -85,6 +86,7 @@ export function CommandPaletteDialog({
 				page("agora", copy.agora, "/agora"),
 				page("log", copy.log, "/log"),
 				page("skills", copy.skills, "/skills"),
+				page("conquistas", copy.conquistas, "/conquistas"),
 			],
 		},
 		...(posts.length

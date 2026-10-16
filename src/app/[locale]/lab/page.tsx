@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { BeforeAfter } from "@/components/lab/before-after";
-import { ClipTabs } from "@/components/lab/clip-tabs";
-import { CopyButton } from "@/components/lab/copy-button";
-import { DragSheet } from "@/components/lab/drag-sheet";
-import { HoldToConfirm } from "@/components/lab/hold-to-confirm";
+import { AchievementBench } from "@/components/lab/achievement-bench";
+import { AvatarToy } from "@/components/lab/avatar-toy";
+import { CartoonBench } from "@/components/lab/cartoon-bench";
+import { Combine } from "@/components/lab/combine";
+import { HoldBench } from "@/components/lab/hold-bench";
+import { PaletteBench } from "@/components/lab/palette-bench";
 import { PaletteDemo } from "@/components/lab/palette-demo";
-import { ReorderList } from "@/components/lab/reorder-list";
-import { ToastStack } from "@/components/lab/toast-stack";
 import { PageHeader } from "@/components/page-header";
 import { alternates, getT } from "@/i18n/server";
-import { site } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
 	const { t, locale } = await getT();
@@ -25,106 +23,133 @@ export default async function Lab() {
 	const { t } = await getT();
 	const copy = t.app.lab;
 
+	const steps = [
+		{ id: "boneco", label: copy.avatar.title },
+		{ id: "juntar", label: copy.combine.title },
+		{ id: "segurar", label: copy.hold.title },
+		{ id: "cartoon", label: copy.cartoon.title },
+		{ id: "paleta-rapida", label: copy.instant.title },
+		{ id: "conquista", label: copy.achievement.title },
+	];
+
 	return (
 		<>
 			<PageHeader intro={copy.intro} title={copy.title} />
 
-			{/* Os mais novos primeiro. */}
-			<Experiment desc={copy.toasts.desc} id="toasts" title={copy.toasts.title}>
-				<ToastStack
+			{/* Passos compactos no topo: âncoras, sem paginação embaixo. */}
+			<nav aria-label={copy.index}>
+				<ol className="flex flex-wrap gap-x-5 gap-y-1 text-sm">
+					{steps.map((step, i) => (
+						<li key={step.id}>
+							<a
+								className="rounded-sm text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-brand"
+								href={`#${step.id}`}
+							>
+								<span className="mr-1.5 font-mono text-[13px] tabular-nums">
+									{String(i + 1).padStart(2, "0")}
+								</span>
+								{step.label}
+							</a>
+						</li>
+					))}
+				</ol>
+			</nav>
+
+			<Experiment
+				desc={copy.avatar.desc}
+				id="boneco"
+				teaches={copy.avatar.teaches}
+				teachesLabel={copy.teaches}
+				title={copy.avatar.title}
+			>
+				<AvatarToy label={copy.avatar.label} />
+			</Experiment>
+
+			<Experiment
+				desc={copy.combine.desc}
+				id="juntar"
+				teaches={copy.combine.teaches}
+				teachesLabel={copy.teaches}
+				title={copy.combine.title}
+			>
+				<Combine
 					copy={{
-						add: copy.toasts.add,
-						clear: copy.toasts.clear,
-						region: copy.toasts.region,
-						dismiss: copy.toasts.dismiss,
-						messages: [
-							{ title: copy.toasts.m1, desc: copy.toasts.d1 },
-							{ title: copy.toasts.m2, desc: copy.toasts.d2 },
-							{ title: copy.toasts.m3, desc: copy.toasts.d3 },
-							{ title: copy.toasts.m4, desc: copy.toasts.d4 },
-						],
+						piece: copy.combine.piece,
+						merged: copy.combine.merged,
+						join: copy.combine.join,
+						split: copy.combine.split,
 					}}
 				/>
 			</Experiment>
 
 			<Experiment
-				desc={copy.palette.desc}
-				id="paleta"
-				title={copy.palette.title}
+				desc={copy.hold.benchDesc}
+				id="segurar"
+				teaches={copy.hold.teaches}
+				teachesLabel={copy.teaches}
+				title={copy.hold.title}
 			>
-				<PaletteDemo label={copy.palette.open} />
+				<HoldBench done={copy.hold.done} label={copy.hold.label} />
 			</Experiment>
 
-			<Experiment desc={copy.sheet.desc} id="gaveta" title={copy.sheet.title}>
-				<DragSheet
-					copy={{
-						open: copy.sheet.open,
-						title: copy.sheet.sheetTitle,
-						body: copy.sheet.body,
-						close: copy.sheet.close,
-						hint: copy.sheet.hint,
-					}}
-				/>
+			<Experiment
+				desc={copy.cartoon.desc}
+				id="cartoon"
+				teaches={copy.cartoon.teaches}
+				teachesLabel={copy.teaches}
+				title={copy.cartoon.title}
+			>
+				<CartoonBench label={copy.cartoon.label} />
 			</Experiment>
 
-			<Experiment desc={copy.reorder.desc} id="flip" title={copy.reorder.title}>
-				<ReorderList
+			<Experiment
+				desc={copy.instant.desc}
+				id="paleta-rapida"
+				teaches={copy.instant.teaches}
+				teachesLabel={copy.teaches}
+				title={copy.instant.title}
+			>
+				<PaletteBench
 					copy={{
-						items: [
-							copy.reorder.item1,
-							copy.reorder.item2,
-							copy.reorder.item3,
-							copy.reorder.item4,
-						],
-						up: copy.reorder.up,
-						down: copy.reorder.down,
-						shuffle: copy.reorder.shuffle,
-						label: copy.reorder.label,
+						preload: copy.instant.preload,
+						cold: copy.instant.cold,
+						open: copy.instant.open,
+						close: copy.instant.close,
+						search: copy.instant.search,
+						rows: [copy.instant.row1, copy.instant.row2, copy.instant.row3],
+						took: copy.instant.took,
+						idle: copy.instant.idle,
 					}}
 				/>
 			</Experiment>
 
 			<Experiment
-				desc={copy.compare.desc}
-				id="antes-depois"
-				title={copy.compare.title}
+				desc={copy.achievement.desc}
+				id="conquista"
+				teaches={copy.achievement.teaches}
+				teachesLabel={copy.teaches}
+				title={copy.achievement.title}
 			>
-				<BeforeAfter
-					copy={{
-						label: copy.compare.label,
-						before: copy.compare.before,
-						after: copy.compare.after,
-						title: copy.compare.cardTitle,
-						meta: copy.compare.cardMeta,
-						action: copy.compare.cardAction,
-						secondary: copy.compare.cardSecondary,
-					}}
+				<AchievementBench
+					label={copy.achievement.unlocked}
+					name={copy.achievement.name}
+					play={copy.achievement.play}
+					replay={copy.achievement.replay}
 				/>
 			</Experiment>
 
-			<Experiment desc={copy.hold.desc} id="segurar" title={copy.hold.title}>
-				<HoldToConfirm done={copy.hold.done} label={copy.hold.label} />
-			</Experiment>
-
-			<Experiment desc={copy.copy.desc} id="copiar" title={copy.copy.title}>
-				<CopyButton
-					done={copy.copy.done}
-					label={copy.copy.label}
-					text={`https://github.com/${site.github}`}
-				/>
-			</Experiment>
-
-			<Experiment desc={copy.tabs.desc} id="abas" title={copy.tabs.title}>
-				<ClipTabs
-					items={[
-						copy.tabs.day,
-						copy.tabs.week,
-						copy.tabs.month,
-						copy.tabs.year,
-					]}
-					label={copy.tabs.label}
-				/>
-			</Experiment>
+			{/* A paleta já vive no site inteiro: aqui é só um atalho pra ela. */}
+			<section aria-labelledby="paleta" className="flex flex-col gap-3">
+				<h2 className="font-medium text-[17px]" id="paleta">
+					{copy.palette.title}
+				</h2>
+				<p className="max-w-[520px] text-pretty text-muted-foreground text-[15px]">
+					{copy.palette.desc}
+				</p>
+				<div>
+					<PaletteDemo label={copy.palette.open} />
+				</div>
+			</section>
 		</>
 	);
 }
@@ -133,22 +158,32 @@ function Experiment({
 	id,
 	title,
 	desc,
+	teaches,
+	teachesLabel,
 	children,
 }: {
 	id: string;
 	title: string;
 	desc: string;
+	teaches: string;
+	teachesLabel: string;
 	children: ReactNode;
 }) {
 	return (
-		<section aria-labelledby={id}>
+		<section aria-labelledby={id} className="scroll-mt-24">
 			<h2 className="font-medium text-[17px]" id={id}>
 				{title}
 			</h2>
-			<p className="mt-1 mb-4 max-w-[520px] text-pretty text-muted-foreground text-[15px]">
+			<p className="mt-1 max-w-[520px] text-pretty text-muted-foreground text-[15px]">
 				{desc}
 			</p>
-			<div className="flex min-h-40 items-center justify-center rounded-xl border bg-card px-6 py-10">
+			<p className="mt-1 mb-4 max-w-[520px] text-pretty text-[15px] text-muted-foreground">
+				<span className="font-mono text-[13px] text-muted-foreground">
+					{teachesLabel}
+				</span>{" "}
+				{teaches}
+			</p>
+			<div className="overflow-hidden rounded-xl border bg-card">
 				{children}
 			</div>
 		</section>

@@ -78,8 +78,19 @@ export function Achievement({
 			// `finished` rejeita com AbortError quando a limpeza cancela: esperado, nada a fazer.
 			() => {},
 		);
+		// Aba escondida: o relógio da animação segue correndo e, na volta, ela já estaria no fim (invisível).
+		// Pausa ao esconder e retoma ao voltar, pra o aviso continuar de onde parou.
+		const sync = () => {
+			for (const a of animations) {
+				if (document.hidden) a?.pause();
+				else a?.play();
+			}
+		};
+		sync();
+		document.addEventListener("visibilitychange", sync);
 		return () => {
 			cancelled = true;
+			document.removeEventListener("visibilitychange", sync);
 			for (const a of animations) a?.cancel();
 		};
 	}, []);

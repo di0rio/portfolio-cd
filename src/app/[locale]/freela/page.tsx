@@ -126,7 +126,7 @@ export default async function Freela() {
 			</Section>
 
 			<Section id="duvidas" title={copy.faqTitle}>
-				<Accordion className="border-y">
+				<Accordion className="border-y" indicator="chevron">
 					{faq.map(([q, a], i) => (
 						<AccordionItem key={q} value={q}>
 							<AccordionTrigger className="group items-baseline py-4 text-base">

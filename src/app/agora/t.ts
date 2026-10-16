@@ -29,6 +29,31 @@ export default {
 		pt: "go e rust, com a IA me ajudando a aprender.",
 		en: "go and rust, with AI helping me learn.",
 	},
+	recentTitle: {
+		pt: "o que eu aprendi e fiz ultimamente",
+		en: "what i learned and did lately",
+	},
+	recent1: {
+		pt: "abri um PR no better-intl, a lib de i18n que este site usa.",
+		en: "opened a PR on better-intl, the i18n lib this site uses.",
+	},
+	recent2: {
+		pt: "integrei um assistente de escrita no CMS do blog em que eu trabalho.",
+		en: "integrated a writing assistant into the CMS of the blog I work on.",
+	},
+	recent3: {
+		pt: "aprendi canonical tags e meta tags de SEO na prática.",
+		en: "learned canonical tags and SEO meta tags in practice.",
+	},
+	recent4: {
+		pt: "aprendi a trabalhar em branches sem encostar na produção. o fluxo de branches do CMS mudou e eu finalmente fiz na prática o que só sabia na teoria.",
+		en: "learned to work in branches without touching production. the CMS branch flow changed and I finally did in practice what I only knew in theory.",
+	},
+	recentNote: {
+		pt: "ainda tô construindo meu próprio senso do que é certo. por enquanto sigo o exemplo do Luan, que tem mais experiência.",
+		en: "I'm still building my own sense of what's right. for now I follow the example of Luan, who has more experience.",
+	},
+	recentPr: { pt: "ver o PR", en: "see the PR" },
 	lastUpdated: { pt: "última atualização: {date}", en: "last updated: {date}" },
 	footerLink: { pt: "agora", en: "now" },
 	contribTitle: { pt: "contribuições", en: "contributions" },

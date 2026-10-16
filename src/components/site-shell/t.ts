@@ -54,6 +54,7 @@ export default {
 		agora: { pt: "agora", en: "now" },
 		log: { pt: "log do site", en: "site log" },
 		skills: { pt: "skills", en: "skills" },
+		conquistas: { pt: "conquistas", en: "achievements" },
 	},
 	footer: {
 		made: { pt: "feito por cauã.", en: "made by cauã." },
@@ -68,6 +69,5 @@ export default {
 		},
 		dismiss: { pt: "Fechar dica", en: "Dismiss hint" },
 		unlocked: { pt: "conquista desbloqueada", en: "achievement unlocked" },
-		achievement: { pt: "curioso", en: "curious" },
 	},
 };

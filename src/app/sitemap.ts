@@ -29,6 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		...entry("/agora", { changeFrequency: "daily", priority: 0.5 }),
 		...entry("/skills", { changeFrequency: "monthly", priority: 0.7 }),
 		...entry("/log", { changeFrequency: "daily", priority: 0.4 }),
+		...entry("/conquistas", { changeFrequency: "monthly", priority: 0.3 }),
 		...entry("/projetos", { changeFrequency: "monthly", priority: 0.8 }),
 		...projects.flatMap((p) =>
 			entry(`/projetos/${p.slug}`, {
