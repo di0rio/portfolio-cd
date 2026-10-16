@@ -1,5 +1,6 @@
 // Skills de agente de IA do repositório público. A copy fica em `src/app/skills/t.ts`.
 export const skillsRepo = "https://github.com/di0rio/cd-skills";
+export const skillsSite = "https://cd-skills.vercel.app";
 export const skillsInstall = "npx skills add di0rio/cd-skills";
 
 export type Skill = {

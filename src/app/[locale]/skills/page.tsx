@@ -21,6 +21,7 @@ import {
 	skills,
 	skillsInstall,
 	skillsRepo,
+	skillsSite,
 	skillUrl,
 } from "@/lib/skills";
 
@@ -63,7 +64,10 @@ export default async function Skills() {
 					<div className="w-full">
 						<CodeBlock copy={copyLabels} lines={[skillsInstall]} />
 					</div>
-					<ExternalLink href={skillsRepo}>{copy.github}</ExternalLink>
+					<div className="flex flex-wrap gap-x-4 gap-y-2">
+						<ExternalLink href={skillsSite}>{copy.site}</ExternalLink>
+						<ExternalLink href={skillsRepo}>{copy.github}</ExternalLink>
+					</div>
 				</div>
 			</PageHeader>
 

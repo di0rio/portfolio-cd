@@ -5,6 +5,7 @@ export default {
 		pt: "Regras que eu escrevi pra agentes de IA (Claude Code, Codex, Cursor) trabalharem do jeito que eu trabalho. Cada skill é um arquivo SKILL.md, em português e em inglês. São de graça, com licença MIT.",
 		en: "Rules I wrote so AI agents (Claude Code, Codex, Cursor) work the way I do. Each skill is a single SKILL.md file, in Portuguese and English. Free, under the MIT license.",
 	},
+	site: { pt: "ver o site das skills", en: "see the skills site" },
 	github: { pt: "ver no github", en: "view on github" },
 	installTitle: { pt: "instalar", en: "install" },
 	installTabs: { pt: "formas de instalar", en: "ways to install" },
