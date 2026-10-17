@@ -7,6 +7,7 @@ import { Dialog, DialogClose, DialogPopup } from "@/components/ui/dialog";
 import { Kbd } from "@/components/ui/kbd";
 import type { Locale } from "@/i18n/generated";
 import { localePath } from "@/i18n/path";
+import { skillsSiteUrl } from "@/lib/skills";
 
 export type Copy = {
 	open: string;
@@ -85,7 +86,12 @@ export function CommandPaletteDialog({
 				page("freela", copy.freela, "/freela"),
 				page("agora", copy.agora, "/agora"),
 				page("log", copy.log, "/log"),
-				page("skills", copy.skills, "/skills"),
+				{
+					id: "skills",
+					label: copy.skills,
+					hint: "cd-skills.vercel.app",
+					run: () => window.open(skillsSiteUrl(locale), "_blank", "noopener"),
+				},
 				page("conquistas", copy.conquistas, "/conquistas"),
 			],
 		},

@@ -2,6 +2,7 @@ import { networkInterfaces } from "node:os";
 import { withInternationalization } from "better-intl/next";
 import { withBotId } from "botid/next/config";
 import type { NextConfig } from "next";
+import { skillsSite } from "./src/lib/skills";
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -51,6 +52,17 @@ const nextConfig: NextConfig = {
 	allowedDevOrigins: devOrigins,
 
 	poweredByHeader: false,
+	// A página /skills virou o site próprio das skills. Redirect roda antes do proxy (locale), então vale nos dois idiomas.
+	async redirects() {
+		return [
+			{ source: "/skills", destination: skillsSite, permanent: true },
+			{
+				source: "/en/skills",
+				destination: `${skillsSite}/en`,
+				permanent: true,
+			},
+		];
+	},
 	async headers() {
 		return [{ source: "/(.*)", headers: securityHeaders }];
 	},
