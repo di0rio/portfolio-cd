@@ -9,7 +9,6 @@ export const sections = {
 	freela: "/freela",
 	agora: "/agora",
 	log: "/log",
-	skills: "/skills",
 	projetos: "/projetos",
 	conquistas: "/conquistas",
 } as const;

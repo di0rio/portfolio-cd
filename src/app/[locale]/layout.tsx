@@ -25,6 +25,7 @@ import { achievements } from "@/lib/achievements";
 import { getBlogPosts } from "@/lib/github";
 import { projects } from "@/lib/projects";
 import { site } from "@/lib/site";
+import { skillsSiteUrl } from "@/lib/skills";
 import { cn } from "@/lib/utils";
 
 const ubuntu = Ubuntu({
@@ -139,7 +140,6 @@ export default async function RootLayout({
 									[
 										["/freela", t.app.freela.footerLink],
 										["/agora", t.app.agora.footerLink],
-										["/skills", t.app.skills.title],
 										["/conquistas", t.app.conquistas.title],
 										["/log", t.app.log.footerLink],
 									] as const
@@ -153,6 +153,14 @@ export default async function RootLayout({
 										{label}
 									</Link>
 								))}
+								<a
+									className="underline decoration-muted-foreground/40 underline-offset-4 hover:text-foreground hover:decoration-brand"
+									href={skillsSiteUrl(locale)}
+									rel="noopener"
+									target="_blank"
+								>
+									{shell.palette.skills}
+								</a>
 							</span>
 							<span>
 								{shell.footer.hint} <Kbd>cd ..</Kbd> / <Kbd>help</Kbd>

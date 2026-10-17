@@ -37,8 +37,7 @@ describe("achievements", () => {
 	});
 
 	test("explorador só depois de visitar todas as seções", () => {
-		for (const s of ["blog", "lab", "cv", "freela", "agora", "log", "skills"])
-			visit(s);
+		for (const s of ["blog", "lab", "cv", "freela", "agora", "log"]) visit(s);
 		visit("fora-da-lista");
 		expect(getSnapshot().explorador).toBeUndefined();
 		visit("projetos");
