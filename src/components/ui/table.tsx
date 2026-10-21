@@ -108,7 +108,7 @@ export function TableRow({
 	return (
 		<tr
 			className={cn(
-				"group/row bg-(--row-tint,var(--stripe,transparent)) transition-colors duration-200 ease-out",
+				"group/row bg-(--row-tint,var(--stripe,transparent)) transition-colors duration-base ease-out",
 				"in-data-[variant=striped]:even:[--stripe:var(--muted)]",
 				"hover:[--row-tint:var(--muted)] in-data-[variant=cartoon]:hover:[--row-tint:color-mix(in_oklab,var(--brand)_22%,transparent)]",
 				"aria-selected:[--row-tint:color-mix(in_oklab,var(--brand)_15%,transparent)] data-[state=selected]:[--row-tint:color-mix(in_oklab,var(--brand)_15%,transparent)]",

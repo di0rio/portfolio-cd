@@ -9,7 +9,7 @@ export function Kbd({
 	return (
 		<kbd
 			className={cn(
-				"inline-flex h-5 min-w-5 select-none items-center justify-center gap-0.5 rounded-sm border border-b-2 bg-background px-1 font-mono text-[11px] text-muted-foreground",
+				"inline-flex h-5 min-w-5 select-none items-center justify-center gap-0.5 rounded-xs border border-b-2 bg-background px-1 font-mono text-[11px] text-muted-foreground",
 				className,
 			)}
 			data-slot="kbd"

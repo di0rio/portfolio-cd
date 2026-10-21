@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import {
 	AvatarSticker,
 	Knob,
 	Knobs,
+	Line,
 	prefersReducedMotion,
 	Stage,
+	useKnobs,
 	useSpring,
 } from "@/components/lab/workbench";
 
@@ -17,9 +19,8 @@ const clamp = (n: number) => Math.max(-1, Math.min(1, n));
  * (a mesma mola, no eixo de escala). Ao soltar, a velocidade passa do ponto e estica: squash and stretch.
  */
 export function AvatarToy({ label }: { label: string }) {
-	const [stiffness, setStiffness] = useState(220);
-	const [damping, setDamping] = useState(14);
-	const [tilt, setTilt] = useState(12);
+	const knobs = useKnobs({ stiffness: 220, damping: 14, tilt: 12 });
+	const { stiffness, damping, tilt } = knobs.values;
 	const button = useRef<HTMLButtonElement>(null);
 	const body = useRef<HTMLSpanElement>(null);
 	const look = useRef({ x: 0, y: 0 });
@@ -103,32 +104,19 @@ export function AvatarToy({ label }: { label: string }) {
 					</span>
 				</button>
 			</Stage>
-			<Knobs
-				code={`spring({ stiffness: ${stiffness}, damping: ${damping} })\nlook({ tilt: ${tilt}deg })`}
-			>
-				<Knob
-					max={400}
-					min={60}
-					name="stiffness"
-					onChange={setStiffness}
-					step={10}
-					value={stiffness}
-				/>
-				<Knob
-					max={30}
-					min={4}
-					name="damping"
-					onChange={setDamping}
-					value={damping}
-				/>
-				<Knob
-					max={25}
-					min={0}
-					name="tilt"
-					onChange={setTilt}
-					unit="deg"
-					value={tilt}
-				/>
+			<Knobs file="avatar-toy.ts" state={knobs}>
+				<Line>
+					{"spring({ stiffness: "}
+					<Knob k="stiffness" max={400} min={60} step={10} />
+					{", damping: "}
+					<Knob k="damping" max={30} min={4} />
+					{" })"}
+				</Line>
+				<Line>
+					{"look({ tilt: "}
+					<Knob k="tilt" max={25} min={0} unit="deg" />
+					{" })"}
+				</Line>
 			</Knobs>
 		</>
 	);

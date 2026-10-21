@@ -4,6 +4,7 @@ import { track } from "@vercel/analytics";
 import { useRef, useState } from "react";
 import { sendContactMessage } from "@/app/[locale]/freela/actions";
 import { Button } from "@/components/ui/button";
+import { confetti } from "@/components/ui/confetti";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -48,6 +49,7 @@ export function FreelaContactForm({ labels }: { labels: FreelaFormLabels }) {
 		message: labels.errMessage,
 	});
 	const honeypot = useRef<HTMLInputElement>(null);
+	const submit = useRef<HTMLButtonElement>(null);
 	const [pending, setPending] = useState(false);
 	const [status, setStatus] = useState<"idle" | "sent" | "error" | "rate">(
 		"idle",
@@ -74,6 +76,8 @@ export function FreelaContactForm({ labels }: { labels: FreelaFormLabels }) {
 					});
 					if (result.ok) {
 						track("freela_contact_sent", { kind: values.kind });
+						// Sai do botão antes dele desmontar: a origem é lida na hora da chamada.
+						confetti({ origin: submit.current ?? undefined, count: 70 });
 						setStatus("sent");
 					} else {
 						setStatus(result.error === "rate_limited" ? "rate" : "error");
@@ -138,7 +142,7 @@ export function FreelaContactForm({ labels }: { labels: FreelaFormLabels }) {
 				<FieldError />
 			</Field>
 			<div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-				<Button loading={pending} type="submit" variant="brand">
+				<Button loading={pending} ref={submit} type="submit" variant="brand">
 					{labels.send}
 				</Button>
 				<p className="text-muted-foreground text-xs">{labels.hint}</p>

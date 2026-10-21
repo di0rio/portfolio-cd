@@ -3,7 +3,7 @@
 import { XIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Confetti } from "@/components/confetti";
+import { confetti } from "@/components/ui/confetti";
 import type { Locale } from "@/i18n/generated";
 import { localePath } from "@/i18n/path";
 import { unlock } from "@/lib/achievements";
@@ -46,7 +46,6 @@ export function EasterEgg({
 }) {
 	const router = useRouter();
 	const [hint, setHint] = useState(false);
-	const [burst, setBurst] = useState(0);
 	const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
 	useEffect(() => {
@@ -86,7 +85,7 @@ export function EasterEgg({
 			konami = key === KONAMI[konami] ? konami + 1 : Number(key === KONAMI[0]);
 			if (konami === KONAMI.length) {
 				konami = 0;
-				if (unlock("curioso")) setBurst((n) => n + 1);
+				if (unlock("curioso")) confetti({ count: 80, spread: 100 });
 				return;
 			}
 			if (e.key.length !== 1) return;
@@ -107,46 +106,38 @@ export function EasterEgg({
 
 	// A região `aria-live` fica sempre no DOM; só o conteúdo entra e sai, então o leitor de tela anuncia.
 	return (
-		<>
-			<div
-				aria-live="polite"
-				className="pointer-events-none fixed bottom-4 left-4 z-40 print:hidden"
-				role="status"
-			>
-				{hint && (
-					<div className="pointer-events-auto relative w-[min(22rem,calc(100vw-2rem))] rounded-xl border bg-card p-3 pr-9 text-sm shadow-lg">
-						<p className="font-mono text-muted-foreground">
-							<span className="text-brand-foreground">~</span> $ help
-						</p>
-						<p className="mt-1.5 mb-2 font-medium">{copy.title}</p>
-						<p className="mb-2 text-muted-foreground text-xs">{copy.intro}</p>
-						<ul className="flex flex-wrap gap-1.5">
-							{[...hintNames, ...slugs].map((n) => (
-								<li
-									className="rounded-sm border bg-background px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground"
-									key={n}
-								>
-									cd {n}
-								</li>
-							))}
-						</ul>
-						<button
-							aria-label={copy.dismiss}
-							className="absolute top-2 right-2 grid size-6 place-items-center rounded-md text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-brand"
-							onClick={() => setHint(false)}
-							type="button"
-						>
-							<XIcon aria-hidden className="size-3.5" />
-						</button>
-					</div>
-				)}
-			</div>
-			{burst > 0 && (
-				<Confetti
-					key={burst}
-					onDone={() => setBurst((n) => (n === burst ? 0 : n))}
-				/>
+		<div
+			aria-live="polite"
+			className="pointer-events-none fixed bottom-4 left-4 z-40 print:hidden"
+			role="status"
+		>
+			{hint && (
+				<div className="pointer-events-auto relative w-[min(22rem,calc(100vw-2rem))] rounded-xl border bg-card p-3 pr-9 text-sm shadow-lg">
+					<p className="font-mono text-muted-foreground">
+						<span className="text-brand-foreground">~</span> $ help
+					</p>
+					<p className="mt-1.5 mb-2 font-medium">{copy.title}</p>
+					<p className="mb-2 text-muted-foreground text-xs">{copy.intro}</p>
+					<ul className="flex flex-wrap gap-1.5">
+						{[...hintNames, ...slugs].map((n) => (
+							<li
+								className="rounded-sm border bg-background px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground"
+								key={n}
+							>
+								cd {n}
+							</li>
+						))}
+					</ul>
+					<button
+						aria-label={copy.dismiss}
+						className="absolute top-2 right-2 grid size-6 place-items-center rounded-md text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-brand"
+						onClick={() => setHint(false)}
+						type="button"
+					>
+						<XIcon aria-hidden className="size-3.5" />
+					</button>
+				</div>
 			)}
-		</>
+		</div>
 	);
 }

@@ -5,8 +5,10 @@ import {
 	AvatarSticker,
 	Knob,
 	Knobs,
+	Line,
 	prefersReducedMotion,
 	Stage,
+	useKnobs,
 	useSpring,
 } from "@/components/lab/workbench";
 import { cartoon, cartoonPress } from "@/components/ui/cartoon";
@@ -27,8 +29,8 @@ export function Combine({
 		split: string;
 	};
 }) {
-	const [snap, setSnap] = useState(56);
-	const [pull, setPull] = useState(260);
+	const knobs = useKnobs({ snap: 56, stiffness: 260 });
+	const { snap, stiffness: pull } = knobs.values;
 	const [merged, setMerged] = useState(false);
 	const [near, setNear] = useState(false);
 	const stage = useRef<HTMLDivElement>(null);
@@ -162,23 +164,14 @@ export function Combine({
 					{merged ? copy.split : copy.join}
 				</button>
 			</Stage>
-			<Knobs code={`merge({ snap: ${snap}px, stiffness: ${pull} })`}>
-				<Knob
-					max={140}
-					min={20}
-					name="snap"
-					onChange={setSnap}
-					unit="px"
-					value={snap}
-				/>
-				<Knob
-					max={500}
-					min={80}
-					name="stiffness"
-					onChange={setPull}
-					step={10}
-					value={pull}
-				/>
+			<Knobs file="combine.ts" state={knobs}>
+				<Line>
+					{"merge({ snap: "}
+					<Knob k="snap" max={140} min={20} unit="px" />
+					{", stiffness: "}
+					<Knob k="stiffness" max={500} min={80} step={10} />
+					{" })"}
+				</Line>
 			</Knobs>
 		</>
 	);

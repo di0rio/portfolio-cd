@@ -54,7 +54,7 @@ export function AccordionTrigger({
 			<AccordionPrimitive.Trigger
 				className={cn(
 					"flex flex-1 cursor-pointer items-center gap-2 rounded-md py-3 text-left text-sm outline-none",
-					"transition-colors duration-200 ease-out hover:text-foreground/80",
+					"transition-colors duration-base ease-out hover:text-foreground/80",
 					"focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
 					"data-disabled:cursor-not-allowed data-disabled:opacity-50",
 					chevron
@@ -68,7 +68,7 @@ export function AccordionTrigger({
 				{!chevron && (
 					<span
 						aria-hidden="true"
-						className="inline-block w-3 shrink-0 text-center text-muted-foreground transition-transform duration-150 ease-out motion-reduce:transition-none"
+						className="inline-block w-3 shrink-0 text-center text-muted-foreground transition-transform duration-fast ease-out"
 					>
 						▸
 					</span>
@@ -77,7 +77,7 @@ export function AccordionTrigger({
 				{chevron && (
 					<ChevronDownIcon
 						aria-hidden="true"
-						className="size-4 shrink-0 text-muted-foreground transition-transform duration-200 ease-out motion-reduce:transition-none"
+						className="size-4 shrink-0 text-muted-foreground transition-transform duration-base ease-out"
 					/>
 				)}
 			</AccordionPrimitive.Trigger>
@@ -96,7 +96,7 @@ export function AccordionPanel({
 		<AccordionPrimitive.Panel
 			className={cn(
 				"h-(--accordion-panel-height) overflow-hidden text-muted-foreground text-sm",
-				"transition-[height,opacity] duration-200 ease-out data-ending-style:h-0 data-starting-style:h-0 data-ending-style:opacity-0 data-starting-style:opacity-0 motion-reduce:transition-none",
+				"transition-[height,opacity] duration-base ease-out data-ending-style:h-0 data-starting-style:h-0 data-ending-style:opacity-0 data-starting-style:opacity-0",
 				className,
 			)}
 			data-slot="accordion-panel"

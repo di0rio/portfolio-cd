@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Achievement } from "@/components/achievement";
-import { Knobs, Stage } from "@/components/lab/workbench";
+import { Knobs, Line, Stage } from "@/components/lab/workbench";
 
 /** A conquista do easter egg, fora da fila: toque de novo quando quiser rever a linha do tempo. */
 export function AchievementBench({
@@ -42,12 +42,10 @@ export function AchievementBench({
 					{on ? replay : play}
 				</button>
 			</Stage>
-			<Knobs
-				code={
-					"circle: pop 280ms -> hold -> collapse\npill: open 200-520ms, close 4050-4400ms\ntext: fade 420-600ms, out 3950-4100ms"
-				}
-			>
-				{null}
+			<Knobs file="achievement.ts">
+				<Line>{"circle: pop 280ms -> hold -> collapse"}</Line>
+				<Line>{"pill: open 200-520ms, close 4050-4400ms"}</Line>
+				<Line>{"text: fade 420-600ms, out 3950-4100ms"}</Line>
 			</Knobs>
 		</>
 	);

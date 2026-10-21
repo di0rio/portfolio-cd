@@ -1,7 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Knob, Knobs, Stage } from "@/components/lab/workbench";
+import {
+	Knob,
+	Knobs,
+	Line,
+	Stage,
+	Toggle,
+	useKnobs,
+} from "@/components/lab/workbench";
 
 type Phase = "closed" | "loading" | "open";
 
@@ -24,8 +31,8 @@ export function PaletteBench({
 		idle: string;
 	};
 }) {
-	const [preload, setPreload] = useState(false);
-	const [network, setNetwork] = useState(450);
+	const knobs = useKnobs({ preload: false, network: 450 });
+	const { preload, network } = knobs.values;
 	const [phase, setPhase] = useState<Phase>("closed");
 	const [took, setTook] = useState<number | null>(null);
 	const t0 = useRef(0);
@@ -125,7 +132,7 @@ export function PaletteBench({
 						aria-pressed={preload}
 						className={`h-11 rounded-md border px-4 font-mono text-[13px] outline-none transition-[background-color,transform] duration-150 ease-out focus-visible:ring-2 focus-visible:ring-brand motion-safe:active:scale-[0.97] ${preload ? "bg-brand text-[#1c1c1c]" : "bg-card text-muted-foreground hover:bg-accent"}`}
 						onClick={() => {
-							setPreload((p) => !p);
+							knobs.set("preload", !preload);
 							close();
 						}}
 						type="button"
@@ -134,16 +141,14 @@ export function PaletteBench({
 					</button>
 				</div>
 			</Stage>
-			<Knobs code={`open({ preload: ${preload}, network: ${network}ms })`}>
-				<Knob
-					max={1500}
-					min={50}
-					name="network"
-					onChange={setNetwork}
-					step={50}
-					unit="ms"
-					value={network}
-				/>
+			<Knobs file="palette.ts" state={knobs}>
+				<Line>
+					{"open({ preload: "}
+					<Toggle k="preload" />
+					{", network: "}
+					<Knob k="network" max={1500} min={50} step={50} unit="ms" />
+					{" })"}
+				</Line>
 			</Knobs>
 		</>
 	);

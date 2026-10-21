@@ -4,9 +4,14 @@ import { AchievementBench } from "@/components/lab/achievement-bench";
 import { AvatarToy } from "@/components/lab/avatar-toy";
 import { CartoonBench } from "@/components/lab/cartoon-bench";
 import { Combine } from "@/components/lab/combine";
+import { ConfettiBench } from "@/components/lab/confetti-bench";
+import { EasingBench } from "@/components/lab/easing-bench";
 import { HoldBench } from "@/components/lab/hold-bench";
 import { PaletteBench } from "@/components/lab/palette-bench";
 import { PaletteDemo } from "@/components/lab/palette-demo";
+import { RubberBench } from "@/components/lab/rubber-bench";
+import { StaggerBench } from "@/components/lab/stagger-bench";
+import { WorkbenchCopy } from "@/components/lab/workbench";
 import { PageHeader } from "@/components/page-header";
 import { alternates, getT } from "@/i18n/server";
 
@@ -28,12 +33,23 @@ export default async function Lab() {
 		{ id: "juntar", label: copy.combine.title },
 		{ id: "segurar", label: copy.hold.title },
 		{ id: "cartoon", label: copy.cartoon.title },
+		{ id: "confete", label: copy.confetti.title },
+		{ id: "easing", label: copy.easing.title },
+		{ id: "cascata", label: copy.stagger.title },
+		{ id: "elastico", label: copy.rubber.title },
 		{ id: "paleta-rapida", label: copy.instant.title },
 		{ id: "conquista", label: copy.achievement.title },
 	];
 
 	return (
-		<>
+		<WorkbenchCopy
+			value={{
+				copy: copy.bench.copy,
+				copied: copy.bench.copied,
+				reset: copy.bench.reset,
+				hint: copy.bench.hint,
+			}}
+		>
 			<PageHeader intro={copy.intro} title={copy.title} />
 
 			{/* Passos compactos no topo: âncoras, sem paginação embaixo. */}
@@ -103,6 +119,46 @@ export default async function Lab() {
 			</Experiment>
 
 			<Experiment
+				desc={copy.confetti.desc}
+				id="confete"
+				teaches={copy.confetti.teaches}
+				teachesLabel={copy.teaches}
+				title={copy.confetti.title}
+			>
+				<ConfettiBench hint={copy.confetti.hint} label={copy.confetti.label} />
+			</Experiment>
+
+			<Experiment
+				desc={copy.easing.desc}
+				id="easing"
+				teaches={copy.easing.teaches}
+				teachesLabel={copy.teaches}
+				title={copy.easing.title}
+			>
+				<EasingBench play={copy.bench.play} />
+			</Experiment>
+
+			<Experiment
+				desc={copy.stagger.desc}
+				id="cascata"
+				teaches={copy.stagger.teaches}
+				teachesLabel={copy.teaches}
+				title={copy.stagger.title}
+			>
+				<StaggerBench play={copy.bench.play} />
+			</Experiment>
+
+			<Experiment
+				desc={copy.rubber.desc}
+				id="elastico"
+				teaches={copy.rubber.teaches}
+				teachesLabel={copy.teaches}
+				title={copy.rubber.title}
+			>
+				<RubberBench label={copy.rubber.label} />
+			</Experiment>
+
+			<Experiment
 				desc={copy.instant.desc}
 				id="paleta-rapida"
 				teaches={copy.instant.teaches}
@@ -150,7 +206,7 @@ export default async function Lab() {
 					<PaletteDemo label={copy.palette.open} />
 				</div>
 			</section>
-		</>
+		</WorkbenchCopy>
 	);
 }
 
