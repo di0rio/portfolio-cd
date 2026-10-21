@@ -12,8 +12,8 @@ export function Textarea({
 	return (
 		<FieldPrimitive.Control
 			className={cn(
-				"field-sizing-content min-h-20 w-full min-w-0 rounded-lg border border-input bg-background px-3 py-2 text-sm outline-none",
-				"transition-[border-color,box-shadow] duration-150 ease-out placeholder:text-muted-foreground",
+				"field-sizing-content min-h-20 w-full min-w-0 rounded-(--radius-field) border border-input bg-background px-3 py-2 text-sm outline-none",
+				"transition-[border-color,box-shadow] duration-base ease-out placeholder:text-muted-foreground",
 				"focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30",
 				"data-invalid:border-destructive data-invalid:focus-visible:ring-destructive/25",
 				"data-disabled:cursor-not-allowed data-disabled:opacity-50",

@@ -1,8 +1,8 @@
 export default {
 	title: { pt: "lab", en: "lab" },
 	intro: {
-		pt: "minha bancada. cada peça aqui é um experimento que você pode mexer, e os botões embaixo mudam os números. os valores aparecem como código, pra você levar os que gostar.",
-		en: "my workbench. every piece here is an experiment you can play with, and the knobs below change the numbers. the values show up as code, so you can take the ones you like.",
+		pt: "minha bancada. cada peça aqui é um experimento que você pode mexer, e o código embaixo de cada uma é o painel: arraste os números pra mudar. copie os que gostar.",
+		en: "my workbench. every piece here is an experiment you can play with, and the code under each one is the control panel: drag the numbers to change them. copy the ones you like.",
 	},
 	index: { pt: "peças", en: "pieces" },
 	teaches: { pt: "aprende:", en: "teaches:" },
@@ -100,6 +100,66 @@ export default {
 		},
 		label: { pt: "segure pra apagar", en: "hold to delete" },
 		done: { pt: "apagado", en: "deleted" },
+	},
+	bench: {
+		copy: { pt: "copiar código", en: "copy code" },
+		copied: { pt: "copiado", en: "copied" },
+		reset: { pt: "voltar pro padrão", en: "back to defaults" },
+		hint: {
+			pt: "arraste os números, ou foque e use as setas. duplo clique pra digitar.",
+			en: "drag the numbers, or focus and use the arrows. double-click to type.",
+		},
+		play: { pt: "rodar", en: "run" },
+	},
+	confetti: {
+		title: { pt: "confete", en: "confetti" },
+		desc: {
+			pt: "o confete do cd/ui, o mesmo que sai quando você manda o formulário do freela. o cone tracejado mostra pra onde ele vai. clique no botão ou em qualquer lugar do palco.",
+			en: "the cd/ui confetti, the same one that fires when you send the freelance form. the dashed cone shows where it goes. click the button or anywhere on the stage.",
+		},
+		teaches: {
+			pt: "física de verdade (velocidade, ângulo, gravidade) amostrada em 12 pontos e entregue pro WAAPI, sem canvas e sem biblioteca.",
+			en: "real physics (speed, angle, gravity) sampled at 12 points and handed to WAAPI, no canvas and no library.",
+		},
+		label: { pt: "estourar", en: "pop it" },
+		hint: { pt: "ou clique em qualquer lugar", en: "or click anywhere" },
+	},
+	easing: {
+		title: { pt: "curva de easing", en: "easing curve" },
+		desc: {
+			pt: "arraste as bolinhas amarelas do gráfico. a bolinha de cima corre com a sua curva e a de baixo é linear, pra comparar. passar de 1 no eixo y é o que dá o efeito de mola.",
+			en: "drag the yellow dots on the graph. the top ball runs on your curve and the bottom one is linear, for comparison. going past 1 on the y axis is what gives the springy overshoot.",
+		},
+		teaches: {
+			pt: "quase tudo na interface pede ease-out: começa rápido e chega devagar, então parece responder na hora.",
+			en: "almost everything in an interface wants ease-out: it starts fast and lands slow, so it feels instant.",
+		},
+	},
+	stagger: {
+		title: { pt: "cascata", en: "stagger" },
+		desc: {
+			pt: "uma lista que entra item por item. mexa no atraso e veja o total no comentário do código: ele fica vermelho quando passa do ponto.",
+			en: "a list that comes in one item at a time. change the delay and watch the total in the code comment: it turns red when it goes too far.",
+		},
+		teaches: {
+			pt: "cascata é charme até o último item demorar. o tempo total é o que a pessoa sente, não o atraso de cada um.",
+			en: "a stagger is charming until the last item takes too long. the total time is what people feel, not the per-item delay.",
+		},
+	},
+	rubber: {
+		title: { pt: "elástico", en: "rubber band" },
+		desc: {
+			pt: "puxe o avatar pra longe. ele segue o dedo com resistência (o círculo tracejado é onde o dedo está) e volta com mola quando solta, levando a velocidade do gesto. no teclado, as setas dão um empurrão.",
+			en: "pull the avatar away. it follows your finger with resistance (the dashed circle is where your finger is) and springs back when you let go, keeping the gesture's speed. on the keyboard, the arrows give it a push.",
+		},
+		teaches: {
+			pt: "limite que cede um pouco é melhor que parede: mostra que acabou sem parecer que travou.",
+			en: "a limit that gives a little beats a wall: it says you've hit the end without feeling stuck.",
+		},
+		label: {
+			pt: "avatar elástico: arraste ou use as setas",
+			en: "rubber avatar: drag it or use the arrows",
+		},
 	},
 	copy: {
 		title: { pt: "copiar com troca de ícone", en: "copy with icon swap" },

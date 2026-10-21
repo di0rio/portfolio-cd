@@ -39,7 +39,7 @@ export function TabsList({
 			<TabsPrimitive.Indicator
 				className={cn(
 					"absolute top-(--active-tab-top) left-0 -z-10 h-(--active-tab-height) w-(--active-tab-width) translate-x-(--active-tab-left) rounded-md bg-accent",
-					"transition-[translate,width] duration-200 ease-in-out",
+					"transition-[translate,width] duration-base ease-in-out",
 				)}
 				data-slot="tabs-indicator"
 			/>
@@ -55,7 +55,7 @@ export function TabsTab({
 		<TabsPrimitive.Tab
 			className={cn(
 				"h-8 cursor-pointer rounded-md px-3.5 font-medium text-muted-foreground text-sm outline-none",
-				"transition-colors duration-200 ease-out hover:text-foreground",
+				"transition-colors duration-base ease-out hover:text-foreground",
 				"data-active:text-foreground",
 				"focus-visible:ring-2 focus-visible:ring-ring data-disabled:pointer-events-none data-disabled:opacity-50",
 				className,

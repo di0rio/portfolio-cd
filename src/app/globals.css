@@ -221,6 +221,12 @@
 	--color-heat-2: var(--heat-2);
 	--color-heat-3: var(--heat-3);
 	--color-heat-4: var(--heat-4);
+	/* Tokens de raio e duração do cd/ui: `rounded-xs`, `duration-base`. As curvas `ease-*` ficam no @theme de movimento. */
+	--radius-xs: 4px;
+	--transition-duration-instant: var(--cd-duration-instant);
+	--transition-duration-fast: var(--cd-duration-fast);
+	--transition-duration-base: var(--cd-duration-base);
+	--transition-duration-slow: var(--cd-duration-slow);
 }
 
 :root {
@@ -241,9 +247,46 @@
 	--cartoon-border: 2px;
 	--cartoon-offset: 3px;
 	--press-depth: 3px;
-	--cd-duration-instant: 75ms;
-	--cd-duration-slow: 300ms;
+	--cd-duration-instant: 80ms;
+	--cd-duration-fast: 120ms;
+	--cd-duration-base: 160ms;
+	--cd-duration-slow: 240ms;
+	--cd-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+	--cd-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 	--cd-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+	--cd-scale-enter: 0.96;
+	--radius-button: var(--radius);
+	--radius-field: var(--radius);
+}
+
+/* Movimento reduzido: as durações do cd/ui viram ~0 e os popups não escalam. */
+@media (prefers-reduced-motion: reduce) {
+	:root {
+		--cd-duration-instant: 0.01ms;
+		--cd-duration-fast: 0.01ms;
+		--cd-duration-base: 0.01ms;
+		--cd-duration-slow: 0.01ms;
+		--cd-scale-enter: 1;
+	}
+}
+
+/* Popups do cd/ui (select, dialog, tooltip): nascem do gatilho com opacidade + escala e saem mais rápido. */
+@utility cd-popup {
+	transform-origin: var(--transform-origin);
+	transition-property: opacity, transform;
+	transition-duration: var(--cd-duration-base);
+	transition-timing-function: var(--cd-ease-out);
+	&[data-starting-style],
+	&[data-ending-style] {
+		opacity: 0;
+		transform: scale(var(--cd-scale-enter));
+	}
+	&[data-ending-style] {
+		transition-duration: var(--cd-duration-fast);
+	}
+	&[data-instant] {
+		transition-duration: 0ms;
+	}
 }
 
 .dark {

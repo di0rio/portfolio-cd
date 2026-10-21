@@ -14,7 +14,8 @@ export function CodeCopy({
 	label,
 	done,
 }: {
-	text: string;
+	/** O texto, ou uma função que monta ele na hora do clique. */
+	text: string | (() => string);
 	label: string;
 	done: string;
 }) {
@@ -30,7 +31,9 @@ export function CodeCopy({
 				className="relative size-7 shrink-0 rounded-md text-muted-foreground outline-none transition-[color,background-color,transform] duration-150 ease-out hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-brand motion-safe:active:scale-[0.97] motion-safe:active:duration-[160ms]"
 				onClick={async () => {
 					try {
-						await navigator.clipboard.writeText(text);
+						await navigator.clipboard.writeText(
+							typeof text === "string" ? text : text(),
+						);
 					} catch {
 						return; // sem permissão de área de transferência: não finge que copiou
 					}

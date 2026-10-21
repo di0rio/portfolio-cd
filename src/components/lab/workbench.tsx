@@ -1,16 +1,19 @@
 "use client";
 
+import { RotateCcwIcon } from "lucide-react";
 import Image from "next/image";
 import {
+	createContext,
 	type ReactNode,
 	type RefObject,
+	use,
 	useEffect,
-	useId,
 	useRef,
 	useState,
 } from "react";
-
+import { CodeCopy } from "@/components/code-copy";
 import { unlock } from "@/lib/achievements";
+import { cn } from "@/lib/utils";
 
 export const prefersReducedMotion = () =>
 	window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -166,80 +169,297 @@ export function Stage({
 	);
 }
 
-/** Botões da bancada: os números aparecem como código embaixo, pra quem quiser levar. */
-export function Knobs({
-	code,
+type KnobValue = number | boolean;
+
+export type KnobState = {
+	values: Record<string, KnobValue>;
+	defaults: Record<string, KnobValue>;
+	set: (key: string, value: KnobValue) => void;
+	reset: () => void;
+	dirty: boolean;
+};
+
+/** Estado dos números de uma bancada: valores, padrões (pra marcar o que mudou e resetar) e um setter por chave. */
+export function useKnobs<T extends Record<string, KnobValue>>(defaults: T) {
+	const initial = useRef(defaults).current;
+	const [values, setValues] = useState(initial);
+	return {
+		values,
+		defaults: initial,
+		set: (key: string, value: KnobValue) => {
+			unlock("bancada");
+			// Mesmo valor devolve o mesmo objeto: o React pula o render.
+			setValues((v) => (v[key] === value ? v : { ...v, [key]: value }));
+		},
+		reset: () => setValues(initial),
+		dirty: Object.keys(initial).some((k) => values[k] !== initial[k]),
+	} satisfies KnobState;
+}
+
+type BenchCopy = { copy: string; copied: string; reset: string; hint: string };
+
+const BenchCopyContext = createContext<BenchCopy>({
+	copy: "copiar",
+	copied: "copiado",
+	reset: "resetar",
+	hint: "",
+});
+const KnobsContext = createContext<KnobState | null>(null);
+
+/** Textos do painel de código (copiar, resetar, dica), entregues uma vez pela página do lab. */
+export function WorkbenchCopy({
+	value,
 	children,
 }: {
-	code: string;
+	value: BenchCopy;
 	children: ReactNode;
 }) {
+	return <BenchCopyContext value={value}>{children}</BenchCopyContext>;
+}
+
+function useKnobState() {
+	const state = use(KnobsContext);
+	if (!state)
+		throw new Error("Knob e Toggle precisam estar dentro de <Knobs state>.");
+	return state;
+}
+
+/** Pisca o token em amarelo quando o valor muda por fora do arrasto (setas, -/+, reset, alças do gráfico). */
+function useFlash(value: KnobValue, quiet: () => boolean) {
+	const ref = useRef<HTMLElement>(null);
+	const prev = useRef(value);
+	useEffect(() => {
+		if (prev.current === value) return;
+		prev.current = value;
+		if (quiet() || prefersReducedMotion()) return;
+		ref.current?.animate(
+			[
+				{
+					backgroundColor: "color-mix(in srgb, var(--brand) 55%, transparent)",
+				},
+				{ backgroundColor: "transparent" },
+			],
+			{ duration: 600, easing: "cubic-bezier(0.23, 1, 0.32, 1)" },
+		);
+	});
+	return ref;
+}
+
+/**
+ * O painel da bancada é o próprio código: cada número dentro dele se arrasta, aceita setas e vira campo no duplo clique.
+ * O ponto amarelo ao lado do nome do arquivo é o "não salvo" de editor: aparece quando algo saiu do padrão.
+ */
+export function Knobs({
+	file,
+	state,
+	children,
+}: {
+	file: string;
+	state?: KnobState;
+	children: ReactNode;
+}) {
+	const copy = use(BenchCopyContext);
+	const code = useRef<HTMLDivElement>(null);
+	const icon = useRef<SVGSVGElement>(null);
+
+	// Texto limpo pra copiar: as linhas sem os controles flutuantes (-/+, régua).
+	const text = () =>
+		Array.from(code.current?.querySelectorAll("[data-line]") ?? [], (line) => {
+			const clone = line.cloneNode(true) as Element;
+			for (const skip of clone.querySelectorAll("[data-copy-skip]"))
+				skip.remove();
+			// Número em edição: o clone do <input> não tem texto, então entra o valor digitado.
+			const inputs = line.querySelectorAll("input");
+			clone.querySelectorAll("input").forEach((input, i) => {
+				input.replaceWith(inputs[i].value);
+			});
+			return clone.textContent ?? "";
+		}).join("\n");
+
 	return (
-		<div className="border-t px-6 py-4">
-			<div className="grid gap-x-8 gap-y-3 sm:grid-cols-2">{children}</div>
-			<p className="mt-4 overflow-x-auto whitespace-pre font-mono text-[13px] text-muted-foreground">
-				{code}
-			</p>
+		<KnobsContext value={state ?? null}>
+			<div className="border-t" data-knobs>
+				<div className="flex h-10 items-center gap-2 border-b bg-muted px-4 font-mono text-[12px] text-muted-foreground">
+					<span>{file}</span>
+					<span
+						aria-hidden="true"
+						className={cn(
+							"size-1.5 rounded-full bg-brand transition-[opacity,scale] duration-base ease-out",
+							state?.dirty ? "scale-100 opacity-100" : "scale-50 opacity-0",
+						)}
+					/>
+					<div className="ml-auto flex items-center gap-1">
+						{state && (
+							<button
+								aria-label={copy.reset}
+								className="grid size-7 place-items-center rounded-md outline-none transition-[color,background-color,opacity] duration-fast ease-out hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-brand disabled:pointer-events-none disabled:opacity-40"
+								disabled={!state.dirty}
+								onClick={() => {
+									state.reset();
+									if (!prefersReducedMotion())
+										icon.current?.animate(
+											[{ rotate: "0deg" }, { rotate: "-360deg" }],
+											{
+												duration: 500,
+												easing: "cubic-bezier(0.23, 1, 0.32, 1)",
+											},
+										);
+								}}
+								type="button"
+							>
+								<RotateCcwIcon
+									aria-hidden="true"
+									className="size-3.5"
+									ref={icon}
+								/>
+							</button>
+						)}
+						<CodeCopy done={copy.copied} label={copy.copy} text={text} />
+					</div>
+				</div>
+				<div
+					className="whitespace-pre-wrap break-words px-4 py-3 font-mono text-[13px] leading-8 [counter-reset:line]"
+					ref={code}
+				>
+					{children}
+				</div>
+				{state && copy.hint && (
+					<p className="-mt-1 px-4 pb-3 text-[12px] text-muted-foreground">
+						{copy.hint}
+					</p>
+				)}
+			</div>
+		</KnobsContext>
+	);
+}
+
+/** Uma linha do painel, com o número da linha na calha (via `counter`, fica fora do texto copiado). */
+export function Line({ children }: { children: ReactNode }) {
+	return (
+		<div
+			className="text-muted-foreground [counter-increment:line] before:mr-4 before:inline-block before:w-3 before:text-right before:text-muted-foreground/50 before:content-[counter(line)]"
+			data-line
+		>
+			{children}
 		</div>
 	);
 }
 
-const TICKS = 21;
+const TICKS = 11;
 const clamp = (v: number, lo: number, hi: number) =>
 	Math.min(hi, Math.max(lo, v));
+// Arrastar a largura disso percorre a faixa inteira; com shift, 5x mais fino.
+const DRAG_SPAN = 240;
 
 /**
- * Botão da bancada: um número que se arrasta, igual a um token no terminal (`stiffness: [220]`).
- * Arraste na horizontal, use as setas (shift ou PageUp/PageDown pula 10 passos) ou os botões -/+.
+ * Um número arrastável dentro do código. Arraste na horizontal (shift = fino), use as setas (shift ou PageUp/PageDown
+ * pula 10 passos), Home/End, ou duplo clique / Enter pra digitar. Passar o mouse ou focar mostra uma régua com -/+.
  */
 export function Knob({
-	name,
-	value,
+	k,
 	min,
 	max,
 	step = 1,
 	unit = "",
-	onChange,
 }: {
-	name: string;
-	value: number;
+	/** Chave em `useKnobs`; também é o nome lido pelo leitor de tela. */
+	k: string;
 	min: number;
 	max: number;
 	step?: number;
 	unit?: string;
-	onChange: (value: number) => void;
 }) {
-	const labelId = useId();
+	const state = useKnobState();
+	const value = state.values[k] as number;
+	const changed = value !== state.defaults[k];
 	const [dragging, setDragging] = useState(false);
-	const drag = useRef<{ x: number; v: number; width: number } | null>(null);
-
-	const set = (next: number) => {
-		const v = clamp(Math.round(next / step) * step, min, max);
-		if (v === value) return;
-		unlock("bancada");
-		onChange(v);
-	};
+	const [editing, setEditing] = useState(false);
+	const drag = useRef<{ x: number; v: number; fine: boolean } | null>(null);
+	const token = useFlash(value, () => drag.current !== null);
+	const decimals = String(step).split(".")[1]?.length ?? 0;
 	const pct = ((value - min) / (max - min)) * 100;
 
+	const set = (next: number) => {
+		// Sem comparar com `value`: ele é do último render, e dois moves no mesmo quadro ficariam pra trás.
+		state.set(
+			k,
+			Number(clamp(Math.round(next / step) * step, min, max).toFixed(decimals)),
+		);
+	};
+	// Escape cancela; o blur que vem da desmontagem do campo não pode aplicar o que foi digitado.
+	const cancelled = useRef(false);
+	const edit = () => {
+		cancelled.current = false;
+		setEditing(true);
+	};
+	// Só Enter e Escape devolvem o foco pro número; blur (Tab, clique em outro lugar) deixa o foco seguir.
+	const close = (refocus: boolean) => {
+		setEditing(false);
+		if (refocus) requestAnimationFrame(() => token.current?.focus());
+	};
+	const commit = (raw: string, refocus: boolean) => {
+		if (cancelled.current) return;
+		const n = Number.parseFloat(raw.replace(",", "."));
+		if (Number.isFinite(n)) set(n);
+		close(refocus);
+	};
+
+	// A régua é centrada no número; perto da borda do card ela desliza pra dentro em vez de ser cortada.
+	const pop = useRef<HTMLSpanElement>(null);
+	const fit = () => {
+		const el = pop.current;
+		const box = el?.closest("[data-knobs]")?.getBoundingClientRect();
+		if (!(el && box)) return;
+		el.style.setProperty("--shift", "0px");
+		const r = el.getBoundingClientRect();
+		const shift =
+			Math.max(0, box.left + 4 - r.left) -
+			Math.max(0, r.right - (box.right - 4));
+		el.style.setProperty("--shift", `${shift}px`);
+	};
+
 	return (
-		<div className="flex flex-col">
-			<span
-				className="font-mono text-[13px] text-muted-foreground"
-				id={labelId}
-			>
-				{name}:
-			</span>
-			<div className="flex items-center">
-				<NudgeButton onClick={() => set(value - step)} sign="-" />
-				<div
-					aria-labelledby={labelId}
+		<span className="group/knob relative inline-block">
+			{editing ? (
+				<input
+					aria-label={k}
+					className="rounded-sm bg-brand/20 px-1 text-foreground outline-none ring-2 ring-brand"
+					defaultValue={value}
+					inputMode="decimal"
+					onBlur={(e) => commit(e.currentTarget.value, false)}
+					onFocus={(e) => e.currentTarget.select()}
+					onKeyDown={(e) => {
+						if (e.key === "Enter") commit(e.currentTarget.value, true);
+						else if (e.key === "Escape") {
+							cancelled.current = true;
+							close(true);
+						}
+					}}
+					// Entra em foco ao montar (o duplo clique ou o Enter pediram pra digitar).
+					ref={(el) => el?.focus()}
+					style={{ width: `${String(value).length + 2}ch` }}
+				/>
+			) : (
+				<span
+					aria-label={k}
 					aria-orientation="horizontal"
 					aria-valuemax={max}
 					aria-valuemin={min}
 					aria-valuenow={value}
 					aria-valuetext={`${value}${unit}`}
-					className={`flex h-11 min-w-0 flex-1 cursor-ew-resize touch-pan-y select-none flex-col justify-center rounded-md px-2 outline-none focus-visible:ring-2 focus-visible:ring-brand ${dragging ? "bg-brand/20" : "hover:bg-accent"}`}
+					className={cn(
+						"cursor-ew-resize touch-pan-y select-none rounded-sm px-1 py-1 tabular-nums underline decoration-dotted underline-offset-4 outline-none transition-colors duration-fast ease-out focus-visible:ring-2 focus-visible:ring-brand",
+						dragging
+							? "bg-brand text-[#1c1c1c] decoration-transparent"
+							: changed
+								? "text-brand-foreground decoration-brand hover:bg-brand/15"
+								: "text-foreground decoration-muted-foreground/60 hover:bg-accent",
+					)}
+					onDoubleClick={edit}
+					onFocus={fit}
 					onKeyDown={(e) => {
+						// Atalhos do navegador (Alt+← volta a página) passam direto.
+						if (e.altKey || e.ctrlKey || e.metaKey) return;
 						const big = e.shiftKey ? 10 : 1;
 						const moves: Record<string, number> = {
 							ArrowLeft: -step * big,
@@ -251,6 +471,7 @@ export function Knob({
 						};
 						if (e.key === "Home") set(min);
 						else if (e.key === "End") set(max);
+						else if (e.key === "Enter") edit();
 						else if (e.key in moves) set(value + moves[e.key]);
 						else return;
 						e.preventDefault();
@@ -262,72 +483,107 @@ export function Knob({
 					onPointerDown={(e) => {
 						if (drag.current || e.button !== 0) return;
 						e.currentTarget.setPointerCapture(e.pointerId);
-						drag.current = {
-							x: e.clientX,
-							v: value,
-							width: e.currentTarget.getBoundingClientRect().width,
-						};
+						drag.current = { x: e.clientX, v: value, fine: e.shiftKey };
 						setDragging(true);
 					}}
+					onPointerEnter={fit}
 					onPointerMove={(e) => {
-						const d = drag.current;
-						if (d) set(d.v + ((e.clientX - d.x) / d.width) * (max - min));
+						let d = drag.current;
+						if (!d) return;
+						// Shift no meio do arrasto: recomeça a conta daqui, pra não pular.
+						if (e.shiftKey !== d.fine) {
+							d = { x: e.clientX, v: value, fine: e.shiftKey };
+							drag.current = d;
+						}
+						set(
+							d.v +
+								((e.clientX - d.x) / DRAG_SPAN) *
+									(max - min) *
+									(d.fine ? 0.2 : 1),
+						);
 					}}
+					ref={token}
 					role="slider"
 					tabIndex={0}
 				>
-					<span className="text-center font-mono text-[15px] tabular-nums">
-						<span className="text-muted-foreground">[</span>
+					{value}
+					{unit}
+				</span>
+			)}
+			{!editing && (
+				<span
+					className={cn(
+						"absolute bottom-full left-1/2 z-10 -translate-x-[calc(50%-var(--shift,0px))] pb-1 leading-none transition-[opacity,visibility,translate] duration-fast ease-out",
+						dragging
+							? "visible translate-y-0 opacity-100"
+							: "invisible translate-y-1 opacity-0 group-focus-within/knob:visible group-focus-within/knob:translate-y-0 group-focus-within/knob:opacity-100 hover-hover:group-hover/knob:visible hover-hover:group-hover/knob:translate-y-0 hover-hover:group-hover/knob:opacity-100 motion-reduce:translate-y-0",
+					)}
+					data-copy-skip
+					ref={pop}
+				>
+					<span className="flex items-center gap-1 rounded-md border bg-popover p-0.5 shadow-sm">
+						<Nudge onClick={() => set(value - step)} sign="-" />
 						<span
-							className={`rounded-sm px-1 ${dragging ? "bg-brand text-[#1c1c1c]" : ""}`}
+							aria-hidden="true"
+							className="relative flex h-3 w-20 items-end justify-between"
 						>
-							{value}
-							{unit}
-						</span>
-						<span className="text-muted-foreground">]</span>
-					</span>
-					<span
-						aria-hidden="true"
-						className="relative mx-1 mt-1 flex h-2.5 items-end justify-between"
-					>
-						{Array.from({ length: TICKS }, (_, i) => (
+							{Array.from({ length: TICKS }, (_, i) => (
+								<span
+									className={`w-px bg-border ${i % 5 === 0 ? "h-3" : "h-1.5"}`}
+									// biome-ignore lint/suspicious/noArrayIndexKey: ticks fixos, nunca reordenam
+									key={i}
+								/>
+							))}
 							<span
-								className={`w-px bg-border ${i % 5 === 0 ? "h-2" : "h-1"}`}
-								// biome-ignore lint/suspicious/noArrayIndexKey: ticks fixos, nunca reordenam
-								key={i}
+								className={`absolute bottom-0 h-3 w-0.5 -translate-x-1/2 rounded-full bg-brand motion-safe:transition-[left] ${dragging ? "duration-0" : "duration-fast"}`}
+								style={{ left: `${pct}%` }}
 							/>
-						))}
-						<span
-							className={`absolute bottom-0 h-2.5 w-0.5 -translate-x-1/2 rounded-full bg-brand motion-safe:transition-[left] ${dragging ? "duration-0" : "duration-100"}`}
-							style={{ left: `${pct}%` }}
-						/>
+						</span>
+						<Nudge onClick={() => set(value + step)} sign="+" />
 					</span>
-				</div>
-				<NudgeButton onClick={() => set(value + step)} sign="+" />
-			</div>
-		</div>
+				</span>
+			)}
+		</span>
 	);
 }
 
-/** Só ponteiro (o teclado usa o slider): área de 44px com um círculo menor desenhado dentro. */
-function NudgeButton({
-	sign,
-	onClick,
-}: {
-	sign: "-" | "+";
-	onClick: () => void;
-}) {
+/** Um `true`/`false` dentro do código: clique (ou espaço) inverte. */
+export function Toggle({ k }: { k: string }) {
+	const state = useKnobState();
+	const on = state.values[k] as boolean;
+	const token = useFlash(on, () => false);
+	return (
+		<button
+			aria-checked={on}
+			aria-label={k}
+			className={cn(
+				"cursor-pointer rounded-sm px-1 py-1 underline decoration-dotted underline-offset-4 outline-none transition-colors duration-fast ease-out focus-visible:ring-2 focus-visible:ring-brand",
+				on !== state.defaults[k]
+					? "text-brand-foreground decoration-brand hover:bg-brand/15"
+					: "text-foreground decoration-muted-foreground/60 hover:bg-accent",
+			)}
+			onClick={() => state.set(k, !on)}
+			ref={token as RefObject<HTMLButtonElement>}
+			role="switch"
+			type="button"
+		>
+			{String(on)}
+		</button>
+	);
+}
+
+/** Só ponteiro (o teclado usa o slider): -/+ dentro da régua. */
+function Nudge({ sign, onClick }: { sign: "-" | "+"; onClick: () => void }) {
 	return (
 		<button
 			aria-hidden="true"
-			className="group flex size-11 shrink-0 items-center justify-center outline-none"
+			className="grid size-6 place-items-center rounded-sm text-muted-foreground transition-[background-color,color,scale] duration-instant ease-out hover:bg-accent hover:text-foreground motion-safe:active:scale-90"
 			onClick={onClick}
+			onPointerDown={(e) => e.preventDefault()}
 			tabIndex={-1}
 			type="button"
 		>
-			<span className="flex size-7 items-center justify-center rounded-full border font-mono text-sm transition-[background-color,transform] duration-100 ease-out group-hover:bg-accent motion-safe:group-active:scale-90">
-				{sign}
-			</span>
+			{sign}
 		</button>
 	);
 }
