@@ -6,6 +6,17 @@ mock.module("botid/server", () => ({
 	checkBotId: async () => ({ isBot: false }),
 }));
 
+mock.module("next/headers", () => ({
+	headers: async () =>
+		new Headers({
+			"user-agent": "Test/1.0",
+			"x-forwarded-for": "203.0.113.7",
+			"x-vercel-ip-city": "S%C3%A3o%20Paulo",
+			"x-vercel-ip-country": "BR",
+			"x-vercel-ip-country-region": "SP",
+		}),
+}));
+
 const { sendContactMessage } = await import("../app/[locale]/freela/actions");
 
 const ok = {
@@ -79,6 +90,10 @@ describe("sendContactMessage", () => {
 		});
 		expect(body.reply_to).toBe("ana@example.com");
 		expect(body.subject).toBe("[freela] ui - A Bcc: x");
+		expect(body.text).toContain("Horário: ");
+		expect(body.text).toContain("Local aproximado: São Paulo, SP, BR");
+		expect(body.text).toContain("Navegador: Test/1.0");
+		expect(body.text).not.toContain("203.0.113.7");
 	});
 	test("não-2xx devolve failed", async () => {
 		process.env.RESEND_API_KEY = "k";
