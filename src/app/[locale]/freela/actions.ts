@@ -24,6 +24,27 @@ async function clientIp(): Promise<string> {
 	}
 }
 
+/** Contexto do envio para o e-mail. Fica sem IP de propósito. */
+async function visitInfo(): Promise<string> {
+	const when = new Date().toLocaleString("pt-BR", {
+		timeZone: "America/Sao_Paulo",
+	});
+	try {
+		const h = await headers();
+		const place = [
+			decodeURIComponent(h.get("x-vercel-ip-city") ?? ""),
+			h.get("x-vercel-ip-country-region"),
+			h.get("x-vercel-ip-country"),
+		]
+			.filter(Boolean)
+			.join(", ");
+		const browser = h.get("user-agent") || "desconhecido";
+		return `Horário: ${when}\nLocal aproximado: ${place || "desconhecido"}\nNavegador: ${browser}`;
+	} catch {
+		return `Horário: ${when}`; // fora de uma requisição (testes)
+	}
+}
+
 type Payload = {
 	name: string;
 	email: string;
@@ -80,7 +101,7 @@ export async function sendContactMessage(
 				to: [to],
 				reply_to: email,
 				subject: `[freela] ${kind} - ${cleanName}`,
-				text: `Nome: ${cleanName}\nE-mail: ${email}\nTipo: ${kind}\n\n${message}`,
+				text: `Nome: ${cleanName}\nE-mail: ${email}\nTipo: ${kind}\n\n${message}\n\n---\n${await visitInfo()}`,
 			}),
 			signal: AbortSignal.timeout(8000),
 		});
